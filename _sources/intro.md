@@ -8,15 +8,15 @@
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif"></img>
 
 <p align="center">
-  <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExamxodTE0c3hzcW1mZW42NWt2MG05Z2JsbzU0MWljczNkeWc4cnNrNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/naoAQrL3DY0xEcEgbv/giphy.gif" width="50%" />
+  <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3eXN4ZjUzazcxbjUwdGZueXg2anF3Y3FwbWQ2dGJ1ZTY1NnR3bTRuZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/7c8QeB0VMddFOuu4iR/giphy.gif" width="100%" />
 </p>
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif"></img>
 
-<img align="right" width=200px height=200px alt="side_sticker" src="https://media.giphy.com/media/TEnXkcsHrP4YedChhA/giphy.gif" />
-
 <code> Student | Developer | Learner </code><br>
-🎓 Informatics student in Universitas Trunojoyo Madura since of 2024<br> 🛠️ Spending my days exploring **Web Dev** <br> 📚 Currently compiling knowledge and leveling up my skills step-by-step<br> ⚡ Fun fact: I turn caffeine into code.
+<code> Universitas Trunojoyo Madura | Bangkalan, Indonesia </code><br>
+<code> A. Choiril Anwar EL-Asfihani Risydan | 240411100098@student.trunojoyo.ac.id </code><br>
+Informatics student in Universitas Trunojoyo Madura since of 2024<br>  Spending my days exploring **Web Dev** <br> Currently compiling knowledge and leveling up my skills step-by-step<br> Fun fact: I turn caffeine into code.
 
 > *"Code. Break. Fix. Learn. Repeat."* 
 
@@ -104,7 +104,7 @@
 
 <br>
 
-See the data mining page included here.
+See the proyek saint data page included here.
 
 ```{tableofcontents}
 ```
