@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Notebooks with MyST Markdown &#8212; A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN</title>
+    <title>Data Understanding &#8212; A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN</title>
   
   
   
@@ -179,9 +179,9 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="markdown.html">Business Understanding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Notebooks with MyST Markdown</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Understanding</a></li>
 </ul>
 
     </div>
@@ -367,7 +367,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Notebooks with MyST Markdown</h1>
+    <h1>Data Understanding</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -377,9 +377,19 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-cell">An example cell</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-notebook-with-myst-markdown">Create a notebook with MyST Markdown</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quickly-add-yaml-metadata-for-myst-notebooks">Quickly add YAML metadata for MyST Notebooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sumber-data">Sumber Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentinel-5p-tropomi">Sentinel-5P &amp; TROPOMI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#openeo-platform-akses-data">OpenEO — Platform Akses Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wilayah-kajian-peta-interaktif">Wilayah Kajian &amp; Peta Interaktif</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengambilan-data-crawling-via-openeo">Pengambilan Data (Crawling via OpenEO)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-fitur-polutan">Deskripsi Fitur (Polutan)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#no2-nitrogen-dioksida">NO2 — Nitrogen Dioksida</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#co-karbon-monoksida">CO — Karbon Monoksida</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#so2-sulfur-dioksida">SO2 — Sulfur Dioksida</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -391,50 +401,302 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="notebooks-with-myst-markdown">
-<h1>Notebooks with MyST Markdown<a class="headerlink" href="#notebooks-with-myst-markdown" title="Link to this heading">#</a></h1>
-<p>Jupyter Book also lets you write text-based notebooks using MyST Markdown.
-See <a class="reference external" href="https://jupyterbook.org/file-types/myst-notebooks.html">the Notebooks with MyST Markdown documentation</a> for more detailed instructions.
-This page shows off a notebook written in MyST Markdown.</p>
-<section id="an-example-cell">
-<h2>An example cell<a class="headerlink" href="#an-example-cell" title="Link to this heading">#</a></h2>
-<p>With MyST Markdown, you can define code cells with a directive like so:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+  <section class="tex2jax_ignore mathjax_ignore" id="data-understanding">
+<h1>Data Understanding<a class="headerlink" href="#data-understanding" title="Link to this heading">#</a></h1>
+<p>Data Understanding adalah tahap kedua dalam kerangka CRISP-DM. Setelah tujuan proyek jelas, tahap ini fokus pada satu hal: memahami data yang akan dipakai sebelum mulai mengolahnya. Ini mencakup dari mana data berasal, apa saja isi kolom-kolomnya, dan apakah ada nilai yang aneh atau tidak masuk akal.</p>
+<hr class="docutils" />
+<section id="sumber-data">
+<h2>Sumber Data<a class="headerlink" href="#sumber-data" title="Link to this heading">#</a></h2>
+<section id="sentinel-5p-tropomi">
+<h3>Sentinel-5P &amp; TROPOMI<a class="headerlink" href="#sentinel-5p-tropomi" title="Link to this heading">#</a></h3>
+<p>Data polutan dalam proyek ini berasal dari satelit <strong>Sentinel-5P</strong> milik European Space Agency (ESA), bagian dari program Copernicus. Sentinel-5P diluncurkan pada Oktober 2017 dan mengorbit Bumi sekali sehari pada ketinggian sekitar 824 km. Instrumen utamanya, <strong>TROPOMI</strong> (<em>TROPOspheric Monitoring Instrument</em>), mengukur konsentrasi gas atmosfer troposfer dengan resolusi spasial 3,5 × 5,5 km per piksel — resolusi tertinggi di antara satelit pemantau atmosfer yang tersedia secara publik.</p>
+<p>Data yang digunakan adalah produk <strong>Level 2 (L2)</strong>: data yang sudah dikoreksi geometri dan radiometri, tapi masih dalam format orbit granul (belum diagregasi ke grid tetap). Dari sinilah kemudian dilakukan agregasi temporal (per hari) dan spasial (mean seluruh wilayah kajian).</p>
+</section>
+<section id="openeo-platform-akses-data">
+<h3>OpenEO — Platform Akses Data<a class="headerlink" href="#openeo-platform-akses-data" title="Link to this heading">#</a></h3>
+<p>Akses ke data Sentinel-5P dilakukan melalui platform <strong>OpenEO Copernicus Data Space</strong>, sebuah antarmuka terbuka yang memungkinkan pengguna memproses data satelit langsung di server tanpa perlu mengunduh file mentah berukuran besar.</p>
+<ul class="simple">
+<li><p><strong>Web Editor OpenEO:</strong> <a class="reference external" href="https://editor.openeo.org/?server=https%3A%2F%2Fopeneo.dataspace.copernicus.eu%2Fopeneo%2F1.2">editor.openeo.org</a></p></li>
+<li><p><strong>Dokumentasi API:</strong> <a class="reference external" href="https://openeo.dataspace.copernicus.eu">openeo.dataspace.copernicus.eu</a></p></li>
+</ul>
+<p><strong>Instalasi library Python:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">openeo</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+<p><strong>Koneksi dan autentikasi:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">openeo</span>
+
+<span class="n">connection</span> <span class="o">=</span> <span class="n">openeo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;https://openeo.dataspace.copernicus.eu&quot;</span><span class="p">)</span>
+<span class="n">connection</span><span class="o">.</span><span class="n">authenticate_oidc</span><span class="p">()</span>
 </pre></div>
 </div>
+<p>Autentikasi menggunakan OIDC (OpenID Connect) — login sekali lewat browser, token tersimpan otomatis untuk sesi berikutnya.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="wilayah-kajian-peta-interaktif">
+<h2>Wilayah Kajian &amp; Peta Interaktif<a class="headerlink" href="#wilayah-kajian-peta-interaktif" title="Link to this heading">#</a></h2>
+<p>Pengambilan data dibatasi pada bounding box wilayah <strong>Kamal–Kampus UTM, Bangkalan</strong>. Batas wilayah didefinisikan menggunakan GeoJSON Polygon yang bisa dilihat dan diedit di <a class="reference external" href="https://geojson.io">geojson.io</a>.</p>
+<p><strong>GeoJSON wilayah kajian:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Feature&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">  </span><span class="nt">&quot;geometry&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Polygon&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;coordinates&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">[</span>
+<span class="w">        </span><span class="p">[</span><span class="mf">112.74249370782024</span><span class="p">,</span><span class="w"> </span><span class="mf">-7.170992207550057</span><span class="p">],</span>
+<span class="w">        </span><span class="p">[</span><span class="mf">112.70985213794359</span><span class="p">,</span><span class="w"> </span><span class="mf">-7.170992207550057</span><span class="p">],</span>
+<span class="w">        </span><span class="p">[</span><span class="mf">112.70985213794359</span><span class="p">,</span><span class="w"> </span><span class="mf">-7.127292848708009</span><span class="p">],</span>
+<span class="w">        </span><span class="p">[</span><span class="mf">112.74249370782024</span><span class="p">,</span><span class="w"> </span><span class="mf">-7.127292848708009</span><span class="p">],</span>
+<span class="w">        </span><span class="p">[</span><span class="mf">112.74249370782024</span><span class="p">,</span><span class="w"> </span><span class="mf">-7.170992207550057</span><span class="p">]</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 </div>
-</div>
-<p>When your book is built, the contents of any <code class="docutils literal notranslate"><span class="pre">{code-cell}</span></code> blocks will be
-executed with your default Jupyter kernel, and their outputs will be displayed
-in-line with the rest of your content.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p>Jupyter Book uses <a class="reference external" href="https://jupytext.readthedocs.io/en/latest/">Jupytext</a> to convert text-based files to notebooks, and can support <a class="reference external" href="https://jupyterbook.org/file-types/jupytext.html">many other text-based notebook files</a>.</p>
+<p><strong>Visualisasi peta interaktif wilayah kajian:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">folium</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Polygon</span>
+
+<span class="c1"># Koordinat batas wilayah Kamal-UTM (format GeoJSON: [lon, lat])</span>
+<span class="n">geojson_coords</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mf">112.74249370782024</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.170992207550057</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">112.70985213794359</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.170992207550057</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">112.70985213794359</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.127292848708009</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">112.74249370782024</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.127292848708009</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">112.74249370782024</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.170992207550057</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="c1"># Hitung centroid wilayah sebagai titik pusat peta</span>
+<span class="n">area_polygon</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">geojson_coords</span><span class="p">)</span>
+<span class="n">centroid_lon</span> <span class="o">=</span> <span class="n">area_polygon</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">x</span>
+<span class="n">centroid_lat</span> <span class="o">=</span> <span class="n">area_polygon</span><span class="o">.</span><span class="n">centroid</span><span class="o">.</span><span class="n">y</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Titik Pusat Wilayah -&gt; Latitude: </span><span class="si">{</span><span class="n">centroid_lat</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">, Longitude: </span><span class="si">{</span><span class="n">centroid_lon</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Buat peta interaktif</span>
+<span class="n">peta_wilayah</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="n">centroid_lat</span><span class="p">,</span> <span class="n">centroid_lon</span><span class="p">],</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+
+<span class="c1"># Tambah polygon batas wilayah kajian</span>
+<span class="n">folium</span><span class="o">.</span><span class="n">Polygon</span><span class="p">(</span>
+    <span class="n">locations</span><span class="o">=</span><span class="p">[(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">)</span> <span class="k">for</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span> <span class="ow">in</span> <span class="n">geojson_coords</span><span class="p">],</span>
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e74c3c&#39;</span><span class="p">,</span>
+    <span class="n">weight</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">fill_opacity</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="s1">&#39;Batas Wilayah Kajian - Kamal UTM&#39;</span>
+<span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">peta_wilayah</span><span class="p">)</span>
+
+<span class="c1"># Tandai titik centroid sebagai lokasi pengambilan data</span>
+<span class="n">folium</span><span class="o">.</span><span class="n">Marker</span><span class="p">(</span>
+    <span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="n">centroid_lat</span><span class="p">,</span> <span class="n">centroid_lon</span><span class="p">],</span>
+    <span class="n">popup</span><span class="o">=</span><span class="s1">&#39;Titik Pengambilan Data Satelit (OpenEO)&#39;</span><span class="p">,</span>
+    <span class="n">icon</span><span class="o">=</span><span class="n">folium</span><span class="o">.</span><span class="n">Icon</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="s1">&#39;cloud&#39;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">peta_wilayah</span><span class="p">)</span>
+
+<span class="n">peta_wilayah</span>
+</pre></div>
 </div>
 </section>
-<section id="create-a-notebook-with-myst-markdown">
-<h2>Create a notebook with MyST Markdown<a class="headerlink" href="#create-a-notebook-with-myst-markdown" title="Link to this heading">#</a></h2>
-<p>MyST Markdown notebooks are defined by two things:</p>
-<ol class="arabic simple">
-<li><p>YAML metadata that is needed to understand if / how it should convert text files to notebooks (including information about the kernel needed).
-See the YAML at the top of this page for example.</p></li>
-<li><p>The presence of <code class="docutils literal notranslate"><span class="pre">{code-cell}</span></code> directives, which will be executed with your book.</p></li>
-</ol>
-<p>That’s all that is needed to get started!</p>
-</section>
-<section id="quickly-add-yaml-metadata-for-myst-notebooks">
-<h2>Quickly add YAML metadata for MyST Notebooks<a class="headerlink" href="#quickly-add-yaml-metadata-for-myst-notebooks" title="Link to this heading">#</a></h2>
-<p>If you have a markdown file and you’d like to quickly add YAML metadata to it, so that Jupyter Book will treat it as a MyST Markdown Notebook, run the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span><span class="o">-</span><span class="n">book</span> <span class="n">myst</span> <span class="n">init</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">markdownfile</span><span class="o">.</span><span class="n">md</span>
+<hr class="docutils" />
+<section id="pengambilan-data-crawling-via-openeo">
+<h2>Pengambilan Data (Crawling via OpenEO)<a class="headerlink" href="#pengambilan-data-crawling-via-openeo" title="Link to this heading">#</a></h2>
+<p>API Sentinel-5P L2 di OpenEO hanya mendukung <strong>satu band per job</strong>. Karena itu, pengambilan data NO2, CO, dan SO2 dilakukan dalam tiga job terpisah secara berurutan.</p>
+<p>Dua parameter kunci dalam pipeline ini:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">aggregate_temporal_period(reducer=&quot;mean&quot;,</span> <span class="pre">period=&quot;day&quot;)</span></code> → menghindari duplikasi data dalam satu hari (satelit kadang merekam satu wilayah lebih dari sekali sehari)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">aggregate_spatial(reducer=&quot;mean&quot;,</span> <span class="pre">geometries=aoi)</span></code> → merata-ratakan seluruh piksel dalam bounding box menjadi satu nilai per hari</p></li>
+</ul>
+<p><strong>Job 1 — NO2:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">openeo</span>
+
+<span class="n">connection</span> <span class="o">=</span> <span class="n">openeo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;https://openeo.dataspace.copernicus.eu&quot;</span><span class="p">)</span>
+<span class="n">connection</span><span class="o">.</span><span class="n">authenticate_oidc</span><span class="p">()</span>
+
+<span class="n">aoi</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Feature&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Polygon&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="p">[</span><span class="mf">112.74249370782024</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.170992207550057</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">112.70985213794359</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.170992207550057</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">112.70985213794359</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.127292848708009</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">112.74249370782024</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.127292848708009</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">112.74249370782024</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.170992207550057</span><span class="p">]</span>
+            <span class="p">]</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">s5post</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">load_collection</span><span class="p">(</span>
+    <span class="s2">&quot;SENTINEL_5P_L2&quot;</span><span class="p">,</span>
+    <span class="n">temporal_extent</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;2025-08-25&quot;</span><span class="p">,</span> <span class="s2">&quot;2026-08-29&quot;</span><span class="p">],</span>
+    <span class="n">spatial_extent</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;west&quot;</span><span class="p">:</span> <span class="mf">112.709852</span><span class="p">,</span>
+        <span class="s2">&quot;south&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">7.170992</span><span class="p">,</span>
+        <span class="s2">&quot;east&quot;</span><span class="p">:</span> <span class="mf">112.742493</span><span class="p">,</span>
+        <span class="s2">&quot;north&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">7.127292</span>
+    <span class="p">},</span>
+    <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">s5p_daily</span> <span class="o">=</span> <span class="n">s5post</span><span class="o">.</span><span class="n">aggregate_temporal_period</span><span class="p">(</span><span class="n">reducer</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">)</span>
+<span class="n">s5p_aoi</span> <span class="o">=</span> <span class="n">s5p_daily</span><span class="o">.</span><span class="n">aggregate_spatial</span><span class="p">(</span><span class="n">reducer</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="n">geometries</span><span class="o">=</span><span class="n">aoi</span><span class="p">)</span>
+
+<span class="n">job</span> <span class="o">=</span> <span class="n">s5p_aoi</span><span class="o">.</span><span class="n">execute_batch</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Polutan_Kamal-UTM_NO2&quot;</span><span class="p">,</span>
+    <span class="n">outputfile</span><span class="o">=</span><span class="s2">&quot;polutan_kamal_utm_NO2.csv&quot;</span><span class="p">,</span>
+    <span class="n">out_format</span><span class="o">=</span><span class="s2">&quot;CSV&quot;</span>
+<span class="p">)</span>
+
+<span class="n">job</span><span class="o">.</span><span class="n">start_and_wait</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Job selesai:&quot;</span><span class="p">,</span> <span class="n">job</span><span class="o">.</span><span class="n">status</span><span class="p">())</span>
 </pre></div>
 </div>
+<p><strong>Job 2 — CO:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sama persis dengan Job NO2, ganti bagian berikut:</span>
+    <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;CO&quot;</span><span class="p">],</span>
+<span class="c1"># dan</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Polutan_Kamal-UTM_CO&quot;</span><span class="p">,</span>
+    <span class="n">outputfile</span><span class="o">=</span><span class="s2">&quot;polutan_kamal_utm_CO.csv&quot;</span><span class="p">,</span>
+</pre></div>
+</div>
+<p><strong>Job 3 — SO2:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sama persis dengan Job NO2, ganti bagian berikut:</span>
+    <span class="n">bands</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;SO2&quot;</span><span class="p">],</span>
+<span class="c1"># dan</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Polutan_Kamal-UTM_SO2&quot;</span><span class="p">,</span>
+    <span class="n">outputfile</span><span class="o">=</span><span class="s2">&quot;polutan_kamal_utm_SO2.csv&quot;</span><span class="p">,</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="deskripsi-fitur-polutan">
+<h2>Deskripsi Fitur (Polutan)<a class="headerlink" href="#deskripsi-fitur-polutan" title="Link to this heading">#</a></h2>
+<p>Setiap file CSV hasil crawling memiliki dua kolom utama: <code class="docutils literal notranslate"><span class="pre">date</span></code> (tanggal pengukuran) dan nilai konsentrasi polutan dalam satuan <strong>mol/m²</strong> (kolom troposfer vertikal). Berikut penjelasan masing-masing polutan secara mendalam.</p>
+<hr class="docutils" />
+<section id="no2-nitrogen-dioksida">
+<h3>NO2 — Nitrogen Dioksida<a class="headerlink" href="#no2-nitrogen-dioksida" title="Link to this heading">#</a></h3>
+<p><strong>Apa itu NO2?</strong></p>
+<p>Nitrogen dioksida adalah gas anorganik berwarna coklat kemerahan yang termasuk dalam kelompok nitrogen oksida (NOx). Di atmosfer, NO2 terbentuk melalui dua jalur utama: oksidasi nitrogen monoksida (NO) yang dilepaskan saat pembakaran pada suhu tinggi, dan reaksi fotokimia di troposfer yang melibatkan sinar matahari. Gas ini menjadi salah satu indikator utama polusi udara perkotaan karena erat kaitannya dengan aktivitas transportasi dan industri.</p>
+<p><strong>Proses pembentukan:</strong></p>
+<p>Saat bahan bakar dibakar pada suhu tinggi (di mesin kendaraan, kapal, atau boiler industri), nitrogen dan oksigen di udara bereaksi membentuk NO. Di atmosfer, NO kemudian teroksidasi menjadi NO2 dalam hitungan menit hingga jam, tergantung kondisi atmosfer dan ketersediaan ozon.</p>
+<p><strong>Sumber di wilayah Kamal-UTM:</strong></p>
+<p>Kawasan Kamal memiliki beberapa sumber NO2 yang aktif setiap hari. Kendaraan bermotor berbahan bakar bensin dan solar di jalur utama Surabaya–Madura menjadi sumber dominan, terutama di jam sibuk pagi dan sore. Mesin kapal ferry di Pelabuhan Kamal mengeluarkan emisi NOx dalam volume besar karena menggunakan mesin diesel berdaya tinggi yang beroperasi terus-menerus. Selain itu, angin dari arah barat (dari Surabaya dan Gresik) sesekali membawa NO2 dari kawasan industri Petrokimia Gresik ke wilayah Madura.</p>
+<p><strong>Satuan &amp; nilai referensi:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Nilai</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Satuan data satelit</p></td>
+<td><p>mol/m² (kolom troposfer)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ambang batas WHO (tahunan)</p></td>
+<td><p>10 µg/m³</p></td>
+</tr>
+<tr class="row-even"><td><p>Ambang batas WHO (24 jam)</p></td>
+<td><p>25 µg/m³</p></td>
+</tr>
+<tr class="row-odd"><td><p>Nilai latar belakang bersih</p></td>
+<td><p>&lt; 1 × 10⁻⁵ mol/m²</p></td>
+</tr>
+<tr class="row-even"><td><p>Nilai tinggi (perkotaan padat)</p></td>
+<td><p>&gt; 5 × 10⁻⁵ mol/m²</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Dampak kesehatan:</strong></p>
+<p>Paparan NO2 jangka pendek (beberapa jam) pada konsentrasi tinggi menyebabkan iritasi pada saluran pernapasan atas, batuk, dan sesak napas. Pada penderita asma, konsentrasi NO2 yang meningkat 50 µg/m³ saja sudah cukup memicu serangan. Paparan jangka panjang (bertahun-tahun) dikaitkan dengan penurunan fungsi paru, peningkatan risiko infeksi saluran pernapasan, dan pada anak-anak menyebabkan gangguan perkembangan paru.</p>
+<p><strong>Dampak lingkungan:</strong></p>
+<p>NO2 adalah prekursor utama pembentukan ozon troposfer (O3) melalui reaksi fotokimia, yang kemudian membentuk kabut fotokimia (smog). Gas ini juga berkontribusi pada hujan asam setelah bereaksi dengan uap air membentuk asam nitrat (HNO3).</p>
+</section>
+<hr class="docutils" />
+<section id="co-karbon-monoksida">
+<h3>CO — Karbon Monoksida<a class="headerlink" href="#co-karbon-monoksida" title="Link to this heading">#</a></h3>
+<p><strong>Apa itu CO?</strong></p>
+<p>Karbon monoksida adalah gas tidak berwarna, tidak berbau, dan tidak berasa — sifat-sifat itulah yang membuatnya berbahaya. Gas ini terbentuk dari pembakaran tidak sempurna senyawa organik yang mengandung karbon, ketika suplai oksigen tidak cukup untuk mengoksidasi seluruh karbon menjadi CO2. Di troposfer, CO menjadi indikator kuat aktivitas pembakaran di permukaan bumi, baik dari kendaraan, industri, maupun kebakaran biomassa.</p>
+<p><strong>Proses pembentukan:</strong></p>
+<p>Pembakaran sempurna menghasilkan CO2. Tapi ketika campuran bahan bakar-udara tidak ideal (terlalu kaya bahan bakar, suhu pembakaran rendah, atau waktu pembakaran singkat), reaksi oksidasi berhenti di tengah jalan dan menghasilkan CO. Ini terjadi paling banyak pada mesin kendaraan tua tanpa catalytic converter, mesin diesel dalam kondisi beban penuh, dan pembakaran sampah terbuka.</p>
+<p><strong>Sumber di wilayah Kamal-UTM:</strong></p>
+<p>Kendaraan tua yang masih banyak beroperasi di jalur Kamal — terutama truk dan angkutan barang yang melayani pelabuhan — menjadi sumber CO signifikan. Kapal ferry berbahan bakar HSD (High Speed Diesel) juga melepaskan CO dalam jumlah besar saat mesin baru dinyalakan atau saat kapal bermanuver di dermaga. Pembakaran sampah terbuka yang masih umum di kawasan pesisir Madura turut menyumbang lonjakan konsentrasi CO sesekali, terutama di musim kemarau.</p>
+<p><strong>Satuan &amp; nilai referensi:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Nilai</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Satuan data satelit</p></td>
+<td><p>mol/m² (kolom troposfer)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ambang batas WHO (rata-rata 8 jam)</p></td>
+<td><p>10.000 µg/m³ (10 mg/m³)</p></td>
+</tr>
+<tr class="row-even"><td><p>Ambang batas WHO (rata-rata 1 jam)</p></td>
+<td><p>35.000 µg/m³ (35 mg/m³)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Nilai latar belakang bersih</p></td>
+<td><p>~1 × 10⁻² mol/m²</p></td>
+</tr>
+<tr class="row-even"><td><p>Nilai tinggi (dekat sumber)</p></td>
+<td><p>&gt; 3 × 10⁻² mol/m²</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Dampak kesehatan:</strong></p>
+<p>CO berikatan dengan hemoglobin dalam darah membentuk karboksihemoglobin (COHb) — ikatannya 200 kali lebih kuat dibanding oksigen. Akibatnya, sel darah merah tidak bisa mengangkut oksigen ke jaringan tubuh. Pada konsentrasi rendah, gejala yang muncul adalah sakit kepala dan pusing yang sering salah dikira migrain. Konsentrasi sedang menyebabkan mual, disorientasi, dan kelelahan ekstrem. Konsentrasi tinggi bisa menyebabkan kehilangan kesadaran dan kematian. Kelompok paling rentan adalah ibu hamil (CO menghambat perkembangan janin), bayi, lansia, dan penderita penyakit jantung.</p>
+<p><strong>Dampak lingkungan:</strong></p>
+<p>CO berkontribusi pada pembentukan ozon troposfer karena bereaksi dengan radikal hidroksil (OH) — yang seharusnya memecah metana dan gas rumah kaca lain di atmosfer. Dengan “memakan” OH, CO secara tidak langsung memperpanjang umur metana di atmosfer dan memperkuat efek rumah kaca.</p>
+</section>
+<hr class="docutils" />
+<section id="so2-sulfur-dioksida">
+<h3>SO2 — Sulfur Dioksida<a class="headerlink" href="#so2-sulfur-dioksida" title="Link to this heading">#</a></h3>
+<p><strong>Apa itu SO2?</strong></p>
+<p>Sulfur dioksida adalah gas tidak berwarna dengan bau tajam dan menyengat yang menjadi penanda kuat aktivitas industri berat dan pembakaran bahan bakar fosil berkadar sulfur tinggi. Di atmosfer, SO2 memiliki umur yang relatif singkat (1–4 hari) sebelum teroksidasi menjadi sulfat, tapi dalam periode singkat itu sudah cukup menyebabkan dampak kesehatan dan lingkungan yang serius.</p>
+<p><strong>Proses pembentukan:</strong></p>
+<p>Bahan bakar fosil — terutama batubara dan solar kualitas rendah — mengandung senyawa sulfur organik. Saat dibakar, sulfur tersebut teroksidasi menjadi SO2. Semakin tinggi kadar sulfur dalam bahan bakar, semakin besar emisi SO2 yang dihasilkan. Bahan bakar kapal laut secara historis memiliki kadar sulfur jauh lebih tinggi dibanding bahan bakar kendaraan darat, meski regulasi internasional (IMO 2020) sudah mulai menekan kadar sulfur ini.</p>
+<p><strong>Sumber di wilayah Kamal-UTM:</strong></p>
+<p>Sumber utama SO2 di wilayah Kamal bukan dari kendaraan darat, melainkan dari kapal ferry yang menggunakan bahan bakar HSD atau MFO (Marine Fuel Oil). Mesin kapal beroperasi dengan bahan bakar berkadar sulfur lebih tinggi dibanding bensin kendaraan, dan emisinya dilepaskan langsung di area pelabuhan. Selain itu, industri di Surabaya bagian utara (Gresik) yang menggunakan batubara atau bahan bakar industri lain bisa membawa SO2 ke arah timur tergantung arah angin. Aktivitas vulkanik di Jawa Timur (Gunung Bromo, Semeru) juga sesekali berkontribusi pada lonjakan SO2 regional yang tertangkap satelit.</p>
+<p><strong>Satuan &amp; nilai referensi:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Nilai</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Satuan data satelit</p></td>
+<td><p>mol/m² (kolom troposfer)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ambang batas WHO (rata-rata 24 jam)</p></td>
+<td><p>40 µg/m³</p></td>
+</tr>
+<tr class="row-even"><td><p>Ambang batas WHO (rata-rata 10 menit)</p></td>
+<td><p>500 µg/m³</p></td>
+</tr>
+<tr class="row-odd"><td><p>Nilai latar belakang bersih</p></td>
+<td><p>&lt; 5 × 10⁻⁴ mol/m²</p></td>
+</tr>
+<tr class="row-even"><td><p>Nilai tinggi (dekat industri/pelabuhan)</p></td>
+<td><p>&gt; 1 × 10⁻³ mol/m²</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Dampak kesehatan:</strong></p>
+<p>SO2 diserap di saluran pernapasan atas karena sangat mudah larut dalam air. Iritasi hidung, tenggorokan, dan bronkus terjadi bahkan pada konsentrasi rendah. Pada penderita asma, SO2 pada konsentrasi 0,4 ppm sudah cukup memicu bronkospasme — penyempitan tiba-tiba saluran napas. Paparan jangka panjang dikaitkan dengan bronkitis kronis dan penurunan fungsi paru. Anak-anak yang tumbuh di daerah dengan SO2 tinggi menunjukkan kapasitas paru di bawah rata-rata dibanding kelompok sebaya di daerah bersih.</p>
+<p><strong>Dampak lingkungan:</strong></p>
+<p>SO2 adalah penyebab utama hujan asam. Di atmosfer, SO2 teroksidasi menjadi SO3, lalu bereaksi dengan uap air membentuk asam sulfat (H2SO4). Hujan asam merusak ekosistem danau dan sungai, melarutkan mineral tanah, dan menghambat pertumbuhan tanaman. Di kawasan pesisir seperti Kamal, hujan asam juga mempercepat korosi struktur besi dan beton pada fasilitas pelabuhan.</p>
+</section>
 </section>
 </section>
 
@@ -493,9 +755,19 @@ See the YAML at the top of this page for example.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-cell">An example cell</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-notebook-with-myst-markdown">Create a notebook with MyST Markdown</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quickly-add-yaml-metadata-for-myst-notebooks">Quickly add YAML metadata for MyST Notebooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sumber-data">Sumber Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentinel-5p-tropomi">Sentinel-5P &amp; TROPOMI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#openeo-platform-akses-data">OpenEO — Platform Akses Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wilayah-kajian-peta-interaktif">Wilayah Kajian &amp; Peta Interaktif</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengambilan-data-crawling-via-openeo">Pengambilan Data (Crawling via OpenEO)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-fitur-polutan">Deskripsi Fitur (Polutan)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#no2-nitrogen-dioksida">NO2 — Nitrogen Dioksida</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#co-karbon-monoksida">CO — Karbon Monoksida</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#so2-sulfur-dioksida">SO2 — Sulfur Dioksida</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
