@@ -1,0 +1,785 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>&lt;no title&gt; &#8212; A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'posgres';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/foto.png" class="logo__image only-light" alt="A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN - Home"/>
+    <script>document.write(`<img src="_static/foto.png" class="logo__image only-dark" alt="A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Proyek Saint Data
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="busines-understanding.html">Business Understanding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-understanding.html">Data Understanding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explorasi-data.html">Eksplorasi Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timeseriesaiven.html">Analisis Time Series: Migrasi Data &amp; Pengolahan di KNIME</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fposgres.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/posgres.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><no title></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>sqlalchemy<span class="w"> </span>psycopg2-binary
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pandas
+  Using cached pandas-2.3.3-cp39-cp39-win_amd64.whl (11.4 MB)
+Collecting sqlalchemy
+  Using cached sqlalchemy-2.0.52-cp39-cp39-win_amd64.whl (2.2 MB)
+Collecting psycopg2-binary
+  Using cached psycopg2_binary-2.9.12-cp39-cp39-win_amd64.whl (2.8 MB)
+Collecting tzdata&gt;=2022.7
+  Using cached tzdata-2026.3-py2.py3-none-any.whl (348 kB)
+Collecting numpy&gt;=1.22.4
+  Using cached numpy-2.0.2-cp39-cp39-win_amd64.whl (15.9 MB)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in c:\users\ariel\onedrive\documents\psd\.venv\lib\site-packages (from pandas) (2.9.0.post0)
+Collecting pytz&gt;=2020.1
+  Using cached pytz-2026.3.post1-py2.py3-none-any.whl (508 kB)
+Requirement already satisfied: typing-extensions&gt;=4.6.0 in c:\users\ariel\onedrive\documents\psd\.venv\lib\site-packages (from sqlalchemy) (4.16.0)
+Collecting greenlet&gt;=1
+  Using cached greenlet-3.2.5.tar.gz (191 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status &#39;done&#39;
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status &#39;done&#39;
+    Preparing wheel metadata: started
+    Preparing wheel metadata: finished with status &#39;done&#39;
+Requirement already satisfied: six&gt;=1.5 in c:\users\ariel\onedrive\documents\psd\.venv\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)
+Building wheels for collected packages: greenlet
+  Building wheel for greenlet (PEP 517): started
+  Building wheel for greenlet (PEP 517): finished with status &#39;error&#39;
+Failed to build greenlet
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  ERROR: Command errored out with exit status 1:
+   command: &#39;c:\Users\ARIEL\OneDrive\Documents\PSD\.venv\Scripts\python.exe&#39; &#39;c:\Users\ARIEL\OneDrive\Documents\PSD\.venv\lib\site-packages\pip\_vendor\pep517\in_process\_in_process.py&#39; build_wheel &#39;C:\Users\ARIEL\AppData\Local\Temp\tmpsnjlaeil&#39;
+       cwd: C:\Users\ARIEL\AppData\Local\Temp\pip-install-l2josrux\greenlet_c190ba8630d74a47879b74f13d644f66
+  Complete output (112 lines):
+  running bdist_wheel
+  running build
+  running build_py
+  creating build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\__init__.py -&gt; build\lib.win-amd64-cpython-39\greenlet
+  creating build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\__init__.py -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  creating build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\fail_clearing_run_switches.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\fail_cpp_exception.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\fail_initialstub_already_started.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\fail_slp_switch.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\fail_switch_three_greenlets.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\fail_switch_three_greenlets2.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\fail_switch_two_greenlets.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\leakcheck.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_contextvars.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_cpp.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_extension_interface.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_gc.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_generator.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_generator_nested.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_greenlet.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_greenlet_trash.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_interpreter_shutdown.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_leaks.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_stack_saved.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_throw.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_tracing.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_version.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_weakref.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\__init__.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  running egg_info
+  writing src\greenlet.egg-info\PKG-INFO
+  writing dependency_links to src\greenlet.egg-info\dependency_links.txt
+  writing requirements to src\greenlet.egg-info\requires.txt
+  writing top-level names to src\greenlet.egg-info\top_level.txt
+  reading manifest file &#39;src\greenlet.egg-info\SOURCES.txt&#39;
+  reading manifest template &#39;MANIFEST.in&#39;
+  warning: no previously-included files found matching &#39;benchmarks\*.json&#39;
+  no previously-included directories found matching &#39;docs\_build&#39;
+  warning: no files found matching &#39;*.py&#39; under directory &#39;appveyor&#39;
+  warning: no previously-included files matching &#39;*.pyc&#39; found anywhere in distribution
+  warning: no previously-included files matching &#39;*.pyd&#39; found anywhere in distribution
+  warning: no previously-included files matching &#39;*.so&#39; found anywhere in distribution
+  warning: no previously-included files matching &#39;.coverage&#39; found anywhere in distribution
+  adding license file &#39;LICENSE&#39;
+  adding license file &#39;LICENSE.PSF&#39;
+  writing manifest file &#39;src\greenlet.egg-info\SOURCES.txt&#39;
+  copying src\greenlet\CObjects.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\PyGreenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\PyGreenlet.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\PyGreenletUnswitchable.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\PyModule.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TBrokenGreenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TExceptionState.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TGreenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TGreenlet.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TGreenletGlobals.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TMainGreenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TPythonState.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TStackState.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TThreadState.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TThreadStateCreator.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TThreadStateDestroy.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TUserGreenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet.h -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet_allocator.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet_compiler_compat.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet_cpython_compat.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet_exceptions.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet_internal.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet_msvc_compat.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet_refs.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet_slp_switch.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet_thread_support.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\slp_platformselect.h -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\platform\setup_switch_x64_masm.cmd -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_aarch64_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_alpha_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_amd64_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_arm32_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_arm32_ios.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_arm64_masm.asm -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_arm64_masm.obj -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_arm64_msvc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_csky_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_loongarch64_linux.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_m68k_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_mips_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_ppc64_aix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_ppc64_linux.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_ppc_aix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_ppc_linux.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_ppc_macosx.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_ppc_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_riscv_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_s390_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_sh_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_sparc_sun_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_x32_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_x64_masm.asm -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_x64_masm.obj -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_x64_msvc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_x86_msvc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_x86_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\tests\_test_extension.c -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\_test_extension_cpp.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  running build_ext
+  building &#39;greenlet._greenlet&#39; extension
+  error: Microsoft Visual C++ 14.0 or greater is required. Get it with &quot;Microsoft C++ Build Tools&quot;: https://visualstudio.microsoft.com/visual-cpp-build-tools/
+  ----------------------------------------
+  ERROR: Failed building wheel for greenlet
+ERROR: Could not build wheels for greenlet which use PEP 517 and cannot be installed directly
+WARNING: You are using pip version 21.2.4; however, version 26.0.1 is available.
+You should consider upgrading via the &#39;c:\Users\ARIEL\OneDrive\Documents\PSD\.venv\Scripts\python.exe -m pip install --upgrade pip&#39; command.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_engine</span><span class="p">,</span> <span class="n">text</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">Float</span>
+
+<span class="c1"># 1. Baca ketiga file CSV</span>
+<span class="n">df_no2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;NO2_KAMAL-UTM.csv&#39;</span><span class="p">)</span>
+<span class="n">df_so2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;SO2_KAMAL-UTM.csv&#39;</span><span class="p">)</span>
+<span class="n">df_co</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;CO_KAMAL-UTM.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># 2. Gabungkan</span>
+<span class="n">df_gabung</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_no2</span><span class="p">,</span> <span class="n">df_so2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;feature_index&#39;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+<span class="n">df_gabung</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_gabung</span><span class="p">,</span> <span class="n">df_co</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;feature_index&#39;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data berhasil digabung! Berikut 5 baris pertamanya:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_gabung</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="c1"># 3. Koneksi Database</span>
+<span class="n">DATABASE_URI</span> <span class="o">=</span> <span class="s2">&quot;masukan url aiven anda&quot;</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">DATABASE_URI</span><span class="p">)</span>
+<span class="n">table_name</span> <span class="o">=</span> <span class="s1">&#39;kualitas_udara_kamal&#39;</span>
+
+<span class="c1"># 4. Upload dengan tipe double precision</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">text</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DROP TABLE IF EXISTS </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">;&quot;</span><span class="p">))</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tabel lama &#39;</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&#39; berhasil dihapus.&quot;</span><span class="p">)</span>
+    
+    <span class="n">df_gabung</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">table_name</span><span class="p">,</span>
+        <span class="n">con</span><span class="o">=</span><span class="n">engine</span><span class="p">,</span>
+        <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">,</span>
+        <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;NO2&#39;</span><span class="p">:</span> <span class="n">Float</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">53</span><span class="p">),</span>
+            <span class="s1">&#39;SO2&#39;</span><span class="p">:</span> <span class="n">Float</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">53</span><span class="p">),</span>
+            <span class="s1">&#39;CO&#39;</span><span class="p">:</span>  <span class="n">Float</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">53</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tabel &#39;</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&#39; berhasil diupload dengan tipe double precision!&quot;</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Terjadi kesalahan: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data berhasil digabung! Berikut 5 baris pertamanya:
+                       date  feature_index       NO2       SO2        CO
+0  2025-08-24T00:00:00.000Z              0       NaN       NaN       NaN
+1  2025-08-25T00:00:00.000Z              0  0.000020  0.000272  0.028240
+2  2025-08-26T00:00:00.000Z              0  0.000035 -0.002125       NaN
+3  2025-08-27T00:00:00.000Z              0  0.000086  0.000169  0.030417
+4  2025-08-28T00:00:00.000Z              0  0.000010  0.000109  0.025137
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ArgumentError</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">19</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="c1"># 3. Koneksi Database</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="n">DATABASE_URI</span> <span class="o">=</span> <span class="s2">&quot;masukan url aiven anda&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">19</span> <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">DATABASE_URI</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="n">table_name</span> <span class="o">=</span> <span class="s1">&#39;kualitas_udara_kamal&#39;</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="c1"># 4. Upload dengan tipe double precision</span>
+
+<span class="nn">File &lt;string&gt;:2,</span> in <span class="ni">create_engine</span><span class="nt">(url, **kwargs)</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\sqlalchemy\util\deprecations.py:281,</span> in <span class="ni">deprecated_params.&lt;locals&gt;.decorate.&lt;locals&gt;.warned</span><span class="nt">(fn, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">274</span>     <span class="k">if</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">275</span>         <span class="n">_warn_with_version</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">276</span>             <span class="n">messages</span><span class="p">[</span><span class="n">m</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">277</span>             <span class="n">versions</span><span class="p">[</span><span class="n">m</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">278</span>             <span class="n">version_warnings</span><span class="p">[</span><span class="n">m</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">279</span>             <span class="n">stacklevel</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">280</span>         <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">281</span> <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\sqlalchemy\engine\create.py:564,</span> in <span class="ni">create_engine</span><span class="nt">(url, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">561</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;empty_in_strategy&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">563</span> <span class="c1"># create url.URL object</span>
+<span class="ne">--&gt; </span><span class="mi">564</span> <span class="n">u</span> <span class="o">=</span> <span class="n">_url</span><span class="o">.</span><span class="n">make_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">566</span> <span class="n">u</span><span class="p">,</span> <span class="n">plugins</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">_instantiate_plugins</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">568</span> <span class="n">entrypoint</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">_get_entrypoint</span><span class="p">()</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\sqlalchemy\engine\url.py:856,</span> in <span class="ni">make_url</span><span class="nt">(name_or_url)</span>
+<span class="g g-Whitespace">    </span><span class="mi">840</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Given a string, produce a new URL instance.</span>
+<span class="g g-Whitespace">    </span><span class="mi">841</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">842</span><span class="sd"> The format of the URL generally follows `RFC-1738</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">852</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">853</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">855</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name_or_url</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">856</span>     <span class="k">return</span> <span class="n">_parse_url</span><span class="p">(</span><span class="n">name_or_url</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">857</span> <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name_or_url</span><span class="p">,</span> <span class="n">URL</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">858</span>     <span class="n">name_or_url</span><span class="p">,</span> <span class="s2">&quot;_sqla_is_testing_if_this_is_a_mock_object&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">859</span> <span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">860</span>     <span class="k">raise</span> <span class="n">exc</span><span class="o">.</span><span class="n">ArgumentError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">861</span>         <span class="sa">f</span><span class="s2">&quot;Expected string or URL object, got </span><span class="si">{</span><span class="n">name_or_url</span><span class="si">!r}</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">862</span>     <span class="p">)</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\sqlalchemy\engine\url.py:922,</span> in <span class="ni">_parse_url</span><span class="nt">(name)</span>
+<span class="g g-Whitespace">    </span><span class="mi">919</span>     <span class="k">return</span> <span class="n">URL</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">components</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+<span class="g g-Whitespace">    </span><span class="mi">921</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">922</span>     <span class="k">raise</span> <span class="n">exc</span><span class="o">.</span><span class="n">ArgumentError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">923</span>         <span class="s2">&quot;Could not parse SQLAlchemy URL from given URL string&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">924</span>     <span class="p">)</span>
+
+<span class="ne">ArgumentError</span>: Could not parse SQLAlchemy URL from given URL string
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_gabung</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;data_gabungan_lengkap.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File CSV berhasil diekspor!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File CSV berhasil diekspor!
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

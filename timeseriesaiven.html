@@ -1,0 +1,1383 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Analisis Time Series: Migrasi Data &amp; Pengolahan di KNIME &#8212; A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'timeseriesaiven';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Eksplorasi Data" href="explorasi-data.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/foto.png" class="logo__image only-light" alt="A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN - Home"/>
+    <script>document.write(`<img src="_static/foto.png" class="logo__image only-dark" alt="A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Proyek Saint Data
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="busines-understanding.html">Business Understanding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-understanding.html">Data Understanding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explorasi-data.html">Eksplorasi Data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Analisis Time Series: Migrasi Data &amp; Pengolahan di KNIME</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Ftimeseriesaiven.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/timeseriesaiven.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Analisis Time Series: Migrasi Data & Pengolahan di KNIME</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#migrasi-data-ke-aiven-postgresql">Migrasi Data ke Aiven PostgreSQL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buat-akun-dan-database-di-aiven">Buat Akun dan Database di Aiven</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#migrasi-data-via-python">Migrasi Data via Python</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrasi-dan-pengolahan-time-series-di-knime">Integrasi dan Pengolahan Time Series di KNIME</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-1-postgresql-connector">Node 1: PostgreSQL Connector</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-2-db-query-reader">Node 2: DB Query Reader</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-3-column-filter">Node 3: Column Filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-4-statistics">Node 4: Statistics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-table-view">Node: Table View</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-csv-writer">Node: CSV Writer</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-rumus-dan-contoh-perhitungan-node-statistics">Penjelasan Rumus dan Contoh Perhitungan Node Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-missing-values">a) Missing Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-minimum-maximum">b) Minimum &amp; Maximum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-mean-rata-rata">c) Mean (Rata-rata)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-median-nilai-tengah">d) Median (Nilai Tengah)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-overall-sum">e) Overall Sum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-variance-varians">f) Variance (Varians)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#g-standard-deviation-simpangan-baku">g) Standard Deviation (Simpangan Baku)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#h-skewness-kemencengan-distribusi">h) Skewness (Kemencengan Distribusi)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-kurtosis-keruncingan-distribusi">i) Kurtosis (Keruncingan Distribusi)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-ringkasan-statistik-aktual-seluruh-dataset">Tabel Ringkasan Statistik Aktual (Seluruh Dataset)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analisis-time-series-migrasi-data-pengolahan-di-knime">
+<h1>Analisis Time Series: Migrasi Data &amp; Pengolahan di KNIME<a class="headerlink" href="#analisis-time-series-migrasi-data-pengolahan-di-knime" title="Link to this heading">#</a></h1>
+<p>Sebelum pemodelan time series dilakukan, data historis polutan yang tersimpan dalam tiga file CSV perlu dipindahkan ke cloud database agar bisa diakses dari berbagai platform secara terpusat. Dokumen ini mencakup alur lengkap mulai dari pembuatan database PostgreSQL di Aiven, migrasi data via Python, hingga pengolahan di KNIME Analytics Platform beserta penjelasan matematis setiap fitur statistik yang dihasilkan.</p>
+<hr class="docutils" />
+<section id="migrasi-data-ke-aiven-postgresql">
+<h2>Migrasi Data ke Aiven PostgreSQL<a class="headerlink" href="#migrasi-data-ke-aiven-postgresql" title="Link to this heading">#</a></h2>
+<section id="buat-akun-dan-database-di-aiven">
+<h3>Buat Akun dan Database di Aiven<a class="headerlink" href="#buat-akun-dan-database-di-aiven" title="Link to this heading">#</a></h3>
+<p>Aiven adalah layanan cloud database terkelola yang mendukung PostgreSQL, MySQL, Kafka, dan lainnya. Data polutan disimpan di sini agar bisa ditarik dari KNIME tanpa perlu memindahkan file CSV secara manual.</p>
+<p><strong>Langkah-langkah:</strong></p>
+<ol class="arabic simple">
+<li><p>Buka <a class="reference external" href="https://console.aiven.io">console.aiven.io</a> dan daftarkan akun baru atau login jika sudah punya.</p></li>
+<li><p>Setelah masuk ke dashboard, klik <strong>Create Service</strong>.</p></li>
+<li><p>Pilih <strong>PostgreSQL</strong> sebagai jenis layanan.</p></li>
+<li><p>Pilih cloud provider (Google Cloud, AWS, atau Azure) dan region terdekat — pilih <strong>Google Cloud / asia-southeast1 (Singapore)</strong> untuk latensi minimal dari Indonesia.</p></li>
+<li><p>Pilih plan <strong>Free</strong> untuk keperluan tugas, lalu klik <strong>Create Service</strong>.</p></li>
+<li><p>Tunggu beberapa menit hingga status layanan berubah dari <em>Rebuilding</em> menjadi <strong>Running</strong>.</p></li>
+</ol>
+<p>Setelah layanan aktif, buka halaman <strong>Overview</strong> layanan tersebut. Di sana tersedia informasi koneksi yang dibutuhkan:</p>
+<ul class="simple">
+<li><p><strong>Host</strong>: alamat server (contoh: <code class="docutils literal notranslate"><span class="pre">xxxxx.aivencloud.com</span></code>)</p></li>
+<li><p><strong>Port</strong>: nomor port PostgreSQL (biasanya 24065 atau 14699)</p></li>
+<li><p><strong>Database</strong>: <code class="docutils literal notranslate"><span class="pre">defaultdb</span></code></p></li>
+<li><p><strong>Username</strong>: <code class="docutils literal notranslate"><span class="pre">avnadmin</span></code></p></li>
+<li><p><strong>Password</strong>: password yang digenerate otomatis oleh Aiven</p></li>
+<li><p><strong>URI</strong>: connection string lengkap dalam format <code class="docutils literal notranslate"><span class="pre">postgresql://user:pass&#64;host:port/db?sslmode=require</span></code></p></li>
+</ul>
+</section>
+<section id="migrasi-data-via-python">
+<h3>Migrasi Data via Python<a class="headerlink" href="#migrasi-data-via-python" title="Link to this heading">#</a></h3>
+<p>Data dipindahkan menggunakan Python dengan library <code class="docutils literal notranslate"><span class="pre">sqlalchemy</span></code> dan <code class="docutils literal notranslate"><span class="pre">psycopg2</span></code>. Tidak perlu membuat tabel secara manual di PG Studio — perintah <code class="docutils literal notranslate"><span class="pre">to_sql</span></code> dengan parameter <code class="docutils literal notranslate"><span class="pre">if_exists='replace'</span></code> secara otomatis membuat tabel baru sesuai struktur dataframe yang dikirim. Jika tabel sudah ada dari run sebelumnya, tabel lama dihapus dulu agar data tidak duplikat.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>sqlalchemy<span class="w"> </span>psycopg2-binary
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_engine</span><span class="p">,</span> <span class="n">text</span>
+
+<span class="c1"># 1. Baca ketiga file CSV</span>
+<span class="c1"># Pastikan nama file SO2 dan CO sudah sesuai dengan yang Anda miliki</span>
+<span class="n">df_no2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;NO2_KAMAL-UTM.csv&#39;</span><span class="p">)</span>
+<span class="n">df_so2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;SO2_KAMAL-UTM.csv&#39;</span><span class="p">)</span> <span class="c1"># Ganti jika nama file berbeda</span>
+<span class="n">df_co</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;CO_KAMAL-UTM.csv&#39;</span><span class="p">)</span>   <span class="c1"># Ganti jika nama file berbeda</span>
+
+<span class="c1"># 2. Gabungkan (Merge) ketiga dataframe berdasarkan &#39;date&#39; dan &#39;feature_index&#39;</span>
+<span class="c1"># Menggunakan &#39;outer&#39; join agar tanggal yang ada di satu file tapi tidak ada di file lain tetap masuk (menjadi NaN/Null)</span>
+<span class="n">df_gabung</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_no2</span><span class="p">,</span> <span class="n">df_so2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;feature_index&#39;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+<span class="n">df_gabung</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_gabung</span><span class="p">,</span> <span class="n">df_co</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;feature_index&#39;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data berhasil digabung! Berikut 5 baris pertamanya:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_gabung</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="c1"># 3. Konfigurasi Koneksi Database</span>
+<span class="c1"># PENTING: Ganti dengan URL database Anda yang aktif!</span>
+<span class="n">DATABASE_URI</span> <span class="o">=</span> <span class="s2">&quot;masukan url aiven anda&quot;</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">DATABASE_URI</span><span class="p">)</span>
+<span class="n">table_name</span> <span class="o">=</span> <span class="s1">&#39;kualitas_udara_kamal&#39;</span>
+
+<span class="c1"># 4. Hapus (Drop) tabel lama jika sudah ada, lalu unggah data baru</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+        <span class="c1"># Hapus tabel lama agar bersih</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">text</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DROP TABLE IF EXISTS </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">;&quot;</span><span class="p">))</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tabel lama &#39;</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&#39; berhasil dihapus (jika ada).&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Upload data yang sudah digabung (if_exists=&#39;replace&#39; juga otomatis menimpa tabel)</span>
+    <span class="n">df_gabung</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">table_name</span><span class="p">,</span> <span class="n">con</span><span class="o">=</span><span class="n">engine</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="s1">&#39;replace&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tabel baru &#39;</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&#39; berhasil dibuat dan data telah diunggah!&quot;</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Terjadi kesalahan pada database: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pandas
+  Using cached pandas-2.3.3-cp39-cp39-win_amd64.whl (11.4 MB)
+Collecting sqlalchemy
+  Using cached sqlalchemy-2.0.52-cp39-cp39-win_amd64.whl (2.2 MB)
+Collecting psycopg2-binary
+  Using cached psycopg2_binary-2.9.12-cp39-cp39-win_amd64.whl (2.8 MB)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in c:\users\ariel\onedrive\documents\psd\.venv\lib\site-packages (from pandas) (2.9.0.post0)
+Collecting tzdata&gt;=2022.7
+  Using cached tzdata-2026.3-py2.py3-none-any.whl (348 kB)
+Collecting numpy&gt;=1.22.4
+  Using cached numpy-2.0.2-cp39-cp39-win_amd64.whl (15.9 MB)
+Collecting pytz&gt;=2020.1
+  Using cached pytz-2026.3.post1-py2.py3-none-any.whl (508 kB)
+Collecting greenlet&gt;=1
+  Using cached greenlet-3.2.5.tar.gz (191 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status &#39;done&#39;
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status &#39;done&#39;
+    Preparing wheel metadata: started
+    Preparing wheel metadata: finished with status &#39;done&#39;
+Requirement already satisfied: typing-extensions&gt;=4.6.0 in c:\users\ariel\onedrive\documents\psd\.venv\lib\site-packages (from sqlalchemy) (4.16.0)
+Requirement already satisfied: six&gt;=1.5 in c:\users\ariel\onedrive\documents\psd\.venv\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)
+Building wheels for collected packages: greenlet
+  Building wheel for greenlet (PEP 517): started
+  Building wheel for greenlet (PEP 517): finished with status &#39;error&#39;
+Failed to build greenlet
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  ERROR: Command errored out with exit status 1:
+   command: &#39;c:\Users\ARIEL\OneDrive\Documents\PSD\.venv\Scripts\python.exe&#39; &#39;c:\Users\ARIEL\OneDrive\Documents\PSD\.venv\lib\site-packages\pip\_vendor\pep517\in_process\_in_process.py&#39; build_wheel &#39;C:\Users\ARIEL\AppData\Local\Temp\tmpj1gzj6d2&#39;
+       cwd: C:\Users\ARIEL\AppData\Local\Temp\pip-install-0g26_y5y\greenlet_d154f3e34044455fbf87640fdbbe0ca1
+  Complete output (112 lines):
+  running bdist_wheel
+  running build
+  running build_py
+  creating build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\__init__.py -&gt; build\lib.win-amd64-cpython-39\greenlet
+  creating build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\__init__.py -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  creating build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\fail_clearing_run_switches.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\fail_cpp_exception.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\fail_initialstub_already_started.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\fail_slp_switch.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\fail_switch_three_greenlets.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\fail_switch_three_greenlets2.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\fail_switch_two_greenlets.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\leakcheck.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_contextvars.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_cpp.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_extension_interface.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_gc.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_generator.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_generator_nested.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_greenlet.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_greenlet_trash.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_interpreter_shutdown.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_leaks.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_stack_saved.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_throw.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_tracing.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_version.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\test_weakref.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\__init__.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  running egg_info
+  writing src\greenlet.egg-info\PKG-INFO
+  writing dependency_links to src\greenlet.egg-info\dependency_links.txt
+  writing requirements to src\greenlet.egg-info\requires.txt
+  writing top-level names to src\greenlet.egg-info\top_level.txt
+  reading manifest file &#39;src\greenlet.egg-info\SOURCES.txt&#39;
+  reading manifest template &#39;MANIFEST.in&#39;
+  warning: no previously-included files found matching &#39;benchmarks\*.json&#39;
+  no previously-included directories found matching &#39;docs\_build&#39;
+  warning: no files found matching &#39;*.py&#39; under directory &#39;appveyor&#39;
+  warning: no previously-included files matching &#39;*.pyc&#39; found anywhere in distribution
+  warning: no previously-included files matching &#39;*.pyd&#39; found anywhere in distribution
+  warning: no previously-included files matching &#39;*.so&#39; found anywhere in distribution
+  warning: no previously-included files matching &#39;.coverage&#39; found anywhere in distribution
+  adding license file &#39;LICENSE&#39;
+  adding license file &#39;LICENSE.PSF&#39;
+  writing manifest file &#39;src\greenlet.egg-info\SOURCES.txt&#39;
+  copying src\greenlet\CObjects.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\PyGreenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\PyGreenlet.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\PyGreenletUnswitchable.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\PyModule.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TBrokenGreenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TExceptionState.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TGreenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TGreenlet.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TGreenletGlobals.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TMainGreenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TPythonState.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TStackState.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TThreadState.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TThreadStateCreator.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TThreadStateDestroy.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\TUserGreenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet.h -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet_allocator.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet_compiler_compat.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet_cpython_compat.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet_exceptions.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet_internal.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet_msvc_compat.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet_refs.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet_slp_switch.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\greenlet_thread_support.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\slp_platformselect.h -&gt; build\lib.win-amd64-cpython-39\greenlet
+  copying src\greenlet\platform\setup_switch_x64_masm.cmd -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_aarch64_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_alpha_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_amd64_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_arm32_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_arm32_ios.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_arm64_masm.asm -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_arm64_masm.obj -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_arm64_msvc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_csky_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_loongarch64_linux.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_m68k_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_mips_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_ppc64_aix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_ppc64_linux.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_ppc_aix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_ppc_linux.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_ppc_macosx.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_ppc_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_riscv_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_s390_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_sh_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_sparc_sun_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_x32_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_x64_masm.asm -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_x64_masm.obj -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_x64_msvc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_x86_msvc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\platform\switch_x86_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
+  copying src\greenlet\tests\_test_extension.c -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  copying src\greenlet\tests\_test_extension_cpp.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
+  running build_ext
+  building &#39;greenlet._greenlet&#39; extension
+  error: Microsoft Visual C++ 14.0 or greater is required. Get it with &quot;Microsoft C++ Build Tools&quot;: https://visualstudio.microsoft.com/visual-cpp-build-tools/
+  ----------------------------------------
+  ERROR: Failed building wheel for greenlet
+ERROR: Could not build wheels for greenlet which use PEP 517 and cannot be installed directly
+WARNING: You are using pip version 21.2.4; however, version 26.0.1 is available.
+You should consider upgrading via the &#39;c:\Users\ARIEL\OneDrive\Documents\PSD\.venv\Scripts\python.exe -m pip install --upgrade pip&#39; command.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data berhasil digabung! Berikut 5 baris pertamanya:
+                       date  feature_index       NO2       SO2        CO
+0  2025-08-24T00:00:00.000Z              0       NaN       NaN       NaN
+1  2025-08-25T00:00:00.000Z              0  0.000020  0.000272  0.028240
+2  2025-08-26T00:00:00.000Z              0  0.000035 -0.002125       NaN
+3  2025-08-27T00:00:00.000Z              0  0.000086  0.000169  0.030417
+4  2025-08-28T00:00:00.000Z              0  0.000010  0.000109  0.025137
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ArgumentError</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">23</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="c1"># 3. Konfigurasi Koneksi Database</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="c1"># PENTING: Ganti dengan URL database Anda yang aktif!</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="n">DATABASE_URI</span> <span class="o">=</span> <span class="s2">&quot;masukan url aiven anda&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">23</span> <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">DATABASE_URI</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="n">table_name</span> <span class="o">=</span> <span class="s1">&#39;kualitas_udara_kamal&#39;</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="c1"># 4. Hapus (Drop) tabel lama jika sudah ada, lalu unggah data baru</span>
+
+<span class="nn">File &lt;string&gt;:2,</span> in <span class="ni">create_engine</span><span class="nt">(url, **kwargs)</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\sqlalchemy\util\deprecations.py:281,</span> in <span class="ni">deprecated_params.&lt;locals&gt;.decorate.&lt;locals&gt;.warned</span><span class="nt">(fn, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">274</span>     <span class="k">if</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">275</span>         <span class="n">_warn_with_version</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">276</span>             <span class="n">messages</span><span class="p">[</span><span class="n">m</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">277</span>             <span class="n">versions</span><span class="p">[</span><span class="n">m</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">278</span>             <span class="n">version_warnings</span><span class="p">[</span><span class="n">m</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">279</span>             <span class="n">stacklevel</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">280</span>         <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">281</span> <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\sqlalchemy\engine\create.py:564,</span> in <span class="ni">create_engine</span><span class="nt">(url, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">561</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;empty_in_strategy&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">563</span> <span class="c1"># create url.URL object</span>
+<span class="ne">--&gt; </span><span class="mi">564</span> <span class="n">u</span> <span class="o">=</span> <span class="n">_url</span><span class="o">.</span><span class="n">make_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">566</span> <span class="n">u</span><span class="p">,</span> <span class="n">plugins</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">_instantiate_plugins</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">568</span> <span class="n">entrypoint</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">_get_entrypoint</span><span class="p">()</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\sqlalchemy\engine\url.py:856,</span> in <span class="ni">make_url</span><span class="nt">(name_or_url)</span>
+<span class="g g-Whitespace">    </span><span class="mi">840</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Given a string, produce a new URL instance.</span>
+<span class="g g-Whitespace">    </span><span class="mi">841</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">842</span><span class="sd"> The format of the URL generally follows `RFC-1738</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">852</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">853</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">855</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name_or_url</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">856</span>     <span class="k">return</span> <span class="n">_parse_url</span><span class="p">(</span><span class="n">name_or_url</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">857</span> <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name_or_url</span><span class="p">,</span> <span class="n">URL</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">858</span>     <span class="n">name_or_url</span><span class="p">,</span> <span class="s2">&quot;_sqla_is_testing_if_this_is_a_mock_object&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">859</span> <span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">860</span>     <span class="k">raise</span> <span class="n">exc</span><span class="o">.</span><span class="n">ArgumentError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">861</span>         <span class="sa">f</span><span class="s2">&quot;Expected string or URL object, got </span><span class="si">{</span><span class="n">name_or_url</span><span class="si">!r}</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">862</span>     <span class="p">)</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\sqlalchemy\engine\url.py:922,</span> in <span class="ni">_parse_url</span><span class="nt">(name)</span>
+<span class="g g-Whitespace">    </span><span class="mi">919</span>     <span class="k">return</span> <span class="n">URL</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">components</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+<span class="g g-Whitespace">    </span><span class="mi">921</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">922</span>     <span class="k">raise</span> <span class="n">exc</span><span class="o">.</span><span class="n">ArgumentError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">923</span>         <span class="s2">&quot;Could not parse SQLAlchemy URL from given URL string&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">924</span>     <span class="p">)</span>
+
+<span class="ne">ArgumentError</span>: Could not parse SQLAlchemy URL from given URL string
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">to_sql</span></code> dengan <code class="docutils literal notranslate"><span class="pre">if_exists='replace'</span></code> secara otomatis membuat tabel <code class="docutils literal notranslate"><span class="pre">kualitas_udara_kamal</span></code> di Aiven beserta seluruh kolom dan tipe datanya — tidak perlu menulis <code class="docutils literal notranslate"><span class="pre">CREATE</span> <span class="pre">TABLE</span></code> manual di PG Studio. Setelah cell selesai dijalankan, tabel sudah tersedia di database dan siap ditarik dari KNIME.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="integrasi-dan-pengolahan-time-series-di-knime">
+<h2>Integrasi dan Pengolahan Time Series di KNIME<a class="headerlink" href="#integrasi-dan-pengolahan-time-series-di-knime" title="Link to this heading">#</a></h2>
+<p>KNIME Analytics Platform adalah tools analitik berbasis node yang memungkinkan penarikan data dari database, transformasi, dan analisis statistik secara visual tanpa menulis banyak kode. Workflow yang dibangun menggunakan empat node utama sesuai gambar: <strong>PostgreSQL Connector → DB Query Reader → Column Filter → Statistics</strong>, dengan cabang ke <strong>Table View</strong> dan <strong>CSV Writer</strong>.</p>
+<section id="node-1-postgresql-connector">
+<h3>Node 1: PostgreSQL Connector<a class="headerlink" href="#node-1-postgresql-connector" title="Link to this heading">#</a></h3>
+<p><img alt="KNIME PostgreSQL Connector" src="materi/assets/sqlconector.png" /></p>
+<p>Node ini membangun koneksi ke database Aiven. Tanpa koneksi yang berhasil di node ini, seluruh node berikutnya tidak bisa berjalan.</p>
+<p><strong>Konfigurasi:</strong></p>
+<ol class="arabic">
+<li><p>Tambahkan node <strong>PostgreSQL Connector</strong> dari panel node di kiri (cari dengan kata kunci “PostgreSQL”).</p></li>
+<li><p>Double-click node untuk membuka konfigurasi.</p></li>
+<li><p>Isi bagian <strong>Connection Settings</strong>:</p>
+<ul class="simple">
+<li><p><strong>Hostname</strong>: host dari Aiven (contoh: <code class="docutils literal notranslate"><span class="pre">posgrespsd-xxx.aivencloud.com</span></code>)</p></li>
+<li><p><strong>Port</strong>: port dari Aiven (contoh: <code class="docutils literal notranslate"><span class="pre">24065</span></code>)</p></li>
+<li><p><strong>Database name</strong>: <code class="docutils literal notranslate"><span class="pre">defaultdb</span></code></p></li>
+<li><p><strong>Username</strong>: <code class="docutils literal notranslate"><span class="pre">avnadmin</span></code></p></li>
+<li><p><strong>Password</strong>: password dari Aiven</p></li>
+</ul>
+</li>
+<li><p>Buka tab <strong>JDBC Parameters</strong>, klik <strong>Add</strong>, lalu tambahkan:</p>
+<ul class="simple">
+<li><p><strong>Parameter name</strong>: <code class="docutils literal notranslate"><span class="pre">sslmode</span></code></p></li>
+<li><p><strong>Value</strong>: <code class="docutils literal notranslate"><span class="pre">require</span></code></p></li>
+</ul>
+<p>Langkah ini wajib dilakukan karena Aiven menolak koneksi yang tidak menggunakan SSL.</p>
+</li>
+<li><p>Klik <strong>OK</strong>, lalu klik kanan node dan pilih <strong>Execute</strong> untuk menguji koneksi. Indikator hijau di bawah node menandakan koneksi berhasil.</p></li>
+</ol>
+</section>
+<section id="node-2-db-query-reader">
+<h3>Node 2: DB Query Reader<a class="headerlink" href="#node-2-db-query-reader" title="Link to this heading">#</a></h3>
+<p><img alt="DB Query Reader" src="materi/assets/dbqueryreader.png" /></p>
+<p>Node ini menarik data dari tabel <code class="docutils literal notranslate"><span class="pre">kualitas_udara_kamal</span></code> di Aiven ke dalam memori KNIME. Berbeda dengan DB Table Selector yang hanya memilih tabel, DB Query Reader memungkinkan penulisan query SQL kustom sehingga bisa memfilter kolom atau baris tertentu sejak awal.</p>
+<p><strong>Konfigurasi:</strong></p>
+<ol class="arabic simple">
+<li><p>Tambahkan node <strong>DB Query Reader</strong> dan hubungkan output port PostgreSQL Connector ke input port DB Query Reader.</p></li>
+<li><p>Double-click untuk membuka konfigurasi.</p></li>
+<li><p>Di kolom <strong>SQL Query</strong>, ketikkan:</p></li>
+</ol>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span><span class="w"> </span><span class="n">NO2</span><span class="p">,</span><span class="w"> </span><span class="n">SO2</span><span class="p">,</span><span class="w"> </span><span class="n">CO</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">kualitas_udara_kamal</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="nb">date</span><span class="w"> </span><span class="k">ASC</span><span class="p">;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Klik <strong>OK</strong>, lalu execute node. Output port menghasilkan tabel dengan 370 baris dan 4 kolom yang siap diolah.</p></li>
+</ol>
+</section>
+<section id="node-3-column-filter">
+<h3>Node 3: Column Filter<a class="headerlink" href="#node-3-column-filter" title="Link to this heading">#</a></h3>
+<p><img alt="Column Filter" src="materi/assets/columnfilter.png" /></p>
+<p>Node ini menyaring kolom yang tidak diperlukan untuk analisis statistik. Kolom <code class="docutils literal notranslate"><span class="pre">feature_index</span></code> misalnya hanya berisi nilai 0 di seluruh baris dan tidak memberi informasi apapun untuk analisis polutan.</p>
+<p><strong>Konfigurasi:</strong></p>
+<ol class="arabic simple">
+<li><p>Tambahkan node <strong>Column Filter</strong> dan hubungkan output DB Query Reader ke inputnya.</p></li>
+<li><p>Double-click untuk membuka konfigurasi.</p></li>
+<li><p>Pindahkan kolom yang ingin <strong>dipertahankan</strong> ke panel kanan (Includes):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">date</span></code>, <code class="docutils literal notranslate"><span class="pre">NO2</span></code>, <code class="docutils literal notranslate"><span class="pre">SO2</span></code>, <code class="docutils literal notranslate"><span class="pre">CO</span></code></p></li>
+</ul>
+</li>
+<li><p>Kolom <code class="docutils literal notranslate"><span class="pre">feature_index</span></code> biarkan di panel kiri (Excludes) sehingga tidak ikut ke output.</p></li>
+<li><p>Klik <strong>OK</strong> dan execute.</p></li>
+</ol>
+</section>
+<section id="node-4-statistics">
+<h3>Node 4: Statistics<a class="headerlink" href="#node-4-statistics" title="Link to this heading">#</a></h3>
+<p><img alt="Statistics 1" src="materi/assets/statistic1.png" />
+<img alt="Statistics 2" src="materi/assets/statistic2.png" /></p>
+<p>Node Statistics adalah inti dari eksplorasi data di KNIME. Node ini secara otomatis menghitung seluruh metrik statistik deskriptif untuk semua kolom numerik sekaligus dalam satu eksekusi, tanpa perlu menulis kode apapun.</p>
+<p><strong>Konfigurasi:</strong></p>
+<ol class="arabic simple">
+<li><p>Tambahkan node <strong>Statistics</strong> dan hubungkan output Column Filter ke inputnya.</p></li>
+<li><p>Double-click untuk membuka konfigurasi.</p></li>
+<li><p>Pada tab <strong>Column Selection</strong>, pastikan kolom <code class="docutils literal notranslate"><span class="pre">NO2</span></code>, <code class="docutils literal notranslate"><span class="pre">SO2</span></code>, dan <code class="docutils literal notranslate"><span class="pre">CO</span></code> dipilih (centang semua).</p></li>
+<li><p>Klik <strong>OK</strong> dan execute. Output node berupa tabel ringkasan statistik untuk ketiga polutan.</p></li>
+</ol>
+</section>
+<section id="node-table-view">
+<h3>Node: Table View<a class="headerlink" href="#node-table-view" title="Link to this heading">#</a></h3>
+<p>Node Table View menampilkan isi data dalam format tabel yang bisa di-scroll dan di-filter langsung di KNIME. Hubungkan output Column Filter ke Table View untuk melihat keseluruhan 370 baris data mentah.</p>
+<p><strong>Konfigurasi:</strong> Tidak ada konfigurasi khusus. Hubungkan ke output Column Filter, execute, lalu double-click untuk membuka tampilan tabel.</p>
+</section>
+<section id="node-csv-writer">
+<h3>Node: CSV Writer<a class="headerlink" href="#node-csv-writer" title="Link to this heading">#</a></h3>
+<p>Node CSV Writer menyimpan output dari node sebelumnya ke file CSV di komputer lokal. Ini berguna untuk menyimpan hasil setelah transformasi di KNIME tanpa harus kembali ke Python.</p>
+<p><strong>Konfigurasi:</strong></p>
+<ol class="arabic simple">
+<li><p>Tambahkan node <strong>CSV Writer</strong> dan hubungkan ke output Statistics (atau Column Filter jika ingin menyimpan data mentah).</p></li>
+<li><p>Double-click untuk konfigurasi.</p></li>
+<li><p>Di <strong>Output location</strong>, klik Browse dan tentukan path file output (contoh: <code class="docutils literal notranslate"><span class="pre">C:/Users/nama/Desktop/statistik_polutan.csv</span></code>).</p></li>
+<li><p>Centang <strong>Write column header</strong> agar nama kolom ikut tersimpan.</p></li>
+<li><p>Klik <strong>OK</strong> dan execute.</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="penjelasan-rumus-dan-contoh-perhitungan-node-statistics">
+<h2>Penjelasan Rumus dan Contoh Perhitungan Node Statistics<a class="headerlink" href="#penjelasan-rumus-dan-contoh-perhitungan-node-statistics" title="Link to this heading">#</a></h2>
+<p>Node Statistics menghasilkan sembilan metrik untuk setiap kolom numerik. Berikut penjelasan lengkap tiap metrik beserta rumus matematis dan contoh perhitungan manual menggunakan 5 data NO2 pertama yang valid dari dataset ini:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tanggal</p></th>
+<th class="head"><p>NO2 (mol/m²)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2025-08-25</p></td>
+<td><p>0.000020</p></td>
+</tr>
+<tr class="row-odd"><td><p>2025-08-26</p></td>
+<td><p>0.000035</p></td>
+</tr>
+<tr class="row-even"><td><p>2025-08-27</p></td>
+<td><p>0.000086</p></td>
+</tr>
+<tr class="row-odd"><td><p>2025-08-28</p></td>
+<td><p>0.000010</p></td>
+</tr>
+<tr class="row-even"><td><p>2025-08-29</p></td>
+<td><p>0.000034</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Jumlah data <span class="math notranslate nohighlight">\(n = 5\)</span>. Setelah diurutkan: <strong>0.000010, 0.000020, 0.000034, 0.000035, 0.000086</strong></p>
+<hr class="docutils" />
+<section id="a-missing-values">
+<h3>a) Missing Values<a class="headerlink" href="#a-missing-values" title="Link to this heading">#</a></h3>
+<p>Menghitung jumlah baris yang bernilai kosong (<code class="docutils literal notranslate"><span class="pre">NULL</span></code>) pada suatu kolom. Nilai ini penting untuk menentukan strategi penanganan data sebelum pemodelan — apakah perlu interpolasi, imputasi mean, atau penghapusan baris.</p>
+<div class="math notranslate nohighlight">
+\[\text{Missing Values} = \text{jumlah baris dengan nilai NULL pada kolom tersebut}\]</div>
+<p><strong>Contoh (5 data sampel):</strong> Tidak ada nilai NULL pada 5 baris ini → Missing Values = <strong>0</strong></p>
+<p><strong>Nilai aktual seluruh dataset:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Polutan</p></th>
+<th class="head"><p>Missing Values</p></th>
+<th class="head"><p>Persentase</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NO2</p></td>
+<td><p>176</p></td>
+<td><p>47,6%</p></td>
+</tr>
+<tr class="row-odd"><td><p>CO</p></td>
+<td><p>168</p></td>
+<td><p>45,4%</p></td>
+</tr>
+<tr class="row-even"><td><p>SO2</p></td>
+<td><p>136</p></td>
+<td><p>36,8%</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Missing value yang tinggi ini bukan kegagalan sensor, melainkan akibat tutupan awan yang menghalangi pengukuran satelit Sentinel-5P dan gap orbit harian.</p>
+</section>
+<hr class="docutils" />
+<section id="b-minimum-maximum">
+<h3>b) Minimum &amp; Maximum<a class="headerlink" href="#b-minimum-maximum" title="Link to this heading">#</a></h3>
+<p>Nilai terkecil dan terbesar dalam kolom. Digunakan untuk mendeteksi outlier atau nilai tidak wajar, seperti konsentrasi polutan yang negatif.</p>
+<div class="math notranslate nohighlight">
+\[\text{Min} = \min(x_1, x_2, \dots, x_n) \qquad \text{Max} = \max(x_1, x_2, \dots, x_n)\]</div>
+<p><strong>Contoh (5 data sampel NO2):</strong></p>
+<div class="math notranslate nohighlight">
+\[\text{Min} = 0.000010 \text{ mol/m}^2 \qquad \text{Max} = 0.000086 \text{ mol/m}^2\]</div>
+<p><strong>Nilai aktual seluruh dataset:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Polutan</p></th>
+<th class="head"><p>Min</p></th>
+<th class="head"><p>Max</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NO2</p></td>
+<td><p>-0.000011</p></td>
+<td><p>0.000147</p></td>
+</tr>
+<tr class="row-odd"><td><p>CO</p></td>
+<td><p>0.020132</p></td>
+<td><p>0.044651</p></td>
+</tr>
+<tr class="row-even"><td><p>SO2</p></td>
+<td><p>-0.002125</p></td>
+<td><p>0.001092</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>NO2 dan SO2 memiliki nilai minimum negatif yang secara fisik tidak mungkin terjadi. Ini adalah noise retrieval algoritma TROPOMI pada hari dengan konsentrasi gas yang sangat rendah.</p>
+</section>
+<hr class="docutils" />
+<section id="c-mean-rata-rata">
+<h3>c) Mean (Rata-rata)<a class="headerlink" href="#c-mean-rata-rata" title="Link to this heading">#</a></h3>
+<p>Nilai rata-rata aritmatika dari seluruh data valid. Mean sensitif terhadap outlier karena nilai ekstrem menarik rata-rata ke arahnya.</p>
+<div class="math notranslate nohighlight">
+\[\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i\]</div>
+<p><strong>Contoh (5 data sampel NO2):</strong></p>
+<div class="math notranslate nohighlight">
+\[\bar{x} = \frac{0.000020 + 0.000035 + 0.000086 + 0.000010 + 0.000034}{5} = \frac{0.000185}{5} = 0.000037 \text{ mol/m}^2\]</div>
+<p><strong>Nilai aktual seluruh dataset:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Polutan</p></th>
+<th class="head"><p>Mean</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NO2</p></td>
+<td><p>0.000035</p></td>
+</tr>
+<tr class="row-odd"><td><p>CO</p></td>
+<td><p>0.028868</p></td>
+</tr>
+<tr class="row-even"><td><p>SO2</p></td>
+<td><p>0.000064</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="d-median-nilai-tengah">
+<h3>d) Median (Nilai Tengah)<a class="headerlink" href="#d-median-nilai-tengah" title="Link to this heading">#</a></h3>
+<p>Nilai tengah setelah data diurutkan dari kecil ke besar. Median lebih robust terhadap outlier dibanding mean karena posisinya tidak terpengaruh nilai ekstrem di ujung distribusi.</p>
+<div class="math notranslate nohighlight">
+\[\text{Median} = x_{\left(\frac{n+1}{2}\right)} \quad \text{untuk } n \text{ ganjil}\]</div>
+<p><strong>Contoh (5 data sampel NO2):</strong></p>
+<p>Data terurut: 0.000010, 0.000020, <strong>0.000034</strong>, 0.000035, 0.000086</p>
+<p>Posisi tengah = <span class="math notranslate nohighlight">\(\frac{5+1}{2} = 3\)</span> → nilai ke-3 = <strong>0.000034 mol/m²</strong></p>
+<p><strong>Nilai aktual seluruh dataset:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Polutan</p></th>
+<th class="head"><p>Mean</p></th>
+<th class="head"><p>Median</p></th>
+<th class="head"><p>Selisih</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NO2</p></td>
+<td><p>0.000035</p></td>
+<td><p>0.000028</p></td>
+<td><p>0.000007</p></td>
+</tr>
+<tr class="row-odd"><td><p>CO</p></td>
+<td><p>0.028868</p></td>
+<td><p>0.029059</p></td>
+<td><p>0.000191</p></td>
+</tr>
+<tr class="row-even"><td><p>SO2</p></td>
+<td><p>0.000064</p></td>
+<td><p>0.000064</p></td>
+<td><p>0.000000</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Selisih mean-median NO2 yang positif mengkonfirmasi distribusi right-skewed: beberapa hari dengan NO2 sangat tinggi menarik mean ke atas dari median.</p>
+</section>
+<hr class="docutils" />
+<section id="e-overall-sum">
+<h3>e) Overall Sum<a class="headerlink" href="#e-overall-sum" title="Link to this heading">#</a></h3>
+<p>Total penjumlahan seluruh nilai valid dalam kolom. Berguna untuk menghitung total beban polutan kumulatif selama periode pengamatan.</p>
+<div class="math notranslate nohighlight">
+\[\text{Sum} = \sum_{i=1}^{n} x_i\]</div>
+<p><strong>Contoh (5 data sampel NO2):</strong></p>
+<div class="math notranslate nohighlight">
+\[\text{Sum} = 0.000020 + 0.000035 + 0.000086 + 0.000010 + 0.000034 = 0.000185 \text{ mol/m}^2\]</div>
+<p><strong>Nilai aktual seluruh dataset:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Polutan</p></th>
+<th class="head"><p>Sum</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NO2</p></td>
+<td><p>0.006705</p></td>
+</tr>
+<tr class="row-odd"><td><p>CO</p></td>
+<td><p>5.831238</p></td>
+</tr>
+<tr class="row-even"><td><p>SO2</p></td>
+<td><p>0.014999</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="f-variance-varians">
+<h3>f) Variance (Varians)<a class="headerlink" href="#f-variance-varians" title="Link to this heading">#</a></h3>
+<p>Mengukur seberapa jauh data menyebar dari nilai rata-ratanya. Semakin besar varians, semakin tidak konsisten konsentrasi polutan dari hari ke hari. Rumus menggunakan pembagi <span class="math notranslate nohighlight">\(n-1\)</span> (varians sampel) karena data ini adalah sampel dari kondisi atmosfer yang sebenarnya.</p>
+<div class="math notranslate nohighlight">
+\[s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2\]</div>
+<p><strong>Contoh (5 data sampel NO2, <span class="math notranslate nohighlight">\(\bar{x} = 0.000037\)</span>):</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(x_i\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(x_i - \bar{x}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\((x_i - \bar{x})^2\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0.000020</p></td>
+<td><p>-0.000017</p></td>
+<td><p><span class="math notranslate nohighlight">\(2.89 \times 10^{-10}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>0.000035</p></td>
+<td><p>-0.000002</p></td>
+<td><p><span class="math notranslate nohighlight">\(4.00 \times 10^{-12}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>0.000086</p></td>
+<td><p>+0.000049</p></td>
+<td><p><span class="math notranslate nohighlight">\(2.401 \times 10^{-9}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>0.000010</p></td>
+<td><p>-0.000027</p></td>
+<td><p><span class="math notranslate nohighlight">\(7.29 \times 10^{-10}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>0.000034</p></td>
+<td><p>-0.000003</p></td>
+<td><p><span class="math notranslate nohighlight">\(9.00 \times 10^{-12}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="math notranslate nohighlight">
+\[s^2 = \frac{3.432 \times 10^{-9}}{5-1} = 8.58 \times 10^{-10} \text{ (mol/m}^2)^2\]</div>
+<p><strong>Nilai aktual seluruh dataset:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Polutan</p></th>
+<th class="head"><p>Variance</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NO2</p></td>
+<td><p><span class="math notranslate nohighlight">\(5.31 \times 10^{-10}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>CO</p></td>
+<td><p><span class="math notranslate nohighlight">\(1.47 \times 10^{-5}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>SO2</p></td>
+<td><p><span class="math notranslate nohighlight">\(1.04 \times 10^{-7}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="g-standard-deviation-simpangan-baku">
+<h3>g) Standard Deviation (Simpangan Baku)<a class="headerlink" href="#g-standard-deviation-simpangan-baku" title="Link to this heading">#</a></h3>
+<p>Akar kuadrat dari varians. Satuannya sama dengan satuan data asli (mol/m²), sehingga lebih mudah diinterpretasikan: nilai ini menyatakan seberapa jauh rata-rata penyimpangan tiap hari dari nilai rata-rata tahunan.</p>
+<div class="math notranslate nohighlight">
+\[s = \sqrt{s^2}\]</div>
+<p><strong>Contoh (5 data sampel NO2):</strong></p>
+<div class="math notranslate nohighlight">
+\[s = \sqrt{8.58 \times 10^{-10}} = 0.0000293 \text{ mol/m}^2 = 2.93 \times 10^{-5} \text{ mol/m}^2\]</div>
+<p>Artinya, secara rata-rata nilai NO2 dalam 5 hari sampel ini menyimpang sekitar <span class="math notranslate nohighlight">\(2.93 \times 10^{-5}\)</span> mol/m² dari rata-ratanya.</p>
+<p><strong>Nilai aktual seluruh dataset:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Polutan</p></th>
+<th class="head"><p>Std Dev</p></th>
+<th class="head"><p>Interpretasi</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NO2</p></td>
+<td><p>0.000023</p></td>
+<td><p>Fluktuasi harian sedang relatif terhadap mean</p></td>
+</tr>
+<tr class="row-odd"><td><p>CO</p></td>
+<td><p>0.003832</p></td>
+<td><p>Variasi paling kecil secara relatif (CV ~13%)</p></td>
+</tr>
+<tr class="row-even"><td><p>SO2</p></td>
+<td><p>0.000322</p></td>
+<td><p>Variasi besar karena dominasi nilai negatif</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="h-skewness-kemencengan-distribusi">
+<h3>h) Skewness (Kemencengan Distribusi)<a class="headerlink" href="#h-skewness-kemencengan-distribusi" title="Link to this heading">#</a></h3>
+<p>Mengukur simetri sebaran data. Skewness = 0 berarti distribusi simetris sempurna. Skewness positif (right-skewed) berarti ekor distribusi memanjang ke kanan — banyak hari dengan nilai rendah, sedikit hari dengan lonjakan tinggi. Skewness negatif (left-skewed) berarti sebaliknya.</p>
+<div class="math notranslate nohighlight">
+\[\text{Skewness} = \frac{\frac{1}{n}\sum_{i=1}^{n}(x_i-\bar{x})^3}{s^3}\]</div>
+<p><strong>Contoh (5 data sampel NO2):</strong> Skewness <span class="math notranslate nohighlight">\(\approx 1.03\)</span> (right-skewed ringan karena nilai 0.000086 jauh di atas yang lain)</p>
+<p><strong>Nilai aktual seluruh dataset:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Polutan</p></th>
+<th class="head"><p>Skewness</p></th>
+<th class="head"><p>Interpretasi</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NO2</p></td>
+<td><p>1.67</p></td>
+<td><p>Right-skewed kuat — beberapa hari polusi sangat tinggi</p></td>
+</tr>
+<tr class="row-odd"><td><p>CO</p></td>
+<td><p>0.23</p></td>
+<td><p>Hampir simetris — konsentrasi CO relatif stabil</p></td>
+</tr>
+<tr class="row-even"><td><p>SO2</p></td>
+<td><p>-1.05</p></td>
+<td><p>Left-skewed — ditarik oleh banyaknya nilai negatif noise</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="i-kurtosis-keruncingan-distribusi">
+<h3>i) Kurtosis (Keruncingan Distribusi)<a class="headerlink" href="#i-kurtosis-keruncingan-distribusi" title="Link to this heading">#</a></h3>
+<p>Mengukur seberapa “runcing” puncak distribusi dibanding distribusi normal. Kurtosis &gt; 0 berarti distribusi lebih runcing dari normal dengan ekor lebih tebal (banyak nilai ekstrem). Kurtosis &lt; 0 berarti distribusi lebih landai dan merata.</p>
+<div class="math notranslate nohighlight">
+\[\text{Kurtosis} = \frac{\frac{1}{n}\sum_{i=1}^{n}(x_i-\bar{x})^4}{s^4} - 3\]</div>
+<p><strong>Contoh (5 data sampel NO2):</strong> Kurtosis <span class="math notranslate nohighlight">\(\approx -0.29\)</span> (distribusi sedikit lebih landai dari normal)</p>
+<p><strong>Nilai aktual seluruh dataset:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Polutan</p></th>
+<th class="head"><p>Kurtosis</p></th>
+<th class="head"><p>Interpretasi</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>NO2</p></td>
+<td><p>3.98</p></td>
+<td><p>Distribusi sangat runcing — ada beberapa hari outlier ekstrem</p></td>
+</tr>
+<tr class="row-odd"><td><p>CO</p></td>
+<td><p>0.74</p></td>
+<td><p>Sedikit lebih runcing dari normal — distribusi cukup terpusat</p></td>
+</tr>
+<tr class="row-even"><td><p>SO2</p></td>
+<td><p>9.29</p></td>
+<td><p>Sangat runcing dan berekor tebal karena campuran noise dan nilai nyata</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="tabel-ringkasan-statistik-aktual-seluruh-dataset">
+<h3>Tabel Ringkasan Statistik Aktual (Seluruh Dataset)<a class="headerlink" href="#tabel-ringkasan-statistik-aktual-seluruh-dataset" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Fitur</p></th>
+<th class="head"><p>NO2</p></th>
+<th class="head"><p>CO</p></th>
+<th class="head"><p>SO2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Missing Values</p></td>
+<td><p>176 (47,6%)</p></td>
+<td><p>168 (45,4%)</p></td>
+<td><p>136 (36,8%)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Minimum</p></td>
+<td><p>-0.000011</p></td>
+<td><p>0.020132</p></td>
+<td><p>-0.002125</p></td>
+</tr>
+<tr class="row-even"><td><p>Maximum</p></td>
+<td><p>0.000147</p></td>
+<td><p>0.044651</p></td>
+<td><p>0.001092</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mean</p></td>
+<td><p>0.000035</p></td>
+<td><p>0.028868</p></td>
+<td><p>0.000064</p></td>
+</tr>
+<tr class="row-even"><td><p>Median</p></td>
+<td><p>0.000028</p></td>
+<td><p>0.029059</p></td>
+<td><p>0.000064</p></td>
+</tr>
+<tr class="row-odd"><td><p>Overall Sum</p></td>
+<td><p>0.006705</p></td>
+<td><p>5.831238</p></td>
+<td><p>0.014999</p></td>
+</tr>
+<tr class="row-even"><td><p>Variance</p></td>
+<td><p>5.31e-10</p></td>
+<td><p>1.47e-05</p></td>
+<td><p>1.04e-07</p></td>
+</tr>
+<tr class="row-odd"><td><p>Standard Deviation</p></td>
+<td><p>0.000023</p></td>
+<td><p>0.003832</p></td>
+<td><p>0.000322</p></td>
+</tr>
+<tr class="row-even"><td><p>Skewness</p></td>
+<td><p>1.67</p></td>
+<td><p>0.23</p></td>
+<td><p>-1.05</p></td>
+</tr>
+<tr class="row-odd"><td><p>Kurtosis</p></td>
+<td><p>3.98</p></td>
+<td><p>0.74</p></td>
+<td><p>9.29</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="kesimpulan">
+<h2>Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h2>
+<p>Data polutan dari tiga file CSV berhasil digabung dan diunggah ke cloud Aiven PostgreSQL menggunakan Python dengan total 370 baris. Koneksi dari KNIME ke Aiven dibangun melalui empat node: PostgreSQL Connector (dengan <code class="docutils literal notranslate"><span class="pre">sslmode=require</span></code>), DB Query Reader, Column Filter, dan Statistics. Node Statistics menghasilkan sembilan metrik statistik deskriptif yang memberi gambaran menyeluruh tentang distribusi NO2, CO, dan SO2 di wilayah Kamal-UTM. Dari hasil ini terlihat bahwa CO memiliki distribusi paling stabil (skewness 0.23), NO2 right-skewed kuat akibat beberapa hari dengan emisi tinggi (skewness 1.67), dan SO2 didominasi noise retrieval TROPOMI yang menghasilkan banyak nilai negatif (kurtosis 9.29).</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="explorasi-data.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Eksplorasi Data</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#migrasi-data-ke-aiven-postgresql">Migrasi Data ke Aiven PostgreSQL</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buat-akun-dan-database-di-aiven">Buat Akun dan Database di Aiven</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#migrasi-data-via-python">Migrasi Data via Python</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrasi-dan-pengolahan-time-series-di-knime">Integrasi dan Pengolahan Time Series di KNIME</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-1-postgresql-connector">Node 1: PostgreSQL Connector</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-2-db-query-reader">Node 2: DB Query Reader</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-3-column-filter">Node 3: Column Filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-4-statistics">Node 4: Statistics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-table-view">Node: Table View</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#node-csv-writer">Node: CSV Writer</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-rumus-dan-contoh-perhitungan-node-statistics">Penjelasan Rumus dan Contoh Perhitungan Node Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-missing-values">a) Missing Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-minimum-maximum">b) Minimum &amp; Maximum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-mean-rata-rata">c) Mean (Rata-rata)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-median-nilai-tengah">d) Median (Nilai Tengah)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-overall-sum">e) Overall Sum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-variance-varians">f) Variance (Varians)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#g-standard-deviation-simpangan-baku">g) Standard Deviation (Simpangan Baku)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#h-skewness-kemencengan-distribusi">h) Skewness (Kemencengan Distribusi)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-kurtosis-keruncingan-distribusi">i) Kurtosis (Keruncingan Distribusi)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-ringkasan-statistik-aktual-seluruh-dataset">Tabel Ringkasan Statistik Aktual (Seluruh Dataset)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
