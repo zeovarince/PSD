@@ -4,7 +4,7 @@
 format: jb-book
 root: intro
 chapters:
-- file: markdown
-- file: notebooks
+- file: busines-understanding
 - file: data-understanding
 - file: explorasi-data
+- file: timeseriesaiven
