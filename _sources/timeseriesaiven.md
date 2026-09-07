@@ -98,7 +98,7 @@ KNIME Analytics Platform adalah tools analitik berbasis node yang memungkinkan p
 
 ### Node 1: PostgreSQL Connector
 
-![KNIME PostgreSQL Connector](/materi/assets/sqlconector.png)
+![KNIME PostgreSQL Connector](/assets/sqlconector.png)
 
 Node ini membangun koneksi ke database Aiven. Tanpa koneksi yang berhasil di node ini, seluruh node berikutnya tidak bisa berjalan.
 
@@ -121,7 +121,7 @@ Node ini membangun koneksi ke database Aiven. Tanpa koneksi yang berhasil di nod
 
 ### Node 2: DB Query Reader
 
-![DB Query Reader](/materi/assets/dbqueryreader.png)
+![DB Query Reader](/assets/dbqueryreader.png)
 
 Node ini menarik data dari tabel `kualitas_udara_kamal` di Aiven ke dalam memori KNIME. Berbeda dengan DB Table Selector yang hanya memilih tabel, DB Query Reader memungkinkan penulisan query SQL kustom sehingga bisa memfilter kolom atau baris tertentu sejak awal.
 
@@ -139,7 +139,7 @@ SELECT date, NO2, SO2, CO FROM kualitas_udara_kamal ORDER BY date ASC;
 
 ### Node 3: Column Filter
 
-![Column Filter](/materi/assets/columnfilter.png)
+![Column Filter](/assets/columnfilter.png)
 
 Node ini menyaring kolom yang tidak diperlukan untuk analisis statistik. Kolom `feature_index` misalnya hanya berisi nilai 0 di seluruh baris dan tidak memberi informasi apapun untuk analisis polutan.
 
@@ -154,8 +154,8 @@ Node ini menyaring kolom yang tidak diperlukan untuk analisis statistik. Kolom `
 
 ### Node 4: Statistics
 
-![Statistics 1](/materi/assets/statistic1.png)
-![Statistics 2](/materi/assets/statistic2.png)  
+![Statistics 1](/assets/statistic1.png)
+![Statistics 2](/assets/statistic2.png)  
 
 Node Statistics adalah inti dari eksplorasi data di KNIME. Node ini secara otomatis menghitung seluruh metrik statistik deskriptif untuk semua kolom numerik sekaligus dalam satu eksekusi, tanpa perlu menulis kode apapun.
 

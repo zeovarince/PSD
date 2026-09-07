@@ -1,4 +1,15 @@
 Traceback (most recent call last):
+  File "C:\laragon\bin\python\python-3.10\lib\site-packages\nbclient\client.py", line 782, in _async_poll_for_reply
+    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
+  File "C:\laragon\bin\python\python-3.10\lib\site-packages\jupyter_core\utils\__init__.py", line 214, in ensure_async
+    result = await obj
+  File "C:\laragon\bin\python\python-3.10\lib\site-packages\jupyter_client\channels.py", line 316, in get_msg
+    raise Empty
+_queue.Empty
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
   File "C:\laragon\bin\python\python-3.10\lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
     executenb(
   File "C:\laragon\bin\python\python-3.10\lib\site-packages\nbclient\client.py", line 1323, in execute
@@ -9,264 +20,18 @@ Traceback (most recent call last):
     return future.result()
   File "C:\laragon\bin\python\python-3.10\lib\site-packages\nbclient\client.py", line 709, in async_execute
     await self.async_execute_cell(
-  File "C:\laragon\bin\python\python-3.10\lib\site-packages\nbclient\client.py", line 1062, in async_execute_cell
-    await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "C:\laragon\bin\python\python-3.10\lib\site-packages\nbclient\client.py", line 918, in _check_raise_for_error
-    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
-nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
-------------------
-!pip install pandas sqlalchemy psycopg2-binary
-
-import pandas as pd
-from sqlalchemy import create_engine, text
-
-# 1. Baca ketiga file CSV
-# Pastikan nama file SO2 dan CO sudah sesuai dengan yang Anda miliki
-df_no2 = pd.read_csv('NO2_KAMAL-UTM.csv')
-df_so2 = pd.read_csv('SO2_KAMAL-UTM.csv') # Ganti jika nama file berbeda
-df_co = pd.read_csv('CO_KAMAL-UTM.csv')   # Ganti jika nama file berbeda
-
-# 2. Gabungkan (Merge) ketiga dataframe berdasarkan 'date' dan 'feature_index'
-# Menggunakan 'outer' join agar tanggal yang ada di satu file tapi tidak ada di file lain tetap masuk (menjadi NaN/Null)
-df_gabung = pd.merge(df_no2, df_so2, on=['date', 'feature_index'], how='outer')
-df_gabung = pd.merge(df_gabung, df_co, on=['date', 'feature_index'], how='outer')
-
-print("Data berhasil digabung! Berikut 5 baris pertamanya:")
-print(df_gabung.head())
-
-# 3. Konfigurasi Koneksi Database
-# PENTING: Ganti dengan URL database Anda yang aktif!
-DATABASE_URI = "masukan url aiven anda"
-engine = create_engine(DATABASE_URI)
-table_name = 'kualitas_udara_kamal'
-
-# 4. Hapus (Drop) tabel lama jika sudah ada, lalu unggah data baru
-try:
-    with engine.connect() as conn:
-        # Hapus tabel lama agar bersih
-        conn.execute(text(f"DROP TABLE IF EXISTS {table_name};"))
-        conn.commit()
-        print(f"Tabel lama '{table_name}' berhasil dihapus (jika ada).")
-    
-    # Upload data yang sudah digabung (if_exists='replace' juga otomatis menimpa tabel)
-    df_gabung.to_sql(name=table_name, con=engine, if_exists='replace', index=False)
-    print(f"Tabel baru '{table_name}' berhasil dibuat dan data telah diunggah!")
-
-except Exception as e:
-    print(f"Terjadi kesalahan pada database: {e}")
-------------------
-
------ stdout -----
-Collecting pandas
-  Using cached pandas-2.3.3-cp39-cp39-win_amd64.whl (11.4 MB)
-Collecting sqlalchemy
-  Using cached sqlalchemy-2.0.52-cp39-cp39-win_amd64.whl (2.2 MB)
-Collecting psycopg2-binary
-  Using cached psycopg2_binary-2.9.12-cp39-cp39-win_amd64.whl (2.8 MB)
-Requirement already satisfied: python-dateutil>=2.8.2 in c:\users\ariel\onedrive\documents\psd\.venv\lib\site-packages (from pandas) (2.9.0.post0)
-Collecting tzdata>=2022.7
-  Using cached tzdata-2026.3-py2.py3-none-any.whl (348 kB)
-Collecting numpy>=1.22.4
-  Using cached numpy-2.0.2-cp39-cp39-win_amd64.whl (15.9 MB)
-Collecting pytz>=2020.1
-  Using cached pytz-2026.3.post1-py2.py3-none-any.whl (508 kB)
-Collecting greenlet>=1
-  Using cached greenlet-3.2.5.tar.gz (191 kB)
-  Installing build dependencies: started
-  Installing build dependencies: finished with status 'done'
-  Getting requirements to build wheel: started
-  Getting requirements to build wheel: finished with status 'done'
-    Preparing wheel metadata: started
-    Preparing wheel metadata: finished with status 'done'
-Requirement already satisfied: typing-extensions>=4.6.0 in c:\users\ariel\onedrive\documents\psd\.venv\lib\site-packages (from sqlalchemy) (4.16.0)
-Requirement already satisfied: six>=1.5 in c:\users\ariel\onedrive\documents\psd\.venv\lib\site-packages (from python-dateutil>=2.8.2->pandas) (1.17.0)
-Building wheels for collected packages: greenlet
-  Building wheel for greenlet (PEP 517): started
-  Building wheel for greenlet (PEP 517): finished with status 'error'
-Failed to build greenlet
------ stderr -----
-  ERROR: Command errored out with exit status 1:
-   command: 'c:\Users\ARIEL\OneDrive\Documents\PSD\.venv\Scripts\python.exe' 'c:\Users\ARIEL\OneDrive\Documents\PSD\.venv\lib\site-packages\pip\_vendor\pep517\in_process\_in_process.py' build_wheel 'C:\Users\ARIEL\AppData\Local\Temp\tmpj1gzj6d2'
-       cwd: C:\Users\ARIEL\AppData\Local\Temp\pip-install-0g26_y5y\greenlet_d154f3e34044455fbf87640fdbbe0ca1
-  Complete output (112 lines):
-  running bdist_wheel
-  running build
-  running build_py
-  creating build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\__init__.py -> build\lib.win-amd64-cpython-39\greenlet
-  creating build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\__init__.py -> build\lib.win-amd64-cpython-39\greenlet\platform
-  creating build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\fail_clearing_run_switches.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\fail_cpp_exception.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\fail_initialstub_already_started.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\fail_slp_switch.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\fail_switch_three_greenlets.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\fail_switch_three_greenlets2.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\fail_switch_two_greenlets.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\leakcheck.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_contextvars.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_cpp.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_extension_interface.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_gc.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_generator.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_generator_nested.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_greenlet.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_greenlet_trash.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_interpreter_shutdown.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_leaks.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_stack_saved.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_throw.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_tracing.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_version.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_weakref.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\__init__.py -> build\lib.win-amd64-cpython-39\greenlet\tests
-  running egg_info
-  writing src\greenlet.egg-info\PKG-INFO
-  writing dependency_links to src\greenlet.egg-info\dependency_links.txt
-  writing requirements to src\greenlet.egg-info\requires.txt
-  writing top-level names to src\greenlet.egg-info\top_level.txt
-  reading manifest file 'src\greenlet.egg-info\SOURCES.txt'
-  reading manifest template 'MANIFEST.in'
-  warning: no previously-included files found matching 'benchmarks\*.json'
-  no previously-included directories found matching 'docs\_build'
-  warning: no files found matching '*.py' under directory 'appveyor'
-  warning: no previously-included files matching '*.pyc' found anywhere in distribution
-  warning: no previously-included files matching '*.pyd' found anywhere in distribution
-  warning: no previously-included files matching '*.so' found anywhere in distribution
-  warning: no previously-included files matching '.coverage' found anywhere in distribution
-  adding license file 'LICENSE'
-  adding license file 'LICENSE.PSF'
-  writing manifest file 'src\greenlet.egg-info\SOURCES.txt'
-  copying src\greenlet\CObjects.cpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\PyGreenlet.cpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\PyGreenlet.hpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\PyGreenletUnswitchable.cpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\PyModule.cpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TBrokenGreenlet.cpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TExceptionState.cpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TGreenlet.cpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TGreenlet.hpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TGreenletGlobals.cpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TMainGreenlet.cpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TPythonState.cpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TStackState.cpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TThreadState.hpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TThreadStateCreator.hpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TThreadStateDestroy.cpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TUserGreenlet.cpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet.cpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet.h -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_allocator.hpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_compiler_compat.hpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_cpython_compat.hpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_exceptions.hpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_internal.hpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_msvc_compat.hpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_refs.hpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_slp_switch.hpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_thread_support.hpp -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\slp_platformselect.h -> build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\platform\setup_switch_x64_masm.cmd -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_aarch64_gcc.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_alpha_unix.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_amd64_unix.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_arm32_gcc.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_arm32_ios.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_arm64_masm.asm -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_arm64_masm.obj -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_arm64_msvc.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_csky_gcc.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_loongarch64_linux.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_m68k_gcc.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_mips_unix.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_ppc64_aix.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_ppc64_linux.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_ppc_aix.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_ppc_linux.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_ppc_macosx.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_ppc_unix.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_riscv_unix.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_s390_unix.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_sh_gcc.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_sparc_sun_gcc.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_x32_unix.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_x64_masm.asm -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_x64_masm.obj -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_x64_msvc.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_x86_msvc.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_x86_unix.h -> build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\tests\_test_extension.c -> build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\_test_extension_cpp.cpp -> build\lib.win-amd64-cpython-39\greenlet\tests
-  running build_ext
-  building 'greenlet._greenlet' extension
-  error: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
-  ----------------------------------------
-  ERROR: Failed building wheel for greenlet
-ERROR: Could not build wheels for greenlet which use PEP 517 and cannot be installed directly
-WARNING: You are using pip version 21.2.4; however, version 26.0.1 is available.
-You should consider upgrading via the 'c:\Users\ARIEL\OneDrive\Documents\PSD\.venv\Scripts\python.exe -m pip install --upgrade pip' command.
------ stdout -----
-Data berhasil digabung! Berikut 5 baris pertamanya:
-                       date  feature_index       NO2       SO2        CO
-0  2025-08-24T00:00:00.000Z              0       NaN       NaN       NaN
-1  2025-08-25T00:00:00.000Z              0  0.000020  0.000272  0.028240
-2  2025-08-26T00:00:00.000Z              0  0.000035 -0.002125       NaN
-3  2025-08-27T00:00:00.000Z              0  0.000086  0.000169  0.030417
-4  2025-08-28T00:00:00.000Z              0  0.000010  0.000109  0.025137
-------------------
-
-[1;31m---------------------------------------------------------------------------[0m
-[1;31mArgumentError[0m                             Traceback (most recent call last)
-Cell [1;32mIn[1], line 23[0m
-[0;32m     20[0m [38;5;66;03m# 3. Konfigurasi Koneksi Database[39;00m
-[0;32m     21[0m [38;5;66;03m# PENTING: Ganti dengan URL database Anda yang aktif![39;00m
-[0;32m     22[0m DATABASE_URI [38;5;241m=[39m [38;5;124m"[39m[38;5;124mmasukan url aiven anda[39m[38;5;124m"[39m
-[1;32m---> 23[0m engine [38;5;241m=[39m [43mcreate_engine[49m[43m([49m[43mDATABASE_URI[49m[43m)[49m
-[0;32m     24[0m table_name [38;5;241m=[39m [38;5;124m'[39m[38;5;124mkualitas_udara_kamal[39m[38;5;124m'[39m
-[0;32m     26[0m [38;5;66;03m# 4. Hapus (Drop) tabel lama jika sudah ada, lalu unggah data baru[39;00m
-
-File [1;32m<string>:2[0m, in [0;36mcreate_engine[1;34m(url, **kwargs)[0m
-
-File [1;32mC:\laragon\bin\python\python-3.10\lib\site-packages\sqlalchemy\util\deprecations.py:281[0m, in [0;36mdeprecated_params.<locals>.decorate.<locals>.warned[1;34m(fn, *args, **kwargs)[0m
-[0;32m    274[0m     [38;5;28;01mif[39;00m m [38;5;129;01min[39;00m kwargs:
-[0;32m    275[0m         _warn_with_version(
-[0;32m    276[0m             messages[m],
-[0;32m    277[0m             versions[m],
-[0;32m    278[0m             version_warnings[m],
-[0;32m    279[0m             stacklevel[38;5;241m=[39m[38;5;241m3[39m,
-[0;32m    280[0m         )
-[1;32m--> 281[0m [38;5;28;01mreturn[39;00m fn([38;5;241m*[39margs, [38;5;241m*[39m[38;5;241m*[39mkwargs)
-
-File [1;32mC:\laragon\bin\python\python-3.10\lib\site-packages\sqlalchemy\engine\create.py:564[0m, in [0;36mcreate_engine[1;34m(url, **kwargs)[0m
-[0;32m    561[0m kwargs[38;5;241m.[39mpop([38;5;124m"[39m[38;5;124mempty_in_strategy[39m[38;5;124m"[39m, [38;5;28;01mNone[39;00m)
-[0;32m    563[0m [38;5;66;03m# create url.URL object[39;00m
-[1;32m--> 564[0m u [38;5;241m=[39m [43m_url[49m[38;5;241;43m.[39;49m[43mmake_url[49m[43m([49m[43murl[49m[43m)[49m
-[0;32m    566[0m u, plugins, kwargs [38;5;241m=[39m u[38;5;241m.[39m_instantiate_plugins(kwargs)
-[0;32m    568[0m entrypoint [38;5;241m=[39m u[38;5;241m.[39m_get_entrypoint()
-
-File [1;32mC:\laragon\bin\python\python-3.10\lib\site-packages\sqlalchemy\engine\url.py:856[0m, in [0;36mmake_url[1;34m(name_or_url)[0m
-[0;32m    840[0m [38;5;250m[39m[38;5;124;03m"""Given a string, produce a new URL instance.[39;00m
-[0;32m    841[0m 
-[0;32m    842[0m [38;5;124;03mThe format of the URL generally follows `RFC-1738[39;00m
-[1;32m   (...)[0m
-[0;32m    852[0m 
-[0;32m    853[0m [38;5;124;03m"""[39;00m
-[0;32m    855[0m [38;5;28;01mif[39;00m [38;5;28misinstance[39m(name_or_url, [38;5;28mstr[39m):
-[1;32m--> 856[0m     [38;5;28;01mreturn[39;00m [43m_parse_url[49m[43m([49m[43mname_or_url[49m[43m)[49m
-[0;32m    857[0m [38;5;28;01melif[39;00m [38;5;129;01mnot[39;00m [38;5;28misinstance[39m(name_or_url, URL) [38;5;129;01mand[39;00m [38;5;129;01mnot[39;00m [38;5;28mhasattr[39m(
-[0;32m    858[0m     name_or_url, [38;5;124m"[39m[38;5;124m_sqla_is_testing_if_this_is_a_mock_object[39m[38;5;124m"[39m
-[0;32m    859[0m ):
-[0;32m    860[0m     [38;5;28;01mraise[39;00m exc[38;5;241m.[39mArgumentError(
-[0;32m    861[0m         [38;5;124mf[39m[38;5;124m"[39m[38;5;124mExpected string or URL object, got [39m[38;5;132;01m{[39;00mname_or_url[38;5;132;01m!r}[39;00m[38;5;124m"[39m
-[0;32m    862[0m     )
-
-File [1;32mC:\laragon\bin\python\python-3.10\lib\site-packages\sqlalchemy\engine\url.py:922[0m, in [0;36m_parse_url[1;34m(name)[0m
-[0;32m    919[0m     [38;5;28;01mreturn[39;00m URL[38;5;241m.[39mcreate(name, [38;5;241m*[39m[38;5;241m*[39mcomponents)  [38;5;66;03m# type: ignore[39;00m
-[0;32m    921[0m [38;5;28;01melse[39;00m:
-[1;32m--> 922[0m     [38;5;28;01mraise[39;00m exc[38;5;241m.[39mArgumentError(
-[0;32m    923[0m         [38;5;124m"[39m[38;5;124mCould not parse SQLAlchemy URL from given URL string[39m[38;5;124m"[39m
-[0;32m    924[0m     )
-
-[1;31mArgumentError[0m: Could not parse SQLAlchemy URL from given URL string
+  File "C:\laragon\bin\python\python-3.10\lib\site-packages\nbclient\client.py", line 1005, in async_execute_cell
+    exec_reply = await self.task_poll_for_reply
+  File "C:\laragon\bin\python\python-3.10\lib\site-packages\nbclient\client.py", line 806, in _async_poll_for_reply
+    error_on_timeout_execute_reply = await self._async_handle_timeout(timeout, cell)
+  File "C:\laragon\bin\python\python-3.10\lib\site-packages\nbclient\client.py", line 856, in _async_handle_timeout
+    raise CellTimeoutError.error_from_timeout_and_cell(
+nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
+The message was: Cell execution timed out.
+Here is a preview of the cell contents:
+-------------------
+['!pip install pandas sqlalchemy psycopg2-binary', '', 'import pandas as pd', 'from sqlalchemy import create_engine, text', '']
+...
+["    df_gabung.to_sql(name=table_name, con=engine, if_exists='replace', index=False)", '    print(f"Tabel baru \'{table_name}\' berhasil dibuat dan data telah diunggah!")', '', 'except Exception as e:', '    print(f"Terjadi kesalahan pada database: {e}")']
+-------------------
 
