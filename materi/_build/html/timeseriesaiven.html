@@ -495,19 +495,22 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>^C
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pandas
   Using cached pandas-2.3.3-cp39-cp39-win_amd64.whl (11.4 MB)
 Collecting sqlalchemy
   Using cached sqlalchemy-2.0.52-cp39-cp39-win_amd64.whl (2.2 MB)
 Collecting psycopg2-binary
   Using cached psycopg2_binary-2.9.12-cp39-cp39-win_amd64.whl (2.8 MB)
-Requirement already satisfied: python-dateutil&gt;=2.8.2 in c:\users\ariel\onedrive\documents\psd\.venv\lib\site-packages (from pandas) (2.9.0.post0)
-Collecting tzdata&gt;=2022.7
-  Using cached tzdata-2026.3-py2.py3-none-any.whl (348 kB)
-Collecting numpy&gt;=1.22.4
-  Using cached numpy-2.0.2-cp39-cp39-win_amd64.whl (15.9 MB)
 Collecting pytz&gt;=2020.1
   Using cached pytz-2026.3.post1-py2.py3-none-any.whl (508 kB)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in c:\users\ariel\onedrive\documents\psd\.venv\lib\site-packages (from pandas) (2.9.0.post0)
+Collecting numpy&gt;=1.22.4
+  Using cached numpy-2.0.2-cp39-cp39-win_amd64.whl (15.9 MB)
+Collecting tzdata&gt;=2022.7
+  Using cached tzdata-2026.3-py2.py3-none-any.whl (348 kB)
 Collecting greenlet&gt;=1
   Using cached greenlet-3.2.5.tar.gz (191 kB)
   Installing build dependencies: started
@@ -515,136 +518,6 @@ Collecting greenlet&gt;=1
   Getting requirements to build wheel: started
   Getting requirements to build wheel: finished with status &#39;done&#39;
     Preparing wheel metadata: started
-    Preparing wheel metadata: finished with status &#39;done&#39;
-Requirement already satisfied: typing-extensions&gt;=4.6.0 in c:\users\ariel\onedrive\documents\psd\.venv\lib\site-packages (from sqlalchemy) (4.16.0)
-Requirement already satisfied: six&gt;=1.5 in c:\users\ariel\onedrive\documents\psd\.venv\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)
-Building wheels for collected packages: greenlet
-  Building wheel for greenlet (PEP 517): started
-  Building wheel for greenlet (PEP 517): finished with status &#39;error&#39;
-Failed to build greenlet
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  ERROR: Command errored out with exit status 1:
-   command: &#39;c:\Users\ARIEL\OneDrive\Documents\PSD\.venv\Scripts\python.exe&#39; &#39;c:\Users\ARIEL\OneDrive\Documents\PSD\.venv\lib\site-packages\pip\_vendor\pep517\in_process\_in_process.py&#39; build_wheel &#39;C:\Users\ARIEL\AppData\Local\Temp\tmpj1gzj6d2&#39;
-       cwd: C:\Users\ARIEL\AppData\Local\Temp\pip-install-0g26_y5y\greenlet_d154f3e34044455fbf87640fdbbe0ca1
-  Complete output (112 lines):
-  running bdist_wheel
-  running build
-  running build_py
-  creating build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\__init__.py -&gt; build\lib.win-amd64-cpython-39\greenlet
-  creating build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\__init__.py -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  creating build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\fail_clearing_run_switches.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\fail_cpp_exception.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\fail_initialstub_already_started.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\fail_slp_switch.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\fail_switch_three_greenlets.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\fail_switch_three_greenlets2.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\fail_switch_two_greenlets.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\leakcheck.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_contextvars.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_cpp.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_extension_interface.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_gc.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_generator.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_generator_nested.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_greenlet.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_greenlet_trash.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_interpreter_shutdown.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_leaks.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_stack_saved.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_throw.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_tracing.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_version.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_weakref.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\__init__.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  running egg_info
-  writing src\greenlet.egg-info\PKG-INFO
-  writing dependency_links to src\greenlet.egg-info\dependency_links.txt
-  writing requirements to src\greenlet.egg-info\requires.txt
-  writing top-level names to src\greenlet.egg-info\top_level.txt
-  reading manifest file &#39;src\greenlet.egg-info\SOURCES.txt&#39;
-  reading manifest template &#39;MANIFEST.in&#39;
-  warning: no previously-included files found matching &#39;benchmarks\*.json&#39;
-  no previously-included directories found matching &#39;docs\_build&#39;
-  warning: no files found matching &#39;*.py&#39; under directory &#39;appveyor&#39;
-  warning: no previously-included files matching &#39;*.pyc&#39; found anywhere in distribution
-  warning: no previously-included files matching &#39;*.pyd&#39; found anywhere in distribution
-  warning: no previously-included files matching &#39;*.so&#39; found anywhere in distribution
-  warning: no previously-included files matching &#39;.coverage&#39; found anywhere in distribution
-  adding license file &#39;LICENSE&#39;
-  adding license file &#39;LICENSE.PSF&#39;
-  writing manifest file &#39;src\greenlet.egg-info\SOURCES.txt&#39;
-  copying src\greenlet\CObjects.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\PyGreenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\PyGreenlet.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\PyGreenletUnswitchable.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\PyModule.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TBrokenGreenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TExceptionState.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TGreenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TGreenlet.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TGreenletGlobals.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TMainGreenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TPythonState.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TStackState.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TThreadState.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TThreadStateCreator.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TThreadStateDestroy.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TUserGreenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet.h -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_allocator.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_compiler_compat.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_cpython_compat.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_exceptions.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_internal.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_msvc_compat.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_refs.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_slp_switch.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_thread_support.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\slp_platformselect.h -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\platform\setup_switch_x64_masm.cmd -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_aarch64_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_alpha_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_amd64_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_arm32_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_arm32_ios.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_arm64_masm.asm -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_arm64_masm.obj -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_arm64_msvc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_csky_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_loongarch64_linux.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_m68k_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_mips_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_ppc64_aix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_ppc64_linux.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_ppc_aix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_ppc_linux.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_ppc_macosx.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_ppc_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_riscv_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_s390_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_sh_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_sparc_sun_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_x32_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_x64_masm.asm -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_x64_masm.obj -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_x64_msvc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_x86_msvc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_x86_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\tests\_test_extension.c -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\_test_extension_cpp.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  running build_ext
-  building &#39;greenlet._greenlet&#39; extension
-  error: Microsoft Visual C++ 14.0 or greater is required. Get it with &quot;Microsoft C++ Build Tools&quot;: https://visualstudio.microsoft.com/visual-cpp-build-tools/
-  ----------------------------------------
-  ERROR: Failed building wheel for greenlet
-ERROR: Could not build wheels for greenlet which use PEP 517 and cannot be installed directly
-WARNING: You are using pip version 21.2.4; however, version 26.0.1 is available.
-You should consider upgrading via the &#39;c:\Users\ARIEL\OneDrive\Documents\PSD\.venv\Scripts\python.exe -m pip install --upgrade pip&#39; command.
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data berhasil digabung! Berikut 5 baris pertamanya:
@@ -722,7 +595,7 @@ You should consider upgrading via the &#39;c:\Users\ARIEL\OneDrive\Documents\PSD
 <p>KNIME Analytics Platform adalah tools analitik berbasis node yang memungkinkan penarikan data dari database, transformasi, dan analisis statistik secara visual tanpa menulis banyak kode. Workflow yang dibangun menggunakan empat node utama sesuai gambar: <strong>PostgreSQL Connector → DB Query Reader → Column Filter → Statistics</strong>, dengan cabang ke <strong>Table View</strong> dan <strong>CSV Writer</strong>.</p>
 <section id="node-1-postgresql-connector">
 <h3>Node 1: PostgreSQL Connector<a class="headerlink" href="#node-1-postgresql-connector" title="Link to this heading">#</a></h3>
-<p><img alt="KNIME PostgreSQL Connector" src="materi/assets/sqlconector.png" /></p>
+<p><img alt="KNIME PostgreSQL Connector" src="_images/sqlconector.png" /></p>
 <p>Node ini membangun koneksi ke database Aiven. Tanpa koneksi yang berhasil di node ini, seluruh node berikutnya tidak bisa berjalan.</p>
 <p><strong>Konfigurasi:</strong></p>
 <ol class="arabic">
@@ -749,7 +622,7 @@ You should consider upgrading via the &#39;c:\Users\ARIEL\OneDrive\Documents\PSD
 </section>
 <section id="node-2-db-query-reader">
 <h3>Node 2: DB Query Reader<a class="headerlink" href="#node-2-db-query-reader" title="Link to this heading">#</a></h3>
-<p><img alt="DB Query Reader" src="materi/assets/dbqueryreader.png" /></p>
+<p><img alt="DB Query Reader" src="_images/dbqueryreader.png" /></p>
 <p>Node ini menarik data dari tabel <code class="docutils literal notranslate"><span class="pre">kualitas_udara_kamal</span></code> di Aiven ke dalam memori KNIME. Berbeda dengan DB Table Selector yang hanya memilih tabel, DB Query Reader memungkinkan penulisan query SQL kustom sehingga bisa memfilter kolom atau baris tertentu sejak awal.</p>
 <p><strong>Konfigurasi:</strong></p>
 <ol class="arabic simple">
@@ -766,7 +639,7 @@ You should consider upgrading via the &#39;c:\Users\ARIEL\OneDrive\Documents\PSD
 </section>
 <section id="node-3-column-filter">
 <h3>Node 3: Column Filter<a class="headerlink" href="#node-3-column-filter" title="Link to this heading">#</a></h3>
-<p><img alt="Column Filter" src="materi/assets/columnfilter.png" /></p>
+<p><img alt="Column Filter" src="_images/columnfilter.png" /></p>
 <p>Node ini menyaring kolom yang tidak diperlukan untuk analisis statistik. Kolom <code class="docutils literal notranslate"><span class="pre">feature_index</span></code> misalnya hanya berisi nilai 0 di seluruh baris dan tidak memberi informasi apapun untuk analisis polutan.</p>
 <p><strong>Konfigurasi:</strong></p>
 <ol class="arabic simple">
@@ -783,8 +656,8 @@ You should consider upgrading via the &#39;c:\Users\ARIEL\OneDrive\Documents\PSD
 </section>
 <section id="node-4-statistics">
 <h3>Node 4: Statistics<a class="headerlink" href="#node-4-statistics" title="Link to this heading">#</a></h3>
-<p><img alt="Statistics 1" src="materi/assets/statistic1.png" />
-<img alt="Statistics 2" src="materi/assets/statistic2.png" /></p>
+<p><img alt="Statistics 1" src="_images/statistic1.png" />
+<img alt="Statistics 2" src="_images/statistic2.png" /></p>
 <p>Node Statistics adalah inti dari eksplorasi data di KNIME. Node ini secara otomatis menghitung seluruh metrik statistik deskriptif untuk semua kolom numerik sekaligus dalam satu eksekusi, tanpa perlu menulis kode apapun.</p>
 <p><strong>Konfigurasi:</strong></p>
 <ol class="arabic simple">
