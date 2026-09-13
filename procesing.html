@@ -184,17 +184,8 @@
 <li class="toctree-l1"><a class="reference internal" href="data-understanding.html">Data Understanding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="explorasi-data.html">Eksplorasi Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="timeseriesaiven.html">Analisis Time Series: Migrasi Data &amp; Pengolahan di KNIME</a></li>
-<li class="toctree-l1"><a class="reference internal" href="no2kamal.html">jupytext:
-formats: md:myst
-text_representation:
-extension: .md
-format_name: myst
-format_version: 0.13
-jupytext_version: 1.11.5
-kernelspec:
-display_name: Python 3
-language: python
-name: python3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="no2kamal.html">Polutan Kamal (Revisi)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing_ekstraksi_kamal.html">Preprocessing Sebelum Ekstraksi Fitur</a></li>
 
 </ul>
 
@@ -482,11 +473,272 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah nilai non-numerik/kosong yang dikonversi jadi NaN: 172
-Jumlah fitur yang diminta: 68
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span><span class="w"> </span><span class="nn">tsfel.feature_extraction.features</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tsfel_features</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># ---------- 1. Muat dan bersihkan data ----------</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;no2kamal.csv&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\pandas\io\parsers\readers.py:1026,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1013</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1014</span>     <span class="n">dialect</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1015</span>     <span class="n">delimiter</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1022</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1023</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1024</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1026</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\pandas\io\parsers\readers.py:620,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">617</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">619</span> <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">620</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">622</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">623</span>     <span class="k">return</span> <span class="n">parser</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\pandas\io\parsers\readers.py:1620,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1617</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1619</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">-&gt; </span><span class="mi">1620</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\pandas\io\parsers\readers.py:1880,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1878</span>     <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1879</span>         <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1880</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1881</span>     <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1882</span>     <span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1883</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1884</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1885</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1886</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1887</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1888</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1889</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1890</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1891</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\pandas\io\common.py:873,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">868</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">869</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
+<span class="g g-Whitespace">    </span><span class="mi">870</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
+<span class="g g-Whitespace">    </span><span class="mi">871</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">872</span>         <span class="c1"># Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">873</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">874</span>             <span class="n">handle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">875</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">876</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">877</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">878</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">879</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">880</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">881</span>         <span class="c1"># Binary mode</span>
+<span class="g g-Whitespace">    </span><span class="mi">882</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;no2kamal.csv&#39;
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Berhasil! Jumlah fitur yang dihasilkan untuk NO2: 68
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">IsolationForest</span>
+
+<span class="n">CONTAMINATION</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">pol</span> <span class="o">=</span> <span class="s2">&quot;NO2&quot;</span>
+
+<span class="c1"># 1. Load data hasil crawling</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;no2_kamal.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">])</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;date&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="n">pol</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">pol</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;coerce&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">pol</span><span class="p">])</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># 2. Deteksi outlier dengan Isolation Forest</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">IsolationForest</span><span class="p">(</span><span class="n">contamination</span><span class="o">=</span><span class="n">CONTAMINATION</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="n">pol</span><span class="p">]])</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;anomaly&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pred</span>  <span class="c1"># -1 = outlier, 1 = normal</span>
+<span class="n">outliers</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;anomaly&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">pol</span><span class="si">}</span><span class="s2">] Jumlah outlier terdeteksi: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">outliers</span><span class="p">)</span><span class="si">}</span><span class="s2"> dari </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> data&quot;</span><span class="p">)</span>
+
+<span class="c1"># 3. Ganti outlier jadi NaN, lalu interpolasi</span>
+<span class="n">df_fixed</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df_fixed</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_fixed</span><span class="p">[</span><span class="s2">&quot;anomaly&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">pol</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">df_fixed</span><span class="p">[</span><span class="n">pol</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_fixed</span><span class="p">[</span><span class="n">pol</span><span class="p">]</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span><span class="o">.</span><span class="n">bfill</span><span class="p">()</span>
+
+<span class="c1"># 4. Plot sebelum vs sesudah</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">pol</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pol</span><span class="si">}</span><span class="s2"> (asli)&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">outliers</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">],</span> <span class="n">outliers</span><span class="p">[</span><span class="n">pol</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
+                <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Outlier (Isolation Forest)&quot;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sebelum Perbaikan - Deteksi Outlier </span><span class="si">{</span><span class="n">pol</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_fixed</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">],</span> <span class="n">df_fixed</span><span class="p">[</span><span class="n">pol</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+             <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pol</span><span class="si">}</span><span class="s2"> (setelah outlier diganti &amp; diinterpolasi)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sesudah Perbaikan Outlier </span><span class="si">{</span><span class="n">pol</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;outlier_</span><span class="si">{</span><span class="n">pol</span><span class="si">}</span><span class="s2">_before_after.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">df_fixed</span><span class="p">[[</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="n">pol</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pol</span><span class="si">}</span><span class="s2">_Kamal_Timeseries_fixed.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[NO2] Jumlah outlier terdeteksi: 10 dari 194 data
+</pre></div>
+</div>
+<img alt="_images/00a56c29cb5ff8b1e655a0dc855a56496eb6faa921719ed9b8308a1273b64b8e.png" src="_images/00a56c29cb5ff8b1e655a0dc855a56496eb6faa921719ed9b8308a1273b64b8e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">pol</span> <span class="o">=</span> <span class="s2">&quot;NO2&quot;</span>
+<span class="n">result_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pol</span><span class="si">}</span><span class="s2">_Kamal_TSFEL.csv&quot;</span><span class="p">)</span>
+
+<span class="n">STATISTICAL</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;abs_energy&quot;</span><span class="p">,</span> <span class="s2">&quot;average_power&quot;</span><span class="p">,</span> <span class="s2">&quot;calc_max&quot;</span><span class="p">,</span> <span class="s2">&quot;calc_mean&quot;</span><span class="p">,</span> <span class="s2">&quot;calc_median&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;calc_min&quot;</span><span class="p">,</span> <span class="s2">&quot;calc_std&quot;</span><span class="p">,</span> <span class="s2">&quot;calc_var&quot;</span><span class="p">,</span> <span class="s2">&quot;ecdf&quot;</span><span class="p">,</span> <span class="s2">&quot;ecdf_percentile&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ecdf_percentile_count&quot;</span><span class="p">,</span> <span class="s2">&quot;ecdf_slope&quot;</span><span class="p">,</span> <span class="s2">&quot;entropy&quot;</span><span class="p">,</span> <span class="s2">&quot;hist_mode&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;interq_range&quot;</span><span class="p">,</span> <span class="s2">&quot;kurtosis&quot;</span><span class="p">,</span> <span class="s2">&quot;mean_abs_deviation&quot;</span><span class="p">,</span> <span class="s2">&quot;median_abs_deviation&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pk_pk_distance&quot;</span><span class="p">,</span> <span class="s2">&quot;rms&quot;</span><span class="p">,</span> <span class="s2">&quot;skewness&quot;</span>
+<span class="p">]</span>
+<span class="n">TEMPORAL</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;auc&quot;</span><span class="p">,</span> <span class="s2">&quot;autocorr&quot;</span><span class="p">,</span> <span class="s2">&quot;calc_centroid&quot;</span><span class="p">,</span> <span class="s2">&quot;dfa&quot;</span><span class="p">,</span> <span class="s2">&quot;distance&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;higuchi_fractal_dimension&quot;</span><span class="p">,</span> <span class="s2">&quot;hurst_exponent&quot;</span><span class="p">,</span> <span class="s2">&quot;lempel_ziv&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;maximum_fractal_length&quot;</span><span class="p">,</span> <span class="s2">&quot;mean_abs_diff&quot;</span><span class="p">,</span> <span class="s2">&quot;mean_diff&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;median_abs_diff&quot;</span><span class="p">,</span> <span class="s2">&quot;median_diff&quot;</span><span class="p">,</span> <span class="s2">&quot;mse&quot;</span><span class="p">,</span> <span class="s2">&quot;negative_turning&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;neighbourhood_peaks&quot;</span><span class="p">,</span> <span class="s2">&quot;petrosian_fractal_dimension&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;positive_turning&quot;</span><span class="p">,</span> <span class="s2">&quot;slope&quot;</span><span class="p">,</span> <span class="s2">&quot;sum_abs_diff&quot;</span><span class="p">,</span> <span class="s2">&quot;zero_cross&quot;</span>
+<span class="p">]</span>
+<span class="n">SPECTRAL</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;fundamental_frequency&quot;</span><span class="p">,</span> <span class="s2">&quot;human_range_energy&quot;</span><span class="p">,</span> <span class="s2">&quot;lpcc&quot;</span><span class="p">,</span> <span class="s2">&quot;max_frequency&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;max_power_spectrum&quot;</span><span class="p">,</span> <span class="s2">&quot;median_frequency&quot;</span><span class="p">,</span> <span class="s2">&quot;mfcc&quot;</span><span class="p">,</span> <span class="s2">&quot;power_bandwidth&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;spectral_centroid&quot;</span><span class="p">,</span> <span class="s2">&quot;spectral_decrease&quot;</span><span class="p">,</span> <span class="s2">&quot;spectral_distance&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;spectral_entropy&quot;</span><span class="p">,</span> <span class="s2">&quot;spectral_kurtosis&quot;</span><span class="p">,</span> <span class="s2">&quot;spectral_positive_turning&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;spectral_roll_off&quot;</span><span class="p">,</span> <span class="s2">&quot;spectral_roll_on&quot;</span><span class="p">,</span> <span class="s2">&quot;spectral_skewness&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;spectral_slope&quot;</span><span class="p">,</span> <span class="s2">&quot;spectral_spread&quot;</span><span class="p">,</span> <span class="s2">&quot;spectral_variation&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;spectrogram_mean_coeff&quot;</span><span class="p">,</span> <span class="s2">&quot;wavelet_abs_mean&quot;</span><span class="p">,</span> <span class="s2">&quot;wavelet_energy&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;wavelet_entropy&quot;</span><span class="p">,</span> <span class="s2">&quot;wavelet_std&quot;</span><span class="p">,</span> <span class="s2">&quot;wavelet_var&quot;</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;=== Statistical Domain (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">STATISTICAL</span><span class="p">)</span><span class="si">}</span><span class="s2"> fitur) ===&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">STATISTICAL</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">result_df</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> |&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Temporal Domain (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">TEMPORAL</span><span class="p">)</span><span class="si">}</span><span class="s2"> fitur) ===&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">TEMPORAL</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">result_df</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> |&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Spectral Domain (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">SPECTRAL</span><span class="p">)</span><span class="si">}</span><span class="s2"> fitur) ===&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">SPECTRAL</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">result_df</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> |&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Statistical Domain (21 fitur) ===
+| abs_energy | 8.004483812520137e-07 |
+| average_power | 2.193009263704147e-09 |
+| calc_max | 8.261699258582667e-05 |
+| calc_mean | 4.304078602292036e-05 |
+| calc_median | 4.281815054127946e-05 |
+| calc_min | -1.074266492651077e-05 |
+| calc_std | 1.8289564610563453e-05 |
+| calc_var | 3.3450817364397506e-10 |
+| ecdf | 0.0150273224043715 |
+| ecdf_percentile | 4.262600214133272e-05 |
+| ecdf_percentile_count | 182.5 |
+| ecdf_slope | 16798.33038578079 |
+| entropy | 0.9993583051330968 |
+| hist_mode | 4.060514670527482e-05 |
+| interq_range | 2.93190165393753e-05 |
+| kurtosis | -0.7653806440586406 |
+| mean_abs_deviation | 1.527524349419392e-05 |
+| median_abs_deviation | 1.4418096179724671e-05 |
+| pk_pk_distance | 9.335965751233744e-05 |
+| rms | 4.6765558214510725e-05 |
+| skewness | -0.0484239574991572 |
+
+=== Temporal Domain (21 fitur) ===
+| auc | 0.0157404357614723 |
+| autocorr | 11.0 |
+| calc_centroid | 166.6274749901177 |
+| dfa | 1.0650859251687137 |
+| distance | 365.0000000236696 |
+| higuchi_fractal_dimension | 1.7864516865906903 |
+| hurst_exponent | 0.8803015029826863 |
+| lempel_ziv | 0.1530054644808743 |
+| maximum_fractal_length | -2.488890466514544 |
+| mean_abs_diff | 7.365990754743968e-06 |
+| mean_diff | -2.9038234708722294e-08 |
+| median_abs_diff | 4.423392965691168e-06 |
+| median_diff | 4.016578064433205e-07 |
+| mse | 0.8092219596587233 |
+| negative_turning | 60.0 |
+| neighbourhood_peaks | 18.0 |
+| petrosian_fractal_dimension | 1.021493424787648 |
+| positive_turning | 60.0 |
+| slope | -3.355667328498242e-08 |
+| sum_abs_diff | 0.0026885866254815 |
+| zero_cross | 2.0 |
+
+=== Spectral Domain (26 fitur) ===
+| fundamental_frequency | 0.0027322404371584 |
+| human_range_energy | 0.0 |
+| lpcc | 0.718735662231064 |
+| max_frequency | 0.4207650273224044 |
+| max_power_spectrum | 84.43438787262676 |
+| median_frequency | 0.0491803278688524 |
+| mfcc | 17.634818598055492 |
+| power_bandwidth | 0.2486338797814207 |
+| spectral_centroid | 0.116987781071585 |
+| spectral_decrease | -2.117715250437212 |
+| spectral_distance | -2.776739725085843 |
+| spectral_entropy | 0.6253514711926725 |
+| spectral_kurtosis | 2.953248019217717 |
+| spectral_positive_turning | 57.0 |
+| spectral_roll_off | 0.4207650273224044 |
+| spectral_roll_on | 0.0 |
+| spectral_skewness | 1.0989809936527493 |
+| spectral_slope | -0.0343237171288835 |
+| spectral_spread | 0.1425901303285489 |
+| spectral_variation | 0.2474728843010087 |
+| spectrogram_mean_coeff | 4.3894200449494655e-10 |
+| wavelet_abs_mean | 1.4975436285281366e-06 |
+| wavelet_energy | 2.512626063016688e-05 |
+| wavelet_entropy | 2.1182052206750783 |
+| wavelet_std | 2.507356733958021e-05 |
+| wavelet_var | 6.99915761051232e-10 |
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">result_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;NO2_Kamal_TSFEL.csv&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah kolom:&quot;</span><span class="p">,</span> <span class="n">result_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nama kolom:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">result_df</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah kolom: 68
+Nama kolom:
+[&#39;abs_energy&#39;, &#39;auc&#39;, &#39;autocorr&#39;, &#39;average_power&#39;, &#39;calc_centroid&#39;, &#39;calc_max&#39;, &#39;calc_mean&#39;, &#39;calc_median&#39;, &#39;calc_min&#39;, &#39;calc_std&#39;, &#39;calc_var&#39;, &#39;dfa&#39;, &#39;distance&#39;, &#39;ecdf&#39;, &#39;ecdf_percentile&#39;, &#39;ecdf_percentile_count&#39;, &#39;ecdf_slope&#39;, &#39;entropy&#39;, &#39;fundamental_frequency&#39;, &#39;higuchi_fractal_dimension&#39;, &#39;hist_mode&#39;, &#39;human_range_energy&#39;, &#39;hurst_exponent&#39;, &#39;interq_range&#39;, &#39;kurtosis&#39;, &#39;lempel_ziv&#39;, &#39;lpcc&#39;, &#39;max_frequency&#39;, &#39;max_power_spectrum&#39;, &#39;maximum_fractal_length&#39;, &#39;mean_abs_deviation&#39;, &#39;mean_abs_diff&#39;, &#39;mean_diff&#39;, &#39;median_abs_deviation&#39;, &#39;median_abs_diff&#39;, &#39;median_diff&#39;, &#39;median_frequency&#39;, &#39;mfcc&#39;, &#39;mse&#39;, &#39;negative_turning&#39;, &#39;neighbourhood_peaks&#39;, &#39;petrosian_fractal_dimension&#39;, &#39;pk_pk_distance&#39;, &#39;positive_turning&#39;, &#39;power_bandwidth&#39;, &#39;rms&#39;, &#39;skewness&#39;, &#39;slope&#39;, &#39;spectral_centroid&#39;, &#39;spectral_decrease&#39;, &#39;spectral_distance&#39;, &#39;spectral_entropy&#39;, &#39;spectral_kurtosis&#39;, &#39;spectral_positive_turning&#39;, &#39;spectral_roll_off&#39;, &#39;spectral_roll_on&#39;, &#39;spectral_skewness&#39;, &#39;spectral_slope&#39;, &#39;spectral_spread&#39;, &#39;spectral_variation&#39;, &#39;spectrogram_mean_coeff&#39;, &#39;sum_abs_diff&#39;, &#39;wavelet_abs_mean&#39;, &#39;wavelet_energy&#39;, &#39;wavelet_entropy&#39;, &#39;wavelet_std&#39;, &#39;wavelet_var&#39;, &#39;zero_cross&#39;]
 </pre></div>
 </div>
 </div>
