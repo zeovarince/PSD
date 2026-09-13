@@ -60,7 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'data-understanding';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Business Understanding" href="markdown.html" />
+    <link rel="next" title="Eksplorasi Data" href="explorasi-data.html" />
+    <link rel="prev" title="Business Understanding" href="busines-understanding.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -179,8 +180,13 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="markdown.html">Business Understanding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="busines-understanding.html">Business Understanding</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Understanding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explorasi-data.html">Eksplorasi Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timeseriesaiven.html">Analisis Time Series: Migrasi Data &amp; Pengolahan di KNIME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="no2kamal.html">Polutan Kamal (Revisi)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing_ekstraksi_kamal.html">Preprocessing Sebelum Ekstraksi Fitur</a></li>
+
 </ul>
 
     </div>
@@ -567,7 +573,7 @@ Centroid Longitude : 112.726173
             &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
             &lt;style&gt;
-                #map_cb6376ce0003f53715ee718c216a8c33 {
+                #map_4747f49b20c3922b0c0a785cc76bc291 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -604,14 +610,14 @@ Centroid Longitude : 112.726173
 &lt;body&gt;
     
     
-            &lt;div class=&quot;folium-map&quot; id=&quot;map_cb6376ce0003f53715ee718c216a8c33&quot; &gt;&lt;/div&gt;
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_4747f49b20c3922b0c0a785cc76bc291&quot; &gt;&lt;/div&gt;
         
 &lt;/body&gt;
 &lt;script&gt;
     
     
-            var map_cb6376ce0003f53715ee718c216a8c33 = L.map(
-                &quot;map_cb6376ce0003f53715ee718c216a8c33&quot;,
+            var map_4747f49b20c3922b0c0a785cc76bc291 = L.map(
+                &quot;map_4747f49b20c3922b0c0a785cc76bc291&quot;,
                 {
                     center: [-7.149142528129033, 112.72617292288191],
                     crs: L.CRS.EPSG3857,
@@ -628,7 +634,7 @@ Centroid Longitude : 112.726173
 
         
     
-            var tile_layer_bf709035d3990c08a6ff09e87ec24853 = L.tileLayer(
+            var tile_layer_459b474ebdaf67b47a32cb7e5c56f0e6 = L.tileLayer(
                 &quot;https://tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
                 {
   &quot;minZoom&quot;: 0,
@@ -645,33 +651,33 @@ Centroid Longitude : 112.726173
             );
         
     
-            tile_layer_bf709035d3990c08a6ff09e87ec24853.addTo(map_cb6376ce0003f53715ee718c216a8c33);
+            tile_layer_459b474ebdaf67b47a32cb7e5c56f0e6.addTo(map_4747f49b20c3922b0c0a785cc76bc291);
         
     
-            var polygon_2ed865e0264aea5539500c74a14f9824 = L.polygon(
+            var polygon_b3d98f7c54c0663a942f87f304139897 = L.polygon(
                 [[-7.170992207550057, 112.74249370782024], [-7.170992207550057, 112.70985213794359], [-7.127292848708009, 112.70985213794359], [-7.127292848708009, 112.74249370782024], [-7.170992207550057, 112.74249370782024]],
                 {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;#e74c3c&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;#e74c3c&quot;, &quot;fillOpacity&quot;: 0.15, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;noClip&quot;: false, &quot;opacity&quot;: 1.0, &quot;smoothFactor&quot;: 1.0, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
-            ).addTo(map_cb6376ce0003f53715ee718c216a8c33);
+            ).addTo(map_4747f49b20c3922b0c0a785cc76bc291);
         
     
-        var popup_69f9854ed65e959645b6a09db8ff0890 = L.popup({
+        var popup_d46a81faa514cc17f6a8a846a86a1c3e = L.popup({
   &quot;maxWidth&quot;: 250,
 });
 
         
             
-                var html_87fc10de263a9079b7c17b2d400690f9 = $(`&lt;div id=&quot;html_87fc10de263a9079b7c17b2d400690f9&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;&lt;b&gt;Wilayah Kajian&lt;/b&gt;&lt;br&gt;Kamal - Kampus UTM, Bangkalan&lt;br&gt;Polutan: NO2, CO, SO2&lt;br&gt;Periode: Agu 2025 - Agu 2026&lt;/div&gt;`)[0];
-                popup_69f9854ed65e959645b6a09db8ff0890.setContent(html_87fc10de263a9079b7c17b2d400690f9);
+                var html_67ca3e412e2425a475f6a7a86fa2febe = $(`&lt;div id=&quot;html_67ca3e412e2425a475f6a7a86fa2febe&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;&lt;b&gt;Wilayah Kajian&lt;/b&gt;&lt;br&gt;Kamal - Kampus UTM, Bangkalan&lt;br&gt;Polutan: NO2, CO, SO2&lt;br&gt;Periode: Agu 2025 - Agu 2026&lt;/div&gt;`)[0];
+                popup_d46a81faa514cc17f6a8a846a86a1c3e.setContent(html_67ca3e412e2425a475f6a7a86fa2febe);
             
         
 
-        polygon_2ed865e0264aea5539500c74a14f9824.bindPopup(popup_69f9854ed65e959645b6a09db8ff0890)
+        polygon_b3d98f7c54c0663a942f87f304139897.bindPopup(popup_d46a81faa514cc17f6a8a846a86a1c3e)
         ;
 
         
     
     
-            polygon_2ed865e0264aea5539500c74a14f9824.bindTooltip(
+            polygon_b3d98f7c54c0663a942f87f304139897.bindTooltip(
                 `&lt;div&gt;
                      Batas Wilayah Kajian - Kamal UTM
                  &lt;/div&gt;`,
@@ -681,14 +687,14 @@ Centroid Longitude : 112.726173
             );
         
     
-            var marker_ebd7f9e7e7eec369c285defd788aca81 = L.marker(
+            var marker_3c780e891a6270a7a190fccb8bb94e81 = L.marker(
                 [-7.149142528129033, 112.72617292288191],
                 {
 }
-            ).addTo(map_cb6376ce0003f53715ee718c216a8c33);
+            ).addTo(map_4747f49b20c3922b0c0a785cc76bc291);
         
     
-            var icon_5ed43e6f14f4f3174529e7056690ec49 = L.AwesomeMarkers.icon(
+            var icon_19353892e023e4e6c678f0ac84351226 = L.AwesomeMarkers.icon(
                 {
   &quot;markerColor&quot;: &quot;blue&quot;,
   &quot;iconColor&quot;: &quot;white&quot;,
@@ -699,24 +705,24 @@ Centroid Longitude : 112.726173
             );
         
     
-        var popup_ab0f14c0e1785b4e4f9154d2caaba1e5 = L.popup({
+        var popup_e94262557fbc5046ca8e03d7a424c34b = L.popup({
   &quot;maxWidth&quot;: 250,
 });
 
         
             
-                var html_0d219b56e9a59d137e6ab45705357278 = $(`&lt;div id=&quot;html_0d219b56e9a59d137e6ab45705357278&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;&lt;b&gt;Titik Pusat Wilayah&lt;/b&gt;&lt;br&gt;Lat: -7.14914&lt;br&gt;Lon: 112.72617&lt;br&gt;Sumber data: Sentinel-5P via OpenEO&lt;/div&gt;`)[0];
-                popup_ab0f14c0e1785b4e4f9154d2caaba1e5.setContent(html_0d219b56e9a59d137e6ab45705357278);
+                var html_7b92cdb757820415723f359c4cd96e97 = $(`&lt;div id=&quot;html_7b92cdb757820415723f359c4cd96e97&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;&lt;b&gt;Titik Pusat Wilayah&lt;/b&gt;&lt;br&gt;Lat: -7.14914&lt;br&gt;Lon: 112.72617&lt;br&gt;Sumber data: Sentinel-5P via OpenEO&lt;/div&gt;`)[0];
+                popup_e94262557fbc5046ca8e03d7a424c34b.setContent(html_7b92cdb757820415723f359c4cd96e97);
             
         
 
-        marker_ebd7f9e7e7eec369c285defd788aca81.bindPopup(popup_ab0f14c0e1785b4e4f9154d2caaba1e5)
+        marker_3c780e891a6270a7a190fccb8bb94e81.bindPopup(popup_e94262557fbc5046ca8e03d7a424c34b)
         ;
 
         
     
     
-            marker_ebd7f9e7e7eec369c285defd788aca81.bindTooltip(
+            marker_3c780e891a6270a7a190fccb8bb94e81.bindTooltip(
                 `&lt;div&gt;
                      Titik Pengambilan Data Satelit (OpenEO)
                  &lt;/div&gt;`,
@@ -726,7 +732,7 @@ Centroid Longitude : 112.726173
             );
         
     
-                marker_ebd7f9e7e7eec369c285defd788aca81.setIcon(icon_5ed43e6f14f4f3174529e7056690ec49);
+                marker_3c780e891a6270a7a190fccb8bb94e81.setIcon(icon_19353892e023e4e6c678f0ac84351226);
             
 &lt;/script&gt;
 &lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
@@ -749,7 +755,7 @@ Centroid Longitude : 112.726173
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">Visit <a href="https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=BMRT-TROT" title="Authenticate at https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=BMRT-TROT" target="_blank" rel="noopener noreferrer">https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=BMRT-TROT</a> <a href="#" onclick="navigator.clipboard.writeText('https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=BMRT-TROT');return false;" title="Copy authentication URL to clipboard">&#128203;</a> to authenticate.</div><div class="output text_html"><code>[##################################---]</code> ⌛ Authorization pending</div></div>
+<div class="output text_html">Visit <a href="https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=AUDZ-ZQEI" title="Authenticate at https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=AUDZ-ZQEI" target="_blank" rel="noopener noreferrer">https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=AUDZ-ZQEI</a> <a href="#" onclick="navigator.clipboard.writeText('https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=AUDZ-ZQEI');return false;" title="Copy authentication URL to clipboard">&#128203;</a> to authenticate.</div><div class="output text_html"><code>[##################################---]</code> ⌛ Authorization pending</div></div>
 </div>
 <section id="crawling-data-no2">
 <h3>Crawling data NO2<a class="headerlink" href="#crawling-data-no2" title="Link to this heading">#</a></h3>
@@ -1057,13 +1063,22 @@ Centroid Longitude : 112.726173
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="markdown.html"
+       href="busines-understanding.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Business Understanding</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="explorasi-data.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Eksplorasi Data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
