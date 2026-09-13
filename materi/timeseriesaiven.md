@@ -96,6 +96,8 @@ except Exception as e:
 
 KNIME Analytics Platform adalah tools analitik berbasis node yang memungkinkan penarikan data dari database, transformasi, dan analisis statistik secara visual tanpa menulis banyak kode. Workflow yang dibangun menggunakan empat node utama sesuai gambar: **PostgreSQL Connector → DB Query Reader → Column Filter → Statistics**, dengan cabang ke **Table View** dan **CSV Writer**.
 
+![KNIME Workflow Overview](/assets/schemaknimetimeseries.png)
+
 ### Node 1: PostgreSQL Connector
 
 ![KNIME PostgreSQL Connector](/assets/sqlconector.png)

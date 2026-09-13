@@ -184,6 +184,18 @@
 <li class="toctree-l1"><a class="reference internal" href="data-understanding.html">Data Understanding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="explorasi-data.html">Eksplorasi Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="timeseriesaiven.html">Analisis Time Series: Migrasi Data &amp; Pengolahan di KNIME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="no2kamal.html">jupytext:
+formats: md:myst
+text_representation:
+extension: .md
+format_name: myst
+format_version: 0.13
+jupytext_version: 1.11.5
+kernelspec:
+display_name: Python 3
+language: python
+name: python3</a></li>
+
 </ul>
 
     </div>
@@ -398,156 +410,20 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pandas
-  Using cached pandas-2.3.3-cp39-cp39-win_amd64.whl (11.4 MB)
-Collecting sqlalchemy
-  Using cached sqlalchemy-2.0.52-cp39-cp39-win_amd64.whl (2.2 MB)
-Collecting psycopg2-binary
-  Using cached psycopg2_binary-2.9.12-cp39-cp39-win_amd64.whl (2.8 MB)
-Collecting tzdata&gt;=2022.7
-  Using cached tzdata-2026.3-py2.py3-none-any.whl (348 kB)
-Collecting numpy&gt;=1.22.4
-  Using cached numpy-2.0.2-cp39-cp39-win_amd64.whl (15.9 MB)
-Requirement already satisfied: python-dateutil&gt;=2.8.2 in c:\users\ariel\onedrive\documents\psd\.venv\lib\site-packages (from pandas) (2.9.0.post0)
-Collecting pytz&gt;=2020.1
-  Using cached pytz-2026.3.post1-py2.py3-none-any.whl (508 kB)
-Requirement already satisfied: typing-extensions&gt;=4.6.0 in c:\users\ariel\onedrive\documents\psd\.venv\lib\site-packages (from sqlalchemy) (4.16.0)
-Collecting greenlet&gt;=1
-  Using cached greenlet-3.2.5.tar.gz (191 kB)
-  Installing build dependencies: started
-  Installing build dependencies: finished with status &#39;done&#39;
-  Getting requirements to build wheel: started
-  Getting requirements to build wheel: finished with status &#39;done&#39;
-    Preparing wheel metadata: started
-    Preparing wheel metadata: finished with status &#39;done&#39;
-Requirement already satisfied: six&gt;=1.5 in c:\users\ariel\onedrive\documents\psd\.venv\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)
-Building wheels for collected packages: greenlet
-  Building wheel for greenlet (PEP 517): started
-  Building wheel for greenlet (PEP 517): finished with status &#39;error&#39;
-Failed to build greenlet
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pandas in c:\laragon\bin\python\python-3.10\lib\site-packages (2.3.3)
+Requirement already satisfied: sqlalchemy in c:\laragon\bin\python\python-3.10\lib\site-packages (2.0.44)
+Requirement already satisfied: psycopg2-binary in c:\laragon\bin\python\python-3.10\lib\site-packages (2.9.13)
+Requirement already satisfied: numpy&gt;=1.22.4 in c:\laragon\bin\python\python-3.10\lib\site-packages (from pandas) (2.2.6)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in c:\laragon\bin\python\python-3.10\lib\site-packages (from pandas) (2.9.0.post0)
+Requirement already satisfied: pytz&gt;=2020.1 in c:\laragon\bin\python\python-3.10\lib\site-packages (from pandas) (2025.2)
+Requirement already satisfied: tzdata&gt;=2022.7 in c:\laragon\bin\python\python-3.10\lib\site-packages (from pandas) (2025.3)
+Requirement already satisfied: greenlet&gt;=1 in c:\laragon\bin\python\python-3.10\lib\site-packages (from sqlalchemy) (3.3.0)
+Requirement already satisfied: typing-extensions&gt;=4.6.0 in c:\laragon\bin\python\python-3.10\lib\site-packages (from sqlalchemy) (4.15.0)
+Requirement already satisfied: six&gt;=1.5 in c:\laragon\bin\python\python-3.10\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  ERROR: Command errored out with exit status 1:
-   command: &#39;c:\Users\ARIEL\OneDrive\Documents\PSD\.venv\Scripts\python.exe&#39; &#39;c:\Users\ARIEL\OneDrive\Documents\PSD\.venv\lib\site-packages\pip\_vendor\pep517\in_process\_in_process.py&#39; build_wheel &#39;C:\Users\ARIEL\AppData\Local\Temp\tmpsnjlaeil&#39;
-       cwd: C:\Users\ARIEL\AppData\Local\Temp\pip-install-l2josrux\greenlet_c190ba8630d74a47879b74f13d644f66
-  Complete output (112 lines):
-  running bdist_wheel
-  running build
-  running build_py
-  creating build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\__init__.py -&gt; build\lib.win-amd64-cpython-39\greenlet
-  creating build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\__init__.py -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  creating build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\fail_clearing_run_switches.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\fail_cpp_exception.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\fail_initialstub_already_started.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\fail_slp_switch.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\fail_switch_three_greenlets.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\fail_switch_three_greenlets2.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\fail_switch_two_greenlets.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\leakcheck.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_contextvars.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_cpp.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_extension_interface.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_gc.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_generator.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_generator_nested.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_greenlet.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_greenlet_trash.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_interpreter_shutdown.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_leaks.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_stack_saved.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_throw.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_tracing.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_version.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\test_weakref.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\__init__.py -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  running egg_info
-  writing src\greenlet.egg-info\PKG-INFO
-  writing dependency_links to src\greenlet.egg-info\dependency_links.txt
-  writing requirements to src\greenlet.egg-info\requires.txt
-  writing top-level names to src\greenlet.egg-info\top_level.txt
-  reading manifest file &#39;src\greenlet.egg-info\SOURCES.txt&#39;
-  reading manifest template &#39;MANIFEST.in&#39;
-  warning: no previously-included files found matching &#39;benchmarks\*.json&#39;
-  no previously-included directories found matching &#39;docs\_build&#39;
-  warning: no files found matching &#39;*.py&#39; under directory &#39;appveyor&#39;
-  warning: no previously-included files matching &#39;*.pyc&#39; found anywhere in distribution
-  warning: no previously-included files matching &#39;*.pyd&#39; found anywhere in distribution
-  warning: no previously-included files matching &#39;*.so&#39; found anywhere in distribution
-  warning: no previously-included files matching &#39;.coverage&#39; found anywhere in distribution
-  adding license file &#39;LICENSE&#39;
-  adding license file &#39;LICENSE.PSF&#39;
-  writing manifest file &#39;src\greenlet.egg-info\SOURCES.txt&#39;
-  copying src\greenlet\CObjects.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\PyGreenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\PyGreenlet.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\PyGreenletUnswitchable.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\PyModule.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TBrokenGreenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TExceptionState.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TGreenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TGreenlet.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TGreenletGlobals.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TMainGreenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TPythonState.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TStackState.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TThreadState.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TThreadStateCreator.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TThreadStateDestroy.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\TUserGreenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet.h -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_allocator.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_compiler_compat.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_cpython_compat.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_exceptions.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_internal.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_msvc_compat.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_refs.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_slp_switch.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\greenlet_thread_support.hpp -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\slp_platformselect.h -&gt; build\lib.win-amd64-cpython-39\greenlet
-  copying src\greenlet\platform\setup_switch_x64_masm.cmd -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_aarch64_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_alpha_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_amd64_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_arm32_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_arm32_ios.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_arm64_masm.asm -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_arm64_masm.obj -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_arm64_msvc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_csky_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_loongarch64_linux.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_m68k_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_mips_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_ppc64_aix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_ppc64_linux.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_ppc_aix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_ppc_linux.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_ppc_macosx.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_ppc_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_riscv_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_s390_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_sh_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_sparc_sun_gcc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_x32_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_x64_masm.asm -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_x64_masm.obj -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_x64_msvc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_x86_msvc.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\platform\switch_x86_unix.h -&gt; build\lib.win-amd64-cpython-39\greenlet\platform
-  copying src\greenlet\tests\_test_extension.c -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  copying src\greenlet\tests\_test_extension_cpp.cpp -&gt; build\lib.win-amd64-cpython-39\greenlet\tests
-  running build_ext
-  building &#39;greenlet._greenlet&#39; extension
-  error: Microsoft Visual C++ 14.0 or greater is required. Get it with &quot;Microsoft C++ Build Tools&quot;: https://visualstudio.microsoft.com/visual-cpp-build-tools/
-  ----------------------------------------
-  ERROR: Failed building wheel for greenlet
-ERROR: Could not build wheels for greenlet which use PEP 517 and cannot be installed directly
-WARNING: You are using pip version 21.2.4; however, version 26.0.1 is available.
-You should consider upgrading via the &#39;c:\Users\ARIEL\OneDrive\Documents\PSD\.venv\Scripts\python.exe -m pip install --upgrade pip&#39; command.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[notice] A new release of pip is available: 26.0.1 -&gt; 26.2.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
 </pre></div>
 </div>
 </div>
@@ -676,6 +552,90 @@ You should consider upgrading via the &#39;c:\Users\ARIEL\OneDrive\Documents\PSD
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File CSV berhasil diekspor!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>scipy
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting scipy
+  Downloading scipy-1.13.1-cp39-cp39-win_amd64.whl (46.2 MB)
+Collecting numpy&lt;2.3,&gt;=1.22.4
+  Using cached numpy-2.0.2-cp39-cp39-win_amd64.whl (15.9 MB)
+Installing collected packages: numpy, scipy
+Successfully installed numpy-2.0.2 scipy-1.13.1
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: You are using pip version 21.2.4; however, version 26.0.1 is available.
+You should consider upgrading via the &#39;c:\Users\ARIEL\OneDrive\Documents\PSD\.venv\Scripts\python.exe -m pip install --upgrade pip&#39; command.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">skew</span><span class="p">,</span> <span class="n">kurtosis</span>
+
+<span class="c1"># Membaca data time series</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data_time_series_20.csv&quot;</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Nilai&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Perubahan antar waktu</span>
+<span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+
+<span class="c1"># Trend</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">))</span>
+<span class="n">trend</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Autocorrelation lag 1</span>
+<span class="n">autocorr_lag1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">ts</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">ts</span><span class="p">[</span><span class="mi">1</span><span class="p">:])[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># RMS</span>
+<span class="n">rms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ts</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># Energy</span>
+<span class="n">energy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ts</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># 14 fitur</span>
+<span class="n">fitur</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Mean&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span>
+    <span class="s2">&quot;Median&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span>
+    <span class="s2">&quot;Std Dev&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+    <span class="s2">&quot;Variance&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+    <span class="s2">&quot;Minimum&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span>
+    <span class="s2">&quot;Maximum&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span>
+    <span class="s2">&quot;Range&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span>
+    <span class="s2">&quot;Skewness&quot;</span><span class="p">:</span> <span class="n">skew</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span>
+    <span class="s2">&quot;Kurtosis&quot;</span><span class="p">:</span> <span class="n">kurtosis</span><span class="p">(</span><span class="n">ts</span><span class="p">),</span>
+    <span class="s2">&quot;Mean Absolute Change&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">diff</span><span class="p">)),</span>
+    <span class="s2">&quot;Trend&quot;</span><span class="p">:</span> <span class="n">trend</span><span class="p">,</span>
+    <span class="s2">&quot;Autocorrelation Lag 1&quot;</span><span class="p">:</span> <span class="n">autocorr_lag1</span><span class="p">,</span>
+    <span class="s2">&quot;RMS&quot;</span><span class="p">:</span> <span class="n">rms</span><span class="p">,</span>
+    <span class="s2">&quot;Energy&quot;</span><span class="p">:</span> <span class="n">energy</span>
+<span class="p">}</span>
+
+<span class="c1"># Menampilkan hasil</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">nama</span><span class="p">,</span> <span class="n">nilai</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fitur</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">nama</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">nilai</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">skew</span><span class="p">,</span> <span class="n">kurtosis</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
 </pre></div>
 </div>
 </div>
