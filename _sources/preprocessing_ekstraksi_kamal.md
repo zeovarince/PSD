@@ -14,17 +14,6 @@ kernelspec:
 
 # Preprocessing Sebelum Ekstraksi Fitur
 
-## Contents
-
-- [1. Deteksi & Perbaikan Outlier](#deteksi-perbaikan-outlier)
-  * [Grafik NO2 sebelum & sesudah perbaikan](#grafik-no2-sebelum-sesudah-perbaikan)
-- [2. Imputasi Missing Value](#imputasi-missing-value)
-- [3. Ekstraksi Fitur dengan TSFEL](#ekstraksi-fitur-dengan-tsfel)
-  * [Hasil ekstraksi fitur per domain](#hasil-ekstraksi-fitur-per-domain)
-- [Ringkasan](#ringkasan)
-
-# Preprocessing Sebelum Ekstraksi Fitur
-
 Tahap ini melanjutkan data kualitas udara **Kecamatan Kamal, Bangkalan** (NO2) yang
 sudah dikumpulkan pada tugas sebelumnya. Sebelum data dipakai untuk ekstraksi fitur,
 data perlu melalui tiga tahap preprocessing: **deteksi & perbaikan outlier**, **imputasi missing value**, lalu **ekstraksi fitur** dengan TSFEL.
@@ -83,9 +72,6 @@ plt.show()
 df_fixed[["date", pol]].to_csv(f"{pol}_Kamal_Timeseries_fixed.csv", index=False)
 ```
 
-### Grafik NO2 sebelum & sesudah perbaikan
-
-*(grafik dihasilkan otomatis saat cell dijalankan)*
 
 ## 2. Imputasi Missing Value
 

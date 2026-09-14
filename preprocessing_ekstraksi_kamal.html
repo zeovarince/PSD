@@ -185,7 +185,6 @@
 <li class="toctree-l1"><a class="reference internal" href="timeseriesaiven.html">Analisis Time Series: Migrasi Data &amp; Pengolahan di KNIME</a></li>
 <li class="toctree-l1"><a class="reference internal" href="no2kamal.html">Polutan Kamal (Revisi)</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Preprocessing Sebelum Ekstraksi Fitur</a></li>
-
 </ul>
 
     </div>
@@ -381,15 +380,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preprocessing Sebelum Ekstraksi Fitur</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contents">Contents</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Preprocessing Sebelum Ekstraksi Fitur</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-perbaikan-outlier">1. Deteksi &amp; Perbaikan Outlier</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafik-no2-sebelum-sesudah-perbaikan">Grafik NO2 sebelum &amp; sesudah perbaikan</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-perbaikan-outlier">1. Deteksi &amp; Perbaikan Outlier</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imputasi-missing-value">2. Imputasi Missing Value</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-dengan-tsfel">3. Ekstraksi Fitur dengan TSFEL</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-ekstraksi-fitur-per-domain">Hasil ekstraksi fitur per domain</a></li>
@@ -397,9 +388,6 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ringkasan">Ringkasan</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -412,26 +400,6 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="preprocessing-sebelum-ekstraksi-fitur">
 <h1>Preprocessing Sebelum Ekstraksi Fitur<a class="headerlink" href="#preprocessing-sebelum-ekstraksi-fitur" title="Link to this heading">#</a></h1>
-<section id="contents">
-<h2>Contents<a class="headerlink" href="#contents" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="#deteksi-perbaikan-outlier"><span class="xref myst">1. Deteksi &amp; Perbaikan Outlier</span></a></p>
-<ul>
-<li><p><a class="reference internal" href="#grafik-no2-sebelum-sesudah-perbaikan"><span class="xref myst">Grafik NO2 sebelum &amp; sesudah perbaikan</span></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#imputasi-missing-value"><span class="xref myst">2. Imputasi Missing Value</span></a></p></li>
-<li><p><a class="reference internal" href="#ekstraksi-fitur-dengan-tsfel"><span class="xref myst">3. Ekstraksi Fitur dengan TSFEL</span></a></p>
-<ul>
-<li><p><a class="reference internal" href="#hasil-ekstraksi-fitur-per-domain"><span class="xref myst">Hasil ekstraksi fitur per domain</span></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#ringkasan"><span class="xref myst">Ringkasan</span></a></p></li>
-</ul>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>Preprocessing Sebelum Ekstraksi Fitur<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <p>Tahap ini melanjutkan data kualitas udara <strong>Kecamatan Kamal, Bangkalan</strong> (NO2) yang
 sudah dikumpulkan pada tugas sebelumnya. Sebelum data dipakai untuk ekstraksi fitur,
 data perlu melalui tiga tahap preprocessing: <strong>deteksi &amp; perbaikan outlier</strong>, <strong>imputasi missing value</strong>, lalu <strong>ekstraksi fitur</strong> dengan TSFEL.</p>
@@ -497,10 +465,6 @@ interpolasi linear terhadap waktu.</p>
 <img alt="_images/e8c78ffc87e72244cc9bc7e4bc091025eb1f01b600f13ff921e24fa59bb9bdde.png" src="_images/e8c78ffc87e72244cc9bc7e4bc091025eb1f01b600f13ff921e24fa59bb9bdde.png" />
 </div>
 </div>
-<section id="grafik-no2-sebelum-sesudah-perbaikan">
-<h3>Grafik NO2 sebelum &amp; sesudah perbaikan<a class="headerlink" href="#grafik-no2-sebelum-sesudah-perbaikan" title="Link to this heading">#</a></h3>
-<p><em>(grafik dihasilkan otomatis saat cell dijalankan)</em></p>
-</section>
 </section>
 <section id="imputasi-missing-value">
 <h2>2. Imputasi Missing Value<a class="headerlink" href="#imputasi-missing-value" title="Link to this heading">#</a></h2>
@@ -952,15 +916,7 @@ Total data setelah imputasi   : 366 hari
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preprocessing Sebelum Ekstraksi Fitur</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contents">Contents</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Preprocessing Sebelum Ekstraksi Fitur</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-perbaikan-outlier">1. Deteksi &amp; Perbaikan Outlier</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafik-no2-sebelum-sesudah-perbaikan">Grafik NO2 sebelum &amp; sesudah perbaikan</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-perbaikan-outlier">1. Deteksi &amp; Perbaikan Outlier</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imputasi-missing-value">2. Imputasi Missing Value</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-dengan-tsfel">3. Ekstraksi Fitur dengan TSFEL</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-ekstraksi-fitur-per-domain">Hasil ekstraksi fitur per domain</a></li>
@@ -968,9 +924,6 @@ Total data setelah imputasi   : 366 hari
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ringkasan">Ringkasan</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
