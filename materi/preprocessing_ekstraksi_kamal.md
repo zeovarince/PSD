@@ -12,7 +12,7 @@ kernelspec:
   name: python3
 ---
 
-# Preprocessing Sebelum Ekstraksi Fitur
+# Preprocessing dan Ekstraksi Fitur
 
 Tahap ini melanjutkan data kualitas udara **Kecamatan Kamal, Bangkalan** (NO2) yang
 sudah dikumpulkan pada tugas sebelumnya. Sebelum data dipakai untuk ekstraksi fitur,
