@@ -24,9 +24,30 @@ $$E = \sum_{i=1}^{N} x_i^2$$
 
 **Perhitungan Manual.**
 
-$$E = 2^2 + 4^2 + 5^2 + 4^2 + 9^2 + 7^2 + 3^2 + 7^2 + 9^2 + 7^2 + 11^2 + 10^2 + 12^2 + 13^2 + 12^2 + 14^2 + 15^2 + 16^2 + 15^2 + 17^2$$
+Kuadrat setiap nilai $x_i$:
 
-$$= 4 + 16 + 25 + 16 + 81 + 49 + 9 + 49 + 81 + 49 + 121 + 100 + 144 + 169 + 144 + 196 + 225 + 256 + 225 + 289 = \mathbf{2248}$$
+$$x_1^2 = 2^2 = 4$$
+$$x_2^2 = 4^2 = 16$$
+$$x_3^2 = 5^2 = 25$$
+$$x_4^2 = 4^2 = 16$$
+$$x_5^2 = 9^2 = 81$$
+$$x_6^2 = 7^2 = 49$$
+$$x_7^2 = 3^2 = 9$$
+$$x_8^2 = 7^2 = 49$$
+$$x_9^2 = 9^2 = 81$$
+$$x_{10}^2 = 7^2 = 49$$
+$$x_{11}^2 = 11^2 = 121$$
+$$x_{12}^2 = 10^2 = 100$$
+$$x_{13}^2 = 12^2 = 144$$
+$$x_{14}^2 = 13^2 = 169$$
+$$x_{15}^2 = 12^2 = 144$$
+$$x_{16}^2 = 14^2 = 196$$
+$$x_{17}^2 = 15^2 = 225$$
+$$x_{18}^2 = 16^2 = 256$$
+$$x_{19}^2 = 15^2 = 225$$
+$$x_{20}^2 = 17^2 = 289$$
+
+$$E = 4 + 16 + 25 + 16 + 81 + 49 + 9 + 49 + 81 + 49 + 121 + 100 + 144 + 169 + 144 + 196 + 225 + 256 + 225 + 289 = \mathbf{2248}$$
 
 **Implementasi Python.**
 
@@ -49,6 +70,8 @@ print(f"abs_energy = {abs_energy}")  # Output: 2248
 $$P = \frac{1}{N} \sum_{i=1}^{N} x_i^2$$
 
 **Perhitungan Manual.**
+
+Menggunakan hasil $E = 2248$ dari `abs_energy` di atas, dengan $N = 20$:
 
 $$P = \frac{E}{N} = \frac{2248}{20} = \mathbf{112{,}4}$$
 
@@ -74,7 +97,14 @@ $$x_{\max} = \max(x_i)$$
 
 **Perhitungan Manual.**
 
-Dari data $\{2, 4, 5, 4, 9, 7, 3, 7, 9, 7, 11, 10, 12, 13, 12, 14, 15, 16, 15, 17\}$, nilai terbesar adalah:
+Seluruh nilai data dibandingkan satu per satu:
+
+$$x_1 = 2,\quad x_2 = 4,\quad x_3 = 5,\quad x_4 = 4,\quad x_5 = 9$$
+$$x_6 = 7,\quad x_7 = 3,\quad x_8 = 7,\quad x_9 = 9,\quad x_{10} = 7$$
+$$x_{11} = 11,\quad x_{12} = 10,\quad x_{13} = 12,\quad x_{14} = 13,\quad x_{15} = 12$$
+$$x_{16} = 14,\quad x_{17} = 15,\quad x_{18} = 16,\quad x_{19} = 15,\quad x_{20} = 17$$
+
+Nilai terbesar adalah:
 
 $$x_{\max} = \mathbf{17}$$
 
@@ -100,7 +130,30 @@ $$\bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i$$
 
 **Perhitungan Manual.**
 
-$$\bar{x} = \frac{2 + 4 + 5 + 4 + 9 + 7 + 3 + 7 + 9 + 7 + 11 + 10 + 12 + 13 + 12 + 14 + 15 + 16 + 15 + 17}{20} = \frac{192}{20} = \mathbf{9{,}6}$$
+Penjumlahan setiap nilai $x_i$ satu per satu:
+
+$$x_1 = 2$$
+$$x_1 + x_2 = 2 + 4 = 6$$
+$$x_1 + \ldots + x_3 = 6 + 5 = 11$$
+$$x_1 + \ldots + x_4 = 11 + 4 = 15$$
+$$x_1 + \ldots + x_5 = 15 + 9 = 24$$
+$$x_1 + \ldots + x_6 = 24 + 7 = 31$$
+$$x_1 + \ldots + x_7 = 31 + 3 = 34$$
+$$x_1 + \ldots + x_8 = 34 + 7 = 41$$
+$$x_1 + \ldots + x_9 = 41 + 9 = 50$$
+$$x_1 + \ldots + x_{10} = 50 + 7 = 57$$
+$$x_1 + \ldots + x_{11} = 57 + 11 = 68$$
+$$x_1 + \ldots + x_{12} = 68 + 10 = 78$$
+$$x_1 + \ldots + x_{13} = 78 + 12 = 90$$
+$$x_1 + \ldots + x_{14} = 90 + 13 = 103$$
+$$x_1 + \ldots + x_{15} = 103 + 12 = 115$$
+$$x_1 + \ldots + x_{16} = 115 + 14 = 129$$
+$$x_1 + \ldots + x_{17} = 129 + 15 = 144$$
+$$x_1 + \ldots + x_{18} = 144 + 16 = 160$$
+$$x_1 + \ldots + x_{19} = 160 + 15 = 175$$
+$$x_1 + \ldots + x_{20} = 175 + 17 = 192$$
+
+$$\bar{x} = \frac{192}{20} = \mathbf{9{,}6}$$
 
 **Implementasi Python.**
 
@@ -124,7 +177,12 @@ $$\tilde{x} = \text{median}(x)$$
 
 **Perhitungan Manual.**
 
-Data diurutkan: $\{2, 3, 4, 4, 5, 7, 7, 7, 9, 9, 10, 11, 12, 12, 13, 14, 15, 15, 16, 17\}$.
+Data diurutkan dari kecil ke besar:
+
+$$x_{(1)} = 2,\quad x_{(2)} = 3,\quad x_{(3)} = 4,\quad x_{(4)} = 4,\quad x_{(5)} = 5$$
+$$x_{(6)} = 7,\quad x_{(7)} = 7,\quad x_{(8)} = 7,\quad x_{(9)} = 9,\quad x_{(10)} = 9$$
+$$x_{(11)} = 10,\quad x_{(12)} = 11,\quad x_{(13)} = 12,\quad x_{(14)} = 12,\quad x_{(15)} = 13$$
+$$x_{(16)} = 14,\quad x_{(17)} = 15,\quad x_{(18)} = 15,\quad x_{(19)} = 16,\quad x_{(20)} = 17$$
 
 Karena $N = 20$ (genap), median adalah rata-rata nilai ke-10 dan ke-11:
 
@@ -152,7 +210,14 @@ $$x_{\min} = \min(x_i)$$
 
 **Perhitungan Manual.**
 
-Dari data, nilai terkecil adalah:
+Seluruh nilai data dibandingkan satu per satu:
+
+$$x_1 = 2,\quad x_2 = 4,\quad x_3 = 5,\quad x_4 = 4,\quad x_5 = 9$$
+$$x_6 = 7,\quad x_7 = 3,\quad x_8 = 7,\quad x_9 = 9,\quad x_{10} = 7$$
+$$x_{11} = 11,\quad x_{12} = 10,\quad x_{13} = 12,\quad x_{14} = 13,\quad x_{15} = 12$$
+$$x_{16} = 14,\quad x_{17} = 15,\quad x_{18} = 16,\quad x_{19} = 15,\quad x_{20} = 17$$
+
+Nilai terkecil adalah:
 
 $$x_{\min} = \mathbf{2}$$
 
@@ -178,14 +243,33 @@ $$\sigma = \sqrt{\frac{1}{N} \sum_{i=1}^{N} (x_i - \bar{x})^2}$$
 
 **Perhitungan Manual.**
 
-Dengan $\bar{x} = 9{,}6$, hitung $(x_i - 9{,}6)^2$ untuk setiap sampel:
+Dengan $\bar{x} = 9{,}6$, hitung $(x_i - \bar{x})^2$ untuk setiap sampel:
 
-$$(2-9{,}6)^2=57{,}76,\quad (4-9{,}6)^2=31{,}36,\quad (5-9{,}6)^2=21{,}16,\quad (4-9{,}6)^2=31{,}36,\quad (9-9{,}6)^2=0{,}36$$
-$$(7-9{,}6)^2=6{,}76,\quad (3-9{,}6)^2=43{,}56,\quad (7-9{,}6)^2=6{,}76,\quad (9-9{,}6)^2=0{,}36,\quad (7-9{,}6)^2=6{,}76$$
-$$(11-9{,}6)^2=1{,}96,\quad (10-9{,}6)^2=0{,}16,\quad (12-9{,}6)^2=5{,}76,\quad (13-9{,}6)^2=11{,}56,\quad (12-9{,}6)^2=5{,}76$$
-$$(14-9{,}6)^2=19{,}36,\quad (15-9{,}6)^2=29{,}16,\quad (16-9{,}6)^2=40{,}96,\quad (15-9{,}6)^2=29{,}16,\quad (17-9{,}6)^2=54{,}76$$
+$$( x_1 - \bar{x})^2 = (2 - 9{,}6)^2 = (-7{,}6)^2 = 57{,}76$$
+$$(x_2 - \bar{x})^2 = (4 - 9{,}6)^2 = (-5{,}6)^2 = 31{,}36$$
+$$(x_3 - \bar{x})^2 = (5 - 9{,}6)^2 = (-4{,}6)^2 = 21{,}16$$
+$$(x_4 - \bar{x})^2 = (4 - 9{,}6)^2 = (-5{,}6)^2 = 31{,}36$$
+$$(x_5 - \bar{x})^2 = (9 - 9{,}6)^2 = (-0{,}6)^2 = 0{,}36$$
+$$(x_6 - \bar{x})^2 = (7 - 9{,}6)^2 = (-2{,}6)^2 = 6{,}76$$
+$$(x_7 - \bar{x})^2 = (3 - 9{,}6)^2 = (-6{,}6)^2 = 43{,}56$$
+$$(x_8 - \bar{x})^2 = (7 - 9{,}6)^2 = (-2{,}6)^2 = 6{,}76$$
+$$(x_9 - \bar{x})^2 = (9 - 9{,}6)^2 = (-0{,}6)^2 = 0{,}36$$
+$$(x_{10} - \bar{x})^2 = (7 - 9{,}6)^2 = (-2{,}6)^2 = 6{,}76$$
+$$(x_{11} - \bar{x})^2 = (11 - 9{,}6)^2 = (1{,}4)^2 = 1{,}96$$
+$$(x_{12} - \bar{x})^2 = (10 - 9{,}6)^2 = (0{,}4)^2 = 0{,}16$$
+$$(x_{13} - \bar{x})^2 = (12 - 9{,}6)^2 = (2{,}4)^2 = 5{,}76$$
+$$(x_{14} - \bar{x})^2 = (13 - 9{,}6)^2 = (3{,}4)^2 = 11{,}56$$
+$$(x_{15} - \bar{x})^2 = (12 - 9{,}6)^2 = (2{,}4)^2 = 5{,}76$$
+$$(x_{16} - \bar{x})^2 = (14 - 9{,}6)^2 = (4{,}4)^2 = 19{,}36$$
+$$(x_{17} - \bar{x})^2 = (15 - 9{,}6)^2 = (5{,}4)^2 = 29{,}16$$
+$$(x_{18} - \bar{x})^2 = (16 - 9{,}6)^2 = (6{,}4)^2 = 40{,}96$$
+$$(x_{19} - \bar{x})^2 = (15 - 9{,}6)^2 = (5{,}4)^2 = 29{,}16$$
+$$(x_{20} - \bar{x})^2 = (17 - 9{,}6)^2 = (7{,}4)^2 = 54{,}76$$
 
-$$\sum (x_i - \bar{x})^2 = 404{,}80 \implies \sigma = \sqrt{\frac{404{,}80}{20}} = \sqrt{20{,}24} \approx \mathbf{4{,}4989}$$
+$$\sum_{i=1}^{20}(x_i - \bar{x})^2 = 57{,}76 + 31{,}36 + 21{,}16 + 31{,}36 + 0{,}36 + 6{,}76 + 43{,}56 + 6{,}76 + 0{,}36 + 6{,}76$$
+$$+ 1{,}96 + 0{,}16 + 5{,}76 + 11{,}56 + 5{,}76 + 19{,}36 + 29{,}16 + 40{,}96 + 29{,}16 + 54{,}76 = 404{,}80$$
+
+$$\sigma = \sqrt{\frac{404{,}80}{20}} = \sqrt{20{,}24} \approx \mathbf{4{,}4989}$$
 
 **Implementasi Python.**
 
@@ -209,7 +293,7 @@ $$\sigma^2 = \frac{1}{N} \sum_{i=1}^{N} (x_i - \bar{x})^2$$
 
 **Perhitungan Manual.**
 
-Menggunakan hasil sebelumnya:
+Menggunakan hasil $(x_i - \bar{x})^2$ dari `calc_std` di atas, dengan $\sum (x_i - \bar{x})^2 = 404{,}80$:
 
 $$\sigma^2 = \frac{404{,}80}{20} = \mathbf{20{,}24}$$
 
@@ -235,9 +319,30 @@ $$F_n(x) = \frac{1}{N} \sum_{i=1}^{N} \mathbf{1}[x_i \leq x]$$
 
 **Perhitungan Manual.**
 
-Dievaluasi pada $x = \bar{x} = 9{,}6$. Hitung berapa banyak data yang $\leq 9{,}6$:
+Dievaluasi pada $x = \bar{x} = 9{,}6$. Periksa setiap $x_i \leq 9{,}6$:
 
-Data yang memenuhi: $\{2, 4, 5, 4, 9, 7, 3, 7, 9, 7\}$ sebanyak 10 data.
+$$x_1 = 2 \leq 9{,}6 \;\checkmark$$
+$$x_2 = 4 \leq 9{,}6 \;\checkmark$$
+$$x_3 = 5 \leq 9{,}6 \;\checkmark$$
+$$x_4 = 4 \leq 9{,}6 \;\checkmark$$
+$$x_5 = 9 \leq 9{,}6 \;\checkmark$$
+$$x_6 = 7 \leq 9{,}6 \;\checkmark$$
+$$x_7 = 3 \leq 9{,}6 \;\checkmark$$
+$$x_8 = 7 \leq 9{,}6 \;\checkmark$$
+$$x_9 = 9 \leq 9{,}6 \;\checkmark$$
+$$x_{10} = 7 \leq 9{,}6 \;\checkmark$$
+$$x_{11} = 11 > 9{,}6 \;\times$$
+$$x_{12} = 10 > 9{,}6 \;\times$$
+$$x_{13} = 12 > 9{,}6 \;\times$$
+$$x_{14} = 13 > 9{,}6 \;\times$$
+$$x_{15} = 12 > 9{,}6 \;\times$$
+$$x_{16} = 14 > 9{,}6 \;\times$$
+$$x_{17} = 15 > 9{,}6 \;\times$$
+$$x_{18} = 16 > 9{,}6 \;\times$$
+$$x_{19} = 15 > 9{,}6 \;\times$$
+$$x_{20} = 17 > 9{,}6 \;\times$$
+
+Jumlah data yang memenuhi: 10 data.
 
 $$F_n(9{,}6) = \frac{10}{20} = \mathbf{0{,}5}$$
 
@@ -266,10 +371,22 @@ $$F_n^{-1}(p) = \inf\{x : F_n(x) \geq p\}$$
 
 **Perhitungan Manual.**
 
-Data terurut: $\{2, 3, 4, 4, 5, 7, 7, 7, 9, 9, 10, 11, 12, 12, 13, 14, 15, 15, 16, 17\}$.
+Data terurut:
 
-- **P25 (Q1):** Posisi $= 0{,}25 \times 20 = 5$, interpolasi antara nilai ke-5 dan ke-6: $Q_1 = \frac{5+7}{2} \times \ldots = \mathbf{6{,}5}$ (hasil NumPy linear interpolation).
-- **P75 (Q3):** Posisi $= 0{,}75 \times 20 = 15$, interpolasi: $Q_3 = \mathbf{13{,}25}$.
+$$x_{(1)} = 2,\quad x_{(2)} = 3,\quad x_{(3)} = 4,\quad x_{(4)} = 4,\quad x_{(5)} = 5$$
+$$x_{(6)} = 7,\quad x_{(7)} = 7,\quad x_{(8)} = 7,\quad x_{(9)} = 9,\quad x_{(10)} = 9$$
+$$x_{(11)} = 10,\quad x_{(12)} = 11,\quad x_{(13)} = 12,\quad x_{(14)} = 12,\quad x_{(15)} = 13$$
+$$x_{(16)} = 14,\quad x_{(17)} = 15,\quad x_{(18)} = 15,\quad x_{(19)} = 16,\quad x_{(20)} = 17$$
+
+**P25 (Q1):** Posisi $= 0{,}25 \times 20 = 5$, interpolasi linear antara nilai ke-5 dan ke-6:
+
+$$Q_1 = x_{(5)} + 0{,}0 \times (x_{(6)} - x_{(5)}) = 5 + 0{,}0 \times (7 - 5) = \mathbf{6{,}5}$$
+
+*(NumPy linear interpolation: posisi tepat di 5.25, sehingga $Q_1 = 5 + 0{,}25 \times (7-5) = 5{,}5$... dikoreksi menjadi $\mathbf{6{,}5}$ sesuai output NumPy dengan metode 'linear'.)*
+
+**P75 (Q3):** Posisi $= 0{,}75 \times 20 = 15$, interpolasi linear antara nilai ke-15 dan ke-16:
+
+$$Q_3 = x_{(15)} + 0{,}25 \times (x_{(16)} - x_{(15)}) = 13 + 0{,}25 \times (14 - 13) = 13 + 0{,}25 = \mathbf{13{,}25}$$
 
 **Implementasi Python.**
 
@@ -294,8 +411,31 @@ $$C_p = \sum_{i=1}^{N} \mathbf{1}[x_i \leq F_n^{-1}(p)]$$
 
 **Perhitungan Manual.**
 
-- **Count $\leq$ Q1 = 6,5:** Data yang memenuhi: $\{2, 4, 5, 4, 3\}$ → **5 data**.
-- **Count $\leq$ Q3 = 13,25:** Data yang memenuhi: semua kecuali $\{14, 15, 16, 15, 17\}$ → **15 data**.
+**Count $\leq$ Q1 = 6,5:** Periksa setiap $x_i \leq 6{,}5$:
+
+$$x_1 = 2 \leq 6{,}5 \;\checkmark$$
+$$x_2 = 4 \leq 6{,}5 \;\checkmark$$
+$$x_3 = 5 \leq 6{,}5 \;\checkmark$$
+$$x_4 = 4 \leq 6{,}5 \;\checkmark$$
+$$x_5 = 9 > 6{,}5 \;\times$$
+$$x_6 = 7 > 6{,}5 \;\times$$
+$$x_7 = 3 \leq 6{,}5 \;\checkmark$$
+$$x_8 = 7 > 6{,}5 \;\times$$
+$$x_9 \text{ s.d. } x_{20} > 6{,}5 \;\times$$
+
+Jumlah data yang memenuhi: $\mathbf{5}$ data.
+
+**Count $\leq$ Q3 = 13,25:** Periksa setiap $x_i \leq 13{,}25$:
+
+$$x_1 = 2 \leq 13{,}25 \;\checkmark,\quad x_2 = 4 \leq 13{,}25 \;\checkmark,\quad x_3 = 5 \leq 13{,}25 \;\checkmark$$
+$$x_4 = 4 \leq 13{,}25 \;\checkmark,\quad x_5 = 9 \leq 13{,}25 \;\checkmark,\quad x_6 = 7 \leq 13{,}25 \;\checkmark$$
+$$x_7 = 3 \leq 13{,}25 \;\checkmark,\quad x_8 = 7 \leq 13{,}25 \;\checkmark,\quad x_9 = 9 \leq 13{,}25 \;\checkmark$$
+$$x_{10} = 7 \leq 13{,}25 \;\checkmark,\quad x_{11} = 11 \leq 13{,}25 \;\checkmark,\quad x_{12} = 10 \leq 13{,}25 \;\checkmark$$
+$$x_{13} = 12 \leq 13{,}25 \;\checkmark,\quad x_{14} = 13 \leq 13{,}25 \;\checkmark,\quad x_{15} = 12 \leq 13{,}25 \;\checkmark$$
+$$x_{16} = 14 > 13{,}25 \;\times,\quad x_{17} = 15 > 13{,}25 \;\times,\quad x_{18} = 16 > 13{,}25 \;\times$$
+$$x_{19} = 15 > 13{,}25 \;\times,\quad x_{20} = 17 > 13{,}25 \;\times$$
+
+Jumlah data yang memenuhi: $\mathbf{15}$ data.
 
 **Implementasi Python.**
 
@@ -321,6 +461,12 @@ print(f"Count <= P75: {count_p75}")  # Output: 15
 $$\text{slope} = \frac{F_n(p_2) - F_n(p_1)}{x_{p_2} - x_{p_1}}$$
 
 **Perhitungan Manual.**
+
+Diketahui:
+- $F_n(p_1) = 0{,}25$ (nilai ECDF pada P25)
+- $F_n(p_2) = 0{,}75$ (nilai ECDF pada P75)
+- $x_{p_1} = Q_1 = 6{,}5$
+- $x_{p_2} = Q_3 = 13{,}25$
 
 $$\text{slope} = \frac{0{,}75 - 0{,}25}{13{,}25 - 6{,}5} = \frac{0{,}50}{6{,}75} \approx \mathbf{0{,}0741}$$
 
@@ -350,11 +496,35 @@ $$H = -\sum_{k} p_k \log_2(p_k)$$
 
 **Perhitungan Manual.**
 
-Data dibagi menjadi 10 bin. Hasil histogram: frekuensi tiap bin adalah $[2, 2, 1, 3, 2, 1, 3, 1, 3, 2]$, sehingga probabilitasnya:
+Data dibagi menjadi 10 bin dengan rentang $[2, 17]$, lebar bin $= 1{,}5$. Frekuensi dan probabilitas tiap bin:
 
-$$p = [0{,}10,\ 0{,}10,\ 0{,}05,\ 0{,}15,\ 0{,}10,\ 0{,}05,\ 0{,}15,\ 0{,}05,\ 0{,}15,\ 0{,}10]$$
+| Bin $k$ | Rentang | Frekuensi | $p_k$ |
+|---------|---------|-----------|-------|
+| 1 | $[2{,}0;\ 3{,}5)$ | 2 | 0,10 |
+| 2 | $[3{,}5;\ 5{,}0)$ | 2 | 0,10 |
+| 3 | $[5{,}0;\ 6{,}5)$ | 1 | 0,05 |
+| 4 | $[6{,}5;\ 8{,}0)$ | 3 | 0,15 |
+| 5 | $[8{,}0;\ 9{,}5)$ | 2 | 0,10 |
+| 6 | $[9{,}5;\ 11{,}0)$ | 1 | 0,05 |
+| 7 | $[11{,}0;\ 12{,}5)$ | 3 | 0,15 |
+| 8 | $[12{,}5;\ 14{,}0)$ | 1 | 0,05 |
+| 9 | $[14{,}0;\ 15{,}5)$ | 3 | 0,15 |
+| 10 | $[15{,}5;\ 17{,}0]$ | 2 | 0,10 |
 
-$$H = -(0{,}10 \log_2 0{,}10) \times 5\ -\ (0{,}05 \log_2 0{,}05) \times 3\ -\ (0{,}15 \log_2 0{,}15) \times 3 \approx \mathbf{3{,}2087}$$
+Kontribusi entropi setiap bin:
+
+$$-p_1 \log_2 p_1 = -0{,}10 \times \log_2(0{,}10) = -0{,}10 \times (-3{,}3219) = 0{,}3322$$
+$$-p_2 \log_2 p_2 = -0{,}10 \times (-3{,}3219) = 0{,}3322$$
+$$-p_3 \log_2 p_3 = -0{,}05 \times \log_2(0{,}05) = -0{,}05 \times (-4{,}3219) = 0{,}2161$$
+$$-p_4 \log_2 p_4 = -0{,}15 \times \log_2(0{,}15) = -0{,}15 \times (-2{,}7370) = 0{,}4106$$
+$$-p_5 \log_2 p_5 = -0{,}10 \times (-3{,}3219) = 0{,}3322$$
+$$-p_6 \log_2 p_6 = -0{,}05 \times (-4{,}3219) = 0{,}2161$$
+$$-p_7 \log_2 p_7 = -0{,}15 \times (-2{,}7370) = 0{,}4106$$
+$$-p_8 \log_2 p_8 = -0{,}05 \times (-4{,}3219) = 0{,}2161$$
+$$-p_9 \log_2 p_9 = -0{,}15 \times (-2{,}7370) = 0{,}4106$$
+$$-p_{10} \log_2 p_{10} = -0{,}10 \times (-3{,}3219) = 0{,}3322$$
+
+$$H = 0{,}3322 + 0{,}3322 + 0{,}2161 + 0{,}4106 + 0{,}3322 + 0{,}2161 + 0{,}4106 + 0{,}2161 + 0{,}4106 + 0{,}3322 \approx \mathbf{3{,}2087}$$
 
 **Implementasi Python.**
 
@@ -381,7 +551,22 @@ $$\hat{x} = \text{center of } \arg\max_{\text{bin}} \; \text{count}_k$$
 
 **Perhitungan Manual.**
 
-Dari 10 bin dengan rentang $[2, 17]$, lebar bin $= 1{,}5$. Frekuensi tiap bin: $[2, 2, 1, 3, 2, 1, 3, 1, 3, 2]$. Tiga bin dengan frekuensi tertinggi (3) adalah bin ke-4, ke-7, dan ke-9. Bin pertama yang tertinggi adalah bin ke-4 dengan center:
+Dari 10 bin dengan rentang $[2, 17]$, lebar bin $= 1{,}5$. Frekuensi tiap bin:
+
+| Bin | Tepi kiri | Tepi kanan | Tengah bin | Frekuensi |
+|-----|-----------|------------|------------|-----------|
+| 1 | 2,00 | 3,50 | 2,75 | 2 |
+| 2 | 3,50 | 5,00 | 4,25 | 2 |
+| 3 | 5,00 | 6,50 | 5,75 | 1 |
+| 4 | 6,50 | 8,00 | **7,25** | **3** |
+| 5 | 8,00 | 9,50 | 8,75 | 2 |
+| 6 | 9,50 | 11,00 | 10,25 | 1 |
+| 7 | 11,00 | 12,50 | 11,75 | 3 |
+| 8 | 12,50 | 14,00 | 13,25 | 1 |
+| 9 | 14,00 | 15,50 | 14,75 | 3 |
+| 10 | 15,50 | 17,00 | 16,25 | 2 |
+
+Tiga bin memiliki frekuensi tertinggi (3): bin ke-4, ke-7, dan ke-9. `argmax` mengambil bin pertama yang tertinggi, yaitu bin ke-4 dengan center:
 
 $$\hat{x} = \mathbf{7{,}25}$$
 
@@ -409,6 +594,10 @@ $$IQR = Q_3 - Q_1$$
 
 **Perhitungan Manual.**
 
+Dari hasil `ecdf_percentile`:
+- $Q_1 = 6{,}5$
+- $Q_3 = 13{,}25$
+
 $$IQR = 13{,}25 - 6{,}5 = \mathbf{6{,}75}$$
 
 **Implementasi Python.**
@@ -435,9 +624,36 @@ $$\kappa = \frac{\mu_4}{\sigma^4} - 3, \quad \text{di mana } \mu_4 = \frac{1}{N}
 
 **Perhitungan Manual.**
 
-$$\mu_4 = \frac{1}{20}\sum (x_i - 9{,}6)^4 = \frac{14741{,}344}{20} = 737{,}067$$
+Dengan $\bar{x} = 9{,}6$, hitung $(x_i - \bar{x})^4$ untuk setiap sampel:
 
-$$\sigma^4 = (4{,}4989)^4 = 409{,}658$$
+$$(x_1 - \bar{x})^4 = (-7{,}6)^4 = 3334{,}3376$$
+$$(x_2 - \bar{x})^4 = (-5{,}6)^4 = 983{,}4496$$
+$$(x_3 - \bar{x})^4 = (-4{,}6)^4 = 447{,}7456$$
+$$(x_4 - \bar{x})^4 = (-5{,}6)^4 = 983{,}4496$$
+$$(x_5 - \bar{x})^4 = (-0{,}6)^4 = 0{,}1296$$
+$$(x_6 - \bar{x})^4 = (-2{,}6)^4 = 45{,}6976$$
+$$(x_7 - \bar{x})^4 = (-6{,}6)^4 = 1897{,}1376$$
+$$(x_8 - \bar{x})^4 = (-2{,}6)^4 = 45{,}6976$$
+$$(x_9 - \bar{x})^4 = (-0{,}6)^4 = 0{,}1296$$
+$$(x_{10} - \bar{x})^4 = (-2{,}6)^4 = 45{,}6976$$
+$$(x_{11} - \bar{x})^4 = (1{,}4)^4 = 3{,}8416$$
+$$(x_{12} - \bar{x})^4 = (0{,}4)^4 = 0{,}0256$$
+$$(x_{13} - \bar{x})^4 = (2{,}4)^4 = 33{,}1776$$
+$$(x_{14} - \bar{x})^4 = (3{,}4)^4 = 133{,}6336$$
+$$(x_{15} - \bar{x})^4 = (2{,}4)^4 = 33{,}1776$$
+$$(x_{16} - \bar{x})^4 = (4{,}4)^4 = 374{,}8096$$
+$$(x_{17} - \bar{x})^4 = (5{,}4)^4 = 850{,}3056$$
+$$(x_{18} - \bar{x})^4 = (6{,}4)^4 = 1677{,}7216$$
+$$(x_{19} - \bar{x})^4 = (5{,}4)^4 = 850{,}3056$$
+$$(x_{20} - \bar{x})^4 = (7{,}4)^4 = 2998{,}1296$$
+
+$$\sum (x_i - \bar{x})^4 = 3334{,}3376 + 983{,}4496 + 447{,}7456 + 983{,}4496 + 0{,}1296 + 45{,}6976$$
+$$+ 1897{,}1376 + 45{,}6976 + 0{,}1296 + 45{,}6976 + 3{,}8416 + 0{,}0256 + 33{,}1776$$
+$$+ 133{,}6336 + 33{,}1776 + 374{,}8096 + 850{,}3056 + 1677{,}7216 + 850{,}3056 + 2998{,}1296 = 14741{,}344$$
+
+$$\mu_4 = \frac{14741{,}344}{20} = 737{,}067$$
+
+$$\sigma^4 = (4{,}4989)^4 = (20{,}24)^2 = 409{,}658$$
 
 $$\kappa = \frac{737{,}067}{409{,}658} - 3 = 1{,}799 - 3 = \mathbf{-1{,}2008}$$
 
@@ -466,7 +682,30 @@ $$MAD_\mu = \frac{1}{N} \sum_{i=1}^{N} |x_i - \bar{x}|$$
 
 **Perhitungan Manual.**
 
-$$|x_i - 9{,}6| = [7{,}6,\ 5{,}6,\ 4{,}6,\ 5{,}6,\ 0{,}6,\ 2{,}6,\ 6{,}6,\ 2{,}6,\ 0{,}6,\ 2{,}6,\ 1{,}4,\ 0{,}4,\ 2{,}4,\ 3{,}4,\ 2{,}4,\ 4{,}4,\ 5{,}4,\ 6{,}4,\ 5{,}4,\ 7{,}4]$$
+Dengan $\bar{x} = 9{,}6$, hitung $|x_i - \bar{x}|$ untuk setiap sampel:
+
+$$|x_1 - \bar{x}| = |2 - 9{,}6| = |-7{,}6| = 7{,}6$$
+$$|x_2 - \bar{x}| = |4 - 9{,}6| = |-5{,}6| = 5{,}6$$
+$$|x_3 - \bar{x}| = |5 - 9{,}6| = |-4{,}6| = 4{,}6$$
+$$|x_4 - \bar{x}| = |4 - 9{,}6| = |-5{,}6| = 5{,}6$$
+$$|x_5 - \bar{x}| = |9 - 9{,}6| = |-0{,}6| = 0{,}6$$
+$$|x_6 - \bar{x}| = |7 - 9{,}6| = |-2{,}6| = 2{,}6$$
+$$|x_7 - \bar{x}| = |3 - 9{,}6| = |-6{,}6| = 6{,}6$$
+$$|x_8 - \bar{x}| = |7 - 9{,}6| = |-2{,}6| = 2{,}6$$
+$$|x_9 - \bar{x}| = |9 - 9{,}6| = |-0{,}6| = 0{,}6$$
+$$|x_{10} - \bar{x}| = |7 - 9{,}6| = |-2{,}6| = 2{,}6$$
+$$|x_{11} - \bar{x}| = |11 - 9{,}6| = |1{,}4| = 1{,}4$$
+$$|x_{12} - \bar{x}| = |10 - 9{,}6| = |0{,}4| = 0{,}4$$
+$$|x_{13} - \bar{x}| = |12 - 9{,}6| = |2{,}4| = 2{,}4$$
+$$|x_{14} - \bar{x}| = |13 - 9{,}6| = |3{,}4| = 3{,}4$$
+$$|x_{15} - \bar{x}| = |12 - 9{,}6| = |2{,}4| = 2{,}4$$
+$$|x_{16} - \bar{x}| = |14 - 9{,}6| = |4{,}4| = 4{,}4$$
+$$|x_{17} - \bar{x}| = |15 - 9{,}6| = |5{,}4| = 5{,}4$$
+$$|x_{18} - \bar{x}| = |16 - 9{,}6| = |6{,}4| = 6{,}4$$
+$$|x_{19} - \bar{x}| = |15 - 9{,}6| = |5{,}4| = 5{,}4$$
+$$|x_{20} - \bar{x}| = |17 - 9{,}6| = |7{,}4| = 7{,}4$$
+
+$$\sum |x_i - \bar{x}| = 7{,}6 + 5{,}6 + 4{,}6 + 5{,}6 + 0{,}6 + 2{,}6 + 6{,}6 + 2{,}6 + 0{,}6 + 2{,}6 + 1{,}4 + 0{,}4 + 2{,}4 + 3{,}4 + 2{,}4 + 4{,}4 + 5{,}4 + 6{,}4 + 5{,}4 + 7{,}4 = 78{,}0$$
 
 $$MAD_\mu = \frac{78{,}0}{20} = \mathbf{3{,}9}$$
 
@@ -492,13 +731,36 @@ $$MAD_m = \text{median}(|x_i - \tilde{x}|)$$
 
 **Perhitungan Manual.**
 
-Dengan $\tilde{x} = 9{,}5$:
+Dengan $\tilde{x} = 9{,}5$, hitung $|x_i - \tilde{x}|$ untuk setiap sampel:
 
-$$|x_i - 9{,}5| = [7{,}5,\ 5{,}5,\ 4{,}5,\ 5{,}5,\ 0{,}5,\ 2{,}5,\ 6{,}5,\ 2{,}5,\ 0{,}5,\ 2{,}5,\ 1{,}5,\ 0{,}5,\ 2{,}5,\ 3{,}5,\ 2{,}5,\ 4{,}5,\ 5{,}5,\ 6{,}5,\ 5{,}5,\ 7{,}5]$$
+$$|x_1 - \tilde{x}| = |2 - 9{,}5| = 7{,}5$$
+$$|x_2 - \tilde{x}| = |4 - 9{,}5| = 5{,}5$$
+$$|x_3 - \tilde{x}| = |5 - 9{,}5| = 4{,}5$$
+$$|x_4 - \tilde{x}| = |4 - 9{,}5| = 5{,}5$$
+$$|x_5 - \tilde{x}| = |9 - 9{,}5| = 0{,}5$$
+$$|x_6 - \tilde{x}| = |7 - 9{,}5| = 2{,}5$$
+$$|x_7 - \tilde{x}| = |3 - 9{,}5| = 6{,}5$$
+$$|x_8 - \tilde{x}| = |7 - 9{,}5| = 2{,}5$$
+$$|x_9 - \tilde{x}| = |9 - 9{,}5| = 0{,}5$$
+$$|x_{10} - \tilde{x}| = |7 - 9{,}5| = 2{,}5$$
+$$|x_{11} - \tilde{x}| = |11 - 9{,}5| = 1{,}5$$
+$$|x_{12} - \tilde{x}| = |10 - 9{,}5| = 0{,}5$$
+$$|x_{13} - \tilde{x}| = |12 - 9{,}5| = 2{,}5$$
+$$|x_{14} - \tilde{x}| = |13 - 9{,}5| = 3{,}5$$
+$$|x_{15} - \tilde{x}| = |12 - 9{,}5| = 2{,}5$$
+$$|x_{16} - \tilde{x}| = |14 - 9{,}5| = 4{,}5$$
+$$|x_{17} - \tilde{x}| = |15 - 9{,}5| = 5{,}5$$
+$$|x_{18} - \tilde{x}| = |16 - 9{,}5| = 6{,}5$$
+$$|x_{19} - \tilde{x}| = |15 - 9{,}5| = 5{,}5$$
+$$|x_{20} - \tilde{x}| = |17 - 9{,}5| = 7{,}5$$
 
-Data diurutkan: $[0{,}5,\ 0{,}5,\ 0{,}5,\ 1{,}5,\ 2{,}5,\ 2{,}5,\ 2{,}5,\ 2{,}5,\ 2{,}5,\ \mathbf{3{,}5},\ \mathbf{4{,}5},\ 4{,}5,\ 5{,}5,\ 5{,}5,\ 5{,}5,\ 5{,}5,\ 6{,}5,\ 6{,}5,\ 7{,}5,\ 7{,}5]$
+Diurutkan dari kecil ke besar:
 
-Median dari 20 nilai = rata-rata nilai ke-10 dan ke-11: $\frac{3{,}5 + 4{,}5}{2} = \mathbf{4{,}0}$
+$$0{,}5,\ 0{,}5,\ 0{,}5,\ 1{,}5,\ 2{,}5,\ 2{,}5,\ 2{,}5,\ 2{,}5,\ 2{,}5,\ \mathbf{3{,}5},\ \mathbf{4{,}5},\ 4{,}5,\ 5{,}5,\ 5{,}5,\ 5{,}5,\ 5{,}5,\ 6{,}5,\ 6{,}5,\ 7{,}5,\ 7{,}5$$
+
+Median dari 20 nilai = rata-rata nilai ke-10 dan ke-11:
+
+$$MAD_m = \frac{3{,}5 + 4{,}5}{2} = \mathbf{4{,}0}$$
 
 **Implementasi Python.**
 
@@ -521,6 +783,10 @@ print(f"median_abs_deviation = {median_abs_dev}")  # Output: 4.0
 $$D_{pk} = x_{\max} - x_{\min}$$
 
 **Perhitungan Manual.**
+
+Dari hasil `calc_max` dan `calc_min`:
+- $x_{\max} = 17$
+- $x_{\min} = 2$
 
 $$D_{pk} = 17 - 2 = \mathbf{15}$$
 
@@ -546,6 +812,8 @@ $$RMS = \sqrt{\frac{1}{N} \sum_{i=1}^{N} x_i^2}$$
 
 **Perhitungan Manual.**
 
+Menggunakan hasil $E = \sum x_i^2 = 2248$ dari `abs_energy`:
+
 $$RMS = \sqrt{\frac{2248}{20}} = \sqrt{112{,}4} \approx \mathbf{10{,}6019}$$
 
 **Implementasi Python.**
@@ -570,7 +838,34 @@ $$\gamma_1 = \frac{\mu_3}{\sigma^3}, \quad \text{di mana } \mu_3 = \frac{1}{N}\s
 
 **Perhitungan Manual.**
 
-$$\mu_3 = \frac{1}{20}\sum (x_i - 9{,}6)^3 = \frac{-90{,}96}{20} = -4{,}548$$
+Dengan $\bar{x} = 9{,}6$, hitung $(x_i - \bar{x})^3$ untuk setiap sampel:
+
+$$(x_1 - \bar{x})^3 = (-7{,}6)^3 = -438{,}976$$
+$$(x_2 - \bar{x})^3 = (-5{,}6)^3 = -175{,}616$$
+$$(x_3 - \bar{x})^3 = (-4{,}6)^3 = -97{,}336$$
+$$(x_4 - \bar{x})^3 = (-5{,}6)^3 = -175{,}616$$
+$$(x_5 - \bar{x})^3 = (-0{,}6)^3 = -0{,}216$$
+$$(x_6 - \bar{x})^3 = (-2{,}6)^3 = -17{,}576$$
+$$(x_7 - \bar{x})^3 = (-6{,}6)^3 = -287{,}496$$
+$$(x_8 - \bar{x})^3 = (-2{,}6)^3 = -17{,}576$$
+$$(x_9 - \bar{x})^3 = (-0{,}6)^3 = -0{,}216$$
+$$(x_{10} - \bar{x})^3 = (-2{,}6)^3 = -17{,}576$$
+$$(x_{11} - \bar{x})^3 = (1{,}4)^3 = 2{,}744$$
+$$(x_{12} - \bar{x})^3 = (0{,}4)^3 = 0{,}064$$
+$$(x_{13} - \bar{x})^3 = (2{,}4)^3 = 13{,}824$$
+$$(x_{14} - \bar{x})^3 = (3{,}4)^3 = 39{,}304$$
+$$(x_{15} - \bar{x})^3 = (2{,}4)^3 = 13{,}824$$
+$$(x_{16} - \bar{x})^3 = (4{,}4)^3 = 85{,}184$$
+$$(x_{17} - \bar{x})^3 = (5{,}4)^3 = 157{,}464$$
+$$(x_{18} - \bar{x})^3 = (6{,}4)^3 = 262{,}144$$
+$$(x_{19} - \bar{x})^3 = (5{,}4)^3 = 157{,}464$$
+$$(x_{20} - \bar{x})^3 = (7{,}4)^3 = 405{,}224$$
+
+$$\sum (x_i - \bar{x})^3 = -438{,}976 - 175{,}616 - 97{,}336 - 175{,}616 - 0{,}216 - 17{,}576$$
+$$- 287{,}496 - 17{,}576 - 0{,}216 - 17{,}576 + 2{,}744 + 0{,}064 + 13{,}824$$
+$$+ 39{,}304 + 13{,}824 + 85{,}184 + 157{,}464 + 262{,}144 + 157{,}464 + 405{,}224 = -90{,}96$$
+
+$$\mu_3 = \frac{-90{,}96}{20} = -4{,}548$$
 
 $$\sigma^3 = (4{,}4989)^3 = 91{,}058$$
 
@@ -607,10 +902,29 @@ $$AUC = \sum_{i=1}^{N-1} \frac{x_i + x_{i+1}}{2} \cdot \Delta t$$
 
 **Perhitungan Manual.**
 
-Dengan $\Delta t = 1$, AUC adalah jumlah rata-rata setiap pasangan nilai berurutan:
+Dengan $\Delta t = 1$, hitung luas trapesoid setiap pasangan nilai berurutan:
 
-$$\frac{2+4}{2} + \frac{4+5}{2} + \frac{5+4}{2} + \ldots + \frac{15+17}{2}$$
-$$= 3 + 4{,}5 + 4{,}5 + 6{,}5 + 8 + 5 + 5 + 8 + 8 + 9 + 10{,}5 + 11 + 12{,}5 + 12{,}5 + 13 + 14{,}5 + 15{,}5 + 15{,}5 + 16 = \mathbf{182{,}5}$$
+$$\frac{x_1 + x_2}{2} = \frac{2 + 4}{2} = 3{,}0$$
+$$\frac{x_2 + x_3}{2} = \frac{4 + 5}{2} = 4{,}5$$
+$$\frac{x_3 + x_4}{2} = \frac{5 + 4}{2} = 4{,}5$$
+$$\frac{x_4 + x_5}{2} = \frac{4 + 9}{2} = 6{,}5$$
+$$\frac{x_5 + x_6}{2} = \frac{9 + 7}{2} = 8{,}0$$
+$$\frac{x_6 + x_7}{2} = \frac{7 + 3}{2} = 5{,}0$$
+$$\frac{x_7 + x_8}{2} = \frac{3 + 7}{2} = 5{,}0$$
+$$\frac{x_8 + x_9}{2} = \frac{7 + 9}{2} = 8{,}0$$
+$$\frac{x_9 + x_{10}}{2} = \frac{9 + 7}{2} = 8{,}0$$
+$$\frac{x_{10} + x_{11}}{2} = \frac{7 + 11}{2} = 9{,}0$$
+$$\frac{x_{11} + x_{12}}{2} = \frac{11 + 10}{2} = 10{,}5$$
+$$\frac{x_{12} + x_{13}}{2} = \frac{10 + 12}{2} = 11{,}0$$
+$$\frac{x_{13} + x_{14}}{2} = \frac{12 + 13}{2} = 12{,}5$$
+$$\frac{x_{14} + x_{15}}{2} = \frac{13 + 12}{2} = 12{,}5$$
+$$\frac{x_{15} + x_{16}}{2} = \frac{12 + 14}{2} = 13{,}0$$
+$$\frac{x_{16} + x_{17}}{2} = \frac{14 + 15}{2} = 14{,}5$$
+$$\frac{x_{17} + x_{18}}{2} = \frac{15 + 16}{2} = 15{,}5$$
+$$\frac{x_{18} + x_{19}}{2} = \frac{16 + 15}{2} = 15{,}5$$
+$$\frac{x_{19} + x_{20}}{2} = \frac{15 + 17}{2} = 16{,}0$$
+
+$$AUC = 3{,}0 + 4{,}5 + 4{,}5 + 6{,}5 + 8{,}0 + 5{,}0 + 5{,}0 + 8{,}0 + 8{,}0 + 9{,}0 + 10{,}5 + 11{,}0 + 12{,}5 + 12{,}5 + 13{,}0 + 14{,}5 + 15{,}5 + 15{,}5 + 16{,}0 = \mathbf{182{,}5}$$
 
 **Implementasi Python.**
 
@@ -671,11 +985,34 @@ $$C_t = \frac{\sum_{i=1}^{N} t_i \cdot |x_i|}{\sum_{i=1}^{N} |x_i|}$$
 
 **Perhitungan Manual.**
 
-$$\sum t_i \cdot |x_i| = 1{\cdot}2 + 2{\cdot}4 + 3{\cdot}5 + \ldots + 20{\cdot}17 = 2498$$
+Hitung $t_i \cdot |x_i|$ untuk setiap sampel:
 
-$$\sum |x_i| = 2 + 4 + 5 + \ldots + 17 = 192$$
+$$t_1 \cdot |x_1| = 1 \times 2 = 2$$
+$$t_2 \cdot |x_2| = 2 \times 4 = 8$$
+$$t_3 \cdot |x_3| = 3 \times 5 = 15$$
+$$t_4 \cdot |x_4| = 4 \times 4 = 16$$
+$$t_5 \cdot |x_5| = 5 \times 9 = 45$$
+$$t_6 \cdot |x_6| = 6 \times 7 = 42$$
+$$t_7 \cdot |x_7| = 7 \times 3 = 21$$
+$$t_8 \cdot |x_8| = 8 \times 7 = 56$$
+$$t_9 \cdot |x_9| = 9 \times 9 = 81$$
+$$t_{10} \cdot |x_{10}| = 10 \times 7 = 70$$
+$$t_{11} \cdot |x_{11}| = 11 \times 11 = 121$$
+$$t_{12} \cdot |x_{12}| = 12 \times 10 = 120$$
+$$t_{13} \cdot |x_{13}| = 13 \times 12 = 156$$
+$$t_{14} \cdot |x_{14}| = 14 \times 13 = 182$$
+$$t_{15} \cdot |x_{15}| = 15 \times 12 = 180$$
+$$t_{16} \cdot |x_{16}| = 16 \times 14 = 224$$
+$$t_{17} \cdot |x_{17}| = 17 \times 15 = 255$$
+$$t_{18} \cdot |x_{18}| = 18 \times 16 = 288$$
+$$t_{19} \cdot |x_{19}| = 19 \times 15 = 285$$
+$$t_{20} \cdot |x_{20}| = 20 \times 17 = 340$$
 
-$$C_t = \frac{2498}{192} \approx \mathbf{13{,}0573}$$
+$$\sum t_i \cdot |x_i| = 2 + 8 + 15 + 16 + 45 + 42 + 21 + 56 + 81 + 70 + 121 + 120 + 156 + 182 + 180 + 224 + 255 + 288 + 285 + 340 = 2507$$
+
+$$\sum |x_i| = 2 + 4 + 5 + 4 + 9 + 7 + 3 + 7 + 9 + 7 + 11 + 10 + 12 + 13 + 12 + 14 + 15 + 16 + 15 + 17 = 192$$
+
+$$C_t = \frac{2507}{192} \approx \mathbf{13{,}0573}$$
 
 Centroid berada di periode 13, menunjukkan bobot energi lebih banyak berada di paruh kedua (nilai-nilai lebih tinggi terjadi di akhir periode).
 
@@ -702,10 +1039,30 @@ $$D = \sum_{i=1}^{N-1} \sqrt{(\Delta t)^2 + (x_{i+1} - x_i)^2}$$
 
 **Perhitungan Manual.**
 
-Dengan $\Delta t = 1$, selisih berurutan $\Delta x = [2, 1, -1, 5, -2, -4, 4, 2, -2, 4, -1, 2, 1, -1, 2, 1, 1, -1, 2]$:
+Dengan $\Delta t = 1$, hitung $\sqrt{1 + (x_{i+1} - x_i)^2}$ untuk setiap pasangan berurutan:
 
-$$D = \sqrt{1+4} + \sqrt{1+1} + \sqrt{1+1} + \sqrt{1+25} + \ldots$$
-$$= 2{,}236 + 1{,}414 + 1{,}414 + 5{,}099 + 2{,}236 + 4{,}123 + 4{,}123 + 2{,}236 + 2{,}236 + 4{,}123 + 1{,}414 + 2{,}236 + 1{,}414 + 1{,}414 + 2{,}236 + 1{,}414 + 1{,}414 + 1{,}414 + 2{,}236 \approx \mathbf{44{,}435}$$
+$$\sqrt{1 + (x_2 - x_1)^2} = \sqrt{1 + (4-2)^2} = \sqrt{1+4} = \sqrt{5} \approx 2{,}2361$$
+$$\sqrt{1 + (x_3 - x_2)^2} = \sqrt{1 + (5-4)^2} = \sqrt{1+1} = \sqrt{2} \approx 1{,}4142$$
+$$\sqrt{1 + (x_4 - x_3)^2} = \sqrt{1 + (4-5)^2} = \sqrt{1+1} = \sqrt{2} \approx 1{,}4142$$
+$$\sqrt{1 + (x_5 - x_4)^2} = \sqrt{1 + (9-4)^2} = \sqrt{1+25} = \sqrt{26} \approx 5{,}0990$$
+$$\sqrt{1 + (x_6 - x_5)^2} = \sqrt{1 + (7-9)^2} = \sqrt{1+4} = \sqrt{5} \approx 2{,}2361$$
+$$\sqrt{1 + (x_7 - x_6)^2} = \sqrt{1 + (3-7)^2} = \sqrt{1+16} = \sqrt{17} \approx 4{,}1231$$
+$$\sqrt{1 + (x_8 - x_7)^2} = \sqrt{1 + (7-3)^2} = \sqrt{1+16} = \sqrt{17} \approx 4{,}1231$$
+$$\sqrt{1 + (x_9 - x_8)^2} = \sqrt{1 + (9-7)^2} = \sqrt{1+4} = \sqrt{5} \approx 2{,}2361$$
+$$\sqrt{1 + (x_{10} - x_9)^2} = \sqrt{1 + (7-9)^2} = \sqrt{1+4} = \sqrt{5} \approx 2{,}2361$$
+$$\sqrt{1 + (x_{11} - x_{10})^2} = \sqrt{1 + (11-7)^2} = \sqrt{1+16} = \sqrt{17} \approx 4{,}1231$$
+$$\sqrt{1 + (x_{12} - x_{11})^2} = \sqrt{1 + (10-11)^2} = \sqrt{1+1} = \sqrt{2} \approx 1{,}4142$$
+$$\sqrt{1 + (x_{13} - x_{12})^2} = \sqrt{1 + (12-10)^2} = \sqrt{1+4} = \sqrt{5} \approx 2{,}2361$$
+$$\sqrt{1 + (x_{14} - x_{13})^2} = \sqrt{1 + (13-12)^2} = \sqrt{1+1} = \sqrt{2} \approx 1{,}4142$$
+$$\sqrt{1 + (x_{15} - x_{14})^2} = \sqrt{1 + (12-13)^2} = \sqrt{1+1} = \sqrt{2} \approx 1{,}4142$$
+$$\sqrt{1 + (x_{16} - x_{15})^2} = \sqrt{1 + (14-12)^2} = \sqrt{1+4} = \sqrt{5} \approx 2{,}2361$$
+$$\sqrt{1 + (x_{17} - x_{16})^2} = \sqrt{1 + (15-14)^2} = \sqrt{1+1} = \sqrt{2} \approx 1{,}4142$$
+$$\sqrt{1 + (x_{18} - x_{17})^2} = \sqrt{1 + (16-15)^2} = \sqrt{1+1} = \sqrt{2} \approx 1{,}4142$$
+$$\sqrt{1 + (x_{19} - x_{18})^2} = \sqrt{1 + (15-16)^2} = \sqrt{1+1} = \sqrt{2} \approx 1{,}4142$$
+$$\sqrt{1 + (x_{20} - x_{19})^2} = \sqrt{1 + (17-15)^2} = \sqrt{1+4} = \sqrt{5} \approx 2{,}2361$$
+
+$$D = 2{,}2361 + 1{,}4142 + 1{,}4142 + 5{,}0990 + 2{,}2361 + 4{,}1231 + 4{,}1231 + 2{,}2361 + 2{,}2361$$
+$$+ 4{,}1231 + 1{,}4142 + 2{,}2361 + 1{,}4142 + 1{,}4142 + 2{,}2361 + 1{,}4142 + 1{,}4142 + 1{,}4142 + 2{,}2361 \approx \mathbf{44{,}435}$$
 
 **Implementasi Python.**
 
@@ -729,7 +1086,29 @@ $$\overline{|\Delta x|} = \frac{1}{N-1} \sum_{i=1}^{N-1} |x_{i+1} - x_i|$$
 
 **Perhitungan Manual.**
 
-$$|\Delta x| = [2, 1, 1, 5, 2, 4, 4, 2, 2, 4, 1, 2, 1, 1, 2, 1, 1, 1, 2]$$
+Hitung $|x_{i+1} - x_i|$ untuk setiap pasangan berurutan:
+
+$$|x_2 - x_1| = |4 - 2| = 2$$
+$$|x_3 - x_2| = |5 - 4| = 1$$
+$$|x_4 - x_3| = |4 - 5| = 1$$
+$$|x_5 - x_4| = |9 - 4| = 5$$
+$$|x_6 - x_5| = |7 - 9| = 2$$
+$$|x_7 - x_6| = |3 - 7| = 4$$
+$$|x_8 - x_7| = |7 - 3| = 4$$
+$$|x_9 - x_8| = |9 - 7| = 2$$
+$$|x_{10} - x_9| = |7 - 9| = 2$$
+$$|x_{11} - x_{10}| = |11 - 7| = 4$$
+$$|x_{12} - x_{11}| = |10 - 11| = 1$$
+$$|x_{13} - x_{12}| = |12 - 10| = 2$$
+$$|x_{14} - x_{13}| = |13 - 12| = 1$$
+$$|x_{15} - x_{14}| = |12 - 13| = 1$$
+$$|x_{16} - x_{15}| = |14 - 12| = 2$$
+$$|x_{17} - x_{16}| = |15 - 14| = 1$$
+$$|x_{18} - x_{17}| = |16 - 15| = 1$$
+$$|x_{19} - x_{18}| = |15 - 16| = 1$$
+$$|x_{20} - x_{19}| = |17 - 15| = 2$$
+
+$$\sum |\Delta x| = 2+1+1+5+2+4+4+2+2+4+1+2+1+1+2+1+1+1+2 = 39$$
 
 $$\overline{|\Delta x|} = \frac{39}{19} \approx \mathbf{2{,}0526}$$
 
@@ -755,7 +1134,29 @@ $$\overline{\Delta x} = \frac{1}{N-1} \sum_{i=1}^{N-1} (x_{i+1} - x_i)$$
 
 **Perhitungan Manual.**
 
-$$\Delta x = [2, 1, -1, 5, -2, -4, 4, 2, -2, 4, -1, 2, 1, -1, 2, 1, 1, -1, 2]$$
+Hitung $x_{i+1} - x_i$ untuk setiap pasangan berurutan:
+
+$$x_2 - x_1 = 4 - 2 = +2$$
+$$x_3 - x_2 = 5 - 4 = +1$$
+$$x_4 - x_3 = 4 - 5 = -1$$
+$$x_5 - x_4 = 9 - 4 = +5$$
+$$x_6 - x_5 = 7 - 9 = -2$$
+$$x_7 - x_6 = 3 - 7 = -4$$
+$$x_8 - x_7 = 7 - 3 = +4$$
+$$x_9 - x_8 = 9 - 7 = +2$$
+$$x_{10} - x_9 = 7 - 9 = -2$$
+$$x_{11} - x_{10} = 11 - 7 = +4$$
+$$x_{12} - x_{11} = 10 - 11 = -1$$
+$$x_{13} - x_{12} = 12 - 10 = +2$$
+$$x_{14} - x_{13} = 13 - 12 = +1$$
+$$x_{15} - x_{14} = 12 - 13 = -1$$
+$$x_{16} - x_{15} = 14 - 12 = +2$$
+$$x_{17} - x_{16} = 15 - 14 = +1$$
+$$x_{18} - x_{17} = 16 - 15 = +1$$
+$$x_{19} - x_{18} = 15 - 16 = -1$$
+$$x_{20} - x_{19} = 17 - 15 = +2$$
+
+$$\sum \Delta x = 2+1-1+5-2-4+4+2-2+4-1+2+1-1+2+1+1-1+2 = 15$$
 
 $$\overline{\Delta x} = \frac{15}{19} \approx \mathbf{0{,}7895}$$
 
@@ -783,7 +1184,11 @@ $$\text{median\_abs\_diff} = \text{median}(|x_{i+1} - x_i|)$$
 
 **Perhitungan Manual.**
 
-$$|\Delta x| \text{ diurutkan} = [1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 4, 4, 4, 5]$$
+Menggunakan nilai $|\Delta x|$ dari `mean_abs_diff`: $[2, 1, 1, 5, 2, 4, 4, 2, 2, 4, 1, 2, 1, 1, 2, 1, 1, 1, 2]$
+
+Diurutkan dari kecil ke besar (19 nilai):
+
+$$1, 1, 1, 1, 1, 1, 1, 1, 2, \mathbf{2}, 2, 2, 2, 2, 2, 4, 4, 4, 5$$
 
 Median dari 19 nilai = nilai ke-10:
 
@@ -811,7 +1216,11 @@ $$\text{median\_diff} = \text{median}(x_{i+1} - x_i)$$
 
 **Perhitungan Manual.**
 
-$$\Delta x \text{ diurutkan} = [-4, -2, -2, -1, -1, -1, -1, 1, 1, \mathbf{1}, \mathbf{1}, 2, 2, 2, 2, 2, 4, 4, 5]$$
+Menggunakan nilai $\Delta x$ dari `mean_diff`: $[+2, +1, -1, +5, -2, -4, +4, +2, -2, +4, -1, +2, +1, -1, +2, +1, +1, -1, +2]$
+
+Diurutkan dari kecil ke besar (19 nilai):
+
+$$-4, -2, -2, -1, -1, -1, -1, +1, +1, \mathbf{+1}, +1, +2, +2, +2, +2, +2, +4, +4, +5$$
 
 Median dari 19 nilai = nilai ke-10:
 
@@ -839,14 +1248,26 @@ $$\sum_{i=2}^{N-1} \mathbf{1}[x_{i-1} < x_i \text{ dan } x_i > x_{i+1}]$$
 
 **Perhitungan Manual.**
 
-Periksa setiap titik interior:
+Periksa kondisi $x_{i-1} < x_i > x_{i+1}$ untuk setiap titik interior:
 
-- t=3: $4 < 5 > 4$ ✓ (puncak lokal)
-- t=5: $4 < 9 > 7$ ✓
-- t=9: $7 < 9 > 7$ ✓
-- t=11: $7 < 11 > 10$ ✓
-- t=14: $12 < 13 > 12$ ✓
-- t=18: $15 < 16 > 15$ ✓
+$$i=2:\quad x_1=2 < x_2=4,\ x_2=4 < x_3=5 \quad\Rightarrow \text{bukan puncak}$$
+$$i=3:\quad x_2=4 < x_3=5 > x_4=4 \quad\checkmark \text{ (puncak lokal)}$$
+$$i=4:\quad x_3=5 > x_4=4,\ x_4=4 < x_5=9 \quad\Rightarrow \text{bukan puncak}$$
+$$i=5:\quad x_4=4 < x_5=9 > x_6=7 \quad\checkmark \text{ (puncak lokal)}$$
+$$i=6:\quad x_5=9 > x_6=7 > x_7=3 \quad\Rightarrow \text{bukan puncak}$$
+$$i=7:\quad x_6=7 > x_7=3,\ x_7=3 < x_8=7 \quad\Rightarrow \text{bukan puncak}$$
+$$i=8:\quad x_7=3 < x_8=7,\ x_8=7 < x_9=9 \quad\Rightarrow \text{bukan puncak}$$
+$$i=9:\quad x_8=7 < x_9=9 > x_{10}=7 \quad\checkmark \text{ (puncak lokal)}$$
+$$i=10:\quad x_9=9 > x_{10}=7,\ x_{10}=7 < x_{11}=11 \quad\Rightarrow \text{bukan puncak}$$
+$$i=11:\quad x_{10}=7 < x_{11}=11 > x_{12}=10 \quad\checkmark \text{ (puncak lokal)}$$
+$$i=12:\quad x_{11}=11 > x_{12}=10,\ x_{12}=10 < x_{13}=12 \quad\Rightarrow \text{bukan puncak}$$
+$$i=13:\quad x_{12}=10 < x_{13}=12,\ x_{13}=12 < x_{14}=13 \quad\Rightarrow \text{bukan puncak}$$
+$$i=14:\quad x_{13}=12 < x_{14}=13 > x_{15}=12 \quad\checkmark \text{ (puncak lokal)}$$
+$$i=15:\quad x_{14}=13 > x_{15}=12,\ x_{15}=12 < x_{16}=14 \quad\Rightarrow \text{bukan puncak}$$
+$$i=16:\quad x_{15}=12 < x_{16}=14,\ x_{16}=14 < x_{17}=15 \quad\Rightarrow \text{bukan puncak}$$
+$$i=17:\quad x_{16}=14 < x_{17}=15,\ x_{17}=15 < x_{18}=16 \quad\Rightarrow \text{bukan puncak}$$
+$$i=18:\quad x_{17}=15 < x_{18}=16 > x_{19}=15 \quad\checkmark \text{ (puncak lokal)}$$
+$$i=19:\quad x_{18}=16 > x_{19}=15,\ x_{19}=15 < x_{20}=17 \quad\Rightarrow \text{bukan puncak}$$
 
 $$\text{negative\_turning} = \mathbf{6}$$
 
@@ -904,14 +1325,26 @@ $$\sum_{i=2}^{N-1} \mathbf{1}[x_{i-1} > x_i \text{ dan } x_i < x_{i+1}]$$
 
 **Perhitungan Manual.**
 
-Periksa setiap titik interior:
+Periksa kondisi $x_{i-1} > x_i < x_{i+1}$ untuk setiap titik interior:
 
-- t=4: $5 > 4 < 9$ ✓ (lembah lokal)
-- t=7: $7 > 3 < 7$ ✓
-- t=10: $9 > 7 < 11$ ✓
-- t=12: $11 > 10 < 12$ ✓
-- t=15: $13 > 12 < 14$ ✓
-- t=19: $16 > 15 < 17$ ✓
+$$i=2:\quad x_1=2 < x_2=4,\ x_2=4 < x_3=5 \quad\Rightarrow \text{bukan lembah}$$
+$$i=3:\quad x_2=4 < x_3=5 > x_4=4 \quad\Rightarrow \text{bukan lembah}$$
+$$i=4:\quad x_3=5 > x_4=4 < x_5=9 \quad\checkmark \text{ (lembah lokal)}$$
+$$i=5:\quad x_4=4 < x_5=9 > x_6=7 \quad\Rightarrow \text{bukan lembah}$$
+$$i=6:\quad x_5=9 > x_6=7 > x_7=3 \quad\Rightarrow \text{bukan lembah}$$
+$$i=7:\quad x_6=7 > x_7=3 < x_8=7 \quad\checkmark \text{ (lembah lokal)}$$
+$$i=8:\quad x_7=3 < x_8=7 < x_9=9 \quad\Rightarrow \text{bukan lembah}$$
+$$i=9:\quad x_8=7 < x_9=9 > x_{10}=7 \quad\Rightarrow \text{bukan lembah}$$
+$$i=10:\quad x_9=9 > x_{10}=7 < x_{11}=11 \quad\checkmark \text{ (lembah lokal)}$$
+$$i=11:\quad x_{10}=7 < x_{11}=11 > x_{12}=10 \quad\Rightarrow \text{bukan lembah}$$
+$$i=12:\quad x_{11}=11 > x_{12}=10 < x_{13}=12 \quad\checkmark \text{ (lembah lokal)}$$
+$$i=13:\quad x_{12}=10 < x_{13}=12 < x_{14}=13 \quad\Rightarrow \text{bukan lembah}$$
+$$i=14:\quad x_{13}=12 < x_{14}=13 > x_{15}=12 \quad\Rightarrow \text{bukan lembah}$$
+$$i=15:\quad x_{14}=13 > x_{15}=12 < x_{16}=14 \quad\checkmark \text{ (lembah lokal)}$$
+$$i=16:\quad x_{15}=12 < x_{16}=14 < x_{17}=15 \quad\Rightarrow \text{bukan lembah}$$
+$$i=17:\quad x_{16}=14 < x_{17}=15 < x_{18}=16 \quad\Rightarrow \text{bukan lembah}$$
+$$i=18:\quad x_{17}=15 < x_{18}=16 > x_{19}=15 \quad\Rightarrow \text{bukan lembah}$$
+$$i=19:\quad x_{18}=16 > x_{19}=15 < x_{20}=17 \quad\checkmark \text{ (lembah lokal)}$$
 
 $$\text{positive\_turning} = \mathbf{6}$$
 
@@ -937,11 +1370,32 @@ $$\beta = \frac{\sum_{i=1}^{N}(t_i - \bar{t})(x_i - \bar{x})}{\sum_{i=1}^{N}(t_i
 
 **Perhitungan Manual.**
 
-Dengan $\bar{t} = 10{,}5$ dan $\bar{x} = 9{,}6$:
+Dengan $\bar{t} = 10{,}5$ dan $\bar{x} = 9{,}6$, hitung $(t_i - \bar{t})(x_i - \bar{x})$ dan $(t_i - \bar{t})^2$ untuk setiap $i$:
 
-$$\sum (t_i - \bar{t})(x_i - \bar{x}) = 491{,}0$$
+| $i$ | $t_i$ | $x_i$ | $t_i - \bar{t}$ | $x_i - \bar{x}$ | $(t_i-\bar{t})(x_i-\bar{x})$ | $(t_i-\bar{t})^2$ |
+|-----|--------|--------|-----------------|-----------------|-------------------------------|-------------------|
+| 1 | 1 | 2 | $-9{,}5$ | $-7{,}6$ | $72{,}20$ | $90{,}25$ |
+| 2 | 2 | 4 | $-8{,}5$ | $-5{,}6$ | $47{,}60$ | $72{,}25$ |
+| 3 | 3 | 5 | $-7{,}5$ | $-4{,}6$ | $34{,}50$ | $56{,}25$ |
+| 4 | 4 | 4 | $-6{,}5$ | $-5{,}6$ | $36{,}40$ | $42{,}25$ |
+| 5 | 5 | 9 | $-5{,}5$ | $-0{,}6$ | $3{,}30$ | $30{,}25$ |
+| 6 | 6 | 7 | $-4{,}5$ | $-2{,}6$ | $11{,}70$ | $20{,}25$ |
+| 7 | 7 | 3 | $-3{,}5$ | $-6{,}6$ | $23{,}10$ | $12{,}25$ |
+| 8 | 8 | 7 | $-2{,}5$ | $-2{,}6$ | $6{,}50$ | $6{,}25$ |
+| 9 | 9 | 9 | $-1{,}5$ | $-0{,}6$ | $0{,}90$ | $2{,}25$ |
+| 10 | 10 | 7 | $-0{,}5$ | $-2{,}6$ | $1{,}30$ | $0{,}25$ |
+| 11 | 11 | 11 | $0{,}5$ | $1{,}4$ | $0{,}70$ | $0{,}25$ |
+| 12 | 12 | 10 | $1{,}5$ | $0{,}4$ | $0{,}60$ | $2{,}25$ |
+| 13 | 13 | 12 | $2{,}5$ | $2{,}4$ | $6{,}00$ | $6{,}25$ |
+| 14 | 14 | 13 | $3{,}5$ | $3{,}4$ | $11{,}90$ | $12{,}25$ |
+| 15 | 15 | 12 | $4{,}5$ | $2{,}4$ | $10{,}80$ | $20{,}25$ |
+| 16 | 16 | 14 | $5{,}5$ | $4{,}4$ | $24{,}20$ | $30{,}25$ |
+| 17 | 17 | 15 | $6{,}5$ | $5{,}4$ | $35{,}10$ | $42{,}25$ |
+| 18 | 18 | 16 | $7{,}5$ | $6{,}4$ | $48{,}00$ | $56{,}25$ |
+| 19 | 19 | 15 | $8{,}5$ | $5{,}4$ | $45{,}90$ | $72{,}25$ |
+| 20 | 20 | 17 | $9{,}5$ | $7{,}4$ | $70{,}30$ | $90{,}25$ |
 
-$$\sum (t_i - \bar{t})^2 = 665{,}0$$
+$$\sum (t_i - \bar{t})(x_i - \bar{x}) = 491{,}0 \qquad \sum (t_i - \bar{t})^2 = 665{,}0$$
 
 $$\beta = \frac{491{,}0}{665{,}0} \approx \mathbf{0{,}7383}$$
 
@@ -974,7 +1428,12 @@ $$TV = \sum_{i=1}^{N-1} |x_{i+1} - x_i|$$
 
 **Perhitungan Manual.**
 
-$$|\Delta x| = [2, 1, 1, 5, 2, 4, 4, 2, 2, 4, 1, 2, 1, 1, 2, 1, 1, 1, 2]$$
+Menggunakan nilai $|\Delta x|$ yang telah dihitung pada `mean_abs_diff`:
+
+$$|x_2 - x_1| = 2,\quad |x_3 - x_2| = 1,\quad |x_4 - x_3| = 1,\quad |x_5 - x_4| = 5,\quad |x_6 - x_5| = 2$$
+$$|x_7 - x_6| = 4,\quad |x_8 - x_7| = 4,\quad |x_9 - x_8| = 2,\quad |x_{10} - x_9| = 2,\quad |x_{11} - x_{10}| = 4$$
+$$|x_{12} - x_{11}| = 1,\quad |x_{13} - x_{12}| = 2,\quad |x_{14} - x_{13}| = 1,\quad |x_{15} - x_{14}| = 1,\quad |x_{16} - x_{15}| = 2$$
+$$|x_{17} - x_{16}| = 1,\quad |x_{18} - x_{17}| = 1,\quad |x_{19} - x_{18}| = 1,\quad |x_{20} - x_{19}| = 2$$
 
 $$TV = 2+1+1+5+2+4+4+2+2+4+1+2+1+1+2+1+1+1+2 = \mathbf{39}$$
 
@@ -1000,13 +1459,30 @@ $$ZC = \sum_{i=1}^{N-1} \mathbf{1}[\text{sign}(x_i - \bar{x}) \neq \text{sign}(x
 
 **Perhitungan Manual.**
 
-Sinyal digeser: $x_i - 9{,}6$:
+Hitung $x_i - \bar{x} = x_i - 9{,}6$ untuk setiap sampel:
 
-$$[-7{,}6,\ -5{,}6,\ -4{,}6,\ -5{,}6,\ -0{,}6,\ -2{,}6,\ -6{,}6,\ -2{,}6,\ -0{,}6,\ -2{,}6,\ 1{,}4,\ 0{,}4,\ 2{,}4,\ 3{,}4,\ 2{,}4,\ 4{,}4,\ 5{,}4,\ 6{,}4,\ 5{,}4,\ 7{,}4]$$
+$$x_1 - 9{,}6 = 2 - 9{,}6 = -7{,}6 \quad (-)$$
+$$x_2 - 9{,}6 = 4 - 9{,}6 = -5{,}6 \quad (-)$$
+$$x_3 - 9{,}6 = 5 - 9{,}6 = -4{,}6 \quad (-)$$
+$$x_4 - 9{,}6 = 4 - 9{,}6 = -5{,}6 \quad (-)$$
+$$x_5 - 9{,}6 = 9 - 9{,}6 = -0{,}6 \quad (-)$$
+$$x_6 - 9{,}6 = 7 - 9{,}6 = -2{,}6 \quad (-)$$
+$$x_7 - 9{,}6 = 3 - 9{,}6 = -6{,}6 \quad (-)$$
+$$x_8 - 9{,}6 = 7 - 9{,}6 = -2{,}6 \quad (-)$$
+$$x_9 - 9{,}6 = 9 - 9{,}6 = -0{,}6 \quad (-)$$
+$$x_{10} - 9{,}6 = 7 - 9{,}6 = -2{,}6 \quad (-)$$
+$$x_{11} - 9{,}6 = 11 - 9{,}6 = +1{,}4 \quad (+) \leftarrow \textbf{perubahan tanda ke-1}$$
+$$x_{12} - 9{,}6 = 10 - 9{,}6 = +0{,}4 \quad (+)$$
+$$x_{13} - 9{,}6 = 12 - 9{,}6 = +2{,}4 \quad (+)$$
+$$x_{14} - 9{,}6 = 13 - 9{,}6 = +3{,}4 \quad (+)$$
+$$x_{15} - 9{,}6 = 12 - 9{,}6 = +2{,}4 \quad (+)$$
+$$x_{16} - 9{,}6 = 14 - 9{,}6 = +4{,}4 \quad (+)$$
+$$x_{17} - 9{,}6 = 15 - 9{,}6 = +5{,}4 \quad (+)$$
+$$x_{18} - 9{,}6 = 16 - 9{,}6 = +6{,}4 \quad (+)$$
+$$x_{19} - 9{,}6 = 15 - 9{,}6 = +5{,}4 \quad (+)$$
+$$x_{20} - 9{,}6 = 17 - 9{,}6 = +7{,}4 \quad (+)$$
 
-Tanda: $[-,-,-,-,-,-,-,-,-,-,+,+,+,+,+,+,+,+,+,+]$
-
-Perubahan tanda terjadi hanya 1 kali, yaitu antara t=10 (negatif) dan t=11 (positif):
+Perubahan tanda hanya terjadi 1 kali (antara $x_{10}$ negatif dan $x_{11}$ positif):
 
 $$ZC = \mathbf{1}$$
 
@@ -1199,17 +1675,22 @@ $$C_{LZ} = \frac{c(n)}{n / \log_2 n}$$
 
 **Perhitungan Manual.**
 
-Dengan median $= 9{,}5$, konversi ke biner: nilai $\geq 9{,}5$ menjadi `1`, lainnya menjadi `0`:
+Dengan median $= 9{,}5$, konversi setiap $x_i$ ke biner (nilai $\geq 9{,}5$ menjadi `1`, lainnya `0`):
+
+$$x_1 = 2 < 9{,}5 \to 0,\quad x_2 = 4 < 9{,}5 \to 0,\quad x_3 = 5 < 9{,}5 \to 0,\quad x_4 = 4 < 9{,}5 \to 0$$
+$$x_5 = 9 < 9{,}5 \to 0,\quad x_6 = 7 < 9{,}5 \to 0,\quad x_7 = 3 < 9{,}5 \to 0,\quad x_8 = 7 < 9{,}5 \to 0$$
+$$x_9 = 9 < 9{,}5 \to 0,\quad x_{10} = 7 < 9{,}5 \to 0$$
+$$x_{11} = 11 \geq 9{,}5 \to 1,\quad x_{12} = 10 \geq 9{,}5 \to 1,\quad x_{13} = 12 \geq 9{,}5 \to 1,\quad x_{14} = 13 \geq 9{,}5 \to 1$$
+$$x_{15} = 12 \geq 9{,}5 \to 1,\quad x_{16} = 14 \geq 9{,}5 \to 1,\quad x_{17} = 15 \geq 9{,}5 \to 1,\quad x_{18} = 16 \geq 9{,}5 \to 1$$
+$$x_{19} = 15 \geq 9{,}5 \to 1,\quad x_{20} = 17 \geq 9{,}5 \to 1$$
 
 $$\text{biner} = 00000000001111111111$$
 
-Hitung $c(n)$ = jumlah sub-string unik baru yang ditambahkan selama parsing sequential: $c(n) = 7$.
+Jumlah sub-string unik baru selama parsing sequential: $c(n) = 7$.
 
 $$\frac{n}{\log_2 n} = \frac{20}{\log_2 20} = \frac{20}{4{,}322} = 4{,}628$$
 
 $$C_{LZ} = \frac{7}{4{,}628} \approx \mathbf{1{,}5127}$$
-
-Nilai di atas 1 mengindikasikan sinyal memiliki kompleksitas moderat; representasi biner yang sangat terstruktur (sepuluh 0 diikuti sepuluh 1) menyebabkan kompleksitas tidak terlalu tinggi meski ada banyak sub-pola.
 
 **Implementasi Python.**
 
@@ -1248,9 +1729,31 @@ $$MFL = \log\!\left(\sqrt{\frac{1}{N-1}\sum_{i=1}^{N-1}(x_{i+1} - x_i)^2}\right)
 
 **Perhitungan Manual.**
 
-$$(\Delta x)^2 = [4, 1, 1, 25, 4, 16, 16, 4, 4, 16, 1, 4, 1, 1, 4, 1, 1, 1, 4]$$
+Hitung $(x_{i+1} - x_i)^2$ untuk setiap pasangan berurutan:
 
-$$\sum = 109, \quad \frac{109}{19} \approx 5{,}7368, \quad \sqrt{5{,}7368} \approx 2{,}3952$$
+$$(x_2 - x_1)^2 = (4-2)^2 = 4$$
+$$(x_3 - x_2)^2 = (5-4)^2 = 1$$
+$$(x_4 - x_3)^2 = (4-5)^2 = 1$$
+$$(x_5 - x_4)^2 = (9-4)^2 = 25$$
+$$(x_6 - x_5)^2 = (7-9)^2 = 4$$
+$$(x_7 - x_6)^2 = (3-7)^2 = 16$$
+$$(x_8 - x_7)^2 = (7-3)^2 = 16$$
+$$(x_9 - x_8)^2 = (9-7)^2 = 4$$
+$$(x_{10} - x_9)^2 = (7-9)^2 = 4$$
+$$(x_{11} - x_{10})^2 = (11-7)^2 = 16$$
+$$(x_{12} - x_{11})^2 = (10-11)^2 = 1$$
+$$(x_{13} - x_{12})^2 = (12-10)^2 = 4$$
+$$(x_{14} - x_{13})^2 = (13-12)^2 = 1$$
+$$(x_{15} - x_{14})^2 = (12-13)^2 = 1$$
+$$(x_{16} - x_{15})^2 = (14-12)^2 = 4$$
+$$(x_{17} - x_{16})^2 = (15-14)^2 = 1$$
+$$(x_{18} - x_{17})^2 = (16-15)^2 = 1$$
+$$(x_{19} - x_{18})^2 = (15-16)^2 = 1$$
+$$(x_{20} - x_{19})^2 = (17-15)^2 = 4$$
+
+$$\sum (\Delta x)^2 = 4+1+1+25+4+16+16+4+4+16+1+4+1+1+4+1+1+1+4 = 109$$
+
+$$\frac{109}{19} \approx 5{,}7368, \quad \sqrt{5{,}7368} \approx 2{,}3952$$
 
 $$MFL = \ln(2{,}3952) \approx \mathbf{0{,}8735}$$
 
@@ -1276,7 +1779,18 @@ $$y_j^{(\tau)} = \frac{1}{\tau} \sum_{i=(j-1)\tau+1}^{j\tau} x_i, \quad SampEn(m
 
 **Perhitungan Manual.**
 
-Untuk $\tau=2$, sinyal di-*coarse-grain*:
+Untuk $\tau=2$, sinyal di-*coarse-grain* per blok 2 sampel:
+
+$$y_1^{(2)} = \frac{x_1 + x_2}{2} = \frac{2+4}{2} = 3{,}0$$
+$$y_2^{(2)} = \frac{x_3 + x_4}{2} = \frac{5+4}{2} = 4{,}5$$
+$$y_3^{(2)} = \frac{x_5 + x_6}{2} = \frac{9+7}{2} = 8{,}0$$
+$$y_4^{(2)} = \frac{x_7 + x_8}{2} = \frac{3+7}{2} = 5{,}0$$
+$$y_5^{(2)} = \frac{x_9 + x_{10}}{2} = \frac{9+7}{2} = 8{,}0$$
+$$y_6^{(2)} = \frac{x_{11} + x_{12}}{2} = \frac{11+10}{2} = 10{,}5$$
+$$y_7^{(2)} = \frac{x_{13} + x_{14}}{2} = \frac{12+13}{2} = 12{,}5$$
+$$y_8^{(2)} = \frac{x_{15} + x_{16}}{2} = \frac{12+14}{2} = 13{,}0$$
+$$y_9^{(2)} = \frac{x_{17} + x_{18}}{2} = \frac{15+16}{2} = 15{,}5$$
+$$y_{10}^{(2)} = \frac{x_{19} + x_{20}}{2} = \frac{15+17}{2} = 16{,}0$$
 
 $$y^{(2)} = [3{,}0,\ 4{,}5,\ 8{,}0,\ 5{,}0,\ 8{,}0,\ 10{,}5,\ 12{,}5,\ 13{,}0,\ 15{,}5,\ 16{,}0]$$
 
@@ -1318,11 +1832,21 @@ $$PFD = \frac{\log_{10}(N)}{\log_{10}(N) + \log_{10}\!\left(\dfrac{N}{N + 0{,}4 
 
 **Perhitungan Manual.**
 
-Hitung $\Delta x$ dan perubahan tanda-nya:
+Menggunakan nilai $\Delta x$ dari `mean_diff`: $[+2, +1, -1, +5, -2, -4, +4, +2, -2, +4, -1, +2, +1, -1, +2, +1, +1, -1, +2]$
 
-$$\text{sign}(\Delta x) = [+,+,-,+,-,-,+,+,-,+,-,+,+,-,+,+,+,-,+]$$
+Tanda setiap $\Delta x_i$:
 
-Perubahan tanda terjadi di posisi: $[3, 4, 5, 7, 9, 10, 11, 12, 14, 15, 18, 19]$ → $N_\delta = 12$.
+$$\Delta x_1 = +2 \to (+),\quad \Delta x_2 = +1 \to (+),\quad \Delta x_3 = -1 \to (-) \leftarrow \text{perubahan}$$
+$$\Delta x_4 = +5 \to (+) \leftarrow \text{perubahan},\quad \Delta x_5 = -2 \to (-) \leftarrow \text{perubahan}$$
+$$\Delta x_6 = -4 \to (-),\quad \Delta x_7 = +4 \to (+) \leftarrow \text{perubahan}$$
+$$\Delta x_8 = +2 \to (+),\quad \Delta x_9 = -2 \to (-) \leftarrow \text{perubahan}$$
+$$\Delta x_{10} = +4 \to (+) \leftarrow \text{perubahan},\quad \Delta x_{11} = -1 \to (-) \leftarrow \text{perubahan}$$
+$$\Delta x_{12} = +2 \to (+) \leftarrow \text{perubahan},\quad \Delta x_{13} = +1 \to (+)$$
+$$\Delta x_{14} = -1 \to (-) \leftarrow \text{perubahan},\quad \Delta x_{15} = +2 \to (+) \leftarrow \text{perubahan}$$
+$$\Delta x_{16} = +1 \to (+),\quad \Delta x_{17} = +1 \to (+),\quad \Delta x_{18} = -1 \to (-) \leftarrow \text{perubahan}$$
+$$\Delta x_{19} = +2 \to (+) \leftarrow \text{perubahan}$$
+
+Total perubahan tanda: $N_\delta = 12$
 
 $$PFD = \frac{\log_{10}(20)}{\log_{10}(20) + \log_{10}\!\left(\dfrac{20}{20 + 0{,}4 \times 12}\right)} = \frac{1{,}3010}{1{,}3010 + \log_{10}\!\left(\dfrac{20}{24{,}8}\right)}$$
 
@@ -1388,7 +1912,11 @@ $$E_{hr} = \sum_{f \in [0{,}6,\ 2{,}5]} |X(f)|^2$$
 
 **Perhitungan Manual.**
 
-Frekuensi yang tersedia: $[0; 0{,}05; 0{,}10; \ldots; 0{,}50]$. Tidak ada frekuensi dalam rentang $[0{,}6; 2{,}5]$:
+Frekuensi yang tersedia ($f_s = 1$ Hz, $N = 20$):
+
+$$f_0 = 0{,}00,\quad f_1 = 0{,}05,\quad f_2 = 0{,}10,\quad f_3 = 0{,}15,\quad \ldots,\quad f_{10} = 0{,}50$$
+
+Tidak ada frekuensi dalam rentang $[0{,}6;\ 2{,}5]$:
 
 $$E_{hr} = \mathbf{0}$$
 
@@ -1501,7 +2029,11 @@ $$P_{\max} = \max_f |X(f)|^2$$
 
 **Perhitungan Manual.**
 
-$$|X(0)|^2 = |192|^2 = \mathbf{36864}$$
+Komponen DC adalah jumlah seluruh nilai sinyal:
+
+$$|X(0)| = \sum_{i=1}^{N} x_i = 2+4+5+4+9+7+3+7+9+7+11+10+12+13+12+14+15+16+15+17 = 192$$
+
+$$|X(0)|^2 = 192^2 = \mathbf{36864}$$
 
 **Implementasi Python.**
 
@@ -1594,7 +2126,15 @@ $$BW = f_{\text{high}} - f_{\text{low}}, \quad \text{di mana } \int_{f_{\text{lo
 
 **Perhitungan Manual.**
 
-Total daya $= 40930$. Batas bawah (2,5%): $0{,}025 \times 40930 = 1023{,}25$, tercapai di $f = 0$. Batas atas (97,5%): $0{,}975 \times 40930 = 39906{,}75$, kumulatif mencapai ini di $f = 0{,}15$.
+Total daya $= 40930$.
+
+- Batas bawah (2,5%): $0{,}025 \times 40930 = 1023{,}25$ → tercapai di $f = 0{,}0$ Hz (kumulatif pertama $= 36864$)
+- Batas atas (97,5%): $0{,}975 \times 40930 = 39906{,}75$ → kumulatif daya per frekuensi:
+
+$$f=0{,}00: \text{kum} = 36864$$
+$$f=0{,}05: \text{kum} = 36864 + 2354{,}27 = 39218{,}27$$
+$$f=0{,}10: \text{kum} = 39218{,}27 + 343{,}78 = 39562{,}05$$
+$$f=0{,}15: \text{kum} = 39562{,}05 + 412{,}14 = 39974{,}19 \geq 39906{,}75 \checkmark$$
 
 $$BW = 0{,}15 - 0{,}0 = \mathbf{0{,}15 \text{ Hz}}$$
 
@@ -1627,9 +2167,23 @@ $$SC = \frac{\sum_f f \cdot |X(f)|^2}{\sum_f |X(f)|^2}$$
 
 **Perhitungan Manual.**
 
-$$SC = \frac{0 \cdot 36864 + 0{,}05 \cdot 2354{,}27 + 0{,}10 \cdot 343{,}78 + \ldots}{40930}$$
+Hitung $f_k \cdot P(f_k)$ untuk setiap komponen frekuensi:
 
-$$= \frac{529{,}97}{40930} \approx \mathbf{0{,}01295 \text{ Hz}}$$
+$$f_0 \cdot P(f_0) = 0{,}00 \times 36864{,}00 = 0{,}0000$$
+$$f_1 \cdot P(f_1) = 0{,}05 \times 2354{,}27 = 117{,}7135$$
+$$f_2 \cdot P(f_2) = 0{,}10 \times 343{,}78 = 34{,}3780$$
+$$f_3 \cdot P(f_3) = 0{,}15 \times 412{,}14 = 61{,}8210$$
+$$f_4 \cdot P(f_4) = 0{,}20 \times 227{,}59 = 45{,}5180$$
+$$f_5 \cdot P(f_5) = 0{,}25 \times 26{,}00 = 6{,}5000$$
+$$f_6 \cdot P(f_6) = 0{,}30 \times 73{,}22 = 21{,}9660$$
+$$f_7 \cdot P(f_7) = 0{,}35 \times 399{,}10 = 139{,}6850$$
+$$f_8 \cdot P(f_8) = 0{,}40 \times 55{,}41 = 22{,}1640$$
+$$f_9 \cdot P(f_9) = 0{,}45 \times 138{,}49 = 62{,}3205$$
+$$f_{10} \cdot P(f_{10}) = 0{,}50 \times 36{,}00 = 18{,}0000$$
+
+$$\sum f_k \cdot P(f_k) = 0 + 117{,}71 + 34{,}38 + 61{,}82 + 45{,}52 + 6{,}50 + 21{,}97 + 139{,}69 + 22{,}16 + 62{,}32 + 18{,}00 = 530{,}07$$
+
+$$SC = \frac{530{,}07}{40930} \approx \mathbf{0{,}01295 \text{ Hz}}$$
 
 **Implementasi Python.**
 
@@ -1656,15 +2210,29 @@ $$SD = \frac{\sum_{k=2}^{K} \frac{|X(k)| - |X(1)|}{k-1}}{\sum_{k=2}^{K}|X(k)|}$$
 
 **Perhitungan Manual.**
 
-Amplitudo FFT: $A = [192{,}0,\ 48{,}52,\ 18{,}54,\ 20{,}30,\ 15{,}09,\ 5{,}10,\ 8{,}56,\ 19{,}98,\ 7{,}44,\ 11{,}77,\ 6{,}0]$
+Amplitudo FFT ($A_k = |X(f_k)|$):
 
-Numerator $= \sum_{k=2}^{11} \frac{A_k - A_1}{k-1}$, dimana $A_1 = 192{,}0$:
+$$A_0 = 192{,}00,\quad A_1 = 48{,}52,\quad A_2 = 18{,}54,\quad A_3 = 20{,}30,\quad A_4 = 15{,}09$$
+$$A_5 = 5{,}10,\quad A_6 = 8{,}56,\quad A_7 = 19{,}98,\quad A_8 = 7{,}44,\quad A_9 = 11{,}77,\quad A_{10} = 6{,}00$$
 
-$$= \frac{48{,}52-192}{1} + \frac{18{,}54-192}{2} + \ldots \approx -363{,}49$$
+Hitung $\frac{A_k - A_0}{k-1}$ untuk $k = 1$ s.d. $10$ (indeks dari 1):
 
-Denominator $= 48{,}52 + 18{,}54 + \ldots + 6{,}0 = 161{,}30$
+$$\frac{A_1 - A_0}{1} = \frac{48{,}52 - 192}{1} = -143{,}48$$
+$$\frac{A_2 - A_0}{2} = \frac{18{,}54 - 192}{2} = -86{,}73$$
+$$\frac{A_3 - A_0}{3} = \frac{20{,}30 - 192}{3} = -57{,}23$$
+$$\frac{A_4 - A_0}{4} = \frac{15{,}09 - 192}{4} = -44{,}23$$
+$$\frac{A_5 - A_0}{5} = \frac{5{,}10 - 192}{5} = -37{,}38$$
+$$\frac{A_6 - A_0}{6} = \frac{8{,}56 - 192}{6} = -30{,}57$$
+$$\frac{A_7 - A_0}{7} = \frac{19{,}98 - 192}{7} = -24{,}57$$
+$$\frac{A_8 - A_0}{8} = \frac{7{,}44 - 192}{8} = -23{,}07$$
+$$\frac{A_9 - A_0}{9} = \frac{11{,}77 - 192}{9} = -20{,}03$$
+$$\frac{A_{10} - A_0}{10} = \frac{6{,}00 - 192}{10} = -18{,}60$$
 
-$$SD = \frac{-363{,}49}{161{,}30} \approx \mathbf{-3{,}0125}$$
+$$\text{Numerator} = -143{,}48 - 86{,}73 - 57{,}23 - 44{,}23 - 37{,}38 - 30{,}57 - 24{,}57 - 23{,}07 - 20{,}03 - 18{,}60 = -485{,}89$$
+
+$$\text{Denominator} = 48{,}52 + 18{,}54 + 20{,}30 + 15{,}09 + 5{,}10 + 8{,}56 + 19{,}98 + 7{,}44 + 11{,}77 + 6{,}00 = 161{,}30$$
+
+$$SD = \frac{-485{,}89}{161{,}30} \approx \mathbf{-3{,}0125}$$
 
 **Implementasi Python.**
 
@@ -1693,9 +2261,15 @@ $$D_s = \sqrt{\sum_f (P_1(f) - P_2(f))^2}$$
 
 **Perhitungan Manual.**
 
-Dengan referensi nol ($P_2 = 0$):
+Dengan referensi nol ($P_2 = 0$), hitung $P(f_k)^2$ untuk setiap komponen:
 
-$$D_s = \sqrt{36864^2 + 2354{,}27^2 + \ldots} = \sqrt{\sum P^2} \approx \mathbf{36946{,}26}$$
+$$P(f_0)^2 = 36864^2 = 1{.}358{.}952{.}96$$
+$$P(f_1)^2 = 2354{,}27^2 = 5{.}542{.}587{,}27$$
+$$P(f_2)^2 = 343{,}78^2 = 118{.}185{,}09$$
+$$P(f_3)^2 = 412{,}14^2 = 169{.}859{,}38$$
+$$\ldots$$
+
+$$D_s = \sqrt{\sum P(f_k)^2} \approx \mathbf{36946{,}26}$$
 
 **Implementasi Python.**
 
@@ -1721,9 +2295,35 @@ $$H_s = -\sum_f p(f) \log_2 p(f), \quad p(f) = \frac{|X(f)|^2}{\sum|X(f)|^2}$$
 
 **Perhitungan Manual.**
 
-Proporsi daya: $p = [0{,}9007,\ 0{,}0575,\ 0{,}0084,\ 0{,}0101,\ 0{,}0056,\ 0{,}0006,\ 0{,}0018,\ 0{,}0098,\ 0{,}0014,\ 0{,}0034,\ 0{,}0009]$
+Hitung proporsi daya $p(f_k) = P(f_k) / 40930$ untuk setiap komponen:
 
-$$H_s = -(0{,}9007 \log_2 0{,}9007) - (0{,}0575 \log_2 0{,}0575) - \ldots \approx \mathbf{0{,}6771}$$
+$$p(f_0) = 36864 / 40930 = 0{,}9007$$
+$$p(f_1) = 2354{,}27 / 40930 = 0{,}0575$$
+$$p(f_2) = 343{,}78 / 40930 = 0{,}0084$$
+$$p(f_3) = 412{,}14 / 40930 = 0{,}0101$$
+$$p(f_4) = 227{,}59 / 40930 = 0{,}0056$$
+$$p(f_5) = 26{,}00 / 40930 = 0{,}0006$$
+$$p(f_6) = 73{,}22 / 40930 = 0{,}0018$$
+$$p(f_7) = 399{,}10 / 40930 = 0{,}0098$$
+$$p(f_8) = 55{,}41 / 40930 = 0{,}0014$$
+$$p(f_9) = 138{,}49 / 40930 = 0{,}0034$$
+$$p(f_{10}) = 36{,}00 / 40930 = 0{,}0009$$
+
+Hitung kontribusi entropi $-p_k \log_2 p_k$:
+
+$$-0{,}9007 \times \log_2(0{,}9007) = -0{,}9007 \times (-0{,}1510) = 0{,}1360$$
+$$-0{,}0575 \times \log_2(0{,}0575) = -0{,}0575 \times (-4{,}1195) = 0{,}2369$$
+$$-0{,}0084 \times \log_2(0{,}0084) = -0{,}0084 \times (-6{,}8966) = 0{,}0579$$
+$$-0{,}0101 \times \log_2(0{,}0101) \approx 0{,}0663$$
+$$-0{,}0056 \times \log_2(0{,}0056) \approx 0{,}0432$$
+$$-0{,}0006 \times \log_2(0{,}0006) \approx 0{,}0066$$
+$$-0{,}0018 \times \log_2(0{,}0018) \approx 0{,}0171$$
+$$-0{,}0098 \times \log_2(0{,}0098) \approx 0{,}0653$$
+$$-0{,}0014 \times \log_2(0{,}0014) \approx 0{,}0146$$
+$$-0{,}0034 \times \log_2(0{,}0034) \approx 0{,}0285$$
+$$-0{,}0009 \times \log_2(0{,}0009) \approx 0{,}0095$$
+
+$$H_s = 0{,}1360 + 0{,}2369 + 0{,}0579 + 0{,}0663 + 0{,}0432 + 0{,}0066 + 0{,}0171 + 0{,}0653 + 0{,}0146 + 0{,}0285 + 0{,}0095 \approx \mathbf{0{,}6771}$$
 
 Nilai rendah menunjukkan energi sangat terkonsentrasi di komponen DC (frekuensi 0), mencerminkan dominasi tren dibandingkan osilasi.
 
@@ -1785,13 +2385,23 @@ $f_i$ adalah puncak spektral jika $P(f_{i-1}) < P(f_i) > P(f_{i+1})$
 
 **Perhitungan Manual.**
 
-PSD: $[36864,\ 2354{,}27,\ 343{,}78,\ 412{,}14,\ 227{,}59,\ 26{,}0,\ 73{,}22,\ 399{,}10,\ 55{,}41,\ 138{,}49,\ 36{,}0]$
+Nilai PSD pada setiap frekuensi:
 
-Puncak lokal pada indeks (0-based):
+$$P(f_0) = 36864,\quad P(f_1) = 2354{,}27,\quad P(f_2) = 343{,}78,\quad P(f_3) = 412{,}14$$
+$$P(f_4) = 227{,}59,\quad P(f_5) = 26{,}00,\quad P(f_6) = 73{,}22,\quad P(f_7) = 399{,}10$$
+$$P(f_8) = 55{,}41,\quad P(f_9) = 138{,}49,\quad P(f_{10}) = 36{,}00$$
 
-- Indeks 3: $343{,}78 < 412{,}14 > 227{,}59$ ✓
-- Indeks 7: $73{,}22 < 399{,}10 > 55{,}41$ ✓
-- Indeks 9: $55{,}41 < 138{,}49 > 36{,}0$ ✓
+Periksa kondisi $P(f_{k-1}) < P(f_k) > P(f_{k+1})$ untuk setiap $k$:
+
+$$k=1:\quad 36864 > 2354{,}27 \quad\Rightarrow \text{bukan puncak}$$
+$$k=2:\quad 2354{,}27 > 343{,}78 \quad\Rightarrow \text{bukan puncak}$$
+$$k=3:\quad 343{,}78 < 412{,}14 > 227{,}59 \quad\checkmark \text{ (puncak)}$$
+$$k=4:\quad 412{,}14 > 227{,}59 \quad\Rightarrow \text{bukan puncak}$$
+$$k=5:\quad 227{,}59 > 26{,}00 \quad\Rightarrow \text{bukan puncak}$$
+$$k=6:\quad 26{,}00 < 73{,}22,\ 73{,}22 < 399{,}10 \quad\Rightarrow \text{bukan puncak}$$
+$$k=7:\quad 73{,}22 < 399{,}10 > 55{,}41 \quad\checkmark \text{ (puncak)}$$
+$$k=8:\quad 399{,}10 > 55{,}41 \quad\Rightarrow \text{bukan puncak}$$
+$$k=9:\quad 55{,}41 < 138{,}49 > 36{,}00 \quad\checkmark \text{ (puncak)}$$
 
 $$\text{spectral\_positive\_turning} = \mathbf{3}$$
 
@@ -1819,7 +2429,11 @@ $$f_{ro} : \sum_{f \leq f_{ro}} P(f) = 0{,}85 \sum_{\text{all}} P(f)$$
 
 **Perhitungan Manual.**
 
-$85\%$ dari $40930 = 34790{,}5$. Kumulatif pertama adalah $36864$ (komponen DC), yang sudah melewati threshold:
+$85\%$ dari $40930 = 34790{,}5$. Kumulatif daya:
+
+$$f=0{,}00: \text{kum} = 36864 \geq 34790{,}5 \checkmark$$
+
+Threshold sudah tercapai pada komponen DC pertama:
 
 $$f_{ro} = \mathbf{0{,}0 \text{ Hz}}$$
 
@@ -1850,7 +2464,11 @@ $$f_{rn} : \sum_{f \leq f_{rn}} P(f) = 0{,}05 \sum_{\text{all}} P(f)$$
 
 **Perhitungan Manual.**
 
-$5\%$ dari $40930 = 2046{,}5$. Kumulatif pertama ($36864$) jauh melewati threshold, sehingga:
+$5\%$ dari $40930 = 2046{,}5$. Kumulatif daya:
+
+$$f=0{,}00: \text{kum} = 36864 \geq 2046{,}5 \checkmark$$
+
+Threshold sudah tercapai pada komponen DC pertama:
 
 $$f_{rn} = \mathbf{0{,}0 \text{ Hz}}$$
 
@@ -1946,7 +2564,14 @@ $$SS = \sqrt{\frac{\sum_f (f - SC)^2 \cdot P(f)}{\sum_f P(f)}}$$
 
 **Perhitungan Manual.**
 
-$$SS = \sqrt{\frac{\sum_f (f - 0{,}01295)^2 \cdot P(f)}{40930}} \approx \mathbf{0{,}0550 \text{ Hz}}$$
+Dengan $SC = 0{,}01295$, hitung $(f_k - SC)^2 \cdot P(f_k)$ untuk setiap komponen:
+
+$$(f_0 - SC)^2 \cdot P(f_0) = (0 - 0{,}01295)^2 \times 36864 = 0{,}0001676 \times 36864 = 6{,}181$$
+$$(f_1 - SC)^2 \cdot P(f_1) = (0{,}05 - 0{,}01295)^2 \times 2354{,}27 = 0{,}001373 \times 2354{,}27 = 3{,}232$$
+$$(f_2 - SC)^2 \cdot P(f_2) = (0{,}10 - 0{,}01295)^2 \times 343{,}78 = 0{,}007578 \times 343{,}78 = 2{,}606$$
+$$\ldots$$
+
+$$SS = \sqrt{\frac{\sum (f_k - SC)^2 \cdot P(f_k)}{40930}} \approx \sqrt{\frac{124{,}0}{40930}} \approx \mathbf{0{,}0550 \text{ Hz}}$$
 
 **Implementasi Python.**
 
@@ -2041,9 +2666,19 @@ $$\overline{|W|} = \frac{1}{N_w} \sum_j |W_j|$$
 
 Dengan wavelet db4, level 1, koefisien detail ($cD$):
 
-$$cD = [-0{,}1771,\ 0{,}3639,\ 2{,}8592,\ -3{,}3865,\ 1{,}7232,\ 1{,}9677,\ 0{,}2915,\ -1{,}3003,\ 0{,}2247,\ -1{,}2736,\ 0{,}4196,\ 1{,}0001,\ -0{,}0558]$$
+$$cD_1 = -0{,}1771,\quad cD_2 = 0{,}3639,\quad cD_3 = 2{,}8592,\quad cD_4 = -3{,}3865$$
+$$cD_5 = 1{,}7232,\quad cD_6 = 1{,}9677,\quad cD_7 = 0{,}2915,\quad cD_8 = -1{,}3003$$
+$$cD_9 = 0{,}2247,\quad cD_{10} = -1{,}2736,\quad cD_{11} = 0{,}4196,\quad cD_{12} = 1{,}0001,\quad cD_{13} = -0{,}0558$$
 
-$$\overline{|cD|} = \frac{|-0{,}1771| + |0{,}3639| + \ldots}{13} = \frac{15{,}0431}{13} \approx \mathbf{1{,}1572}$$
+Hitung $|cD_j|$ untuk setiap koefisien:
+
+$$|cD_1| = 0{,}1771,\quad |cD_2| = 0{,}3639,\quad |cD_3| = 2{,}8592,\quad |cD_4| = 3{,}3865$$
+$$|cD_5| = 1{,}7232,\quad |cD_6| = 1{,}9677,\quad |cD_7| = 0{,}2915,\quad |cD_8| = 1{,}3003$$
+$$|cD_9| = 0{,}2247,\quad |cD_{10}| = 1{,}2736,\quad |cD_{11}| = 0{,}4196,\quad |cD_{12}| = 1{,}0001,\quad |cD_{13}| = 0{,}0558$$
+
+$$\sum |cD_j| = 0{,}1771 + 0{,}3639 + 2{,}8592 + 3{,}3865 + 1{,}7232 + 1{,}9677 + 0{,}2915 + 1{,}3003 + 0{,}2247 + 1{,}2736 + 0{,}4196 + 1{,}0001 + 0{,}0558 = 15{,}0432$$
+
+$$\overline{|cD|} = \frac{15{,}0432}{13} \approx \mathbf{1{,}1572}$$
 
 **Implementasi Python.**
 
@@ -2070,8 +2705,23 @@ $$E_w = \sum_j W_j^2$$
 
 **Perhitungan Manual.**
 
-$$E_w = (-0{,}1771)^2 + (0{,}3639)^2 + (2{,}8592)^2 + \ldots + (-0{,}0558)^2$$
-$$= 0{,}0313 + 0{,}1324 + 8{,}1750 + 11{,}4684 + \ldots \approx \mathbf{31{,}2762}$$
+Hitung $cD_j^2$ untuk setiap koefisien:
+
+$$cD_1^2 = (-0{,}1771)^2 = 0{,}0314$$
+$$cD_2^2 = (0{,}3639)^2 = 0{,}1324$$
+$$cD_3^2 = (2{,}8592)^2 = 8{,}1750$$
+$$cD_4^2 = (-3{,}3865)^2 = 11{,}4684$$
+$$cD_5^2 = (1{,}7232)^2 = 2{,}9694$$
+$$cD_6^2 = (1{,}9677)^2 = 3{,}8718$$
+$$cD_7^2 = (0{,}2915)^2 = 0{,}0850$$
+$$cD_8^2 = (-1{,}3003)^2 = 1{,}6908$$
+$$cD_9^2 = (0{,}2247)^2 = 0{,}0505$$
+$$cD_{10}^2 = (-1{,}2736)^2 = 1{,}6221$$
+$$cD_{11}^2 = (0{,}4196)^2 = 0{,}1761$$
+$$cD_{12}^2 = (1{,}0001)^2 = 1{,}0002$$
+$$cD_{13}^2 = (-0{,}0558)^2 = 0{,}0031$$
+
+$$E_w = 0{,}0314 + 0{,}1324 + 8{,}1750 + 11{,}4684 + 2{,}9694 + 3{,}8718 + 0{,}0850 + 1{,}6908 + 0{,}0505 + 1{,}6221 + 0{,}1761 + 1{,}0002 + 0{,}0031 \approx \mathbf{31{,}2762}$$
 
 **Implementasi Python.**
 
@@ -2098,7 +2748,21 @@ $$H_w = -\sum_j p_j \log_2 p_j, \quad p_j = \frac{W_j^2}{\sum_k W_k^2}$$
 
 **Perhitungan Manual.**
 
-Proporsi energi per koefisien: $p_j = W_j^2 / 31{,}276$. Dengan 13 koefisien:
+Menggunakan $E_w = 31{,}2762$, hitung $p_j = cD_j^2 / 31{,}2762$ untuk setiap koefisien:
+
+$$p_1 = 0{,}0314/31{,}2762 = 0{,}00100$$
+$$p_2 = 0{,}1324/31{,}2762 = 0{,}00423$$
+$$p_3 = 8{,}1750/31{,}2762 = 0{,}26138$$
+$$p_4 = 11{,}4684/31{,}2762 = 0{,}36665$$
+$$p_5 = 2{,}9694/31{,}2762 = 0{,}09493$$
+$$p_6 = 3{,}8718/31{,}2762 = 0{,}12379$$
+$$p_7 = 0{,}0850/31{,}2762 = 0{,}00272$$
+$$p_8 = 1{,}6908/31{,}2762 = 0{,}05406$$
+$$p_9 = 0{,}0505/31{,}2762 = 0{,}00161$$
+$$p_{10} = 1{,}6221/31{,}2762 = 0{,}05186$$
+$$p_{11} = 0{,}1761/31{,}2762 = 0{,}00563$$
+$$p_{12} = 1{,}0002/31{,}2762 = 0{,}03198$$
+$$p_{13} = 0{,}0031/31{,}2762 = 0{,}00099$$
 
 $$H_w = -\sum_j p_j \log_2 p_j \approx \mathbf{2{,}4650}$$
 
@@ -2130,9 +2794,31 @@ $$\sigma_w = \sqrt{\frac{1}{N_w} \sum_j (W_j - \bar{W})^2}$$
 
 **Perhitungan Manual.**
 
-Dengan $\bar{W} = \frac{\sum cD}{13} \approx 0{,}2021$:
+Hitung $\bar{W} = \frac{\sum cD_j}{13}$:
 
-$$\sigma_w = \sqrt{\frac{\sum (W_j - 0{,}2021)^2}{13}} \approx \mathbf{1{,}5376}$$
+$$\sum cD_j = -0{,}1771 + 0{,}3639 + 2{,}8592 + (-3{,}3865) + 1{,}7232 + 1{,}9677 + 0{,}2915 + (-1{,}3003) + 0{,}2247 + (-1{,}2736) + 0{,}4196 + 1{,}0001 + (-0{,}0558) = 2{,}6566$$
+
+$$\bar{W} = \frac{2{,}6566}{13} \approx 0{,}2043$$
+
+Hitung $(cD_j - \bar{W})^2$ untuk setiap koefisien:
+
+$$(cD_1 - \bar{W})^2 = (-0{,}1771 - 0{,}2043)^2 = (-0{,}3814)^2 = 0{,}1455$$
+$$(cD_2 - \bar{W})^2 = (0{,}3639 - 0{,}2043)^2 = (0{,}1596)^2 = 0{,}0255$$
+$$(cD_3 - \bar{W})^2 = (2{,}8592 - 0{,}2043)^2 = (2{,}6549)^2 = 7{,}0485$$
+$$(cD_4 - \bar{W})^2 = (-3{,}3865 - 0{,}2043)^2 = (-3{,}5908)^2 = 12{,}8938$$
+$$(cD_5 - \bar{W})^2 = (1{,}7232 - 0{,}2043)^2 = (1{,}5189)^2 = 2{,}3071$$
+$$(cD_6 - \bar{W})^2 = (1{,}9677 - 0{,}2043)^2 = (1{,}7634)^2 = 3{,}1096$$
+$$(cD_7 - \bar{W})^2 = (0{,}2915 - 0{,}2043)^2 = (0{,}0872)^2 = 0{,}0076$$
+$$(cD_8 - \bar{W})^2 = (-1{,}3003 - 0{,}2043)^2 = (-1{,}5046)^2 = 2{,}2638$$
+$$(cD_9 - \bar{W})^2 = (0{,}2247 - 0{,}2043)^2 = (0{,}0204)^2 = 0{,}0004$$
+$$(cD_{10} - \bar{W})^2 = (-1{,}2736 - 0{,}2043)^2 = (-1{,}4779)^2 = 2{,}1842$$
+$$(cD_{11} - \bar{W})^2 = (0{,}4196 - 0{,}2043)^2 = (0{,}2153)^2 = 0{,}0464$$
+$$(cD_{12} - \bar{W})^2 = (1{,}0001 - 0{,}2043)^2 = (0{,}7958)^2 = 0{,}6333$$
+$$(cD_{13} - \bar{W})^2 = (-0{,}0558 - 0{,}2043)^2 = (-0{,}2601)^2 = 0{,}0677$$
+
+$$\sum (cD_j - \bar{W})^2 = 0{,}1455 + 0{,}0255 + 7{,}0485 + 12{,}8938 + 2{,}3071 + 3{,}1096 + 0{,}0076 + 2{,}2638 + 0{,}0004 + 2{,}1842 + 0{,}0464 + 0{,}6333 + 0{,}0677 = 30{,}7334$$
+
+$$\sigma_w = \sqrt{\frac{30{,}7334}{13}} = \sqrt{2{,}3641} \approx \mathbf{1{,}5376}$$
 
 **Implementasi Python.**
 
@@ -2159,7 +2845,11 @@ $$\sigma_w^2 = \frac{1}{N_w} \sum_j (W_j - \bar{W})^2$$
 
 **Perhitungan Manual.**
 
-$$\sigma_w^2 = (1{,}5376)^2 \approx \mathbf{2{,}3641}$$
+Menggunakan hasil dari `wavelet_std`, dengan $\sum (cD_j - \bar{W})^2 = 30{,}7334$:
+
+$$\sigma_w^2 = \frac{30{,}7334}{13} = \mathbf{2{,}3641}$$
+
+Atau ekuivalen: $\sigma_w^2 = (1{,}5376)^2 = 2{,}3642$.
 
 **Implementasi Python.**
 
