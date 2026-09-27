@@ -68,7 +68,14 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 
-CSV_PATH = "ekstraksi_fitur_no2.csv"
+from pathlib import Path
+CSV_PATH = next(
+    p for p in [
+        Path("ekstraksi_fitur_no2.csv"),
+        Path("../ekstraksi_fitur_no2.csv"),
+        *Path(".").rglob("ekstraksi_fitur_no2.csv")
+    ] if p.exists()
+)
 KOLOM_IDENTITAS = ['id', 'nama', 'daerah']
 K = 3
 
@@ -123,7 +130,14 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 
-CSV_PATH = "ekstraksi_fitur_no2.csv"
+from pathlib import Path
+CSV_PATH = next(
+    p for p in [
+        Path("ekstraksi_fitur_no2.csv"),
+        Path("../ekstraksi_fitur_no2.csv"),
+        *Path(".").rglob("ekstraksi_fitur_no2.csv")
+    ] if p.exists()
+)
 KOLOM_IDENTITAS = ['id', 'nama', 'daerah']
 K = 3
 N_KOMPONEN_PCA = 37
@@ -197,7 +211,14 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 
-CSV_PATH = "ekstraksi_fitur_so2.csv"
+from pathlib import Path
+CSV_PATH = next(
+    p for p in [
+        Path("ekstraksi_fitur_so2.csv"),
+        Path("../ekstraksi_fitur_so2.csv"),
+        *Path(".").rglob("ekstraksi_fitur_so2.csv")
+    ] if p.exists()
+)
 KOLOM_IDENTITAS = ['id', 'nama', 'daerah']
 K = 3
 
@@ -252,7 +273,14 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 
-CSV_PATH = "ekstraksi_fitur_so2.csv"
+from pathlib import Path
+CSV_PATH = next(
+    p for p in [
+        Path("ekstraksi_fitur_so2.csv"),
+        Path("../ekstraksi_fitur_so2.csv"),
+        *Path(".").rglob("ekstraksi_fitur_so2.csv")
+    ] if p.exists()
+)
 KOLOM_IDENTITAS = ['id', 'nama', 'daerah']
 K = 3
 N_KOMPONEN_PCA = 37
@@ -324,7 +352,14 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 
-CSV_PATH = "ekstraksi_fitur_co.csv"
+from pathlib import Path
+CSV_PATH = next(
+    p for p in [
+        Path("ekstraksi_fitur_co.csv"),
+        Path("../ekstraksi_fitur_co.csv"),
+        *Path(".").rglob("ekstraksi_fitur_co.csv")
+    ] if p.exists()
+)
 KOLOM_IDENTITAS = ['id', 'nama', 'daerah']
 K = 3
 
@@ -379,7 +414,14 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 
-CSV_PATH = "ekstraksi_fitur_co.csv"
+from pathlib import Path
+CSV_PATH = next(
+    p for p in [
+        Path("ekstraksi_fitur_co.csv"),
+        Path("../ekstraksi_fitur_co.csv"),
+        *Path(".").rglob("ekstraksi_fitur_co.csv")
+    ] if p.exists()
+)
 KOLOM_IDENTITAS = ['id', 'nama', 'daerah']
 K = 3
 N_KOMPONEN_PCA = 37

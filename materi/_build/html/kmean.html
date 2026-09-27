@@ -462,7 +462,14 @@ document.write(`
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
 
-<span class="n">CSV_PATH</span> <span class="o">=</span> <span class="s2">&quot;ekstraksi_fitur_no2.csv&quot;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="n">CSV_PATH</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
+    <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span>
+        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;ekstraksi_fitur_no2.csv&quot;</span><span class="p">),</span>
+        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../ekstraksi_fitur_no2.csv&quot;</span><span class="p">),</span>
+        <span class="o">*</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">&quot;ekstraksi_fitur_no2.csv&quot;</span><span class="p">)</span>
+    <span class="p">]</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+<span class="p">)</span>
 <span class="n">KOLOM_IDENTITAS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;nama&#39;</span><span class="p">,</span> <span class="s1">&#39;daerah&#39;</span><span class="p">]</span>
 <span class="n">K</span> <span class="o">=</span> <span class="mi">3</span>
 
@@ -536,7 +543,14 @@ Detail daerah per cluster:
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
 
-<span class="n">CSV_PATH</span> <span class="o">=</span> <span class="s2">&quot;ekstraksi_fitur_no2.csv&quot;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="n">CSV_PATH</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
+    <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span>
+        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;ekstraksi_fitur_no2.csv&quot;</span><span class="p">),</span>
+        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../ekstraksi_fitur_no2.csv&quot;</span><span class="p">),</span>
+        <span class="o">*</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">&quot;ekstraksi_fitur_no2.csv&quot;</span><span class="p">)</span>
+    <span class="p">]</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+<span class="p">)</span>
 <span class="n">KOLOM_IDENTITAS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;nama&#39;</span><span class="p">,</span> <span class="s1">&#39;daerah&#39;</span><span class="p">]</span>
 <span class="n">K</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">N_KOMPONEN_PCA</span> <span class="o">=</span> <span class="mi">37</span>
@@ -583,9 +597,7 @@ Detail daerah per cluster:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reduksi dimensi: 68 fitur → 37 komponen PCA
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inertia: 1001.2819
+Inertia: 1001.2819
 
 Jumlah data per cluster:
 cluster_label
@@ -630,7 +642,14 @@ Detail daerah per cluster:
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
 
-<span class="n">CSV_PATH</span> <span class="o">=</span> <span class="s2">&quot;ekstraksi_fitur_so2.csv&quot;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="n">CSV_PATH</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
+    <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span>
+        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;ekstraksi_fitur_so2.csv&quot;</span><span class="p">),</span>
+        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../ekstraksi_fitur_so2.csv&quot;</span><span class="p">),</span>
+        <span class="o">*</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">&quot;ekstraksi_fitur_so2.csv&quot;</span><span class="p">)</span>
+    <span class="p">]</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+<span class="p">)</span>
 <span class="n">KOLOM_IDENTITAS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;nama&#39;</span><span class="p">,</span> <span class="s1">&#39;daerah&#39;</span><span class="p">]</span>
 <span class="n">K</span> <span class="o">=</span> <span class="mi">3</span>
 
@@ -704,7 +723,14 @@ Detail daerah per cluster:
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
 
-<span class="n">CSV_PATH</span> <span class="o">=</span> <span class="s2">&quot;ekstraksi_fitur_so2.csv&quot;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="n">CSV_PATH</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
+    <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span>
+        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;ekstraksi_fitur_so2.csv&quot;</span><span class="p">),</span>
+        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../ekstraksi_fitur_so2.csv&quot;</span><span class="p">),</span>
+        <span class="o">*</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">&quot;ekstraksi_fitur_so2.csv&quot;</span><span class="p">)</span>
+    <span class="p">]</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+<span class="p">)</span>
 <span class="n">KOLOM_IDENTITAS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;nama&#39;</span><span class="p">,</span> <span class="s1">&#39;daerah&#39;</span><span class="p">]</span>
 <span class="n">K</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">N_KOMPONEN_PCA</span> <span class="o">=</span> <span class="mi">37</span>
@@ -751,9 +777,7 @@ Detail daerah per cluster:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reduksi dimensi: 68 fitur → 37 komponen PCA
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inertia: 691.6448
+Inertia: 691.6448
 
 Jumlah data per cluster:
 cluster_label
@@ -797,7 +821,14 @@ Detail daerah per cluster:
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
 
-<span class="n">CSV_PATH</span> <span class="o">=</span> <span class="s2">&quot;ekstraksi_fitur_co.csv&quot;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="n">CSV_PATH</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
+    <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span>
+        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;ekstraksi_fitur_co.csv&quot;</span><span class="p">),</span>
+        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../ekstraksi_fitur_co.csv&quot;</span><span class="p">),</span>
+        <span class="o">*</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">&quot;ekstraksi_fitur_co.csv&quot;</span><span class="p">)</span>
+    <span class="p">]</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+<span class="p">)</span>
 <span class="n">KOLOM_IDENTITAS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;nama&#39;</span><span class="p">,</span> <span class="s1">&#39;daerah&#39;</span><span class="p">]</span>
 <span class="n">K</span> <span class="o">=</span> <span class="mi">3</span>
 
@@ -871,7 +902,14 @@ Detail daerah per cluster:
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
 
-<span class="n">CSV_PATH</span> <span class="o">=</span> <span class="s2">&quot;ekstraksi_fitur_co.csv&quot;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="n">CSV_PATH</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
+    <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span>
+        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;ekstraksi_fitur_co.csv&quot;</span><span class="p">),</span>
+        <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../ekstraksi_fitur_co.csv&quot;</span><span class="p">),</span>
+        <span class="o">*</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">&quot;ekstraksi_fitur_co.csv&quot;</span><span class="p">)</span>
+    <span class="p">]</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+<span class="p">)</span>
 <span class="n">KOLOM_IDENTITAS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;nama&#39;</span><span class="p">,</span> <span class="s1">&#39;daerah&#39;</span><span class="p">]</span>
 <span class="n">K</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">N_KOMPONEN_PCA</span> <span class="o">=</span> <span class="mi">37</span>
@@ -918,9 +956,7 @@ Detail daerah per cluster:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reduksi dimensi: 68 fitur → 37 komponen PCA
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inertia: 660.2141
+Inertia: 660.2141
 
 Jumlah data per cluster:
 cluster_label
