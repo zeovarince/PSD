@@ -1,0 +1,1149 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>K-Means Clustering Polutan &#8212; A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'kmean';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Preprocessing dan Ekstraksi Fitur" href="preprocessing_ekstraksi_kamal.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/foto.png" class="logo__image only-light" alt="A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN - Home"/>
+    <script>document.write(`<img src="_static/foto.png" class="logo__image only-dark" alt="A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Proyek Saint Data
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="busines-understanding.html">Business Understanding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data-understanding.html">Data Understanding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explorasi-data.html">Eksplorasi Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timeseriesaiven.html">Analisis Time Series: Migrasi Data &amp; Pengolahan di KNIME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="no2kamal.html">Polutan Kamal (Revisi)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tsfel.html">Fitur-Fitur TSFEL pada Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing_ekstraksi_kamal.html">Preprocessing dan Ekstraksi Fitur</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">K-Means Clustering Polutan</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fkmean.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/kmean.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>K-Means Clustering Polutan</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-kerja-workflow-knime">Alur Kerja (Workflow) KNIME</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-tanpa-pca">Workflow Tanpa PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-dengan-pca">Workflow Dengan PCA</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polutan-no2">Polutan NO2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tanpa-pca">Tanpa PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dengan-pca">Dengan PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-dan-interpretasi-no2">Perbandingan dan Interpretasi NO2</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polutan-so2">Polutan SO2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Tanpa PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Dengan PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-dan-interpretasi-so2">Perbandingan dan Interpretasi SO2</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polutan-co">Polutan CO</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Tanpa PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Dengan PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-dan-interpretasi-co">Perbandingan dan Interpretasi CO</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="k-means-clustering-polutan">
+<h1>K-Means Clustering Polutan<a class="headerlink" href="#k-means-clustering-polutan" title="Link to this heading">#</a></h1>
+<p>Dokumen ini menjelaskan proses pengelompokan (clustering) area berdasarkan karakteristik deret waktu polutan NO2, SO2, dan CO. Data ekstraksi fitur menggunakan TSFEL dikumpulkan dari seluruh daerah bersama teman sekelas, kemudian diproses menggunakan algoritma K-Means dengan jumlah klaster K=3.</p>
+<p>Setiap polutan diuji dalam dua skenario: <strong>tanpa reduksi dimensi (Non-PCA)</strong> dan <strong>dengan reduksi dimensi PCA</strong> (68 fitur → 37 komponen utama), sehingga kita dapat membandingkan apakah PCA memengaruhi distribusi dan kualitas klaster yang terbentuk.</p>
+<hr class="docutils" />
+<section id="alur-kerja-workflow-knime">
+<h2>Alur Kerja (Workflow) KNIME<a class="headerlink" href="#alur-kerja-workflow-knime" title="Link to this heading">#</a></h2>
+<p>Eksperimen ini menggunakan dua workflow berbeda di KNIME, masing-masing untuk skenario tanpa dan dengan PCA.</p>
+<section id="workflow-tanpa-pca">
+<h3>Workflow Tanpa PCA<a class="headerlink" href="#workflow-tanpa-pca" title="Link to this heading">#</a></h3>
+<p><img alt="Workflow K-Means Tanpa PCA" src="_images/1790545022814_image.png" /></p>
+<p>Penjelasan fungsi setiap node:</p>
+<ol class="arabic simple">
+<li><p><strong>CSV Reader</strong>: Membaca file CSV hasil ekstraksi fitur (<code class="docutils literal notranslate"><span class="pre">ekstraksi_fitur_[polutan].csv</span></code>) langsung ke dalam environment KNIME. File ini berisi kolom identitas (<code class="docutils literal notranslate"><span class="pre">id</span></code>, <code class="docutils literal notranslate"><span class="pre">nama</span></code>, <code class="docutils literal notranslate"><span class="pre">daerah</span></code>) dan 68 kolom fitur statistik hasil ekstraksi TSFEL.</p></li>
+<li><p><strong>k-Means</strong>: Algoritma inti yang membagi seluruh data ke dalam K=3 kelompok berdasarkan kedekatan jarak Euclidean antar titik fitur. Karena tidak ada preprocessing reduksi dimensi, K-Means bekerja langsung pada ruang fitur berdimensi 68.</p></li>
+<li><p><strong>Scatter Plot</strong>: Memvisualisasikan hasil pengelompokan. Sumbu X menampilkan nama daerah dan sumbu Y menampilkan label cluster yang ditetapkan, sehingga distribusi tiap daerah ke klasternya terlihat jelas.</p></li>
+</ol>
+</section>
+<section id="workflow-dengan-pca">
+<h3>Workflow Dengan PCA<a class="headerlink" href="#workflow-dengan-pca" title="Link to this heading">#</a></h3>
+<p><img alt="Workflow K-Means Dengan PCA" src="_images/1790545014826_image.png" /></p>
+<p>Penjelasan fungsi setiap node:</p>
+<ol class="arabic simple">
+<li><p><strong>CSV Reader</strong>: Membaca file CSV hasil ekstraksi fitur, sama seperti workflow non-PCA.</p></li>
+<li><p><strong>PCA (Principal Component Analysis)</strong>: Mereduksi dimensi data dari 68 fitur asli menjadi 37 komponen utama (<em>Principal Components</em>). PCA bekerja dengan mentransformasikan fitur-fitur yang berkorelasi tinggi menjadi variabel baru yang ortogonal (tidak saling berkorelasi). Penerapan PCA di sini berguna untuk mengatasi <em>curse of dimensionality</em> sehingga perhitungan jarak pada K-Means menjadi lebih representatif, mengurangi beban komputasi, dan menyaring noise dari fitur yang tidak relevan.</p></li>
+<li><p><strong>k-Means</strong>: Menjalankan algoritma clustering pada 37 komponen PCA hasil reduksi. Daerah dengan pola polusi serupa menempati klaster yang sama.</p></li>
+<li><p><strong>Scatter Plot</strong>: Visualisasi hasil clustering, identik dengan workflow non-PCA.</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="polutan-no2">
+<h2>Polutan NO2<a class="headerlink" href="#polutan-no2" title="Link to this heading">#</a></h2>
+<section id="tanpa-pca">
+<h3>Tanpa PCA<a class="headerlink" href="#tanpa-pca" title="Link to this heading">#</a></h3>
+<p><em>Scatter Plot KNIME (NO2 — Tanpa PCA):</em></p>
+<p><img alt="Scatter Plot K-Means NO2 Tanpa PCA" src="_images/NONPCAScatterPlotNO2.png" /></p>
+<p><em>Implementasi Python:</em></p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="n">CSV_PATH</span> <span class="o">=</span> <span class="s2">&quot;ekstraksi_fitur_no2.csv&quot;</span>
+<span class="n">KOLOM_IDENTITAS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;nama&#39;</span><span class="p">,</span> <span class="s1">&#39;daerah&#39;</span><span class="p">]</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">CSV_PATH</span><span class="p">)</span>
+<span class="n">fitur</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">KOLOM_IDENTITAS</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">fitur</span><span class="p">)</span>
+
+<span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster_label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;cluster_&#39;</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inertia: </span><span class="si">{</span><span class="n">kmeans</span><span class="o">.</span><span class="n">inertia_</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Jumlah data per cluster:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster_label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Detail daerah per cluster:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()):</span>
+    <span class="n">daerah</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">][</span><span class="s1">&#39;daerah&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  cluster_</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">daerah</span><span class="p">)</span><span class="si">}</span><span class="s2"> daerah): </span><span class="si">{</span><span class="n">daerah</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">label_cluster</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;cluster_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="p">)]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#6b8bd6&#39;</span><span class="p">,</span> <span class="s1">&#39;#e07b5a&#39;</span><span class="p">,</span> <span class="s1">&#39;#5ab87e&#39;</span><span class="p">]</span>
+<span class="n">scatter_colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">colors</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">y</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">scatter_colors</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;daerah&#39;</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="p">),</span> <span class="n">label_cluster</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">K</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Scatter Plot K-Means NO2 Tanpa PCA (K=3)&quot;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Daerah&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cluster&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#eeeeee&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">CSV_PATH</span> <span class="o">=</span> <span class="s2">&quot;ekstraksi_fitur_no2.csv&quot;</span>
+
+<span class="n">File</span> <span class="n">C</span><span class="p">:</span>\<span class="n">laragon</span>\<span class="nb">bin</span>\<span class="n">python</span>\<span class="n">python</span><span class="o">-</span><span class="mf">3.10</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">sklearn</span>\<span class="n">cluster</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">16</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._birch</span><span class="w"> </span><span class="kn">import</span> <span class="n">Birch</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._bisect_k_means</span><span class="w"> </span><span class="kn">import</span> <span class="n">BisectingKMeans</span>
+<span class="ne">---&gt; </span><span class="mi">16</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._dbscan</span><span class="w"> </span><span class="kn">import</span> <span class="n">DBSCAN</span><span class="p">,</span> <span class="n">dbscan</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._hdbscan.hdbscan</span><span class="w"> </span><span class="kn">import</span> <span class="n">HDBSCAN</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._kmeans</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span><span class="p">,</span> <span class="n">MiniBatchKMeans</span><span class="p">,</span> <span class="n">k_means</span><span class="p">,</span> <span class="n">kmeans_plusplus</span>
+
+<span class="n">File</span> <span class="n">C</span><span class="p">:</span>\<span class="n">laragon</span>\<span class="nb">bin</span>\<span class="n">python</span>\<span class="n">python</span><span class="o">-</span><span class="mf">3.10</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">sklearn</span>\<span class="n">cluster</span>\<span class="n">_dbscan</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">16</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..base</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">ClusterMixin</span><span class="p">,</span> <span class="n">_fit_context</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..metrics.pairwise</span><span class="w"> </span><span class="kn">import</span> <span class="n">_VALID_METRICS</span>
+<span class="ne">---&gt; </span><span class="mi">16</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">NearestNeighbors</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..utils._param_validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">Interval</span><span class="p">,</span> <span class="n">StrOptions</span><span class="p">,</span> <span class="n">validate_params</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..utils.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">_check_sample_weight</span><span class="p">,</span> <span class="n">validate_data</span>
+
+<span class="n">File</span> <span class="n">C</span><span class="p">:</span>\<span class="n">laragon</span>\<span class="nb">bin</span>\<span class="n">python</span>\<span class="n">python</span><span class="o">-</span><span class="mf">3.10</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">sklearn</span>\<span class="n">neighbors</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">18</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._kde</span><span class="w"> </span><span class="kn">import</span> <span class="n">KernelDensity</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._lof</span><span class="w"> </span><span class="kn">import</span> <span class="n">LocalOutlierFactor</span>
+<span class="ne">---&gt; </span><span class="mi">18</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._nca</span><span class="w"> </span><span class="kn">import</span> <span class="n">NeighborhoodComponentsAnalysis</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._nearest_centroid</span><span class="w"> </span><span class="kn">import</span> <span class="n">NearestCentroid</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._regression</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsRegressor</span><span class="p">,</span> <span class="n">RadiusNeighborsRegressor</span>
+
+<span class="n">File</span> <span class="n">C</span><span class="p">:</span>\<span class="n">laragon</span>\<span class="nb">bin</span>\<span class="n">python</span>\<span class="n">python</span><span class="o">-</span><span class="mf">3.10</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">sklearn</span>\<span class="n">neighbors</span>\<span class="n">_nca</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">22</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..base</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">BaseEstimator</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">ClassNamePrefixFeaturesOutMixin</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span>     <span class="n">TransformerMixin</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="n">_fit_context</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">22</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConvergenceWarning</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">pairwise_distances</span>
+
+<span class="n">File</span> <span class="n">C</span><span class="p">:</span>\<span class="n">laragon</span>\<span class="nb">bin</span>\<span class="n">python</span>\<span class="n">python</span><span class="o">-</span><span class="mf">3.10</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">sklearn</span>\<span class="n">decomposition</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">11</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1"># Authors: The scikit-learn developers</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># SPDX-License-Identifier: BSD-3-Clause</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..utils.extmath</span><span class="w"> </span><span class="kn">import</span> <span class="n">randomized_svd</span>
+<span class="ne">---&gt; </span><span class="mi">11</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._dict_learning</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">DictionaryLearning</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="n">MiniBatchDictionaryLearning</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">SparseCoder</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="n">dict_learning</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="n">dict_learning_online</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">sparse_encode</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._factor_analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">FactorAnalysis</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._fastica</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastICA</span><span class="p">,</span> <span class="n">fastica</span>
+
+<span class="n">File</span> <span class="n">C</span><span class="p">:</span>\<span class="n">laragon</span>\<span class="nb">bin</span>\<span class="n">python</span>\<span class="n">python</span><span class="o">-</span><span class="mf">3.10</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">sklearn</span>\<span class="n">decomposition</span>\<span class="n">_dict_learning</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">21</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">linalg</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..base</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="n">BaseEstimator</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">ClassNamePrefixFeaturesOutMixin</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">TransformerMixin</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span>     <span class="n">_fit_context</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">21</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lars</span><span class="p">,</span> <span class="n">Lasso</span><span class="p">,</span> <span class="n">LassoLars</span><span class="p">,</span> <span class="n">orthogonal_mp_gram</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_array</span><span class="p">,</span> <span class="n">check_random_state</span><span class="p">,</span> <span class="n">gen_batches</span><span class="p">,</span> <span class="n">gen_even_slices</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..utils._param_validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">Interval</span><span class="p">,</span> <span class="n">StrOptions</span><span class="p">,</span> <span class="n">validate_params</span>
+
+<span class="n">File</span> <span class="n">C</span><span class="p">:</span>\<span class="n">laragon</span>\<span class="nb">bin</span>\<span class="n">python</span>\<span class="n">python</span><span class="o">-</span><span class="mf">3.10</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">sklearn</span>\<span class="n">linear_model</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">35</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._huber</span><span class="w"> </span><span class="kn">import</span> <span class="n">HuberRegressor</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._least_angle</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span>     <span class="n">Lars</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span>     <span class="n">LarsCV</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span>     <span class="n">lars_path_gram</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span> <span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">35</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._logistic</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span><span class="p">,</span> <span class="n">LogisticRegressionCV</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._omp</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span>     <span class="n">OrthogonalMatchingPursuit</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span>     <span class="n">OrthogonalMatchingPursuitCV</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span>     <span class="n">orthogonal_mp</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span>     <span class="n">orthogonal_mp_gram</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._passive_aggressive</span><span class="w"> </span><span class="kn">import</span> <span class="n">PassiveAggressiveClassifier</span><span class="p">,</span> <span class="n">PassiveAggressiveRegressor</span>
+
+<span class="n">File</span> <span class="n">C</span><span class="p">:</span>\<span class="n">laragon</span>\<span class="nb">bin</span>\<span class="n">python</span>\<span class="n">python</span><span class="o">-</span><span class="mf">3.10</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">sklearn</span>\<span class="n">linear_model</span>\<span class="n">_logistic</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">23</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_cv</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelBinarizer</span><span class="p">,</span> <span class="n">LabelEncoder</span>
+<span class="ne">---&gt; </span><span class="mi">23</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..svm._base</span><span class="w"> </span><span class="kn">import</span> <span class="n">_fit_liblinear</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span>     <span class="n">Bunch</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span>     <span class="n">check_array</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span>     <span class="n">compute_class_weight</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..utils._param_validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">Hidden</span><span class="p">,</span> <span class="n">Interval</span><span class="p">,</span> <span class="n">StrOptions</span>
+
+<span class="n">File</span> <span class="n">C</span><span class="p">:</span>\<span class="n">laragon</span>\<span class="nb">bin</span>\<span class="n">python</span>\<span class="n">python</span><span class="o">-</span><span class="mf">3.10</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">sklearn</span>\<span class="n">svm</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">10</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># See http://scikit-learn.sourceforge.net/modules/svm.html for complete</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># documentation.</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># Authors: The scikit-learn developers</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1"># SPDX-License-Identifier: BSD-3-Clause</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._bounds</span><span class="w"> </span><span class="kn">import</span> <span class="n">l1_min_c</span>
+<span class="ne">---&gt; </span><span class="mi">10</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._classes</span><span class="w"> </span><span class="kn">import</span> <span class="n">SVC</span><span class="p">,</span> <span class="n">SVR</span><span class="p">,</span> <span class="n">LinearSVC</span><span class="p">,</span> <span class="n">LinearSVR</span><span class="p">,</span> <span class="n">NuSVC</span><span class="p">,</span> <span class="n">NuSVR</span><span class="p">,</span> <span class="n">OneClassSVM</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="s2">&quot;SVC&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="s2">&quot;SVR&quot;</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="s2">&quot;l1_min_c&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="p">]</span>
+
+<span class="n">File</span> <span class="n">C</span><span class="p">:</span>\<span class="n">laragon</span>\<span class="nb">bin</span>\<span class="n">python</span>\<span class="n">python</span><span class="o">-</span><span class="mf">3.10</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">sklearn</span>\<span class="n">svm</span>\<span class="n">_classes</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">13</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..utils.multiclass</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_classification_targets</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">from</span><span class="w"> </span><span class="nn">..utils.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">_num_samples</span><span class="p">,</span> <span class="n">validate_data</span>
+<span class="ne">---&gt; </span><span class="mi">13</span> <span class="kn">from</span><span class="w"> </span><span class="nn">._base</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseLibSVM</span><span class="p">,</span> <span class="n">BaseSVC</span><span class="p">,</span> <span class="n">_fit_liblinear</span><span class="p">,</span> <span class="n">_get_liblinear_solver_type</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="k">def</span><span class="w"> </span><span class="nf">_validate_dual_parameter</span><span class="p">(</span><span class="n">dual</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">penalty</span><span class="p">,</span> <span class="n">multi_class</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Helper function to assign the value of dual parameter.&quot;&quot;&quot;</span>
+
+<span class="n">File</span> <span class="n">C</span><span class="p">:</span>\<span class="n">laragon</span>\<span class="nb">bin</span>\<span class="n">python</span>\<span class="n">python</span><span class="o">-</span><span class="mf">3.10</span>\<span class="n">lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">sklearn</span>\<span class="n">svm</span>\<span class="n">_base</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">32</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="c1"># mypy error: error: Module &#39;sklearn.svm&#39; has no attribute &#39;_libsvm&#39;</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="c1"># (and same for other imports)</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">_libsvm</span> <span class="k">as</span> <span class="n">libsvm</span>  <span class="c1"># type: ignore[attr-defined]</span>
+<span class="ne">---&gt; </span><span class="mi">32</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">_libsvm_sparse</span> <span class="k">as</span> <span class="n">libsvm_sparse</span>  <span class="c1"># type: ignore[attr-defined]</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span> <span class="n">LIBSVM_IMPL</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;c_svc&quot;</span><span class="p">,</span> <span class="s2">&quot;nu_svc&quot;</span><span class="p">,</span> <span class="s2">&quot;one_class&quot;</span><span class="p">,</span> <span class="s2">&quot;epsilon_svr&quot;</span><span class="p">,</span> <span class="s2">&quot;nu_svr&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span> <span class="k">def</span><span class="w"> </span><span class="nf">_one_vs_one_coef</span><span class="p">(</span><span class="n">dual_coef</span><span class="p">,</span> <span class="n">n_support</span><span class="p">,</span> <span class="n">support_vectors</span><span class="p">):</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:404,</span> in <span class="ni">parent</span><span class="nt">(self)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dengan-pca">
+<h3>Dengan PCA<a class="headerlink" href="#dengan-pca" title="Link to this heading">#</a></h3>
+<p><em>Scatter Plot KNIME (NO2 — Dengan PCA):</em></p>
+<p><img alt="Scatter Plot K-Means NO2 Dengan PCA" src="_images/ScatterPlotNO2.png" /></p>
+<p><em>Implementasi Python:</em></p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+
+<span class="n">CSV_PATH</span> <span class="o">=</span> <span class="s2">&quot;ekstraksi_fitur_no2.csv&quot;</span>
+<span class="n">KOLOM_IDENTITAS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;nama&#39;</span><span class="p">,</span> <span class="s1">&#39;daerah&#39;</span><span class="p">]</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">N_KOMPONEN_PCA</span> <span class="o">=</span> <span class="mi">37</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">CSV_PATH</span><span class="p">)</span>
+<span class="n">fitur</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">KOLOM_IDENTITAS</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">X_scaled</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">fitur</span><span class="p">)</span>
+<span class="n">X_pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">N_KOMPONEN_PCA</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reduksi dimensi: </span><span class="si">{</span><span class="n">fitur</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> fitur → </span><span class="si">{</span><span class="n">N_KOMPONEN_PCA</span><span class="si">}</span><span class="s2"> komponen PCA&quot;</span><span class="p">)</span>
+
+<span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X_pca</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster_label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;cluster_&#39;</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inertia: </span><span class="si">{</span><span class="n">kmeans</span><span class="o">.</span><span class="n">inertia_</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Jumlah data per cluster:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster_label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Detail daerah per cluster:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()):</span>
+    <span class="n">daerah</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">][</span><span class="s1">&#39;daerah&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  cluster_</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">daerah</span><span class="p">)</span><span class="si">}</span><span class="s2"> daerah): </span><span class="si">{</span><span class="n">daerah</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">label_cluster</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;cluster_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="p">)]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#6b8bd6&#39;</span><span class="p">,</span> <span class="s1">&#39;#e07b5a&#39;</span><span class="p">,</span> <span class="s1">&#39;#5ab87e&#39;</span><span class="p">]</span>
+<span class="n">scatter_colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">colors</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">y</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">scatter_colors</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;daerah&#39;</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="p">),</span> <span class="n">label_cluster</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">K</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Scatter Plot K-Means NO2 Dengan PCA (K=3, n_components=37)&quot;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Daerah&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cluster&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#eeeeee&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="perbandingan-dan-interpretasi-no2">
+<h3>Perbandingan dan Interpretasi NO2<a class="headerlink" href="#perbandingan-dan-interpretasi-no2" title="Link to this heading">#</a></h3>
+<p>Baik tanpa PCA maupun dengan PCA, hasil clustering NO2 menghasilkan distribusi yang <strong>identik</strong> — nilai inertia sama (1001.2819) dan pembagian daerah ke klaster tidak berubah sama sekali. Ini menunjukkan bahwa 37 komponen PCA sudah menangkap hampir seluruh varians penting dari 68 fitur asli, sehingga informasi yang hilang saat reduksi dimensi tidak berdampak pada keputusan clustering.</p>
+<p>Dari scatter plot, tiga kelompok terbentuk dengan karakteristik berikut:</p>
+<ul class="simple">
+<li><p><strong>Cluster 0 (20 daerah)</strong> — kelompok terbesar, memuat daerah dengan pola polusi NO2 yang paling umum dan stabil. Daerah seperti Manyar, Asemrowo Surabaya, Menganti Gresik, hingga Kwanyar Bangkalan masuk di sini. Fluktuasi NO2 di daerah-daerah ini bergerak dalam rentang yang serupa sepanjang periode observasi.</p></li>
+<li><p><strong>Cluster 2 (16 daerah)</strong> — kelompok menengah dengan pola polusi yang sedikit berbeda dari mayoritas. Daerah seperti Cerme Gresik, Widodaren Ngawi, Wonoayu, dan Nunukan menunjukkan karakteristik time-series NO2 yang homogen satu sama lain namun berbeda dari cluster 0.</p></li>
+<li><p><strong>Cluster 1 (1 daerah)</strong> — <strong>Kamal, Banyuajuh</strong> berdiri sendiri secara terisolasi. Karakteristik pergerakan NO2 di titik ini sama sekali tidak menyerupai daerah manapun dalam dataset, mengindikasikan adanya sumber emisi lokal yang spesifik di wilayah tersebut.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="polutan-so2">
+<h2>Polutan SO2<a class="headerlink" href="#polutan-so2" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>Tanpa PCA<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p><em>Scatter Plot KNIME (SO2 — Tanpa PCA):</em></p>
+<p><img alt="Scatter Plot K-Means SO2 Tanpa PCA" src="_images/NONPCAScatterPlotSO2.png" /></p>
+<p><em>Implementasi Python:</em></p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="n">CSV_PATH</span> <span class="o">=</span> <span class="s2">&quot;ekstraksi_fitur_so2.csv&quot;</span>
+<span class="n">KOLOM_IDENTITAS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;nama&#39;</span><span class="p">,</span> <span class="s1">&#39;daerah&#39;</span><span class="p">]</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">CSV_PATH</span><span class="p">)</span>
+<span class="n">fitur</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">KOLOM_IDENTITAS</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">fitur</span><span class="p">)</span>
+
+<span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster_label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;cluster_&#39;</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inertia: </span><span class="si">{</span><span class="n">kmeans</span><span class="o">.</span><span class="n">inertia_</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Jumlah data per cluster:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster_label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Detail daerah per cluster:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()):</span>
+    <span class="n">daerah</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">][</span><span class="s1">&#39;daerah&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  cluster_</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">daerah</span><span class="p">)</span><span class="si">}</span><span class="s2"> daerah): </span><span class="si">{</span><span class="n">daerah</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">label_cluster</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;cluster_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="p">)]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#6b8bd6&#39;</span><span class="p">,</span> <span class="s1">&#39;#e07b5a&#39;</span><span class="p">,</span> <span class="s1">&#39;#5ab87e&#39;</span><span class="p">]</span>
+<span class="n">scatter_colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">colors</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">y</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">scatter_colors</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;daerah&#39;</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="p">),</span> <span class="n">label_cluster</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">K</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Scatter Plot K-Means SO2 Tanpa PCA (K=3)&quot;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Daerah&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cluster&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#eeeeee&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="id2">
+<h3>Dengan PCA<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p><em>Scatter Plot KNIME (SO2 — Dengan PCA):</em></p>
+<p><img alt="Scatter Plot K-Means SO2 Dengan PCA" src="_images/ScatterPlotSO2.png" /></p>
+<p><em>Implementasi Python:</em></p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+
+<span class="n">CSV_PATH</span> <span class="o">=</span> <span class="s2">&quot;ekstraksi_fitur_so2.csv&quot;</span>
+<span class="n">KOLOM_IDENTITAS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;nama&#39;</span><span class="p">,</span> <span class="s1">&#39;daerah&#39;</span><span class="p">]</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">N_KOMPONEN_PCA</span> <span class="o">=</span> <span class="mi">37</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">CSV_PATH</span><span class="p">)</span>
+<span class="n">fitur</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">KOLOM_IDENTITAS</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">X_scaled</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">fitur</span><span class="p">)</span>
+<span class="n">X_pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">N_KOMPONEN_PCA</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reduksi dimensi: </span><span class="si">{</span><span class="n">fitur</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> fitur → </span><span class="si">{</span><span class="n">N_KOMPONEN_PCA</span><span class="si">}</span><span class="s2"> komponen PCA&quot;</span><span class="p">)</span>
+
+<span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X_pca</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster_label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;cluster_&#39;</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inertia: </span><span class="si">{</span><span class="n">kmeans</span><span class="o">.</span><span class="n">inertia_</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Jumlah data per cluster:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster_label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Detail daerah per cluster:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()):</span>
+    <span class="n">daerah</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">][</span><span class="s1">&#39;daerah&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  cluster_</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">daerah</span><span class="p">)</span><span class="si">}</span><span class="s2"> daerah): </span><span class="si">{</span><span class="n">daerah</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">label_cluster</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;cluster_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="p">)]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#6b8bd6&#39;</span><span class="p">,</span> <span class="s1">&#39;#e07b5a&#39;</span><span class="p">,</span> <span class="s1">&#39;#5ab87e&#39;</span><span class="p">]</span>
+<span class="n">scatter_colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">colors</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">y</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">scatter_colors</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;daerah&#39;</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="p">),</span> <span class="n">label_cluster</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">K</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Scatter Plot K-Means SO2 Dengan PCA (K=3, n_components=37)&quot;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Daerah&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cluster&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#eeeeee&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="perbandingan-dan-interpretasi-so2">
+<h3>Perbandingan dan Interpretasi SO2<a class="headerlink" href="#perbandingan-dan-interpretasi-so2" title="Link to this heading">#</a></h3>
+<p>Clustering SO2 juga menghasilkan hasil yang <strong>identik</strong> antara skenario non-PCA dan PCA (inertia 691.6448). Distribusi klasternya membentuk pola yang jauh lebih ekstrem dibanding NO2:</p>
+<ul class="simple">
+<li><p><strong>Cluster 0 (35 daerah)</strong> — hampir seluruh daerah dalam dataset masuk ke satu kelompok besar. Fluktuasi SO2 di sebagian besar wilayah memiliki profil deret waktu yang sangat seragam. Daerah mulai dari Kerek Tuban, Cerme Gresik, Asemrowo Surabaya, hingga Kwanyar Bangkalan semuanya berbagi pola yang sama.</p></li>
+<li><p><strong>Cluster 1 (1 daerah)</strong> — <strong>Kamal, Banyuajuh</strong> kembali terisolasi, konsisten dengan temuan pada NO2. Lokasi ini menjadi anomali pada dua polutan sekaligus, yang memperkuat dugaan adanya sumber emisi khusus di kawasan tersebut.</p></li>
+<li><p><strong>Cluster 2 (1 daerah)</strong> — <strong>Kamal, Bangkalan</strong> berdiri sendiri di klaster tersendiri. Dua titik observasi di sekitar wilayah Kamal (Banyuajuh dan Bangkalan) keduanya memisahkan diri dari massa utama, meski keduanya tidak saling berkelompok. Area Kamal secara keseluruhan menunjukkan dinamika SO2 yang berbeda dari wilayah lain dalam dataset.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="polutan-co">
+<h2>Polutan CO<a class="headerlink" href="#polutan-co" title="Link to this heading">#</a></h2>
+<section id="id3">
+<h3>Tanpa PCA<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p><em>Scatter Plot KNIME (CO — Tanpa PCA):</em></p>
+<p><img alt="Scatter Plot K-Means CO Tanpa PCA" src="_images/NONPCAScatterPlotCO.png" /></p>
+<p><em>Implementasi Python:</em></p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="n">CSV_PATH</span> <span class="o">=</span> <span class="s2">&quot;ekstraksi_fitur_co.csv&quot;</span>
+<span class="n">KOLOM_IDENTITAS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;nama&#39;</span><span class="p">,</span> <span class="s1">&#39;daerah&#39;</span><span class="p">]</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">CSV_PATH</span><span class="p">)</span>
+<span class="n">fitur</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">KOLOM_IDENTITAS</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">fitur</span><span class="p">)</span>
+
+<span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster_label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;cluster_&#39;</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inertia: </span><span class="si">{</span><span class="n">kmeans</span><span class="o">.</span><span class="n">inertia_</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Jumlah data per cluster:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster_label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Detail daerah per cluster:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()):</span>
+    <span class="n">daerah</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">][</span><span class="s1">&#39;daerah&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  cluster_</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">daerah</span><span class="p">)</span><span class="si">}</span><span class="s2"> daerah): </span><span class="si">{</span><span class="n">daerah</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">label_cluster</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;cluster_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="p">)]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#6b8bd6&#39;</span><span class="p">,</span> <span class="s1">&#39;#e07b5a&#39;</span><span class="p">,</span> <span class="s1">&#39;#5ab87e&#39;</span><span class="p">]</span>
+<span class="n">scatter_colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">colors</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">y</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">scatter_colors</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;daerah&#39;</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="p">),</span> <span class="n">label_cluster</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">K</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Scatter Plot K-Means CO Tanpa PCA (K=3)&quot;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Daerah&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cluster&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#eeeeee&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="id4">
+<h3>Dengan PCA<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p><em>Scatter Plot KNIME (CO — Dengan PCA):</em></p>
+<p><img alt="Scatter Plot K-Means CO Dengan PCA" src="_images/ScatterPlotCO.png" /></p>
+<p><em>Implementasi Python:</em></p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+
+<span class="n">CSV_PATH</span> <span class="o">=</span> <span class="s2">&quot;ekstraksi_fitur_co.csv&quot;</span>
+<span class="n">KOLOM_IDENTITAS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;nama&#39;</span><span class="p">,</span> <span class="s1">&#39;daerah&#39;</span><span class="p">]</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">N_KOMPONEN_PCA</span> <span class="o">=</span> <span class="mi">37</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">CSV_PATH</span><span class="p">)</span>
+<span class="n">fitur</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">KOLOM_IDENTITAS</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">X_scaled</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">fitur</span><span class="p">)</span>
+<span class="n">X_pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">N_KOMPONEN_PCA</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reduksi dimensi: </span><span class="si">{</span><span class="n">fitur</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> fitur → </span><span class="si">{</span><span class="n">N_KOMPONEN_PCA</span><span class="si">}</span><span class="s2"> komponen PCA&quot;</span><span class="p">)</span>
+
+<span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X_pca</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster_label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;cluster_&#39;</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inertia: </span><span class="si">{</span><span class="n">kmeans</span><span class="o">.</span><span class="n">inertia_</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Jumlah data per cluster:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster_label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Detail daerah per cluster:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()):</span>
+    <span class="n">daerah</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">][</span><span class="s1">&#39;daerah&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  cluster_</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">daerah</span><span class="p">)</span><span class="si">}</span><span class="s2"> daerah): </span><span class="si">{</span><span class="n">daerah</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">label_cluster</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;cluster_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="p">)]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cluster&#39;</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#6b8bd6&#39;</span><span class="p">,</span> <span class="s1">&#39;#e07b5a&#39;</span><span class="p">,</span> <span class="s1">&#39;#5ab87e&#39;</span><span class="p">]</span>
+<span class="n">scatter_colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">colors</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">y</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">scatter_colors</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;daerah&#39;</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="p">),</span> <span class="n">label_cluster</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">K</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Scatter Plot K-Means CO Dengan PCA (K=3, n_components=37)&quot;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Daerah&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cluster&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#eeeeee&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="perbandingan-dan-interpretasi-co">
+<h3>Perbandingan dan Interpretasi CO<a class="headerlink" href="#perbandingan-dan-interpretasi-co" title="Link to this heading">#</a></h3>
+<p>Clustering CO menghasilkan distribusi yang <strong>identik</strong> antara non-PCA dan PCA (inertia 660.2141). Pola yang terbentuk serupa dengan SO2:</p>
+<ul class="simple">
+<li><p><strong>Cluster 1 (35 daerah)</strong> — mayoritas besar daerah masuk ke satu kelompok dominan. Karakteristik deret waktu CO di daerah-daerah ini sangat homogen: Kerek Tuban, Cerme Gresik, Asemrowo Surabaya, Widodaren Ngawi, dan puluhan daerah lainnya menunjukkan fluktuasi CO dalam kisaran yang sebanding.</p></li>
+<li><p><strong>Cluster 0 (1 daerah)</strong> — <strong>Kamal, Bangkalan</strong> berdiri sendiri. Ada aktivitas emisi CO yang terjadi di daerah ini dan tidak ditemukan di daerah manapun dalam dataset.</p></li>
+<li><p><strong>Cluster 2 (1 daerah)</strong> — <strong>Kamal, Banyuajuh</strong> kembali muncul sebagai anomali tersendiri. Konsistensinya sebagai outlier di ketiga polutan (NO2, SO2, CO) menjadikan titik ini sebagai lokasi observasi paling unik dalam keseluruhan dataset.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="kesimpulan">
+<h2>Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h2>
+<p>Dari seluruh eksperimen clustering K-Means dengan K=3 pada tiga polutan, tiga poin utama yang dapat ditarik:</p>
+<p><strong>PCA tidak mengubah hasil clustering.</strong> Di ketiga polutan, nilai inertia dan distribusi daerah ke klaster identik antara skenario non-PCA dan PCA. Ini terjadi karena 37 komponen PCA yang dipilih sudah merepresentasikan hampir seluruh varians dari 68 fitur asli. Meski hasilnya sama, PCA tetap bermanfaat karena mereduksi beban komputasi dan menghilangkan fitur-fitur yang berkorelasi tinggi — keuntungan yang lebih terasa signifikan bila dataset lebih besar.</p>
+<p><strong>Kamal, Banyuajuh adalah anomali konsisten.</strong> Titik observasi ini terisolasi di klaster tersendiri pada ketiga polutan. Tidak ada daerah lain dalam dataset yang menunjukkan pola serupa, baik untuk NO2, SO2, maupun CO. Ini sinyal kuat bahwa ada karakteristik emisi yang sangat spesifik di lokasi tersebut yang layak ditelusuri lebih lanjut.</p>
+<p><strong>Pola polusi SO2 dan CO lebih seragam dibanding NO2.</strong> Pada SO2 dan CO, satu klaster mendominasi dengan 35 dari 37 daerah. NO2 terbagi lebih merata menjadi 20 dan 16 daerah. Variasi karakteristik deret waktu NO2 antar daerah lebih tinggi — daerah-daerah memiliki profil NO2 yang lebih beragam dibanding dua polutan lainnya.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="preprocessing_ekstraksi_kamal.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Preprocessing dan Ekstraksi Fitur</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-kerja-workflow-knime">Alur Kerja (Workflow) KNIME</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-tanpa-pca">Workflow Tanpa PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-dengan-pca">Workflow Dengan PCA</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polutan-no2">Polutan NO2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tanpa-pca">Tanpa PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dengan-pca">Dengan PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-dan-interpretasi-no2">Perbandingan dan Interpretasi NO2</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polutan-so2">Polutan SO2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Tanpa PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Dengan PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-dan-interpretasi-so2">Perbandingan dan Interpretasi SO2</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polutan-co">Polutan CO</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Tanpa PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Dengan PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-dan-interpretasi-co">Perbandingan dan Interpretasi CO</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
