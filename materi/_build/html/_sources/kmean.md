@@ -63,7 +63,6 @@ Penjelasan fungsi setiap node:
 *Implementasi Python:*
 
 ```{code-cell} ipython3
-:tags: [hide-input]
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
@@ -118,7 +117,6 @@ plt.show()
 *Implementasi Python:*
 
 ```{code-cell} ipython3
-:tags: [hide-input]
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
@@ -194,7 +192,6 @@ Dari scatter plot, tiga kelompok terbentuk dengan karakteristik berikut:
 *Implementasi Python:*
 
 ```{code-cell} ipython3
-:tags: [hide-input]
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
@@ -249,7 +246,6 @@ plt.show()
 *Implementasi Python:*
 
 ```{code-cell} ipython3
-:tags: [hide-input]
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
@@ -323,7 +319,6 @@ Clustering SO2 juga menghasilkan hasil yang **identik** antara skenario non-PCA 
 *Implementasi Python:*
 
 ```{code-cell} ipython3
-:tags: [hide-input]
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
@@ -378,7 +373,6 @@ plt.show()
 *Implementasi Python:*
 
 ```{code-cell} ipython3
-:tags: [hide-input]
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans

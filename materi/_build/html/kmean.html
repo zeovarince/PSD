@@ -455,12 +455,7 @@ document.write(`
 <p><em>Scatter Plot KNIME (NO2 — Tanpa PCA):</em></p>
 <p><img alt="Scatter Plot K-Means NO2 Tanpa PCA" src="_images/NONPCAScatterPlotNO2.png" /></p>
 <p><em>Implementasi Python:</em></p>
-<div class="cell tag_hide-input docutils container">
-<details class="admonition hide above-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show code cell source</p>
-<p class="expanded admonition-title">Hide code cell source</p>
-</summary>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -508,75 +503,23 @@ document.write(`
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">10</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">KOLOM_IDENTITAS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;nama&#39;</span><span class="p">,</span> <span class="s1">&#39;daerah&#39;</span><span class="p">]</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">K</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="ne">---&gt; </span><span class="mi">10</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">CSV_PATH</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">fitur</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">KOLOM_IDENTITAS</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">X</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">fitur</span><span class="p">)</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inertia: 1001.2819
 
-<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\pandas\io\parsers\readers.py:1026,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1013</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1014</span>     <span class="n">dialect</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1015</span>     <span class="n">delimiter</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1022</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1023</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1024</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1026</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+Jumlah data per cluster:
+cluster_label
+cluster_0    20
+cluster_1     1
+cluster_2    16
+Name: count, dtype: int64
 
-<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\pandas\io\parsers\readers.py:620,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">617</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">619</span> <span class="c1"># Create the parser.</span>
-<span class="ne">--&gt; </span><span class="mi">620</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">622</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">623</span>     <span class="k">return</span> <span class="n">parser</span>
-
-<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\pandas\io\parsers\readers.py:1620,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1617</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1619</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="ne">-&gt; </span><span class="mi">1620</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
-
-<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\pandas\io\parsers\readers.py:1880,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1878</span>     <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1879</span>         <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1880</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1881</span>     <span class="n">f</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1882</span>     <span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1883</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1884</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1885</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1886</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1887</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1888</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1889</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1890</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-<span class="g g-Whitespace">   </span><span class="mi">1891</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
-
-<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\pandas\io\common.py:873,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">868</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">869</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
-<span class="g g-Whitespace">    </span><span class="mi">870</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
-<span class="g g-Whitespace">    </span><span class="mi">871</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">872</span>         <span class="c1"># Encoding</span>
-<span class="ne">--&gt; </span><span class="mi">873</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">874</span>             <span class="n">handle</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">875</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">876</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">877</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">878</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">879</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">880</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">881</span>         <span class="c1"># Binary mode</span>
-<span class="g g-Whitespace">    </span><span class="mi">882</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;ekstraksi_fitur_no2.csv&#39;
+Detail daerah per cluster:
+  cluster_0 (20 daerah): [&#39;Manyar&#39;, &#39;Kedungpring Lamongan&#39;, &#39;Kamal, Bangkalan&#39;, &#39;Kota Sumenep, Sumenep&#39;, &#39;Asemrowo, Surabaya&#39;, &#39;Wonokromo, Surabaya&#39;, &#39;Banyu Ajuh, Perumnas, Kamal&#39;, &#39;Menganti Gresik&#39;, &#39;Labang, Bangkalan&#39;, &#39;Kec. Bangkalan, Kab. Bangkalan&#39;, &#39;Kerek, Tuban&#39;, &#39;Tikala, Manado&#39;, &#39;Socah, Bangkalan&#39;, &#39;Tanah Merah, Bangkalan&#39;, &#39;Dukun, Gresik&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;Baron Nganjuk&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;Warudoyong, Kota Sukabumi&#39;, &#39;Bandung, Jogoroto, Jombang&#39;]
+  cluster_1 (1 daerah): [&#39;Kamal, Banyuajuh&#39;]
+  cluster_2 (16 daerah): [&#39;sambeng lamongan&#39;, &#39;Gresik Kota, Gresik&#39;, &#39;Waru, Pamekasan&#39;, &#39;Bangkalan Kota,Bangkalan&#39;, &#39;Nunukan&#39;, &#39;Kamal, Bangkalan&#39;, &#39;Cerme, Gresik&#39;, &#39;Pilangkenceng, Madiun&#39;, &#39;Sreseh, Sampang&#39;, &#39;Wonoayu&#39;, &#39;Kec. Kalianget, Sumenep&#39;, &#39;Widang, Tuban&#39;, &#39;Paciran, Lamongan&#39;, &#39;Widodaren, Ngawi&#39;, &#39;jabon , Sidoarjo&#39;, &#39;Kertosono, Ngajuk&#39;]
 </pre></div>
 </div>
+<img alt="_images/07c3ccc8dac447099f10997722bb9dbf99971092b49adf7cd7e97438e4160830.png" src="_images/07c3ccc8dac447099f10997722bb9dbf99971092b49adf7cd7e97438e4160830.png" />
 </div>
 </div>
 </section>
@@ -585,12 +528,7 @@ document.write(`
 <p><em>Scatter Plot KNIME (NO2 — Dengan PCA):</em></p>
 <p><img alt="Scatter Plot K-Means NO2 Dengan PCA" src="_images/ScatterPlotNO2.png" /></p>
 <p><em>Implementasi Python:</em></p>
-<div class="cell tag_hide-input docutils container">
-<details class="admonition hide above-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show code cell source</p>
-<p class="expanded admonition-title">Hide code cell source</p>
-</summary>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -643,7 +581,27 @@ document.write(`
 </pre></div>
 </div>
 </div>
-</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reduksi dimensi: 68 fitur → 37 komponen PCA
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inertia: 1001.2819
+
+Jumlah data per cluster:
+cluster_label
+cluster_0    20
+cluster_1     1
+cluster_2    16
+Name: count, dtype: int64
+
+Detail daerah per cluster:
+  cluster_0 (20 daerah): [&#39;Manyar&#39;, &#39;Kedungpring Lamongan&#39;, &#39;Kamal, Bangkalan&#39;, &#39;Kota Sumenep, Sumenep&#39;, &#39;Asemrowo, Surabaya&#39;, &#39;Wonokromo, Surabaya&#39;, &#39;Banyu Ajuh, Perumnas, Kamal&#39;, &#39;Menganti Gresik&#39;, &#39;Labang, Bangkalan&#39;, &#39;Kec. Bangkalan, Kab. Bangkalan&#39;, &#39;Kerek, Tuban&#39;, &#39;Tikala, Manado&#39;, &#39;Socah, Bangkalan&#39;, &#39;Tanah Merah, Bangkalan&#39;, &#39;Dukun, Gresik&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;Baron Nganjuk&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;Warudoyong, Kota Sukabumi&#39;, &#39;Bandung, Jogoroto, Jombang&#39;]
+  cluster_1 (1 daerah): [&#39;Kamal, Banyuajuh&#39;]
+  cluster_2 (16 daerah): [&#39;sambeng lamongan&#39;, &#39;Gresik Kota, Gresik&#39;, &#39;Waru, Pamekasan&#39;, &#39;Bangkalan Kota,Bangkalan&#39;, &#39;Nunukan&#39;, &#39;Kamal, Bangkalan&#39;, &#39;Cerme, Gresik&#39;, &#39;Pilangkenceng, Madiun&#39;, &#39;Sreseh, Sampang&#39;, &#39;Wonoayu&#39;, &#39;Kec. Kalianget, Sumenep&#39;, &#39;Widang, Tuban&#39;, &#39;Paciran, Lamongan&#39;, &#39;Widodaren, Ngawi&#39;, &#39;jabon , Sidoarjo&#39;, &#39;Kertosono, Ngajuk&#39;]
+</pre></div>
+</div>
+<img alt="_images/ab85f39c485e52b0672996f4377d20c00eb29ddb0045f2738b634e0224e8329d.png" src="_images/ab85f39c485e52b0672996f4377d20c00eb29ddb0045f2738b634e0224e8329d.png" />
+</div>
 </div>
 </section>
 <section id="perbandingan-dan-interpretasi-no2">
@@ -665,12 +623,7 @@ document.write(`
 <p><em>Scatter Plot KNIME (SO2 — Tanpa PCA):</em></p>
 <p><img alt="Scatter Plot K-Means SO2 Tanpa PCA" src="_images/NONPCAScatterPlotSO2.png" /></p>
 <p><em>Implementasi Python:</em></p>
-<div class="cell tag_hide-input docutils container">
-<details class="admonition hide above-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show code cell source</p>
-<p class="expanded admonition-title">Hide code cell source</p>
-</summary>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -718,7 +671,24 @@ document.write(`
 </pre></div>
 </div>
 </div>
-</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inertia: 691.6448
+
+Jumlah data per cluster:
+cluster_label
+cluster_0    35
+cluster_1     1
+cluster_2     1
+Name: count, dtype: int64
+
+Detail daerah per cluster:
+  cluster_0 (35 daerah): [&#39;Kerek, Tuban&#39;, &#39;Menganti Gresik&#39;, &#39;Manyar, Gresik&#39;, &#39;Widang, Tuban&#39;, &#39;Sreseh, Sampang&#39;, &#39;Cerme, Gresik&#39;, &#39;Nunukan&#39;, &#39;Pilangkenceng, Madiun&#39;, &#39;Tikala, Manado&#39;, &#39;Kec. Kalianget, Sumenep&#39;, &#39;Labang, Bangkalan&#39;, &#39;Paciran, Lamongan&#39;, &#39;Waru, Pamekasan&#39;, &#39;Gresik Kota, Gresik&#39;, &#39;sambeng lamongan&#39;, &#39;Widodaren, Ngawi&#39;, &#39;Kertosono, Ngajuk&#39;, &#39;Kedungpring Lamongan&#39;, &#39;Bandung, Jogoroto, Jombang&#39;, &#39;Socah, Bangkalan&#39;, &#39;Tanah Merah, Bangkalan&#39;, &#39;Kamal, Bangkalan&#39;, &#39;Banyu Ajuh, Perumnas, Kamal&#39;, &#39;Wonokromo, Surabaya&#39;, &#39;Dukun, Gresik&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;jabon , Sidoarjo&#39;, &#39;Kota Sumenep, Sumenep&#39;, &#39;Baron Nganjuk&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;Warudoyong, Kota Sukabumi&#39;, &#39;Kec. Bangkalan, Kab. Bangkalan&#39;, &#39;Wonoayu&#39;, &#39;Kecamatan Bangkalan,Bangkalan&#39;, &#39;Asemrowo, Surabaya&#39;]
+  cluster_1 (1 daerah): [&#39;Kamal, Banyuajuh&#39;]
+  cluster_2 (1 daerah): [&#39;Kamal, Bangkalan&#39;]
+</pre></div>
+</div>
+<img alt="_images/9f84093ad82f40dcc420fa2b33cc0dfa6403d16401a1fafcab3c4a6f608d623b.png" src="_images/9f84093ad82f40dcc420fa2b33cc0dfa6403d16401a1fafcab3c4a6f608d623b.png" />
+</div>
 </div>
 </section>
 <section id="id2">
@@ -726,12 +696,7 @@ document.write(`
 <p><em>Scatter Plot KNIME (SO2 — Dengan PCA):</em></p>
 <p><img alt="Scatter Plot K-Means SO2 Dengan PCA" src="_images/ScatterPlotSO2.png" /></p>
 <p><em>Implementasi Python:</em></p>
-<div class="cell tag_hide-input docutils container">
-<details class="admonition hide above-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show code cell source</p>
-<p class="expanded admonition-title">Hide code cell source</p>
-</summary>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -784,7 +749,27 @@ document.write(`
 </pre></div>
 </div>
 </div>
-</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reduksi dimensi: 68 fitur → 37 komponen PCA
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inertia: 691.6448
+
+Jumlah data per cluster:
+cluster_label
+cluster_0    35
+cluster_1     1
+cluster_2     1
+Name: count, dtype: int64
+
+Detail daerah per cluster:
+  cluster_0 (35 daerah): [&#39;Kerek, Tuban&#39;, &#39;Menganti Gresik&#39;, &#39;Manyar, Gresik&#39;, &#39;Widang, Tuban&#39;, &#39;Sreseh, Sampang&#39;, &#39;Cerme, Gresik&#39;, &#39;Nunukan&#39;, &#39;Pilangkenceng, Madiun&#39;, &#39;Tikala, Manado&#39;, &#39;Kec. Kalianget, Sumenep&#39;, &#39;Labang, Bangkalan&#39;, &#39;Paciran, Lamongan&#39;, &#39;Waru, Pamekasan&#39;, &#39;Gresik Kota, Gresik&#39;, &#39;sambeng lamongan&#39;, &#39;Widodaren, Ngawi&#39;, &#39;Kertosono, Ngajuk&#39;, &#39;Kedungpring Lamongan&#39;, &#39;Bandung, Jogoroto, Jombang&#39;, &#39;Socah, Bangkalan&#39;, &#39;Tanah Merah, Bangkalan&#39;, &#39;Kamal, Bangkalan&#39;, &#39;Banyu Ajuh, Perumnas, Kamal&#39;, &#39;Wonokromo, Surabaya&#39;, &#39;Dukun, Gresik&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;jabon , Sidoarjo&#39;, &#39;Kota Sumenep, Sumenep&#39;, &#39;Baron Nganjuk&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;Warudoyong, Kota Sukabumi&#39;, &#39;Kec. Bangkalan, Kab. Bangkalan&#39;, &#39;Wonoayu&#39;, &#39;Kecamatan Bangkalan,Bangkalan&#39;, &#39;Asemrowo, Surabaya&#39;]
+  cluster_1 (1 daerah): [&#39;Kamal, Banyuajuh&#39;]
+  cluster_2 (1 daerah): [&#39;Kamal, Bangkalan&#39;]
+</pre></div>
+</div>
+<img alt="_images/b65bd67c33d7ee8ffd266bb7544434443fc3c70caadd30bab55bea28cadd2e4d.png" src="_images/b65bd67c33d7ee8ffd266bb7544434443fc3c70caadd30bab55bea28cadd2e4d.png" />
+</div>
 </div>
 </section>
 <section id="perbandingan-dan-interpretasi-so2">
@@ -805,12 +790,7 @@ document.write(`
 <p><em>Scatter Plot KNIME (CO — Tanpa PCA):</em></p>
 <p><img alt="Scatter Plot K-Means CO Tanpa PCA" src="_images/NONPCAScatterPlotCO.png" /></p>
 <p><em>Implementasi Python:</em></p>
-<div class="cell tag_hide-input docutils container">
-<details class="admonition hide above-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show code cell source</p>
-<p class="expanded admonition-title">Hide code cell source</p>
-</summary>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -858,7 +838,24 @@ document.write(`
 </pre></div>
 </div>
 </div>
-</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inertia: 660.2141
+
+Jumlah data per cluster:
+cluster_label
+cluster_0     1
+cluster_1    35
+cluster_2     1
+Name: count, dtype: int64
+
+Detail daerah per cluster:
+  cluster_0 (1 daerah): [&#39;Kamal, Bangkalan&#39;]
+  cluster_1 (35 daerah): [&#39;Kerek, Tuban&#39;, &#39;Menganti Gresik&#39;, &#39;Manyar, Gresik&#39;, &#39;Widang, Tuban&#39;, &#39;Sreseh, Sampang&#39;, &#39;Cerme, Gresik&#39;, &#39;Nunukan&#39;, &#39;Pilangkenceng, Madiun&#39;, &#39;Tikala, Manado&#39;, &#39;Labang, Bangkalan&#39;, &#39;Kec. Kalianget, Sumenep&#39;, &#39;Paciran, Lamongan&#39;, &#39;Waru, Pamekasan&#39;, &#39;Gresik Kota, Gresik&#39;, &#39;sambeng lamongan&#39;, &#39;Widodaren, Ngawi&#39;, &#39;Kertosono, Ngajuk&#39;, &#39;Kedungpring Lamongan&#39;, &#39;Bandung, Jogoroto, Jombang&#39;, &#39;Socah, Bangkalan&#39;, &#39;Tanah Merah, Bangkalan&#39;, &#39;Kamal, Bangkalan&#39;, &#39;Banyu Ajuh, Perumnas, Kamal&#39;, &#39;Wonokromo, Surabaya&#39;, &#39;Dukun, Gresik&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;jabon , Sidoarjo&#39;, &#39;Kota Sumenep, Sumenep&#39;, &#39;Baron Nganjuk&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;Warudoyong, Kota Sukabumi&#39;, &#39;Kec. Bangkalan, Kab. Bangkalan&#39;, &#39;Wonoayu&#39;, &#39;Kecamatan Bangkalan,Bangkalan&#39;, &#39;Asemrowo, Surabaya&#39;]
+  cluster_2 (1 daerah): [&#39;Kamal, Banyuajuh&#39;]
+</pre></div>
+</div>
+<img alt="_images/bdc271e25218f859c5a1364fcb26db70f5cdfa316d644aa66a37ad9ec3387635.png" src="_images/bdc271e25218f859c5a1364fcb26db70f5cdfa316d644aa66a37ad9ec3387635.png" />
+</div>
 </div>
 </section>
 <section id="id4">
@@ -866,12 +863,7 @@ document.write(`
 <p><em>Scatter Plot KNIME (CO — Dengan PCA):</em></p>
 <p><img alt="Scatter Plot K-Means CO Dengan PCA" src="_images/ScatterPlotCO.png" /></p>
 <p><em>Implementasi Python:</em></p>
-<div class="cell tag_hide-input docutils container">
-<details class="admonition hide above-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show code cell source</p>
-<p class="expanded admonition-title">Hide code cell source</p>
-</summary>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -924,7 +916,27 @@ document.write(`
 </pre></div>
 </div>
 </div>
-</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reduksi dimensi: 68 fitur → 37 komponen PCA
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inertia: 660.2141
+
+Jumlah data per cluster:
+cluster_label
+cluster_0     1
+cluster_1    35
+cluster_2     1
+Name: count, dtype: int64
+
+Detail daerah per cluster:
+  cluster_0 (1 daerah): [&#39;Kamal, Bangkalan&#39;]
+  cluster_1 (35 daerah): [&#39;Kerek, Tuban&#39;, &#39;Menganti Gresik&#39;, &#39;Manyar, Gresik&#39;, &#39;Widang, Tuban&#39;, &#39;Sreseh, Sampang&#39;, &#39;Cerme, Gresik&#39;, &#39;Nunukan&#39;, &#39;Pilangkenceng, Madiun&#39;, &#39;Tikala, Manado&#39;, &#39;Labang, Bangkalan&#39;, &#39;Kec. Kalianget, Sumenep&#39;, &#39;Paciran, Lamongan&#39;, &#39;Waru, Pamekasan&#39;, &#39;Gresik Kota, Gresik&#39;, &#39;sambeng lamongan&#39;, &#39;Widodaren, Ngawi&#39;, &#39;Kertosono, Ngajuk&#39;, &#39;Kedungpring Lamongan&#39;, &#39;Bandung, Jogoroto, Jombang&#39;, &#39;Socah, Bangkalan&#39;, &#39;Tanah Merah, Bangkalan&#39;, &#39;Kamal, Bangkalan&#39;, &#39;Banyu Ajuh, Perumnas, Kamal&#39;, &#39;Wonokromo, Surabaya&#39;, &#39;Dukun, Gresik&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;jabon , Sidoarjo&#39;, &#39;Kota Sumenep, Sumenep&#39;, &#39;Baron Nganjuk&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;Warudoyong, Kota Sukabumi&#39;, &#39;Kec. Bangkalan, Kab. Bangkalan&#39;, &#39;Wonoayu&#39;, &#39;Kecamatan Bangkalan,Bangkalan&#39;, &#39;Asemrowo, Surabaya&#39;]
+  cluster_2 (1 daerah): [&#39;Kamal, Banyuajuh&#39;]
+</pre></div>
+</div>
+<img alt="_images/6647a2d02a15118ddb5f3cd47b2862fdaa95c5a7dfec1726c985d6033bb7c9b9.png" src="_images/6647a2d02a15118ddb5f3cd47b2862fdaa95c5a7dfec1726c985d6033bb7c9b9.png" />
+</div>
 </div>
 </section>
 <section id="perbandingan-dan-interpretasi-co">
