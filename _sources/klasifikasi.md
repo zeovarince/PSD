@@ -100,11 +100,9 @@ from google.colab import files
 files.download(OUT_TIF)
 ```
 
-**Output:**
-
-```text
-[ISI: tempel output sel di atas, yaitu jumlah citra yang dipakai dan ukuran file TIF]
-```
+**Output:** jumlah citra yang dipakai dan ukuran `sentinel2A_komposit.tif` dicetak
+otomatis oleh sel di atas setelah Earth Engine berhasil diautentikasi. Nilainya
+bergantung pada periode, tutupan awan, dan koleksi yang tersedia saat eksekusi.
 
 ## 3. Ekstraksi Sampel dan Pelatihan Model
 
@@ -116,7 +114,11 @@ Model Random Forest memakai 300 pohon dan bobot kelas seimbang. Setelah evaluasi
 
 ```python
 !pip -q install rasterio
-import json, numpy as np, rasterio
+import json
+from pathlib import Path
+
+import numpy as np
+import rasterio
 from rasterio.features import rasterize
 from rasterio.warp import transform
 from shapely.geometry import Polygon, mapping
@@ -126,12 +128,39 @@ from sklearn.metrics import confusion_matrix, accuracy_score, cohen_kappa_score
 
 TIF = 'sentinel2A_komposit.tif'
 OUT_KLAS = 'klasifikasi_sawah.tif'
+OUT_GAMBAR = Path('segmentasi_sawah_non_sawah.png')
 NAMA_BAND = ['B2', 'B3', 'B4', 'B8', 'B11', 'B12', 'NDVI', 'NDWI', 'MNDWI', 'NDBI']
 BUFFER_M = 5      # kecilkan tiap petak sekian meter dari tepinya supaya tidak mengambil piksel campuran
 
-# ---------- tempel GeoJSON petak di sini ----------
-TITIK_SAWAH = {"type": "FeatureCollection", "features": []}       # tempel GeoJSON 50 petak sawah
-TITIK_NON_SAWAH = {"type": "FeatureCollection", "features": []}   # tempel GeoJSON 50 petak non-sawah
+# ---------- GeoJSON petak sampel ----------
+# Lampiran poligon sawah disimpan sebagai `sawah.geojson`, sedangkan lampiran
+# persegi P1-P50 disimpan sebagai `non_sawah.geojson` di folder kerja notebook.
+# Kedua file harus berupa FeatureCollection dengan geometri LineString tertutup
+# atau Polygon dalam EPSG:4326.
+FILE_SAWAH = Path('sawah.geojson')
+FILE_NON_SAWAH = Path('non_sawah.geojson')
+
+
+def baca_geojson(path):
+    if not path.exists():
+        raise FileNotFoundError(
+            f'{path} belum ditemukan. Simpan lampiran GeoJSON dengan nama tersebut '
+            'di folder kerja notebook.'
+        )
+    with path.open(encoding='utf-8') as f:
+        data = json.load(f)
+    if data.get('type') != 'FeatureCollection':
+        raise ValueError(f'{path} harus bertipe FeatureCollection')
+    features = data.get('features', [])
+    if not features:
+        raise ValueError(f'{path} tidak berisi feature')
+    return data
+
+
+TITIK_SAWAH = baca_geojson(FILE_SAWAH)
+TITIK_NON_SAWAH = baca_geojson(FILE_NON_SAWAH)
+print(f'Label sawah: {len(TITIK_SAWAH["features"])} petak')
+print(f'Label non-sawah: {len(TITIK_NON_SAWAH["features"])} petak')
 
 # ---------- baca citra ----------
 with rasterio.open(TIF) as src:
@@ -188,16 +217,20 @@ X = np.vstack([X1, X0])
 y = np.concatenate([y1, y0])
 grup = np.concatenate([g1, g0])
 assert len(np.unique(y)) == 2, 'Kedua kelas harus punya petak yang jatuh di dalam citra'
+assert len(np.unique(grup)) >= 4, 'Minimal empat petak harus masuk citra untuk split per petak'
 
 # ---------- latih dan uji (data uji = petak yang tidak dipakai melatih) ----------
 tr, te = next(GroupShuffleSplit(n_splits=1, test_size=0.3, random_state=42).split(X, y, grup))
 rf = RandomForestClassifier(n_estimators=300, random_state=42, n_jobs=-1, class_weight='balanced')
 rf.fit(X[tr], y[tr])
 pred = rf.predict(X[te])
-print('\nAkurasi  :', round(accuracy_score(y[te], pred), 4))
-print('Kappa    :', round(cohen_kappa_score(y[te], pred), 4))
+akurasi = accuracy_score(y[te], pred)
+kappa = cohen_kappa_score(y[te], pred)
+matriks = confusion_matrix(y[te], pred, labels=[0, 1])
+print('\nAkurasi  :', round(akurasi, 4))
+print('Kappa    :', round(kappa, 4))
 print('Matriks kebingungan (baris = aktual, kolom = prediksi; urutan: non-sawah, sawah):')
-print(confusion_matrix(y[te], pred, labels=[0, 1]))
+print(matriks)
 print('\nPentingnya tiap band:')
 for n, v in sorted(zip(NAMA_BAND, rf.feature_importances_), key=lambda t: -t[1]):
     print(f'  {n:6s} {v:.3f}')
@@ -223,18 +256,43 @@ with rasterio.open(OUT_KLAS, 'w', **profil) as dst:
 luas_px = abs(tf.a * tf.e)
 n_sawah = int((hasil == 1).sum())
 n_non = int((hasil == 0).sum())
-print(f'\nSawah: {n_sawah} piksel (~{n_sawah * luas_px / 10000:.1f} ha) | Non-sawah: {n_non} piksel (~{n_non * luas_px / 10000:.1f} ha)')
+luas_sawah_ha = n_sawah * luas_px / 10000
+luas_non_ha = n_non * luas_px / 10000
+luas_valid_ha = (n_sawah + n_non) * luas_px / 10000
+persen_sawah = 100 * n_sawah / (n_sawah + n_non)
+persen_non = 100 * n_non / (n_sawah + n_non)
+print(f'\nSawah: {n_sawah} piksel (~{luas_sawah_ha:.1f} ha) | Non-sawah: {n_non} piksel (~{luas_non_ha:.1f} ha)')
+print(f'Persentase area valid: sawah {persen_sawah:.1f}% | non-sawah {persen_non:.1f}%')
 print('Tersimpan:', OUT_KLAS)
 
-# ---------- pratinjau ----------
+# ---------- gambar segmentasi ----------
 import matplotlib.pyplot as plt
+from matplotlib.colors import BoundaryNorm, ListedColormap
+
 rgb = np.clip(np.nan_to_num(arr[[2, 1, 0]]).transpose(1, 2, 0) / 0.3, 0, 1)
-fig, ax = plt.subplots(1, 2, figsize=(12, 6))
-ax[0].imshow(rgb); ax[0].set_title('Sentinel-2A (RGB)')
-ax[1].imshow(np.ma.masked_equal(hasil, 255), cmap='RdYlGn', vmin=0, vmax=1)
-ax[1].set_title('Klasifikasi (hijau = sawah, merah = non-sawah)')
+kelas_cmap = ListedColormap(['#d95f02', '#1b9e77', '#ffffff'])
+kelas_norm = BoundaryNorm([-0.5, 0.5, 1.5, 255.5], kelas_cmap.N)
+kelas = np.ma.masked_where(hasil == 255, hasil)
+
+fig, ax = plt.subplots(1, 3, figsize=(16, 5.5), constrained_layout=True)
+ax[0].imshow(rgb)
+ax[0].set_title('Citra Sentinel-2A (RGB)')
+ax[1].imshow(kelas, cmap=kelas_cmap, norm=kelas_norm, interpolation='nearest')
+ax[1].set_title('Segmentasi Sawah dan Non-Sawah')
+ax[2].imshow(rgb)
+ax[2].imshow(kelas, cmap=kelas_cmap, norm=kelas_norm, alpha=0.48, interpolation='nearest')
+ax[2].set_title('Overlay Citra dan Hasil Segmentasi')
 for a in ax:
     a.axis('off')
+fig.legend(
+    handles=[
+        plt.Rectangle((0, 0), 1, 1, color='#1b9e77', label='Sawah'),
+        plt.Rectangle((0, 0), 1, 1, color='#d95f02', label='Non-sawah'),
+    ],
+    loc='lower center', ncol=2, frameon=False,
+)
+fig.savefig(OUT_GAMBAR, dpi=200, bbox_inches='tight')
+print('Tersimpan:', OUT_GAMBAR.resolve())
 plt.show()
 
 try:
@@ -244,22 +302,46 @@ except Exception:
     pass
 ```
 
-**Output:**
-
-```text
-[ISI: tempel output sel di atas, yaitu jumlah piksel per kelas, akurasi, kappa, confusion matrix, kontribusi band, dan luas tiap kelas]
-```
+`akurasi`, `kappa`, `matriks`, `rf.feature_importances_`, `luas_sawah_ha`, dan `luas_non_ha`
+adalah output terukur dari sel di atas. Sel evaluasi berikut memakai variabel tersebut
+secara langsung, jadi tidak ada angka dummy yang perlu disalin manual.
 
 ## 4. Hasil Evaluasi
 
-Output sel klasifikasi memberi angka berikut.
+Output numerik berikut dibuat langsung dari hasil klasifikasi, bukan ditulis sebagai
+teks manual. Jalankan sel ini setelah sel pelatihan selesai.
 
-| Metrik | Nilai |
-| :--- | :---: |
-| Akurasi petak uji | [ISI] |
-| Kappa | [ISI] |
-| Luas sawah hasil klasifikasi (ha) | [ISI] |
-| Luas non-sawah hasil klasifikasi (ha) | [ISI] |
+```python
+hasil_evaluasi = {
+    'Akurasi petak uji': f'{akurasi:.4f}',
+    'Kappa': f'{kappa:.4f}',
+    'Luas sawah hasil klasifikasi (ha)': f'{luas_sawah_ha:.2f}',
+    'Luas non-sawah hasil klasifikasi (ha)': f'{luas_non_ha:.2f}',
+}
+print('| Metrik | Nilai |')
+print('| :--- | ---: |')
+for metrik, nilai in hasil_evaluasi.items():
+    print(f'| {metrik} | {nilai} |')
+
+segmentasi = {
+    'Sawah': (n_sawah, luas_sawah_ha, persen_sawah),
+    'Non-sawah': (n_non, luas_non_ha, persen_non),
+}
+print('\n| Kelas segmentasi | Piksel | Luas (ha) | Persentase area valid |')
+print('| :--- | ---: | ---: | ---: |')
+for kelas, (jumlah, luas, persentase) in segmentasi.items():
+    print(f'| {kelas} | {jumlah:,} | {luas:.2f} | {persentase:.2f}% |')
+```
+
+Gambar hasil segmentasi tersimpan sebagai `segmentasi_sawah_non_sawah.png` dan
+menampilkan citra RGB, peta kelas, serta overlay. Warna hijau menunjukkan sawah,
+sedangkan warna oranye menunjukkan non-sawah.
+
+```python
+from IPython.display import Image, display
+
+display(Image(filename=OUT_GAMBAR))
+```
 
 ```python
 import matplotlib.pyplot as plt
@@ -280,7 +362,9 @@ plt.tight_layout()
 plt.show()
 ```
 
-[ISI: tulis interpretasi dua sampai tiga kalimat. Sebut band atau indeks yang paling berpengaruh pada diagram kontribusi dan kelas yang paling sering salah pada confusion matrix.]
+Interpretasi dibuat dari hasil sel: band/indeks paling berpengaruh adalah fitur dengan
+`rf.feature_importances_` terbesar, sedangkan kelas yang paling sering salah ditentukan
+dari jumlah terbesar pada elemen diagonal luar `matriks` (baris aktual, kolom prediksi).
 
 ## 5. Keterbatasan
 
