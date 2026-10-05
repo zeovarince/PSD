@@ -409,6 +409,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-hasil-antar-reduksi-dimensi">5. Perbandingan Hasil Antar Reduksi Dimensi</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penentuan-cluster-terbaik">6. Penentuan Cluster Terbaik</a></li>
+<<<<<<< HEAD
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-python">7. Implementasi Python</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memuat-dan-menggabungkan-fitur-3-polutan">7.1 Memuat dan Menggabungkan Fitur 3 Polutan</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-k-means-clustering">7.2 PCA + K-Means Clustering</a></li>
@@ -423,6 +424,25 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">9. Kesimpulan</a></li>
+=======
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemetaan-segmentasi-wilayah">7. Pemetaan Segmentasi Wilayah</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#persiapan-fungsi-peta">Persiapan Fungsi Peta</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-peta-cluster-fitur-linear">A. Peta Cluster Fitur Linear</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-1-peta-k-2">A.1 Peta K = 2</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-2-peta-k-3">A.2 Peta K = 3</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-3-peta-k-4">A.3 Peta K = 4</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-peta-cluster-fitur-polynomial">B. Peta Cluster Fitur Polynomial</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-1-peta-k-2">B.1 Peta K = 2</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-2-peta-k-3">B.2 Peta K = 3</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-3-peta-k-4">B.3 Peta K = 4</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">8. Kesimpulan</a></li>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 </ul>
             </nav>
         </div>
@@ -443,13 +463,21 @@ document.write(`
 <h2>1. Alur Kerja (Workflow) KNIME<a class="headerlink" href="#alur-kerja-workflow-knime" title="Link to this heading">#</a></h2>
 <p>Eksperimen dijalankan di KNIME Analytics Platform dengan dua workflow yang strukturnya sama. Perbedaannya hanya pada tabel sumber di database: satu berisi fitur linear dan satu berisi fitur polynomial.</p>
 <figure class="align-center" id="workflow-linear">
+<<<<<<< HEAD
 <a class="reference internal image-reference" href="_images/workflow_linear.png"><img alt="_images/workflow_linear.png" src="_images/workflow_linear.png" style="width: 90%;" /></a>
+=======
+<a class="reference internal image-reference" href="img/clustering_knime/workflow_linear.png"><img alt="img/clustering_knime/workflow_linear.png" src="img/clustering_knime/workflow_linear.png" style="width: 90%;" /></a>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 <figcaption>
 <p><span class="caption-number">Fig. 1 </span><span class="caption-text">Workflow KNIME untuk fitur linear</span><a class="headerlink" href="#workflow-linear" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-center" id="workflow-polynomial">
+<<<<<<< HEAD
 <a class="reference internal image-reference" href="_images/workflow_polynomial.png"><img alt="_images/workflow_polynomial.png" src="_images/workflow_polynomial.png" style="width: 90%;" /></a>
+=======
+<a class="reference internal image-reference" href="img/clustering_knime/workflow_polynomial.png"><img alt="img/clustering_knime/workflow_polynomial.png" src="img/clustering_knime/workflow_polynomial.png" style="width: 90%;" /></a>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 <figcaption>
 <p><span class="caption-number">Fig. 2 </span><span class="caption-text">Workflow KNIME untuk fitur polynomial</span><a class="headerlink" href="#workflow-polynomial" title="Link to this image">#</a></p>
 </figcaption>
@@ -525,14 +553,18 @@ document.write(`
 <section id="hasil-clustering-fitur-linear">
 <h2>2. Hasil Clustering Fitur Linear<a class="headerlink" href="#hasil-clustering-fitur-linear" title="Link to this heading">#</a></h2>
 <p>Bagian ini memuat scatter plot dan nilai <em>Silhouette Coefficient</em> untuk setiap kombinasi dimensi PCA dan jumlah cluster pada fitur linear.</p>
+<<<<<<< HEAD
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Gambar scatter plot dan silhouette dari KNIME untuk fitur linear akan ditambahkan pada tahap selanjutnya. Nilai Silhouette Coefficient di bawah diperoleh dari implementasi Python (sklearn) sebagai referensi awal.</p>
 </div>
+=======
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 <section id="pca-203-dimensi">
 <h3>2.1 PCA 203 Dimensi<a class="headerlink" href="#pca-203-dimensi" title="Link to this heading">#</a></h3>
 <p><strong>K = 2</strong></p>
 <ul class="simple">
+<<<<<<< HEAD
 <li><p><strong>Silhouette Coefficient</strong>: <strong>0.769</strong> — Skor tertinggi di antara semua kombinasi K. Dua cluster membagi daerah menjadi satu kelompok mayoritas dan satu kelompok kecil outlier, menunjukkan pemisahan yang sangat jelas.</p></li>
 </ul>
 <p><strong>K = 3</strong></p>
@@ -543,11 +575,42 @@ document.write(`
 <ul class="simple">
 <li><p><strong>Silhouette Coefficient</strong>: <strong>0.089</strong> — Skor turun drastis karena pembagian menjadi 4 cluster membuat beberapa cluster hanya memiliki 1–2 anggota, sehingga batas antar cluster menjadi tumpang tindih dan tidak stabil.</p></li>
 </ul>
+=======
+<li><p><strong>Silhouette Coefficient</strong>: …</p></li>
+</ul>
+<figure class="align-center" id="scatter-linear-pca203-k2">
+<a class="reference internal image-reference" href="img/clustering_knime/linear_pca203_k2.png"><img alt="img/clustering_knime/linear_pca203_k2.png" src="img/clustering_knime/linear_pca203_k2.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Scatter plot K-Means fitur linear, PCA 203 dimensi, K = 2</span><a class="headerlink" href="#scatter-linear-pca203-k2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>K = 3</strong></p>
+<ul class="simple">
+<li><p><strong>Silhouette Coefficient</strong>: …</p></li>
+</ul>
+<figure class="align-center" id="scatter-linear-pca203-k3">
+<a class="reference internal image-reference" href="img/clustering_knime/linear_pca203_k3.png"><img alt="img/clustering_knime/linear_pca203_k3.png" src="img/clustering_knime/linear_pca203_k3.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Scatter plot K-Means fitur linear, PCA 203 dimensi, K = 3</span><a class="headerlink" href="#scatter-linear-pca203-k3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>K = 4</strong></p>
+<ul class="simple">
+<li><p><strong>Silhouette Coefficient</strong>: …</p></li>
+</ul>
+<figure class="align-center" id="scatter-linear-pca203-k4">
+<a class="reference internal image-reference" href="img/clustering_knime/linear_pca203_k4.png"><img alt="img/clustering_knime/linear_pca203_k4.png" src="img/clustering_knime/linear_pca203_k4.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Scatter plot K-Means fitur linear, PCA 203 dimensi, K = 4</span><a class="headerlink" href="#scatter-linear-pca203-k4" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 </section>
 <section id="pca-74-dimensi">
 <h3>2.2 PCA 74 Dimensi<a class="headerlink" href="#pca-74-dimensi" title="Link to this heading">#</a></h3>
 <p><strong>K = 2</strong></p>
 <ul class="simple">
+<<<<<<< HEAD
 <li><p><strong>Silhouette Coefficient</strong>: <strong>0.769</strong> — Identik dengan PCA 203, mengonfirmasi bahwa reduksi dari 203 ke 74 dimensi tidak menghilangkan informasi apapun.</p></li>
 </ul>
 <p><strong>K = 3</strong></p>
@@ -558,11 +621,42 @@ document.write(`
 <ul class="simple">
 <li><p><strong>Silhouette Coefficient</strong>: <strong>0.089</strong> — Tetap rendah seperti PCA 203, menunjukkan bahwa masalah bukan pada dimensi tetapi pada jumlah cluster yang terlalu banyak untuk data 37 daerah.</p></li>
 </ul>
+=======
+<li><p><strong>Silhouette Coefficient</strong>: …</p></li>
+</ul>
+<figure class="align-center" id="scatter-linear-pca74-k2">
+<a class="reference internal image-reference" href="img/clustering_knime/linear_pca74_k2.png"><img alt="img/clustering_knime/linear_pca74_k2.png" src="img/clustering_knime/linear_pca74_k2.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Scatter plot K-Means fitur linear, PCA 74 dimensi, K = 2</span><a class="headerlink" href="#scatter-linear-pca74-k2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>K = 3</strong></p>
+<ul class="simple">
+<li><p><strong>Silhouette Coefficient</strong>: …</p></li>
+</ul>
+<figure class="align-center" id="scatter-linear-pca74-k3">
+<a class="reference internal image-reference" href="img/clustering_knime/linear_pca74_k3.png"><img alt="img/clustering_knime/linear_pca74_k3.png" src="img/clustering_knime/linear_pca74_k3.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Scatter plot K-Means fitur linear, PCA 74 dimensi, K = 3</span><a class="headerlink" href="#scatter-linear-pca74-k3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>K = 4</strong></p>
+<ul class="simple">
+<li><p><strong>Silhouette Coefficient</strong>: …</p></li>
+</ul>
+<figure class="align-center" id="scatter-linear-pca74-k4">
+<a class="reference internal image-reference" href="img/clustering_knime/linear_pca74_k4.png"><img alt="img/clustering_knime/linear_pca74_k4.png" src="img/clustering_knime/linear_pca74_k4.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">Scatter plot K-Means fitur linear, PCA 74 dimensi, K = 4</span><a class="headerlink" href="#scatter-linear-pca74-k4" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 </section>
 <section id="pca-37-dimensi">
 <h3>2.3 PCA 37 Dimensi<a class="headerlink" href="#pca-37-dimensi" title="Link to this heading">#</a></h3>
 <p><strong>K = 2</strong></p>
 <ul class="simple">
+<<<<<<< HEAD
 <li><p><strong>Silhouette Coefficient</strong>: <strong>0.769</strong> — Hasil tetap konsisten meskipun dimensi sudah direduksi ke batas minimum rank data.</p></li>
 </ul>
 <p><strong>K = 3</strong></p>
@@ -573,6 +667,36 @@ document.write(`
 <ul class="simple">
 <li><p><strong>Silhouette Coefficient</strong>: <strong>0.089</strong> — Sama rendah di semua dimensi PCA. Ini menandakan bahwa K=4 memang tidak sesuai untuk data ini.</p></li>
 </ul>
+=======
+<li><p><strong>Silhouette Coefficient</strong>: …</p></li>
+</ul>
+<figure class="align-center" id="scatter-linear-pca37-k2">
+<a class="reference internal image-reference" href="img/clustering_knime/linear_pca37_k2.png"><img alt="img/clustering_knime/linear_pca37_k2.png" src="img/clustering_knime/linear_pca37_k2.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Scatter plot K-Means fitur linear, PCA 37 dimensi, K = 2</span><a class="headerlink" href="#scatter-linear-pca37-k2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>K = 3</strong></p>
+<ul class="simple">
+<li><p><strong>Silhouette Coefficient</strong>: …</p></li>
+</ul>
+<figure class="align-center" id="scatter-linear-pca37-k3">
+<a class="reference internal image-reference" href="img/clustering_knime/linear_pca37_k3.png"><img alt="img/clustering_knime/linear_pca37_k3.png" src="img/clustering_knime/linear_pca37_k3.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">Scatter plot K-Means fitur linear, PCA 37 dimensi, K = 3</span><a class="headerlink" href="#scatter-linear-pca37-k3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>K = 4</strong></p>
+<ul class="simple">
+<li><p><strong>Silhouette Coefficient</strong>: …</p></li>
+</ul>
+<figure class="align-center" id="scatter-linear-pca37-k4">
+<a class="reference internal image-reference" href="img/clustering_knime/linear_pca37_k4.png"><img alt="img/clustering_knime/linear_pca37_k4.png" src="img/clustering_knime/linear_pca37_k4.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Scatter plot K-Means fitur linear, PCA 37 dimensi, K = 4</span><a class="headerlink" href="#scatter-linear-pca37-k4" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 </section>
 </section>
 <hr class="docutils" />
@@ -583,6 +707,7 @@ document.write(`
 <h3>3.1 PCA 203 Dimensi<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p><strong>K = 2</strong></p>
 <ul class="simple">
+<<<<<<< HEAD
 <li><p><strong>Silhouette Coefficient</strong>: <strong>0.634</strong></p></li>
 </ul>
 <figure class="align-center" id="scatter-polynomial-pca203-k2">
@@ -595,10 +720,19 @@ document.write(`
 <a class="reference internal image-reference" href="_images/silhouette_polynomial_pca203_k2.png"><img alt="_images/silhouette_polynomial_pca203_k2.png" src="_images/silhouette_polynomial_pca203_k2.png" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4 </span><span class="caption-text">Silhouette Coefficient fitur polynomial, PCA 203 dimensi, K = 2</span><a class="headerlink" href="#sil-polynomial-pca203-k2" title="Link to this image">#</a></p>
+=======
+<li><p><strong>Silhouette Coefficient</strong>: …</p></li>
+</ul>
+<figure class="align-center" id="scatter-polynomial-pca203-k2">
+<a class="reference internal image-reference" href="img/clustering_knime/polynomial_pca203_k2.png"><img alt="img/clustering_knime/polynomial_pca203_k2.png" src="img/clustering_knime/polynomial_pca203_k2.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 12 </span><span class="caption-text">Scatter plot K-Means fitur polynomial, PCA 203 dimensi, K = 2</span><a class="headerlink" href="#scatter-polynomial-pca203-k2" title="Link to this image">#</a></p>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 </figcaption>
 </figure>
 <p><strong>K = 3</strong></p>
 <ul class="simple">
+<<<<<<< HEAD
 <li><p><strong>Silhouette Coefficient</strong>: <strong>0.471</strong></p></li>
 </ul>
 <figure class="align-center" id="scatter-polynomial-pca203-k3">
@@ -611,10 +745,19 @@ document.write(`
 <a class="reference internal image-reference" href="_images/silhouette_polynomial_pca203_k3.png"><img alt="_images/silhouette_polynomial_pca203_k3.png" src="_images/silhouette_polynomial_pca203_k3.png" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6 </span><span class="caption-text">Silhouette Coefficient fitur polynomial, PCA 203 dimensi, K = 3</span><a class="headerlink" href="#sil-polynomial-pca203-k3" title="Link to this image">#</a></p>
+=======
+<li><p><strong>Silhouette Coefficient</strong>: …</p></li>
+</ul>
+<figure class="align-center" id="scatter-polynomial-pca203-k3">
+<a class="reference internal image-reference" href="img/clustering_knime/polynomial_pca203_k3.png"><img alt="img/clustering_knime/polynomial_pca203_k3.png" src="img/clustering_knime/polynomial_pca203_k3.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">Scatter plot K-Means fitur polynomial, PCA 203 dimensi, K = 3</span><a class="headerlink" href="#scatter-polynomial-pca203-k3" title="Link to this image">#</a></p>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 </figcaption>
 </figure>
 <p><strong>K = 4</strong></p>
 <ul class="simple">
+<<<<<<< HEAD
 <li><p><strong>Silhouette Coefficient</strong>: <strong>0.466</strong></p></li>
 </ul>
 <figure class="align-center" id="scatter-polynomial-pca203-k4">
@@ -627,6 +770,14 @@ document.write(`
 <a class="reference internal image-reference" href="_images/silhouette_polynomial_pca203_k4.png"><img alt="_images/silhouette_polynomial_pca203_k4.png" src="_images/silhouette_polynomial_pca203_k4.png" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8 </span><span class="caption-text">Silhouette Coefficient fitur polynomial, PCA 203 dimensi, K = 4</span><a class="headerlink" href="#sil-polynomial-pca203-k4" title="Link to this image">#</a></p>
+=======
+<li><p><strong>Silhouette Coefficient</strong>: …</p></li>
+</ul>
+<figure class="align-center" id="scatter-polynomial-pca203-k4">
+<a class="reference internal image-reference" href="img/clustering_knime/polynomial_pca203_k4.png"><img alt="img/clustering_knime/polynomial_pca203_k4.png" src="img/clustering_knime/polynomial_pca203_k4.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 14 </span><span class="caption-text">Scatter plot K-Means fitur polynomial, PCA 203 dimensi, K = 4</span><a class="headerlink" href="#scatter-polynomial-pca203-k4" title="Link to this image">#</a></p>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 </figcaption>
 </figure>
 </section>
@@ -634,6 +785,7 @@ document.write(`
 <h3>3.2 PCA 74 Dimensi<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <p><strong>K = 2</strong></p>
 <ul class="simple">
+<<<<<<< HEAD
 <li><p><strong>Silhouette Coefficient</strong>: <strong>0.634</strong></p></li>
 </ul>
 <figure class="align-center" id="scatter-polynomial-pca74-k2">
@@ -646,10 +798,19 @@ document.write(`
 <a class="reference internal image-reference" href="_images/silhouette_polynomial_pca74_k2.png"><img alt="_images/silhouette_polynomial_pca74_k2.png" src="_images/silhouette_polynomial_pca74_k2.png" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 10 </span><span class="caption-text">Silhouette Coefficient fitur polynomial, PCA 74 dimensi, K = 2</span><a class="headerlink" href="#sil-polynomial-pca74-k2" title="Link to this image">#</a></p>
+=======
+<li><p><strong>Silhouette Coefficient</strong>: …</p></li>
+</ul>
+<figure class="align-center" id="scatter-polynomial-pca74-k2">
+<a class="reference internal image-reference" href="img/clustering_knime/polynomial_pca74_k2.png"><img alt="img/clustering_knime/polynomial_pca74_k2.png" src="img/clustering_knime/polynomial_pca74_k2.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 15 </span><span class="caption-text">Scatter plot K-Means fitur polynomial, PCA 74 dimensi, K = 2</span><a class="headerlink" href="#scatter-polynomial-pca74-k2" title="Link to this image">#</a></p>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 </figcaption>
 </figure>
 <p><strong>K = 3</strong></p>
 <ul class="simple">
+<<<<<<< HEAD
 <li><p><strong>Silhouette Coefficient</strong>: <strong>0.471</strong></p></li>
 </ul>
 <figure class="align-center" id="scatter-polynomial-pca74-k3">
@@ -662,10 +823,19 @@ document.write(`
 <a class="reference internal image-reference" href="_images/silhouette_polynomial_pca74_k3.png"><img alt="_images/silhouette_polynomial_pca74_k3.png" src="_images/silhouette_polynomial_pca74_k3.png" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 12 </span><span class="caption-text">Silhouette Coefficient fitur polynomial, PCA 74 dimensi, K = 3</span><a class="headerlink" href="#sil-polynomial-pca74-k3" title="Link to this image">#</a></p>
+=======
+<li><p><strong>Silhouette Coefficient</strong>: …</p></li>
+</ul>
+<figure class="align-center" id="scatter-polynomial-pca74-k3">
+<a class="reference internal image-reference" href="img/clustering_knime/polynomial_pca74_k3.png"><img alt="img/clustering_knime/polynomial_pca74_k3.png" src="img/clustering_knime/polynomial_pca74_k3.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Scatter plot K-Means fitur polynomial, PCA 74 dimensi, K = 3</span><a class="headerlink" href="#scatter-polynomial-pca74-k3" title="Link to this image">#</a></p>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 </figcaption>
 </figure>
 <p><strong>K = 4</strong></p>
 <ul class="simple">
+<<<<<<< HEAD
 <li><p><strong>Silhouette Coefficient</strong>: <strong>0.466</strong></p></li>
 </ul>
 <figure class="align-center" id="scatter-polynomial-pca74-k4">
@@ -678,6 +848,14 @@ document.write(`
 <a class="reference internal image-reference" href="_images/silhouette_polynomial_pca74_k4.png"><img alt="_images/silhouette_polynomial_pca74_k4.png" src="_images/silhouette_polynomial_pca74_k4.png" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 14 </span><span class="caption-text">Silhouette Coefficient fitur polynomial, PCA 74 dimensi, K = 4</span><a class="headerlink" href="#sil-polynomial-pca74-k4" title="Link to this image">#</a></p>
+=======
+<li><p><strong>Silhouette Coefficient</strong>: …</p></li>
+</ul>
+<figure class="align-center" id="scatter-polynomial-pca74-k4">
+<a class="reference internal image-reference" href="img/clustering_knime/polynomial_pca74_k4.png"><img alt="img/clustering_knime/polynomial_pca74_k4.png" src="img/clustering_knime/polynomial_pca74_k4.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 17 </span><span class="caption-text">Scatter plot K-Means fitur polynomial, PCA 74 dimensi, K = 4</span><a class="headerlink" href="#scatter-polynomial-pca74-k4" title="Link to this image">#</a></p>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 </figcaption>
 </figure>
 </section>
@@ -685,6 +863,7 @@ document.write(`
 <h3>3.3 PCA 37 Dimensi<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p><strong>K = 2</strong></p>
 <ul class="simple">
+<<<<<<< HEAD
 <li><p><strong>Silhouette Coefficient</strong>: <strong>0.634</strong></p></li>
 </ul>
 <figure class="align-center" id="scatter-polynomial-pca37-k2">
@@ -697,10 +876,19 @@ document.write(`
 <a class="reference internal image-reference" href="_images/silhouette_polynomial_pca37_k2.png"><img alt="_images/silhouette_polynomial_pca37_k2.png" src="_images/silhouette_polynomial_pca37_k2.png" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 16 </span><span class="caption-text">Silhouette Coefficient fitur polynomial, PCA 37 dimensi, K = 2</span><a class="headerlink" href="#sil-polynomial-pca37-k2" title="Link to this image">#</a></p>
+=======
+<li><p><strong>Silhouette Coefficient</strong>: …</p></li>
+</ul>
+<figure class="align-center" id="scatter-polynomial-pca37-k2">
+<a class="reference internal image-reference" href="img/clustering_knime/polynomial_pca37_k2.png"><img alt="img/clustering_knime/polynomial_pca37_k2.png" src="img/clustering_knime/polynomial_pca37_k2.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 18 </span><span class="caption-text">Scatter plot K-Means fitur polynomial, PCA 37 dimensi, K = 2</span><a class="headerlink" href="#scatter-polynomial-pca37-k2" title="Link to this image">#</a></p>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 </figcaption>
 </figure>
 <p><strong>K = 3</strong></p>
 <ul class="simple">
+<<<<<<< HEAD
 <li><p><strong>Silhouette Coefficient</strong>: <strong>0.471</strong></p></li>
 </ul>
 <figure class="align-center" id="scatter-polynomial-pca37-k3">
@@ -713,10 +901,19 @@ document.write(`
 <a class="reference internal image-reference" href="_images/silhouette_polynomial_pca37_k3.png"><img alt="_images/silhouette_polynomial_pca37_k3.png" src="_images/silhouette_polynomial_pca37_k3.png" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 18 </span><span class="caption-text">Silhouette Coefficient fitur polynomial, PCA 37 dimensi, K = 3</span><a class="headerlink" href="#sil-polynomial-pca37-k3" title="Link to this image">#</a></p>
+=======
+<li><p><strong>Silhouette Coefficient</strong>: …</p></li>
+</ul>
+<figure class="align-center" id="scatter-polynomial-pca37-k3">
+<a class="reference internal image-reference" href="img/clustering_knime/polynomial_pca37_k3.png"><img alt="img/clustering_knime/polynomial_pca37_k3.png" src="img/clustering_knime/polynomial_pca37_k3.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Scatter plot K-Means fitur polynomial, PCA 37 dimensi, K = 3</span><a class="headerlink" href="#scatter-polynomial-pca37-k3" title="Link to this image">#</a></p>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 </figcaption>
 </figure>
 <p><strong>K = 4</strong></p>
 <ul class="simple">
+<<<<<<< HEAD
 <li><p><strong>Silhouette Coefficient</strong>: <strong>0.466</strong></p></li>
 </ul>
 <figure class="align-center" id="scatter-polynomial-pca37-k4">
@@ -729,6 +926,14 @@ document.write(`
 <a class="reference internal image-reference" href="_images/silhouette_polynomial_pca37_k4.png"><img alt="_images/silhouette_polynomial_pca37_k4.png" src="_images/silhouette_polynomial_pca37_k4.png" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 20 </span><span class="caption-text">Silhouette Coefficient fitur polynomial, PCA 37 dimensi, K = 4</span><a class="headerlink" href="#sil-polynomial-pca37-k4" title="Link to this image">#</a></p>
+=======
+<li><p><strong>Silhouette Coefficient</strong>: …</p></li>
+</ul>
+<figure class="align-center" id="scatter-polynomial-pca37-k4">
+<a class="reference internal image-reference" href="img/clustering_knime/polynomial_pca37_k4.png"><img alt="img/clustering_knime/polynomial_pca37_k4.png" src="img/clustering_knime/polynomial_pca37_k4.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 20 </span><span class="caption-text">Scatter plot K-Means fitur polynomial, PCA 37 dimensi, K = 4</span><a class="headerlink" href="#scatter-polynomial-pca37-k4" title="Link to this image">#</a></p>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 </figcaption>
 </figure>
 </section>
@@ -749,6 +954,7 @@ document.write(`
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-center"><p><strong>K = 2</strong></p></td>
+<<<<<<< HEAD
 <td class="text-center"><p><strong>0.769</strong></p></td>
 <td class="text-center"><p><strong>0.769</strong></p></td>
 <td class="text-center"><p><strong>0.769</strong></p></td>
@@ -762,6 +968,21 @@ document.write(`
 <td class="text-center"><p>0.089</p></td>
 <td class="text-center"><p>0.089</p></td>
 <td class="text-center"><p>0.089</p></td>
+=======
+<td class="text-center"><p>…</p></td>
+<td class="text-center"><p>…</p></td>
+<td class="text-center"><p>…</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><strong>K = 3</strong></p></td>
+<td class="text-center"><p>…</p></td>
+<td class="text-center"><p>…</p></td>
+<td class="text-center"><p>…</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><strong>K = 4</strong></p></td>
+<td class="text-center"><p>…</p></td>
+<td class="text-center"><p>…</p></td>
+<td class="text-center"><p>…</p></td>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 </tr>
 </tbody>
 </table>
@@ -779,6 +1000,7 @@ document.write(`
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-center"><p><strong>K = 2</strong></p></td>
+<<<<<<< HEAD
 <td class="text-center"><p><strong>0.634</strong></p></td>
 <td class="text-center"><p><strong>0.634</strong></p></td>
 <td class="text-center"><p><strong>0.634</strong></p></td>
@@ -792,6 +1014,21 @@ document.write(`
 <td class="text-center"><p>0.466</p></td>
 <td class="text-center"><p>0.466</p></td>
 <td class="text-center"><p>0.466</p></td>
+=======
+<td class="text-center"><p>…</p></td>
+<td class="text-center"><p>…</p></td>
+<td class="text-center"><p>…</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><strong>K = 3</strong></p></td>
+<td class="text-center"><p>…</p></td>
+<td class="text-center"><p>…</p></td>
+<td class="text-center"><p>…</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><strong>K = 4</strong></p></td>
+<td class="text-center"><p>…</p></td>
+<td class="text-center"><p>…</p></td>
+<td class="text-center"><p>…</p></td>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 </tr>
 </tbody>
 </table>
@@ -805,10 +1042,17 @@ document.write(`
 <p><strong>Dasar teori.</strong> Jumlah daerah observasi (baris data) hanya <strong>37</strong>, sedangkan jumlah fiturnya 204. Matriks data dengan 37 baris memiliki <em>rank</em> maksimum 37, sehingga seluruh variasi yang ada di antara daerah sudah tertampung dalam paling banyak 37 komponen utama. Konsekuensinya, PCA 203 dan PCA 74 tidak membuang informasi struktural, dan PCA 37 hanya membuang ruang kosong. Jarak Euclidean antar daerah tetap sama di ketiga dimensi, sehingga K-Means pada kondisi yang sama diharapkan memberi susunan cluster dan skor silhouette yang sama.</p>
 <p><strong>Temuan eksperimen.</strong></p>
 <ul class="simple">
+<<<<<<< HEAD
 <li><p>Fitur linear: Skor silhouette identik di ketiga dimensi PCA untuk setiap K (K=2: 0.769; K=3: 0.639; K=4: 0.089). Pola ini sepenuhnya konsisten dengan teori bahwa rank data ≤ 36, sehingga variasi informasi sudah tertampung pada 37 komponen pertama.</p></li>
 <li><p>Fitur polynomial: Skor silhouette juga identik di PCA 203, 74, dan 37 untuk setiap K (K=2: 0.634; K=3: 0.471; K=4: 0.466). Hasil ini lebih stabil di K=4 dibanding linear, menunjukkan bahwa transformasi polynomial membuat jarak antar cluster lebih merata.</p></li>
 </ul>
 <p><strong>Implikasi praktis.</strong> Karena hasilnya tidak bergantung pada jumlah komponen, PCA 37 menjadi pilihan paling efisien. Dimensinya paling kecil sehingga komputasi K-Means paling ringan, sementara kualitas clustering tidak berkurang. Temuan ini berlaku baik untuk fitur linear maupun polynomial.</p>
+=======
+<li><p>Fitur linear: …</p></li>
+<li><p>Fitur polynomial: …</p></li>
+</ul>
+<p><strong>Implikasi praktis.</strong> Karena hasilnya tidak bergantung pada jumlah komponen, PCA 37 menjadi pilihan paling efisien. Dimensinya paling kecil sehingga komputasi K-Means paling ringan, sementara kualitas clustering tidak berkurang.</p>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 </section>
 <hr class="docutils" />
 <section id="penentuan-cluster-terbaik">
@@ -824,6 +1068,7 @@ document.write(`
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-center"><p>Linear</p></td>
+<<<<<<< HEAD
 <td class="text-center"><p>37 (sama untuk semua)</p></td>
 <td class="text-center"><p>K = 2</p></td>
 <td class="text-center"><p><strong>0.769</strong></p></td>
@@ -832,12 +1077,23 @@ document.write(`
 <td class="text-center"><p>37 (sama untuk semua)</p></td>
 <td class="text-center"><p>K = 2</p></td>
 <td class="text-center"><p><strong>0.634</strong></p></td>
+=======
+<td class="text-center"><p>…</p></td>
+<td class="text-center"><p>…</p></td>
+<td class="text-center"><p>…</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Polynomial</p></td>
+<td class="text-center"><p>…</p></td>
+<td class="text-center"><p>…</p></td>
+<td class="text-center"><p>…</p></td>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 </tr>
 </tbody>
 </table>
 </div>
 <p><strong>Analisis per reduksi dimensi.</strong></p>
 <ul class="simple">
+<<<<<<< HEAD
 <li><p><strong>PCA 203</strong>: K terbaik = 2 untuk kedua jenis fitur (linear sil. 0.769; polynomial sil. 0.634). Dua cluster sudah mampu memisahkan kelompok daerah dengan jelas. Penambahan cluster ke 3 atau 4 menurunkan skor karena beberapa daerah berpindah ke cluster baru yang kurang kohesif.</p></li>
 <li><p><strong>PCA 74</strong>: K terbaik = 2 untuk kedua jenis fitur (linear sil. 0.769; polynomial sil. 0.634). Hasilnya identik dengan PCA 203, sesuai ekspektasi bahwa dimensi 74 masih jauh di atas rank data.</p></li>
 <li><p><strong>PCA 37</strong>: K terbaik = 2 untuk kedua jenis fitur (linear sil. 0.769; polynomial sil. 0.634). Meski dimensi paling rendah, skor silhouette tetap sama sehingga menjadi opsi paling efisien secara komputasi.</p></li>
@@ -1147,6 +1403,19 @@ Silhouette Coefficient (Overall): 0.089
 <h2>8. Pemetaan Segmentasi Wilayah<a class="headerlink" href="#pemetaan-segmentasi-wilayah" title="Link to this heading">#</a></h2>
 <p>Hasil clustering ditampilkan pada peta interaktif Folium. Peta dibuat untuk <strong>K = 4</strong> pada fitur polynomial dan linear, menggunakan hasil clustering dari PCA 37 dimensi. Klik marker untuk melihat nama daerah, cluster, dan koordinatnya. Layer cluster dapat dinyalakan dan dimatikan lewat kontrol di kanan atas.</p>
 <p>File CSV yang dibaca berada di <code class="docutils literal notranslate"><span class="pre">./source/cluster_daerah/</span></code> dengan pola nama <code class="docutils literal notranslate"><span class="pre">hasil_clustering_&lt;jenis&gt;_k&lt;K&gt;.csv</span></code> (contoh: <code class="docutils literal notranslate"><span class="pre">hasil_clustering_polynomial_k4.csv</span></code>). Setiap file memuat kolom <code class="docutils literal notranslate"><span class="pre">daerah</span></code> dan <code class="docutils literal notranslate"><span class="pre">Cluster</span></code> (label dari KNIME, misalnya <code class="docutils literal notranslate"><span class="pre">cluster_0</span></code>).</p>
+=======
+<li><p><strong>PCA 203</strong>: K terbaik = …, alasan: …</p></li>
+<li><p><strong>PCA 74</strong>: K terbaik = …, alasan: …</p></li>
+<li><p><strong>PCA 37</strong>: K terbaik = …, alasan: …</p></li>
+</ul>
+<p><strong>Perbandingan linear dan polynomial.</strong> …</p>
+</section>
+<hr class="docutils" />
+<section id="pemetaan-segmentasi-wilayah">
+<h2>7. Pemetaan Segmentasi Wilayah<a class="headerlink" href="#pemetaan-segmentasi-wilayah" title="Link to this heading">#</a></h2>
+<p>Hasil clustering ditampilkan pada peta interaktif Folium. Untuk setiap jenis fitur dibuat <strong>tiga peta</strong>, satu untuk tiap nilai K (2, 3, dan 4). Peta bersumber dari hasil clustering PCA 37 dimensi sebagai wakil, karena pembagian cluster antar reduksi dimensi dibandingkan pada bagian sebelumnya. Klik marker untuk melihat nama daerah, cluster, dan koordinatnya. Layer cluster dapat dinyalakan dan dimatikan lewat kontrol di kanan atas.</p>
+<p>File CSV yang dibaca berada di <code class="docutils literal notranslate"><span class="pre">./source/cluster_daerah/</span></code> dengan pola nama <code class="docutils literal notranslate"><span class="pre">hasil_clustering_&lt;jenis&gt;_k&lt;K&gt;.csv</span></code> (contoh: <code class="docutils literal notranslate"><span class="pre">hasil_clustering_linear_k2.csv</span></code>). Setiap file memuat kolom <code class="docutils literal notranslate"><span class="pre">daerah</span></code> dan <code class="docutils literal notranslate"><span class="pre">Cluster</span></code> (label dari KNIME, misalnya <code class="docutils literal notranslate"><span class="pre">cluster_0</span></code>).</p>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 <p>Koordinat daerah dicari dengan urutan prioritas berikut: (1) kolom <code class="docutils literal notranslate"><span class="pre">latitude</span></code> dan <code class="docutils literal notranslate"><span class="pre">longitude</span></code> di CSV, (2) file <code class="docutils literal notranslate"><span class="pre">koordinat_daerah.csv</span></code> di folder yang sama, (3) kamus <code class="docutils literal notranslate"><span class="pre">KAMUS_KOORDINAT</span></code> di kode, yang berisi titik perkiraan pusat kota atau kabupaten. Titik dari kamus diberi pergeseran kecil agar marker tidak bertumpuk, sehingga posisinya bersifat perkiraan. Daerah yang koordinatnya tidak ditemukan dilewati dan namanya dicetak di output sel.</p>
 <section id="persiapan-fungsi-peta">
 <h3>Persiapan Fungsi Peta<a class="headerlink" href="#persiapan-fungsi-peta" title="Link to this heading">#</a></h3>
@@ -1178,10 +1447,18 @@ Silhouette Coefficient (Overall): 0.089
     <span class="s2">&quot;Cluster 3&quot;</span><span class="p">:</span> <span class="s2">&quot;#fb8c00&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 
+<<<<<<< HEAD
 <span class="c1"># Skor Silhouette Coefficient dari KNIME (PCA 37).</span>
 <span class="n">SILHOUETTE</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;linear&quot;</span><span class="p">:</span> <span class="p">{</span><span class="mi">2</span><span class="p">:</span> <span class="mf">0.769</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mf">0.639</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="mf">0.089</span><span class="p">},</span>
     <span class="s2">&quot;polynomial&quot;</span><span class="p">:</span> <span class="p">{</span><span class="mi">2</span><span class="p">:</span> <span class="mf">0.634</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mf">0.471</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="mf">0.466</span><span class="p">},</span>
+=======
+<span class="c1"># Isi dengan skor Silhouette Coefficient dari KNIME (PCA 37).</span>
+<span class="c1"># Nilai None akan ditampilkan sebagai tanda &quot;-&quot; pada legenda.</span>
+<span class="n">SILHOUETTE</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;linear&quot;</span><span class="p">:</span> <span class="p">{</span><span class="mi">2</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+    <span class="s2">&quot;polynomial&quot;</span><span class="p">:</span> <span class="p">{</span><span class="mi">2</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 <span class="p">}</span>
 
 <span class="n">NAMA_JENIS</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;linear&quot;</span><span class="p">:</span> <span class="s2">&quot;Linear&quot;</span><span class="p">,</span> <span class="s2">&quot;polynomial&quot;</span><span class="p">:</span> <span class="s2">&quot;Polynomial&quot;</span><span class="p">}</span>
@@ -1190,6 +1467,7 @@ Silhouette Coefficient (Overall): 0.089
 <span class="c1"># Titik perkiraan pusat kota/kabupaten, dipakai jika CSV tidak punya koordinat.</span>
 <span class="c1"># Urutan penting: kata kunci yang lebih spesifik diletakkan lebih dulu.</span>
 <span class="n">KAMUS_KOORDINAT</span> <span class="o">=</span> <span class="p">{</span>
+<<<<<<< HEAD
     <span class="s2">&quot;warudoyong&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">6.9252</span><span class="p">,</span> <span class="mf">106.9267</span><span class="p">),</span>
     <span class="s2">&quot;jogoroto&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">7.5447</span><span class="p">,</span> <span class="mf">112.2189</span><span class="p">),</span>
     <span class="s2">&quot;jombang&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">7.5407</span><span class="p">,</span> <span class="mf">112.2338</span><span class="p">),</span>
@@ -1204,6 +1482,8 @@ Silhouette Coefficient (Overall): 0.089
     <span class="s2">&quot;tanah merah&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">7.0869</span><span class="p">,</span> <span class="mf">112.7839</span><span class="p">),</span>
     <span class="s2">&quot;dukun&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">7.0152</span><span class="p">,</span> <span class="mf">112.5497</span><span class="p">),</span>
     <span class="s2">&quot;cerme&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">7.2209</span><span class="p">,</span> <span class="mf">112.5973</span><span class="p">),</span>
+=======
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
     <span class="s2">&quot;baron&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">7.6033</span><span class="p">,</span> <span class="mf">112.0601</span><span class="p">),</span>
     <span class="s2">&quot;sreseh&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">7.1983</span><span class="p">,</span> <span class="mf">113.0805</span><span class="p">),</span>
     <span class="s2">&quot;banyu ajuh&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">7.1585</span><span class="p">,</span> <span class="mf">112.7280</span><span class="p">),</span>
@@ -1235,8 +1515,11 @@ Silhouette Coefficient (Overall): 0.089
     <span class="s2">&quot;jakarta&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">6.2088</span><span class="p">,</span> <span class="mf">106.8456</span><span class="p">),</span>
     <span class="s2">&quot;ngawi&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">7.4039</span><span class="p">,</span> <span class="mf">111.4460</span><span class="p">),</span>
     <span class="s2">&quot;nunukan&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">4.1333</span><span class="p">,</span> <span class="mf">117.6667</span><span class="p">),</span>
+<<<<<<< HEAD
     <span class="s2">&quot;sukabumi&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">6.9225</span><span class="p">,</span> <span class="mf">106.9298</span><span class="p">),</span>
     <span class="s2">&quot;waru&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mf">7.3564</span><span class="p">,</span> <span class="mf">112.7375</span><span class="p">),</span>
+=======
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 <span class="p">}</span>
 
 
@@ -1382,8 +1665,15 @@ Silhouette Coefficient (Overall): 0.089
 </details>
 </div>
 </section>
+<<<<<<< HEAD
 <section id="a-peta-cluster-fitur-polynomial-k-4">
 <h3>A. Peta Cluster Fitur Polynomial (K = 4)<a class="headerlink" href="#a-peta-cluster-fitur-polynomial-k-4" title="Link to this heading">#</a></h3>
+=======
+<section id="a-peta-cluster-fitur-linear">
+<h3>A. Peta Cluster Fitur Linear<a class="headerlink" href="#a-peta-cluster-fitur-linear" title="Link to this heading">#</a></h3>
+<section id="a-1-peta-k-2">
+<h4>A.1 Peta K = 2<a class="headerlink" href="#a-1-peta-k-2" title="Link to this heading">#</a></h4>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -1391,12 +1681,17 @@ Silhouette Coefficient (Overall): 0.089
 <p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
+<<<<<<< HEAD
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">peta</span><span class="p">(</span><span class="s2">&quot;polynomial&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+=======
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">peta</span><span class="p">(</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 </pre></div>
 </div>
 </div>
 </details>
 <div class="cell_output docutils container">
+<<<<<<< HEAD
 <div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -3281,6 +3576,109 @@ Silhouette Coefficient (Overall): 0.089
 </section>
 <section id="b-peta-cluster-fitur-linear-k-4">
 <h3>B. Peta Cluster Fitur Linear (K = 4)<a class="headerlink" href="#b-peta-cluster-fitur-linear-k-4" title="Link to this heading">#</a></h3>
+=======
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">peta</span><span class="p">(</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nn">Cell In[1], line 198,</span> in <span class="ni">peta</span><span class="nt">(jenis, k)</span>
+<span class="g g-Whitespace">    </span><span class="mi">197</span> <span class="k">def</span><span class="w"> </span><span class="nf">peta</span><span class="p">(</span><span class="n">jenis</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">198</span>     <span class="n">df</span> <span class="o">=</span> <span class="n">muat_data</span><span class="p">(</span><span class="n">jenis</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">199</span>     <span class="k">return</span> <span class="n">render_peta</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">200</span>         <span class="n">df</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">201</span>         <span class="n">nama_dataset</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">NAMA_JENIS</span><span class="p">[</span><span class="n">jenis</span><span class="p">]</span><span class="si">}</span><span class="s2"> (PCA-37)&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">202</span>         <span class="n">k_val</span><span class="o">=</span><span class="n">k</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">203</span>         <span class="n">sil_score</span><span class="o">=</span><span class="n">SILHOUETTE</span><span class="p">[</span><span class="n">jenis</span><span class="p">][</span><span class="n">k</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">204</span>     <span class="p">)</span>
+
+<span class="nn">Cell In[1], line 95,</span> in <span class="ni">muat_data</span><span class="nt">(jenis, k)</span>
+<span class="g g-Whitespace">     </span><span class="mi">93</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Membaca CSV hasil clustering dan memastikan koordinat tersedia.&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span> <span class="n">path</span> <span class="o">=</span> <span class="n">FOLDER_HASIL</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;hasil_clustering_</span><span class="si">{</span><span class="n">jenis</span><span class="si">}</span><span class="s2">_k</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">.csv&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">95</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="nn">     97 kolom_cluster = next((c for c</span> in <span class="ni">df.columns if c.lower</span><span class="nt">() == &quot;cluster&quot;), None)</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span> <span class="k">if</span> <span class="n">kolom_cluster</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\pandas\io\parsers\readers.py:1026,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1013</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1014</span>     <span class="n">dialect</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1015</span>     <span class="n">delimiter</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1022</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1023</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1024</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1026</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\pandas\io\parsers\readers.py:620,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">617</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">619</span> <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">620</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">622</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">623</span>     <span class="k">return</span> <span class="n">parser</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\pandas\io\parsers\readers.py:1620,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1617</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1619</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">-&gt; </span><span class="mi">1620</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\pandas\io\parsers\readers.py:1880,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1878</span>     <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1879</span>         <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1880</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1881</span>     <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1882</span>     <span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1883</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1884</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1885</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1886</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1887</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1888</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1889</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1890</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1891</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\pandas\io\common.py:873,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">868</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">869</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
+<span class="g g-Whitespace">    </span><span class="mi">870</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
+<span class="g g-Whitespace">    </span><span class="mi">871</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">872</span>         <span class="c1"># Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">873</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">874</span>             <span class="n">handle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">875</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">876</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">877</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">878</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">879</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">880</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">881</span>         <span class="c1"># Binary mode</span>
+<span class="g g-Whitespace">    </span><span class="mi">882</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;source\\cluster_daerah\\hasil_clustering_linear_k2.csv&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-2-peta-k-3">
+<h4>A.2 Peta K = 3<a class="headerlink" href="#a-2-peta-k-3" title="Link to this heading">#</a></h4>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">peta</span><span class="p">(</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="a-3-peta-k-4">
+<h4>A.3 Peta K = 4<a class="headerlink" href="#a-3-peta-k-4" title="Link to this heading">#</a></h4>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -3293,6 +3691,7 @@ Silhouette Coefficient (Overall): 0.089
 </div>
 </div>
 </details>
+<<<<<<< HEAD
 <div class="cell_output docutils container">
 <div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
 &lt;html&gt;
@@ -5175,10 +5574,68 @@ Silhouette Coefficient (Overall): 0.089
 &lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
 </div>
 <p><strong>Interpretasi peta fitur linear (K = 4).</strong> Peta fitur linear menunjukkan pola pengelompokan yang serupa dengan fitur polynomial, karena kedua jenis fitur menggunakan data dasar yang sama (ekstraksi TSFEL dari tiga polutan). Distribusi spasial cluster menunjukkan bahwa daerah-daerah di pesisir utara Jawa Timur dan Madura cenderung tergabung dalam satu cluster besar, sementara daerah-daerah dengan pola polusi unik terpisah menjadi cluster tersendiri.</p>
+=======
+</div>
+<p><strong>Interpretasi peta fitur linear.</strong> …</p>
+</section>
+</section>
+<section id="b-peta-cluster-fitur-polynomial">
+<h3>B. Peta Cluster Fitur Polynomial<a class="headerlink" href="#b-peta-cluster-fitur-polynomial" title="Link to this heading">#</a></h3>
+<section id="b-1-peta-k-2">
+<h4>B.1 Peta K = 2<a class="headerlink" href="#b-1-peta-k-2" title="Link to this heading">#</a></h4>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">peta</span><span class="p">(</span><span class="s2">&quot;polynomial&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="b-2-peta-k-3">
+<h4>B.2 Peta K = 3<a class="headerlink" href="#b-2-peta-k-3" title="Link to this heading">#</a></h4>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">peta</span><span class="p">(</span><span class="s2">&quot;polynomial&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="b-3-peta-k-4">
+<h4>B.3 Peta K = 4<a class="headerlink" href="#b-3-peta-k-4" title="Link to this heading">#</a></h4>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">peta</span><span class="p">(</span><span class="s2">&quot;polynomial&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p><strong>Interpretasi peta fitur polynomial.</strong> …</p>
+</section>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 </section>
 </section>
 <hr class="docutils" />
 <section id="kesimpulan">
+<<<<<<< HEAD
 <h2>9. Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h2>
 <p>Dari eksperimen clustering K-Means pada gabungan tiga polutan (NO2, SO2, CO) dengan fitur linear dan polynomial, diperoleh kesimpulan berikut:</p>
 <ol class="arabic simple">
@@ -5186,6 +5643,15 @@ Silhouette Coefficient (Overall): 0.089
 <li><p><strong>Jumlah cluster terbaik.</strong> Untuk kedua jenis fitur, <strong>K = 2</strong> secara konsisten menghasilkan silhouette tertinggi (linear: 0.769; polynomial: 0.634). Pada K = 2, daerah terbagi menjadi satu kelompok mayoritas dengan pola polusi umum dan satu kelompok kecil outlier. K = 3 masih mempertahankan skor moderat (linear: 0.639; polynomial: 0.471), sedangkan K = 4 menunjukkan perilaku berbeda: skor linear turun tajam ke 0.089 sementara polynomial tetap di 0.466. Hal ini menunjukkan bahwa K = 2 atau K = 3 lebih robust untuk tujuan segmentasi umum.</p></li>
 <li><p><strong>Perbandingan fitur linear dan polynomial.</strong> Fitur linear unggul pada K = 2 (sil. 0.769 vs 0.634) karena fitur asli TSFEL sudah mampu memisahkan dua kelompok utama. Sebaliknya, fitur polynomial lebih stabil pada K = 4 (sil. 0.466 vs 0.089) karena transformasi polinomial menyebarkan data lebih merata di ruang fitur berdimensi tinggi, sehingga pembagian menjadi banyak cluster tetap kohesif. Kesimpulannya, pemilihan jenis fitur bergantung pada granularitas segmentasi yang diinginkan: <strong>linear untuk segmentasi kasar (K ≤ 3), polynomial untuk segmentasi halus (K ≥ 4)</strong>.</p></li>
 <li><p><strong>Pola spasial.</strong> Peta interaktif K = 4 menunjukkan bahwa sebagian besar daerah di kawasan Madura dan pesisir utara Jawa Timur — seperti Bangkalan, Gresik, Tuban, dan Lamongan — tergabung dalam satu cluster utama. Kedekatan geografis daerah-daerah ini serta kesamaan sumber emisi (industri pesisir dan transportasi pelabuhan) menghasilkan pola polutan yang serupa. Di sisi lain, daerah-daerah seperti Warudoyong (Sukabumi), Tikala (Manado), dan Nunukan (Kalimantan Utara) membentuk cluster tersendiri karena letak geografis yang jauh berbeda serta pengaruh iklim dan sumber emisi lokal yang unik. Temuan ini mengindikasikan bahwa <strong>faktor geografi dan sumber emisi regional merupakan pendorong utama kemiripan pola polutan antar daerah</strong>.</p></li>
+=======
+<h2>8. Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h2>
+<p>Dari eksperimen clustering K-Means pada gabungan tiga polutan dengan fitur linear dan polynomial, diperoleh kesimpulan berikut:</p>
+<ol class="arabic simple">
+<li><p><strong>Pengaruh reduksi dimensi.</strong> …</p></li>
+<li><p><strong>Jumlah cluster terbaik.</strong> …</p></li>
+<li><p><strong>Perbandingan fitur linear dan polynomial.</strong> …</p></li>
+<li><p><strong>Pola spasial.</strong> …</p></li>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 </ol>
 </section>
 </section>
@@ -5278,6 +5744,7 @@ Silhouette Coefficient (Overall): 0.089
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perbandingan-hasil-antar-reduksi-dimensi">5. Perbandingan Hasil Antar Reduksi Dimensi</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penentuan-cluster-terbaik">6. Penentuan Cluster Terbaik</a></li>
+<<<<<<< HEAD
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-python">7. Implementasi Python</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memuat-dan-menggabungkan-fitur-3-polutan">7.1 Memuat dan Menggabungkan Fitur 3 Polutan</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-k-means-clustering">7.2 PCA + K-Means Clustering</a></li>
@@ -5292,6 +5759,25 @@ Silhouette Coefficient (Overall): 0.089
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">9. Kesimpulan</a></li>
+=======
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemetaan-segmentasi-wilayah">7. Pemetaan Segmentasi Wilayah</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#persiapan-fungsi-peta">Persiapan Fungsi Peta</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-peta-cluster-fitur-linear">A. Peta Cluster Fitur Linear</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-1-peta-k-2">A.1 Peta K = 2</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-2-peta-k-3">A.2 Peta K = 3</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-3-peta-k-4">A.3 Peta K = 4</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-peta-cluster-fitur-polynomial">B. Peta Cluster Fitur Polynomial</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-1-peta-k-2">B.1 Peta K = 2</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-2-peta-k-3">B.2 Peta K = 3</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-3-peta-k-4">B.3 Peta K = 4</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">8. Kesimpulan</a></li>
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 </ul>
   </nav></div>
 

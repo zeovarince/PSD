@@ -78,14 +78,18 @@ Total terdapat 18 hasil clustering yang dievaluasi.
 
 Bagian ini memuat scatter plot dan nilai *Silhouette Coefficient* untuk setiap kombinasi dimensi PCA dan jumlah cluster pada fitur linear.
 
+<<<<<<< HEAD
 :::{note}
 Gambar scatter plot dan silhouette dari KNIME untuk fitur linear akan ditambahkan pada tahap selanjutnya. Nilai Silhouette Coefficient di bawah diperoleh dari implementasi Python (sklearn) sebagai referensi awal.
 :::
 
+=======
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 ### 2.1 PCA 203 Dimensi
 
 **K = 2**
 
+<<<<<<< HEAD
 - **Silhouette Coefficient**: **0.769** — Skor tertinggi di antara semua kombinasi K. Dua cluster membagi daerah menjadi satu kelompok mayoritas dan satu kelompok kecil outlier, menunjukkan pemisahan yang sangat jelas.
 
 **K = 3**
@@ -95,11 +99,50 @@ Gambar scatter plot dan silhouette dari KNIME untuk fitur linear akan ditambahka
 **K = 4**
 
 - **Silhouette Coefficient**: **0.089** — Skor turun drastis karena pembagian menjadi 4 cluster membuat beberapa cluster hanya memiliki 1–2 anggota, sehingga batas antar cluster menjadi tumpang tindih dan tidak stabil.
+=======
+- **Silhouette Coefficient**: …
+
+```{figure} ./img/clustering_knime/linear_pca203_k2.png
+---
+name: scatter-linear-pca203-k2
+align: center
+width: 70%
+---
+Scatter plot K-Means fitur linear, PCA 203 dimensi, K = 2
+```
+
+**K = 3**
+
+- **Silhouette Coefficient**: …
+
+```{figure} ./img/clustering_knime/linear_pca203_k3.png
+---
+name: scatter-linear-pca203-k3
+align: center
+width: 70%
+---
+Scatter plot K-Means fitur linear, PCA 203 dimensi, K = 3
+```
+
+**K = 4**
+
+- **Silhouette Coefficient**: …
+
+```{figure} ./img/clustering_knime/linear_pca203_k4.png
+---
+name: scatter-linear-pca203-k4
+align: center
+width: 70%
+---
+Scatter plot K-Means fitur linear, PCA 203 dimensi, K = 4
+```
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 
 ### 2.2 PCA 74 Dimensi
 
 **K = 2**
 
+<<<<<<< HEAD
 - **Silhouette Coefficient**: **0.769** — Identik dengan PCA 203, mengonfirmasi bahwa reduksi dari 203 ke 74 dimensi tidak menghilangkan informasi apapun.
 
 **K = 3**
@@ -109,11 +152,50 @@ Gambar scatter plot dan silhouette dari KNIME untuk fitur linear akan ditambahka
 **K = 4**
 
 - **Silhouette Coefficient**: **0.089** — Tetap rendah seperti PCA 203, menunjukkan bahwa masalah bukan pada dimensi tetapi pada jumlah cluster yang terlalu banyak untuk data 37 daerah.
+=======
+- **Silhouette Coefficient**: …
+
+```{figure} ./img/clustering_knime/linear_pca74_k2.png
+---
+name: scatter-linear-pca74-k2
+align: center
+width: 70%
+---
+Scatter plot K-Means fitur linear, PCA 74 dimensi, K = 2
+```
+
+**K = 3**
+
+- **Silhouette Coefficient**: …
+
+```{figure} ./img/clustering_knime/linear_pca74_k3.png
+---
+name: scatter-linear-pca74-k3
+align: center
+width: 70%
+---
+Scatter plot K-Means fitur linear, PCA 74 dimensi, K = 3
+```
+
+**K = 4**
+
+- **Silhouette Coefficient**: …
+
+```{figure} ./img/clustering_knime/linear_pca74_k4.png
+---
+name: scatter-linear-pca74-k4
+align: center
+width: 70%
+---
+Scatter plot K-Means fitur linear, PCA 74 dimensi, K = 4
+```
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 
 ### 2.3 PCA 37 Dimensi
 
 **K = 2**
 
+<<<<<<< HEAD
 - **Silhouette Coefficient**: **0.769** — Hasil tetap konsisten meskipun dimensi sudah direduksi ke batas minimum rank data.
 
 **K = 3**
@@ -123,6 +205,44 @@ Gambar scatter plot dan silhouette dari KNIME untuk fitur linear akan ditambahka
 **K = 4**
 
 - **Silhouette Coefficient**: **0.089** — Sama rendah di semua dimensi PCA. Ini menandakan bahwa K=4 memang tidak sesuai untuk data ini.
+=======
+- **Silhouette Coefficient**: …
+
+```{figure} ./img/clustering_knime/linear_pca37_k2.png
+---
+name: scatter-linear-pca37-k2
+align: center
+width: 70%
+---
+Scatter plot K-Means fitur linear, PCA 37 dimensi, K = 2
+```
+
+**K = 3**
+
+- **Silhouette Coefficient**: …
+
+```{figure} ./img/clustering_knime/linear_pca37_k3.png
+---
+name: scatter-linear-pca37-k3
+align: center
+width: 70%
+---
+Scatter plot K-Means fitur linear, PCA 37 dimensi, K = 3
+```
+
+**K = 4**
+
+- **Silhouette Coefficient**: …
+
+```{figure} ./img/clustering_knime/linear_pca37_k4.png
+---
+name: scatter-linear-pca37-k4
+align: center
+width: 70%
+---
+Scatter plot K-Means fitur linear, PCA 37 dimensi, K = 4
+```
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 
 ---
 
@@ -134,7 +254,11 @@ Bagian ini memuat scatter plot dan nilai *Silhouette Coefficient* untuk setiap k
 
 **K = 2**
 
+<<<<<<< HEAD
 - **Silhouette Coefficient**: **0.634**
+=======
+- **Silhouette Coefficient**: …
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 
 ```{figure} ./img/clustering_knime/polynomial_pca203_k2.png
 ---
@@ -145,6 +269,7 @@ width: 70%
 Scatter plot K-Means fitur polynomial, PCA 203 dimensi, K = 2
 ```
 
+<<<<<<< HEAD
 ```{figure} ./img/clustering_knime/silhouette_polynomial_pca203_k2.png
 ---
 name: sil-polynomial-pca203-k2
@@ -157,6 +282,11 @@ Silhouette Coefficient fitur polynomial, PCA 203 dimensi, K = 2
 **K = 3**
 
 - **Silhouette Coefficient**: **0.471**
+=======
+**K = 3**
+
+- **Silhouette Coefficient**: …
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 
 ```{figure} ./img/clustering_knime/polynomial_pca203_k3.png
 ---
@@ -167,6 +297,7 @@ width: 70%
 Scatter plot K-Means fitur polynomial, PCA 203 dimensi, K = 3
 ```
 
+<<<<<<< HEAD
 ```{figure} ./img/clustering_knime/silhouette_polynomial_pca203_k3.png
 ---
 name: sil-polynomial-pca203-k3
@@ -179,6 +310,11 @@ Silhouette Coefficient fitur polynomial, PCA 203 dimensi, K = 3
 **K = 4**
 
 - **Silhouette Coefficient**: **0.466**
+=======
+**K = 4**
+
+- **Silhouette Coefficient**: …
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 
 ```{figure} ./img/clustering_knime/polynomial_pca203_k4.png
 ---
@@ -189,6 +325,7 @@ width: 70%
 Scatter plot K-Means fitur polynomial, PCA 203 dimensi, K = 4
 ```
 
+<<<<<<< HEAD
 ```{figure} ./img/clustering_knime/silhouette_polynomial_pca203_k4.png
 ---
 name: sil-polynomial-pca203-k4
@@ -198,11 +335,17 @@ width: 50%
 Silhouette Coefficient fitur polynomial, PCA 203 dimensi, K = 4
 ```
 
+=======
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 ### 3.2 PCA 74 Dimensi
 
 **K = 2**
 
+<<<<<<< HEAD
 - **Silhouette Coefficient**: **0.634**
+=======
+- **Silhouette Coefficient**: …
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 
 ```{figure} ./img/clustering_knime/polynomial_pca74_k2.png
 ---
@@ -213,6 +356,7 @@ width: 70%
 Scatter plot K-Means fitur polynomial, PCA 74 dimensi, K = 2
 ```
 
+<<<<<<< HEAD
 ```{figure} ./img/clustering_knime/silhouette_polynomial_pca74_k2.png
 ---
 name: sil-polynomial-pca74-k2
@@ -225,6 +369,11 @@ Silhouette Coefficient fitur polynomial, PCA 74 dimensi, K = 2
 **K = 3**
 
 - **Silhouette Coefficient**: **0.471**
+=======
+**K = 3**
+
+- **Silhouette Coefficient**: …
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 
 ```{figure} ./img/clustering_knime/polynomial_pca74_k3.png
 ---
@@ -235,6 +384,7 @@ width: 70%
 Scatter plot K-Means fitur polynomial, PCA 74 dimensi, K = 3
 ```
 
+<<<<<<< HEAD
 ```{figure} ./img/clustering_knime/silhouette_polynomial_pca74_k3.png
 ---
 name: sil-polynomial-pca74-k3
@@ -247,6 +397,11 @@ Silhouette Coefficient fitur polynomial, PCA 74 dimensi, K = 3
 **K = 4**
 
 - **Silhouette Coefficient**: **0.466**
+=======
+**K = 4**
+
+- **Silhouette Coefficient**: …
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 
 ```{figure} ./img/clustering_knime/polynomial_pca74_k4.png
 ---
@@ -257,6 +412,7 @@ width: 70%
 Scatter plot K-Means fitur polynomial, PCA 74 dimensi, K = 4
 ```
 
+<<<<<<< HEAD
 ```{figure} ./img/clustering_knime/silhouette_polynomial_pca74_k4.png
 ---
 name: sil-polynomial-pca74-k4
@@ -266,11 +422,17 @@ width: 50%
 Silhouette Coefficient fitur polynomial, PCA 74 dimensi, K = 4
 ```
 
+=======
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 ### 3.3 PCA 37 Dimensi
 
 **K = 2**
 
+<<<<<<< HEAD
 - **Silhouette Coefficient**: **0.634**
+=======
+- **Silhouette Coefficient**: …
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 
 ```{figure} ./img/clustering_knime/polynomial_pca37_k2.png
 ---
@@ -281,6 +443,7 @@ width: 70%
 Scatter plot K-Means fitur polynomial, PCA 37 dimensi, K = 2
 ```
 
+<<<<<<< HEAD
 ```{figure} ./img/clustering_knime/silhouette_polynomial_pca37_k2.png
 ---
 name: sil-polynomial-pca37-k2
@@ -293,6 +456,11 @@ Silhouette Coefficient fitur polynomial, PCA 37 dimensi, K = 2
 **K = 3**
 
 - **Silhouette Coefficient**: **0.471**
+=======
+**K = 3**
+
+- **Silhouette Coefficient**: …
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 
 ```{figure} ./img/clustering_knime/polynomial_pca37_k3.png
 ---
@@ -303,6 +471,7 @@ width: 70%
 Scatter plot K-Means fitur polynomial, PCA 37 dimensi, K = 3
 ```
 
+<<<<<<< HEAD
 ```{figure} ./img/clustering_knime/silhouette_polynomial_pca37_k3.png
 ---
 name: sil-polynomial-pca37-k3
@@ -315,6 +484,11 @@ Silhouette Coefficient fitur polynomial, PCA 37 dimensi, K = 3
 **K = 4**
 
 - **Silhouette Coefficient**: **0.466**
+=======
+**K = 4**
+
+- **Silhouette Coefficient**: …
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 
 ```{figure} ./img/clustering_knime/polynomial_pca37_k4.png
 ---
@@ -325,6 +499,7 @@ width: 70%
 Scatter plot K-Means fitur polynomial, PCA 37 dimensi, K = 4
 ```
 
+<<<<<<< HEAD
 ```{figure} ./img/clustering_knime/silhouette_polynomial_pca37_k4.png
 ---
 name: sil-polynomial-pca37-k4
@@ -334,6 +509,8 @@ width: 50%
 Silhouette Coefficient fitur polynomial, PCA 37 dimensi, K = 4
 ```
 
+=======
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 ---
 
 ## 4. Ringkasan Silhouette Coefficient
@@ -344,17 +521,29 @@ Tabel berikut merangkum seluruh skor silhouette. Skor tertinggi pada setiap kolo
 
 | Jumlah Cluster | Silhouette **203 Dimensi** | Silhouette **74 Dimensi** | Silhouette **37 Dimensi** |
 | :---: | :---: | :---: | :---: |
+<<<<<<< HEAD
 | **K = 2** | **0.769** | **0.769** | **0.769** |
 | **K = 3** | 0.639 | 0.639 | 0.639 |
 | **K = 4** | 0.089 | 0.089 | 0.089 |
+=======
+| **K = 2** | … | … | … |
+| **K = 3** | … | … | … |
+| **K = 4** | … | … | … |
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 
 ### Fitur Polynomial
 
 | Jumlah Cluster | Silhouette **203 Dimensi** | Silhouette **74 Dimensi** | Silhouette **37 Dimensi** |
 | :---: | :---: | :---: | :---: |
+<<<<<<< HEAD
 | **K = 2** | **0.634** | **0.634** | **0.634** |
 | **K = 3** | 0.471 | 0.471 | 0.471 |
 | **K = 4** | 0.466 | 0.466 | 0.466 |
+=======
+| **K = 2** | … | … | … |
+| **K = 3** | … | … | … |
+| **K = 4** | … | … | … |
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 
 ---
 
@@ -366,10 +555,17 @@ Perbandingan dilakukan pada nilai K yang sama, dengan melihat skor silhouette da
 
 **Temuan eksperimen.**
 
+<<<<<<< HEAD
 - Fitur linear: Skor silhouette identik di ketiga dimensi PCA untuk setiap K (K=2: 0.769; K=3: 0.639; K=4: 0.089). Pola ini sepenuhnya konsisten dengan teori bahwa rank data ≤ 36, sehingga variasi informasi sudah tertampung pada 37 komponen pertama.
 - Fitur polynomial: Skor silhouette juga identik di PCA 203, 74, dan 37 untuk setiap K (K=2: 0.634; K=3: 0.471; K=4: 0.466). Hasil ini lebih stabil di K=4 dibanding linear, menunjukkan bahwa transformasi polynomial membuat jarak antar cluster lebih merata.
 
 **Implikasi praktis.** Karena hasilnya tidak bergantung pada jumlah komponen, PCA 37 menjadi pilihan paling efisien. Dimensinya paling kecil sehingga komputasi K-Means paling ringan, sementara kualitas clustering tidak berkurang. Temuan ini berlaku baik untuk fitur linear maupun polynomial.
+=======
+- Fitur linear: …
+- Fitur polynomial: …
+
+**Implikasi praktis.** Karena hasilnya tidak bergantung pada jumlah komponen, PCA 37 menjadi pilihan paling efisien. Dimensinya paling kecil sehingga komputasi K-Means paling ringan, sementara kualitas clustering tidak berkurang.
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 
 ---
 
@@ -379,6 +575,7 @@ Konfigurasi terbaik dipilih dari skor *Silhouette Coefficient* tertinggi. Nilai 
 
 | Jenis Fitur | Dimensi Terbaik | K Terbaik | Silhouette |
 | :---: | :---: | :---: | :---: |
+<<<<<<< HEAD
 | Linear | 37 (sama untuk semua) | K = 2 | **0.769** |
 | Polynomial | 37 (sama untuk semua) | K = 2 | **0.634** |
 
@@ -544,6 +741,26 @@ print(f"\nSilhouette Coefficient (Overall): {sil_k4:.3f}")
 Hasil clustering ditampilkan pada peta interaktif Folium. Peta dibuat untuk **K = 4** pada fitur polynomial dan linear, menggunakan hasil clustering dari PCA 37 dimensi. Klik marker untuk melihat nama daerah, cluster, dan koordinatnya. Layer cluster dapat dinyalakan dan dimatikan lewat kontrol di kanan atas.
 
 File CSV yang dibaca berada di `./source/cluster_daerah/` dengan pola nama `hasil_clustering_<jenis>_k<K>.csv` (contoh: `hasil_clustering_polynomial_k4.csv`). Setiap file memuat kolom `daerah` dan `Cluster` (label dari KNIME, misalnya `cluster_0`).
+=======
+| Linear | … | … | … |
+| Polynomial | … | … | … |
+
+**Analisis per reduksi dimensi.**
+
+- **PCA 203**: K terbaik = …, alasan: …
+- **PCA 74**: K terbaik = …, alasan: …
+- **PCA 37**: K terbaik = …, alasan: …
+
+**Perbandingan linear dan polynomial.** …
+
+---
+
+## 7. Pemetaan Segmentasi Wilayah
+
+Hasil clustering ditampilkan pada peta interaktif Folium. Untuk setiap jenis fitur dibuat **tiga peta**, satu untuk tiap nilai K (2, 3, dan 4). Peta bersumber dari hasil clustering PCA 37 dimensi sebagai wakil, karena pembagian cluster antar reduksi dimensi dibandingkan pada bagian sebelumnya. Klik marker untuk melihat nama daerah, cluster, dan koordinatnya. Layer cluster dapat dinyalakan dan dimatikan lewat kontrol di kanan atas.
+
+File CSV yang dibaca berada di `./source/cluster_daerah/` dengan pola nama `hasil_clustering_<jenis>_k<K>.csv` (contoh: `hasil_clustering_linear_k2.csv`). Setiap file memuat kolom `daerah` dan `Cluster` (label dari KNIME, misalnya `cluster_0`).
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 
 Koordinat daerah dicari dengan urutan prioritas berikut: (1) kolom `latitude` dan `longitude` di CSV, (2) file `koordinat_daerah.csv` di folder yang sama, (3) kamus `KAMUS_KOORDINAT` di kode, yang berisi titik perkiraan pusat kota atau kabupaten. Titik dari kamus diberi pergeseran kecil agar marker tidak bertumpuk, sehingga posisinya bersifat perkiraan. Daerah yang koordinatnya tidak ditemukan dilewati dan namanya dicetak di output sel.
 
@@ -573,10 +790,18 @@ PALET_WARNA = {
     "Cluster 3": "#fb8c00",
 }
 
+<<<<<<< HEAD
 # Skor Silhouette Coefficient dari KNIME (PCA 37).
 SILHOUETTE = {
     "linear": {2: 0.769, 3: 0.639, 4: 0.089},
     "polynomial": {2: 0.634, 3: 0.471, 4: 0.466},
+=======
+# Isi dengan skor Silhouette Coefficient dari KNIME (PCA 37).
+# Nilai None akan ditampilkan sebagai tanda "-" pada legenda.
+SILHOUETTE = {
+    "linear": {2: None, 3: None, 4: None},
+    "polynomial": {2: None, 3: None, 4: None},
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 }
 
 NAMA_JENIS = {"linear": "Linear", "polynomial": "Polynomial"}
@@ -585,6 +810,7 @@ NAMA_JENIS = {"linear": "Linear", "polynomial": "Polynomial"}
 # Titik perkiraan pusat kota/kabupaten, dipakai jika CSV tidak punya koordinat.
 # Urutan penting: kata kunci yang lebih spesifik diletakkan lebih dulu.
 KAMUS_KOORDINAT = {
+<<<<<<< HEAD
     "warudoyong": (-6.9252, 106.9267),
     "jogoroto": (-7.5447, 112.2189),
     "jombang": (-7.5407, 112.2338),
@@ -599,6 +825,8 @@ KAMUS_KOORDINAT = {
     "tanah merah": (-7.0869, 112.7839),
     "dukun": (-7.0152, 112.5497),
     "cerme": (-7.2209, 112.5973),
+=======
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
     "baron": (-7.6033, 112.0601),
     "sreseh": (-7.1983, 113.0805),
     "banyu ajuh": (-7.1585, 112.7280),
@@ -630,8 +858,11 @@ KAMUS_KOORDINAT = {
     "jakarta": (-6.2088, 106.8456),
     "ngawi": (-7.4039, 111.4460),
     "nunukan": (4.1333, 117.6667),
+<<<<<<< HEAD
     "sukabumi": (-6.9225, 106.9298),
     "waru": (-7.3564, 112.7375),
+=======
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 }
 
 
@@ -773,17 +1004,38 @@ def peta(jenis, k):
     )
 ```
 
+<<<<<<< HEAD
 ### A. Peta Cluster Fitur Polynomial (K = 4)
+=======
+### A. Peta Cluster Fitur Linear
+
+#### A.1 Peta K = 2
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 
 ```{code-cell} ipython3
 :tags: [hide-input]
 
+<<<<<<< HEAD
 peta("polynomial", 4)
 ```
 
 **Interpretasi peta fitur polynomial (K = 4).** Peta menampilkan empat cluster yang membagi 37 daerah berdasarkan pola gabungan polutan NO2, SO2, dan CO. Cluster terbesar (C3, oranye) umumnya berisi daerah-daerah di wilayah Madura dan pesisir utara Jawa Timur yang memiliki pola polusi relatif homogen. Cluster C0 (merah) mencakup daerah-daerah dengan karakteristik polusi berbeda, termasuk beberapa kota yang cukup besar. Cluster C1 dan C2 masing-masing hanya berisi satu daerah (Kamal/Banyuajuh dan Warudoyong/Sukabumi), yang menunjukkan bahwa kedua daerah ini memiliki pola polutan yang sangat berbeda dari mayoritas daerah lainnya — kemungkinan karena perbedaan geografis atau sumber polusi yang unik.
 
 ### B. Peta Cluster Fitur Linear (K = 4)
+=======
+peta("linear", 2)
+```
+
+#### A.2 Peta K = 3
+
+```{code-cell} ipython3
+:tags: [hide-input]
+
+peta("linear", 3)
+```
+
+#### A.3 Peta K = 4
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -791,6 +1043,7 @@ peta("polynomial", 4)
 peta("linear", 4)
 ```
 
+<<<<<<< HEAD
 **Interpretasi peta fitur linear (K = 4).** Peta fitur linear menunjukkan pola pengelompokan yang serupa dengan fitur polynomial, karena kedua jenis fitur menggunakan data dasar yang sama (ekstraksi TSFEL dari tiga polutan). Distribusi spasial cluster menunjukkan bahwa daerah-daerah di pesisir utara Jawa Timur dan Madura cenderung tergabung dalam satu cluster besar, sementara daerah-daerah dengan pola polusi unik terpisah menjadi cluster tersendiri.
 
 ---
@@ -806,3 +1059,45 @@ Dari eksperimen clustering K-Means pada gabungan tiga polutan (NO2, SO2, CO) den
 3. **Perbandingan fitur linear dan polynomial.** Fitur linear unggul pada K = 2 (sil. 0.769 vs 0.634) karena fitur asli TSFEL sudah mampu memisahkan dua kelompok utama. Sebaliknya, fitur polynomial lebih stabil pada K = 4 (sil. 0.466 vs 0.089) karena transformasi polinomial menyebarkan data lebih merata di ruang fitur berdimensi tinggi, sehingga pembagian menjadi banyak cluster tetap kohesif. Kesimpulannya, pemilihan jenis fitur bergantung pada granularitas segmentasi yang diinginkan: **linear untuk segmentasi kasar (K ≤ 3), polynomial untuk segmentasi halus (K ≥ 4)**.
 
 4. **Pola spasial.** Peta interaktif K = 4 menunjukkan bahwa sebagian besar daerah di kawasan Madura dan pesisir utara Jawa Timur — seperti Bangkalan, Gresik, Tuban, dan Lamongan — tergabung dalam satu cluster utama. Kedekatan geografis daerah-daerah ini serta kesamaan sumber emisi (industri pesisir dan transportasi pelabuhan) menghasilkan pola polutan yang serupa. Di sisi lain, daerah-daerah seperti Warudoyong (Sukabumi), Tikala (Manado), dan Nunukan (Kalimantan Utara) membentuk cluster tersendiri karena letak geografis yang jauh berbeda serta pengaruh iklim dan sumber emisi lokal yang unik. Temuan ini mengindikasikan bahwa **faktor geografi dan sumber emisi regional merupakan pendorong utama kemiripan pola polutan antar daerah**.
+=======
+**Interpretasi peta fitur linear.** …
+
+### B. Peta Cluster Fitur Polynomial
+
+#### B.1 Peta K = 2
+
+```{code-cell} ipython3
+:tags: [hide-input]
+
+peta("polynomial", 2)
+```
+
+#### B.2 Peta K = 3
+
+```{code-cell} ipython3
+:tags: [hide-input]
+
+peta("polynomial", 3)
+```
+
+#### B.3 Peta K = 4
+
+```{code-cell} ipython3
+:tags: [hide-input]
+
+peta("polynomial", 4)
+```
+
+**Interpretasi peta fitur polynomial.** …
+
+---
+
+## 8. Kesimpulan
+
+Dari eksperimen clustering K-Means pada gabungan tiga polutan dengan fitur linear dan polynomial, diperoleh kesimpulan berikut:
+
+1. **Pengaruh reduksi dimensi.** …
+2. **Jumlah cluster terbaik.** …
+3. **Perbandingan fitur linear dan polynomial.** …
+4. **Pola spasial.** …
+>>>>>>> fb9e89169076413da10023b3c312c56fec486f9e
