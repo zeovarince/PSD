@@ -528,9 +528,13 @@ document.write(`
 <p>Semua indeks berada pada rentang teoritis sekitar <span class="math notranslate nohighlight">\(-1\)</span> sampai <span class="math notranslate nohighlight">\(1\)</span>. Nilai aktual dapat dipengaruhi oleh tutupan awan yang tersisa, bayangan, kelembapan tanah, fase pertumbuhan padi, dan pencampuran piksel. Karena itu, satu fitur tidak dipakai sebagai aturan ambang tunggal. Random Forest menggabungkan pola dari semua fitur untuk menentukan kelas setiap piksel.</p>
 <p><strong>Daftar fitur input model:</strong> <code class="docutils literal notranslate"><span class="pre">B2</span></code>, <code class="docutils literal notranslate"><span class="pre">B3</span></code>, <code class="docutils literal notranslate"><span class="pre">B4</span></code>, <code class="docutils literal notranslate"><span class="pre">B8</span></code>, <code class="docutils literal notranslate"><span class="pre">B11</span></code>, <code class="docutils literal notranslate"><span class="pre">B12</span></code>, <code class="docutils literal notranslate"><span class="pre">NDVI</span></code>, <code class="docutils literal notranslate"><span class="pre">NDWI</span></code>, <code class="docutils literal notranslate"><span class="pre">MNDWI</span></code>, dan <code class="docutils literal notranslate"><span class="pre">NDBI</span></code>. Urutan ini harus sama antara urutan band pada GeoTIFF, isi <code class="docutils literal notranslate"><span class="pre">NAMA_BAND</span></code>, dan kolom <code class="docutils literal notranslate"><span class="pre">X</span></code> yang diberikan ke model.</p>
 <p>Earth Engine mengekspor sepuluh band pada resolusi 10 m dalam proyeksi UTM zona 49S (EPSG:32749) sebagai GeoTIFF float32, dengan urutan B2, B3, B4, B8, B11, B12, NDVI, NDWI, MNDWI, NDBI. Band B11 dan B12 beresolusi asli 20 m, dan Earth Engine menyamakannya ke 10 m.</p>
+<blockquote>
+<div><p><strong>Urutan menjalankan sel:</strong> jalankan sel akuisisi ini di Google Colab atau Jupyter Notebook yang dapat membuka proses autentikasi Earth Engine. Setelah autentikasi selesai, pastikan <code class="docutils literal notranslate"><span class="pre">sentinel2A_komposit.tif</span></code> berhasil dibuat dan diunduh. Sel pelatihan berikutnya juga memerlukan <code class="docutils literal notranslate"><span class="pre">sawah.geojson</span></code> dan <code class="docutils literal notranslate"><span class="pre">non_sawah.geojson</span></code> pada folder kerja yang sama. Jika salah satu file atau autentikasi belum tersedia, output Random Forest belum dapat muncul.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">ee</span><span class="o">,</span><span class="w"> </span><span class="nn">requests</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>-q<span class="w"> </span>install<span class="w"> </span>earthengine-api<span class="w"> </span>requests
+<span class="kn">import</span><span class="w"> </span><span class="nn">ee</span><span class="o">,</span><span class="w"> </span><span class="nn">requests</span>
 
 <span class="n">ee</span><span class="o">.</span><span class="n">Authenticate</span><span class="p">()</span>
 <span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">&#39;ID-PROJECT-GEE&#39;</span><span class="p">)</span>   <span class="c1"># ganti dengan Project ID Google Cloud</span>
@@ -575,18 +579,25 @@ document.write(`
 <span class="nb">open</span><span class="p">(</span><span class="n">OUT_TIF</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Tersimpan </span><span class="si">{</span><span class="n">OUT_TIF</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> MB | urutan band: B2, B3, B4, B8, B11, B12, NDVI, NDWI, MNDWI, NDBI&#39;</span><span class="p">)</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">files</span>
-<span class="n">files</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">OUT_TIF</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">files</span>
+    <span class="n">files</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">OUT_TIF</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;File tersedia di folder kerja: </span><span class="si">{</span><span class="n">OUT_TIF</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>^C
+</pre></div>
+</div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">ee</span><span class="o">,</span><span class="w"> </span><span class="nn">requests</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">ee</span><span class="o">.</span><span class="n">Authenticate</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">&#39;ID-PROJECT-GEE&#39;</span><span class="p">)</span>   <span class="c1"># ganti dengan Project ID Google Cloud</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;pip -q install earthengine-api requests&#39;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">ee</span><span class="o">,</span><span class="w"> </span><span class="nn">requests</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">ee</span><span class="o">.</span><span class="n">Authenticate</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">&#39;ID-PROJECT-GEE&#39;</span><span class="p">)</span>   <span class="c1"># ganti dengan Project ID Google Cloud</span>
 
 <span class="ne">ModuleNotFoundError</span>: No module named &#39;ee&#39;
 </pre></div>

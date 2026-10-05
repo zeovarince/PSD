@@ -71,7 +71,10 @@ Semua indeks berada pada rentang teoritis sekitar $-1$ sampai $1$. Nilai aktual 
 
 Earth Engine mengekspor sepuluh band pada resolusi 10 m dalam proyeksi UTM zona 49S (EPSG:32749) sebagai GeoTIFF float32, dengan urutan B2, B3, B4, B8, B11, B12, NDVI, NDWI, MNDWI, NDBI. Band B11 dan B12 beresolusi asli 20 m, dan Earth Engine menyamakannya ke 10 m.
 
+> **Urutan menjalankan sel:** jalankan sel akuisisi ini di Google Colab atau Jupyter Notebook yang dapat membuka proses autentikasi Earth Engine. Setelah autentikasi selesai, pastikan `sentinel2A_komposit.tif` berhasil dibuat dan diunduh. Sel pelatihan berikutnya juga memerlukan `sawah.geojson` dan `non_sawah.geojson` pada folder kerja yang sama. Jika salah satu file atau autentikasi belum tersedia, output Random Forest belum dapat muncul.
+
 ```{code-cell} ipython3
+!pip -q install earthengine-api requests
 import ee, requests
 
 ee.Authenticate()
@@ -117,8 +120,11 @@ if r.content[:2] not in (b'II', b'MM'):          # bukan file TIFF = pesan error
 open(OUT_TIF, 'wb').write(r.content)
 print(f'Tersimpan {OUT_TIF}: {len(r.content) / 1e6:.1f} MB | urutan band: B2, B3, B4, B8, B11, B12, NDVI, NDWI, MNDWI, NDBI')
 
-from google.colab import files
-files.download(OUT_TIF)
+try:
+    from google.colab import files
+    files.download(OUT_TIF)
+except ImportError:
+    print(f'File tersedia di folder kerja: {OUT_TIF}')
 ```
 
 **Output:** jumlah citra yang dipakai dan ukuran `sentinel2A_komposit.tif` dicetak
