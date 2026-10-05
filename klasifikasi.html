@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'klasifikasi';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="clusterlinpoly.html" />
+    <link rel="prev" title="Clustering Linear dan Polynomial" href="clusteringlinpoly.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -189,6 +189,7 @@
 <li class="toctree-l1"><a class="reference internal" href="tsfel.html">Fitur-Fitur TSFEL pada Time Series</a></li>
 <li class="toctree-l1"><a class="reference internal" href="preprocessing_ekstraksi_kamal.html">Preprocessing dan Ekstraksi Fitur</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kmean.html">K-Means Clustering Polutan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clusteringlinpoly.html">Clustering Linear dan Polynomial</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Klasifikasi Lahan Sawah dan Non-Sawah dari Komposit Sentinel-2A</a></li>
 </ul>
 
@@ -387,8 +388,14 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pustaka">Pustaka</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wilayah-studi-dan-sampel">1. Wilayah Studi dan Sampel</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#akuisisi-komposit-sentinel-2a">2. Akuisisi Komposit Sentinel-2A</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-sampel-dan-pelatihan-model">3. Ekstraksi Sampel dan Pelatihan Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#akuisisi-komposit-sentinel-2a">2. Akuisisi Komposit Sentinel-2A</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitur-yang-digunakan-untuk-klasifikasi">Fitur yang digunakan untuk klasifikasi</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-sampel-dan-pelatihan-model">3. Ekstraksi Sampel dan Pelatihan Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-random-forest">Model Random Forest</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-evaluasi">4. Hasil Evaluasi</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keterbatasan">5. Keterbatasan</a></li>
 </ul>
@@ -453,8 +460,77 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[\text{MNDWI} = \frac{B3 - B11}{B3 + B11} \qquad \text{NDBI} = \frac{B11 - B8}{B11 + B8}\]</div>
 <p>NDVI mengukur kerapatan vegetasi, sedangkan NDWI dan MNDWI menandai air, termasuk genangan pada sawah yang baru ditanami. NDBI menandai lahan terbangun.</p>
+<section id="fitur-yang-digunakan-untuk-klasifikasi">
+<h3>Fitur yang digunakan untuk klasifikasi<a class="headerlink" href="#fitur-yang-digunakan-untuk-klasifikasi" title="Link to this heading">#</a></h3>
+<p>Random Forest tidak menerima nama kelas atau bentuk petak secara langsung. Model menerima satu baris angka untuk setiap piksel. Satu baris tersebut berisi <strong>10 fitur</strong>, yaitu enam nilai reflektansi dan empat indeks spektral berikut.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Fitur</p></th>
+<th class="head text-left"><p>Sumber atau rumus</p></th>
+<th class="head text-left"><p>Informasi yang dibawa</p></th>
+<th class="head text-left"><p>Peran dalam membedakan sawah dan non-sawah</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">B2</span></code></p></td>
+<td class="text-left"><p>Biru, 490 nm</p></td>
+<td class="text-left"><p>Respons permukaan pada cahaya biru</p></td>
+<td class="text-left"><p>Membantu membedakan air, tanah, dan permukaan terbangun; juga sensitif terhadap pengaruh atmosfer dan kekeruhan air.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">B3</span></code></p></td>
+<td class="text-left"><p>Hijau, 560 nm</p></td>
+<td class="text-left"><p>Pantulan cahaya hijau</p></td>
+<td class="text-left"><p>Membantu mengenali vegetasi dan air; genangan biasanya memiliki respons berbeda dari vegetasi sawah.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">B4</span></code></p></td>
+<td class="text-left"><p>Merah, 665 nm</p></td>
+<td class="text-left"><p>Pantulan cahaya merah</p></td>
+<td class="text-left"><p>Diserap kuat oleh klorofil. Nilainya bersama <code class="docutils literal notranslate"><span class="pre">B8</span></code> menjadi dasar NDVI.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">B8</span></code></p></td>
+<td class="text-left"><p>Inframerah dekat/NIR, 842 nm</p></td>
+<td class="text-left"><p>Pantulan struktur internal daun</p></td>
+<td class="text-left"><p>Umumnya tinggi pada vegetasi sehat dan menjadi pembeda penting antara vegetasi sawah dengan air atau lahan terbuka.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">B11</span></code></p></td>
+<td class="text-left"><p>SWIR-1, 1610 nm</p></td>
+<td class="text-left"><p>Kandungan air dan karakter permukaan</p></td>
+<td class="text-left"><p>Membantu memisahkan tanah, vegetasi, air, dan area terbangun; digunakan dalam MNDWI dan NDBI.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">B12</span></code></p></td>
+<td class="text-left"><p>SWIR-2, 2190 nm</p></td>
+<td class="text-left"><p>Kelembapan dan kondisi material permukaan</p></td>
+<td class="text-left"><p>Melengkapi informasi <code class="docutils literal notranslate"><span class="pre">B11</span></code> untuk membedakan tanah kering, vegetasi, air, dan material non-vegetasi.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">NDVI</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\((B8-B4)/(B8+B4)\)</span></p></td>
+<td class="text-left"><p>Kerapatan dan kehijauan vegetasi</p></td>
+<td class="text-left"><p>Nilai tinggi umumnya menunjukkan vegetasi aktif, termasuk tanaman padi pada fase vegetatif.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">NDWI</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\((B3-B8)/(B3+B8)\)</span></p></td>
+<td class="text-left"><p>Indikasi air atau genangan</p></td>
+<td class="text-left"><p>Membantu mengenali sawah berair atau baru ditanami, sekaligus memisahkannya dari vegetasi yang memiliki <code class="docutils literal notranslate"><span class="pre">B8</span></code> tinggi.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">MNDWI</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\((B3-B11)/(B3+B11)\)</span></p></td>
+<td class="text-left"><p>Air dengan pengurangan pengaruh tanah dan area terbangun</p></td>
+<td class="text-left"><p>Berguna untuk mendeteksi genangan ketika air bercampur dengan tanah atau berada di sekitar permukaan terbangun.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">NDBI</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\((B11-B8)/(B11+B8)\)</span></p></td>
+<td class="text-left"><p>Indikasi permukaan terbangun</p></td>
+<td class="text-left"><p>Membantu mengurangi kesalahan antara non-sawah terbangun dan sawah, karena area terbangun cenderung memiliki respons SWIR lebih tinggi daripada NIR.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Semua indeks berada pada rentang teoritis sekitar <span class="math notranslate nohighlight">\(-1\)</span> sampai <span class="math notranslate nohighlight">\(1\)</span>. Nilai aktual dapat dipengaruhi oleh tutupan awan yang tersisa, bayangan, kelembapan tanah, fase pertumbuhan padi, dan pencampuran piksel. Karena itu, satu fitur tidak dipakai sebagai aturan ambang tunggal. Random Forest menggabungkan pola dari semua fitur untuk menentukan kelas setiap piksel.</p>
+<p><strong>Daftar fitur input model:</strong> <code class="docutils literal notranslate"><span class="pre">B2</span></code>, <code class="docutils literal notranslate"><span class="pre">B3</span></code>, <code class="docutils literal notranslate"><span class="pre">B4</span></code>, <code class="docutils literal notranslate"><span class="pre">B8</span></code>, <code class="docutils literal notranslate"><span class="pre">B11</span></code>, <code class="docutils literal notranslate"><span class="pre">B12</span></code>, <code class="docutils literal notranslate"><span class="pre">NDVI</span></code>, <code class="docutils literal notranslate"><span class="pre">NDWI</span></code>, <code class="docutils literal notranslate"><span class="pre">MNDWI</span></code>, dan <code class="docutils literal notranslate"><span class="pre">NDBI</span></code>. Urutan ini harus sama antara urutan band pada GeoTIFF, isi <code class="docutils literal notranslate"><span class="pre">NAMA_BAND</span></code>, dan kolom <code class="docutils literal notranslate"><span class="pre">X</span></code> yang diberikan ke model.</p>
 <p>Earth Engine mengekspor sepuluh band pada resolusi 10 m dalam proyeksi UTM zona 49S (EPSG:32749) sebagai GeoTIFF float32, dengan urutan B2, B3, B4, B8, B11, B12, NDVI, NDWI, MNDWI, NDBI. Band B11 dan B12 beresolusi asli 20 m, dan Earth Engine menyamakannya ke 10 m.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">ee</span><span class="o">,</span><span class="w"> </span><span class="nn">requests</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">ee</span><span class="o">,</span><span class="w"> </span><span class="nn">requests</span>
 
 <span class="n">ee</span><span class="o">.</span><span class="n">Authenticate</span><span class="p">()</span>
 <span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">&#39;ID-PROJECT-GEE&#39;</span><span class="p">)</span>   <span class="c1"># ganti dengan Project ID Google Cloud</span>
@@ -503,16 +579,65 @@ document.write(`
 <span class="n">files</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">OUT_TIF</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">ee</span><span class="o">,</span><span class="w"> </span><span class="nn">requests</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">ee</span><span class="o">.</span><span class="n">Authenticate</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">&#39;ID-PROJECT-GEE&#39;</span><span class="p">)</span>   <span class="c1"># ganti dengan Project ID Google Cloud</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;ee&#39;
+</pre></div>
+</div>
+</div>
+</div>
 <p><strong>Output:</strong> jumlah citra yang dipakai dan ukuran <code class="docutils literal notranslate"><span class="pre">sentinel2A_komposit.tif</span></code> dicetak
 otomatis oleh sel di atas setelah Earth Engine berhasil diautentikasi. Nilainya
 bergantung pada periode, tutupan awan, dan koleksi yang tersedia saat eksekusi.</p>
 </section>
+</section>
 <section id="ekstraksi-sampel-dan-pelatihan-model">
 <h2>3. Ekstraksi Sampel dan Pelatihan Model<a class="headerlink" href="#ekstraksi-sampel-dan-pelatihan-model" title="Link to this heading">#</a></h2>
 <p>Skrip memproyeksikan tiap poligon ke CRS citra dan mengecilkan batasnya 5 m ke dalam, supaya piksel tepi petak yang bercampur dengan penutup lahan lain tidak ikut. Poligon yang kosong setelah pengecilan memakai batas aslinya. Semua piksel yang pusatnya jatuh di dalam poligon menjadi sampel, dan tiap sampel membawa nomor petaknya. Piksel tanpa data tidak masuk.</p>
+<p>Dalam klasifikasi ini, <strong>satu data berarti satu piksel berlabel</strong>. Setiap data mempunyai <strong>10 fitur</strong>, yaitu <code class="docutils literal notranslate"><span class="pre">B2</span></code>, <code class="docutils literal notranslate"><span class="pre">B3</span></code>, <code class="docutils literal notranslate"><span class="pre">B4</span></code>, <code class="docutils literal notranslate"><span class="pre">B8</span></code>, <code class="docutils literal notranslate"><span class="pre">B11</span></code>, <code class="docutils literal notranslate"><span class="pre">B12</span></code>, <code class="docutils literal notranslate"><span class="pre">NDVI</span></code>, <code class="docutils literal notranslate"><span class="pre">NDWI</span></code>, <code class="docutils literal notranslate"><span class="pre">MNDWI</span></code>, dan <code class="docutils literal notranslate"><span class="pre">NDBI</span></code>. Jadi, bentuk matriks <code class="docutils literal notranslate"><span class="pre">X</span></code> adalah <code class="docutils literal notranslate"><span class="pre">(jumlah</span> <span class="pre">data</span> <span class="pre">piksel,</span> <span class="pre">10)</span></code>, sedangkan <code class="docutils literal notranslate"><span class="pre">y</span></code> berisi satu label kelas untuk setiap baris <code class="docutils literal notranslate"><span class="pre">X</span></code>. Jumlah data bergantung pada jumlah piksel yang masuk ke dalam petak sampel dan lolos pemeriksaan validitas citra.</p>
 <p>Pembagian data latih dan uji mengikuti nomor petak: 70% petak melatih model dan 30% petak menguji model. Piksel dari satu petak tidak muncul di kedua sisi, jadi akurasi uji tidak menghitung piksel bertetangga yang nilainya hampir sama sebagai bukti terpisah.</p>
-<p>Model Random Forest memakai 300 pohon dan bobot kelas seimbang. Setelah evaluasi, saya melatih ulang model pada semua piksel dan memakainya untuk mengklasifikasi seluruh citra. Skrip menulis hasilnya ke <code class="docutils literal notranslate"><span class="pre">klasifikasi_sawah.tif</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pip</span> <span class="o">-</span><span class="n">q</span> <span class="n">install</span> <span class="n">rasterio</span>
+<section id="model-random-forest">
+<h3>Model Random Forest<a class="headerlink" href="#model-random-forest" title="Link to this heading">#</a></h3>
+<p>Random Forest adalah kumpulan banyak pohon keputusan. Setiap pohon belajar dari sampel dan subset fitur yang berbeda, lalu hasil akhirnya ditentukan melalui voting mayoritas. Pendekatan ini sesuai untuk data Sentinel-2A karena hubungan antara reflektansi, indeks vegetasi, genangan, dan kelas lahan tidak harus linear.</p>
+<p>Pada penelitian ini digunakan <code class="docutils literal notranslate"><span class="pre">RandomForestClassifier</span></code> dengan pengaturan berikut:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Parameter</p></th>
+<th class="head text-center"><p>Nilai</p></th>
+<th class="head text-left"><p>Fungsi</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">n_estimators</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">300</span></code></p></td>
+<td class="text-left"><p>Jumlah pohon keputusan. Lebih banyak pohon membuat hasil voting lebih stabil, dengan waktu komputasi yang lebih besar.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">class_weight</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">'balanced'</span></code></p></td>
+<td class="text-left"><p>Memberi bobot lebih besar pada kelas yang jumlah pikselnya lebih sedikit setelah ekstraksi sampel.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">random_state</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">42</span></code></p></td>
+<td class="text-left"><p>Membuat pembagian data dan hasil model dapat diulang.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">n_jobs</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">-1</span></code></p></td>
+<td class="text-left"><p>Menggunakan seluruh inti prosesor yang tersedia.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Model pertama dilatih hanya pada petak latih, kemudian diuji pada petak yang benar-benar berbeda. Setelah akurasi dan kappa dihitung, model dilatih ulang menggunakan seluruh sampel berlabel. Model akhir inilah yang digunakan untuk memprediksi setiap piksel pada citra dan menghasilkan <code class="docutils literal notranslate"><span class="pre">klasifikasi_sawah.tif</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>-q<span class="w"> </span>install<span class="w"> </span>rasterio
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
@@ -618,8 +743,28 @@ bergantung pada periode, tutupan awan, dan koleksi yang tersedia saat eksekusi.<
 <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Kedua kelas harus punya petak yang jatuh di dalam citra&#39;</span>
 <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">grup</span><span class="p">))</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;Minimal empat petak harus masuk citra untuk split per petak&#39;</span>
 
+<span class="n">jumlah_fitur</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">jumlah_data</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">jumlah_piksel_sawah</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="n">jumlah_piksel_non_sawah</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="n">jumlah_petak</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">grup</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Ringkasan data berlabel:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Jumlah data piksel       : </span><span class="si">{</span><span class="n">jumlah_data</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Jumlah fitur per piksel  : </span><span class="si">{</span><span class="n">jumlah_fitur</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Ukuran matriks X         : </span><span class="si">{</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Piksel label sawah (1)   : </span><span class="si">{</span><span class="n">jumlah_piksel_sawah</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Piksel label non-sawah (0): </span><span class="si">{</span><span class="n">jumlah_piksel_non_sawah</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Jumlah petak             : </span><span class="si">{</span><span class="n">jumlah_petak</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
 <span class="c1"># ---------- latih dan uji (data uji = petak yang tidak dipakai melatih) ----------</span>
 <span class="n">tr</span><span class="p">,</span> <span class="n">te</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">GroupShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">grup</span><span class="p">))</span>
+<span class="n">petak_train</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">grup</span><span class="p">[</span><span class="n">tr</span><span class="p">]))</span>
+<span class="n">petak_test</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">grup</span><span class="p">[</span><span class="n">te</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Pembagian data berdasarkan petak:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Data train               : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span><span class="si">}</span><span class="s1"> piksel (</span><span class="si">{</span><span class="n">petak_train</span><span class="si">}</span><span class="s1"> petak)&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Data testing             : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">te</span><span class="p">)</span><span class="si">}</span><span class="s1"> piksel (</span><span class="si">{</span><span class="n">petak_test</span><span class="si">}</span><span class="s1"> petak)&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Train sawah / non-sawah  : </span><span class="si">{</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">tr</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1"> / </span><span class="si">{</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">tr</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1"> piksel&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Test sawah / non-sawah   : </span><span class="si">{</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">te</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1"> / </span><span class="si">{</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">te</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1"> piksel&#39;</span><span class="p">)</span>
 <span class="n">rf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">class_weight</span><span class="o">=</span><span class="s1">&#39;balanced&#39;</span><span class="p">)</span>
 <span class="n">rf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">tr</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">tr</span><span class="p">])</span>
 <span class="n">pred</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">te</span><span class="p">])</span>
@@ -631,8 +776,10 @@ bergantung pada periode, tutupan awan, dan koleksi yang tersedia saat eksekusi.<
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Matriks kebingungan (baris = aktual, kolom = prediksi; urutan: non-sawah, sawah):&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">matriks</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Pentingnya tiap band:&#39;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">NAMA_BAND</span><span class="p">,</span> <span class="n">rf</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  </span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s1">6s</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">peringkat_fitur</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">NAMA_BAND</span><span class="p">,</span> <span class="n">rf</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Fitur       Kepentingan&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">nama_fitur</span><span class="p">,</span> <span class="n">nilai</span> <span class="ow">in</span> <span class="n">peringkat_fitur</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  </span><span class="si">{</span><span class="n">nama_fitur</span><span class="si">:</span><span class="s1">8s</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">nilai</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">nilai</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%)&#39;</span><span class="p">)</span>
 
 <span class="c1"># model akhir dilatih ulang memakai semua piksel</span>
 <span class="n">rf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -701,15 +848,26 @@ bergantung pada periode, tutupan awan, dan koleksi yang tersedia saat eksekusi.<
     <span class="k">pass</span>
 </pre></div>
 </div>
+</div>
+</div>
 <p><code class="docutils literal notranslate"><span class="pre">akurasi</span></code>, <code class="docutils literal notranslate"><span class="pre">kappa</span></code>, <code class="docutils literal notranslate"><span class="pre">matriks</span></code>, <code class="docutils literal notranslate"><span class="pre">rf.feature_importances_</span></code>, <code class="docutils literal notranslate"><span class="pre">luas_sawah_ha</span></code>, dan <code class="docutils literal notranslate"><span class="pre">luas_non_ha</span></code>
 adalah output terukur dari sel di atas. Sel evaluasi berikut memakai variabel tersebut
 secara langsung, jadi tidak ada angka dummy yang perlu disalin manual.</p>
+</section>
 </section>
 <section id="hasil-evaluasi">
 <h2>4. Hasil Evaluasi<a class="headerlink" href="#hasil-evaluasi" title="Link to this heading">#</a></h2>
 <p>Output numerik berikut dibuat langsung dari hasil klasifikasi, bukan ditulis sebagai
 teks manual. Jalankan sel ini setelah sel pelatihan selesai.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hasil_evaluasi</span> <span class="o">=</span> <span class="p">{</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hasil_evaluasi</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Jumlah fitur&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">jumlah_fitur</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Jumlah data piksel berlabel&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">jumlah_data</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Piksel label sawah&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">jumlah_piksel_sawah</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Piksel label non-sawah&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">jumlah_piksel_non_sawah</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Data train&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1"> piksel (</span><span class="si">{</span><span class="n">petak_train</span><span class="si">}</span><span class="s1"> petak)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Data testing&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">te</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1"> piksel (</span><span class="si">{</span><span class="n">petak_test</span><span class="si">}</span><span class="s1"> petak)&#39;</span><span class="p">,</span>
     <span class="s1">&#39;Akurasi petak uji&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">akurasi</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
     <span class="s1">&#39;Kappa&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">kappa</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
     <span class="s1">&#39;Luas sawah hasil klasifikasi (ha)&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">luas_sawah_ha</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
@@ -730,15 +888,23 @@ teks manual. Jalankan sel ini setelah sel pelatihan selesai.</p>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;| </span><span class="si">{</span><span class="n">kelas</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">jumlah</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">luas</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">persentase</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">% |&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+</div>
 <p>Gambar hasil segmentasi tersimpan sebagai <code class="docutils literal notranslate"><span class="pre">segmentasi_sawah_non_sawah.png</span></code> dan
 menampilkan citra RGB, peta kelas, serta overlay. Warna hijau menunjukkan sawah,
 sedangkan warna oranye menunjukkan non-sawah.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
 
 <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">OUT_GAMBAR</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfusionMatrixDisplay</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
@@ -755,6 +921,8 @@ sedangkan warna oranye menunjukkan non-sawah.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
+</div>
+</div>
 </div>
 <p>Interpretasi dibuat dari hasil sel: band/indeks paling berpengaruh adalah fitur dengan
 <code class="docutils literal notranslate"><span class="pre">rf.feature_importances_</span></code> terbesar, sedangkan kelas yang paling sering salah ditentukan
@@ -797,12 +965,12 @@ dari jumlah terbesar pada elemen diagonal luar <code class="docutils literal not
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="clusterlinpoly.html"
+       href="clusteringlinpoly.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">Clustering Linear dan Polynomial</p>
       </div>
     </a>
 </div>
@@ -823,8 +991,14 @@ dari jumlah terbesar pada elemen diagonal luar <code class="docutils literal not
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pustaka">Pustaka</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wilayah-studi-dan-sampel">1. Wilayah Studi dan Sampel</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#akuisisi-komposit-sentinel-2a">2. Akuisisi Komposit Sentinel-2A</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-sampel-dan-pelatihan-model">3. Ekstraksi Sampel dan Pelatihan Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#akuisisi-komposit-sentinel-2a">2. Akuisisi Komposit Sentinel-2A</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitur-yang-digunakan-untuk-klasifikasi">Fitur yang digunakan untuk klasifikasi</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-sampel-dan-pelatihan-model">3. Ekstraksi Sampel dan Pelatihan Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-random-forest">Model Random Forest</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-evaluasi">4. Hasil Evaluasi</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keterbatasan">5. Keterbatasan</a></li>
 </ul>

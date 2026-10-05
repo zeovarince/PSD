@@ -1,0 +1,76 @@
+Traceback (most recent call last):
+  File "C:\laragon\bin\python\python-3.10\lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
+    executenb(
+  File "C:\laragon\bin\python\python-3.10\lib\site-packages\nbclient\client.py", line 1323, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "C:\laragon\bin\python\python-3.10\lib\site-packages\jupyter_core\utils\__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "C:\laragon\bin\python\python-3.10\lib\asyncio\base_events.py", line 646, in run_until_complete
+    return future.result()
+  File "C:\laragon\bin\python\python-3.10\lib\site-packages\nbclient\client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "C:\laragon\bin\python\python-3.10\lib\site-packages\nbclient\client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\laragon\bin\python\python-3.10\lib\site-packages\nbclient\client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import ee, requests
+
+ee.Authenticate()
+ee.Initialize(project='ID-PROJECT-GEE')   # ganti dengan Project ID Google Cloud
+
+# ---------- pengaturan ----------
+START, END = '2024-06-01', '2024-09-30'   # periode citra (musim kemarau, relatif bebas awan)
+MAX_AWAN = 40                             # persen awan maksimum per citra
+HANYA_S2A = True                          # True = hanya satelit Sentinel-2A; False = semua Sentinel-2 L2A
+OUT_TIF = 'sentinel2A_komposit.tif'
+
+AOI = ee.Geometry.Rectangle([112.7060, -7.1495, 112.7270, -7.1325])   # barat, selatan, timur, utara
+
+koleksi = (ee.ImageCollection('COPERNICUS/S2_SR_HARMONIZED')
+           .filterBounds(AOI).filterDate(START, END)
+           .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', MAX_AWAN)))
+print('Semua Sentinel-2 L2A:', koleksi.size().getInfo(), 'citra')
+if HANYA_S2A:
+    koleksi = koleksi.filter(ee.Filter.eq('SPACECRAFT_NAME', 'Sentinel-2A'))
+n = koleksi.size().getInfo()
+print('Dipakai             :', n, 'citra')
+if n == 0:
+    raise SystemExit('Tidak ada citra. Geser START/END, naikkan MAX_AWAN, atau set HANYA_S2A = False.')
+
+def mask_awan(img):
+    scl = img.select('SCL')   # buang no-data, jenuh, bayangan awan, awan, cirrus, salju
+    bagus = (scl.neq(0).And(scl.neq(1)).And(scl.neq(3)).And(scl.neq(8))
+             .And(scl.neq(9)).And(scl.neq(10)).And(scl.neq(11)))
+    return img.updateMask(bagus)
+
+BAND = ['B2', 'B3', 'B4', 'B8', 'B11', 'B12']
+komposit = koleksi.map(mask_awan).select(BAND).median().divide(10000)
+ndvi = komposit.normalizedDifference(['B8', 'B4']).rename('NDVI')
+ndwi = komposit.normalizedDifference(['B3', 'B8']).rename('NDWI')
+mndwi = komposit.normalizedDifference(['B3', 'B11']).rename('MNDWI')
+ndbi = komposit.normalizedDifference(['B11', 'B8']).rename('NDBI')
+citra = komposit.addBands([ndvi, ndwi, mndwi, ndbi]).toFloat().clip(AOI)
+
+url = citra.getDownloadURL({'region': AOI, 'scale': 10, 'crs': 'EPSG:32749', 'format': 'GEO_TIFF'})
+r = requests.get(url, timeout=900)
+if r.content[:2] not in (b'II', b'MM'):          # bukan file TIFF = pesan error dari GEE
+    raise RuntimeError(r.text[:500])
+open(OUT_TIF, 'wb').write(r.content)
+print(f'Tersimpan {OUT_TIF}: {len(r.content) / 1e6:.1f} MB | urutan band: B2, B3, B4, B8, B11, B12, NDVI, NDWI, MNDWI, NDBI')
+
+from google.colab import files
+files.download(OUT_TIF)
+------------------
+
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [1;32mIn[1], line 1[0m
+[1;32m----> 1[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mee[39;00m[38;5;241m,[39m[38;5;250m [39m[38;5;21;01mrequests[39;00m
+[0;32m      3[0m ee[38;5;241m.[39mAuthenticate()
+[0;32m      4[0m ee[38;5;241m.[39mInitialize(project[38;5;241m=[39m[38;5;124m'[39m[38;5;124mID-PROJECT-GEE[39m[38;5;124m'[39m)   [38;5;66;03m# ganti dengan Project ID Google Cloud[39;00m
+
+[1;31mModuleNotFoundError[0m: No module named 'ee'
+
