@@ -192,6 +192,7 @@
 <li class="toctree-l1"><a class="reference internal" href="kmean.html">K-Means Clustering Polutan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="clusteringlinpoly.html">Clustering Linear dan Polynomial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="klasifikasi.html">Klasifikasi Lahan Sawah dan Non-Sawah dengan Random Forest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laporan_klasifikasi_jatim.html">Laporan Analisis LULC (Land Use and Land Cover) Jawa Timur</a></li>
 </ul>
 
     </div>
@@ -471,6 +472,12 @@ interpolasi linear terhadap waktu.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[NO2] Jumlah outlier terdeteksi: 10 dari 194 data
+</pre></div>
+</div>
+<img alt="_images/e8c78ffc87e72244cc9bc7e4bc091025eb1f01b600f13ff921e24fa59bb9bdde.png" src="_images/e8c78ffc87e72244cc9bc7e4bc091025eb1f01b600f13ff921e24fa59bb9bdde.png" />
+</div>
 </div>
 </section>
 <section id="imputasi-missing-value">
@@ -500,6 +507,13 @@ interpolasi linear terhadap waktu.</p>
 
 <span class="n">df_imputed</span> <span class="o">=</span> <span class="n">df_full</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 <span class="n">df_imputed</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pol</span><span class="si">}</span><span class="s2">_Kamal_Timeseries_imputed.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Missing value sebelum imputasi: 366 hari
+Missing value setelah imputasi: 366 hari
+Total data setelah imputasi   : 366 hari
 </pre></div>
 </div>
 </div>
@@ -946,6 +960,83 @@ interpolasi linear terhadap waktu.</p>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Spectral Domain (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">SPECTRAL</span><span class="p">)</span><span class="si">}</span><span class="s2"> fitur) ===&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">SPECTRAL</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;| </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">result_df</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> |&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Statistical Domain (21 fitur) ===
+| abs_energy | 8.004483812520137e-07 |
+| average_power | 2.193009263704147e-09 |
+| calc_max | 8.261699258582667e-05 |
+| calc_mean | 4.304078602292036e-05 |
+| calc_median | 4.281815054127946e-05 |
+| calc_min | -1.074266492651077e-05 |
+| calc_std | 1.8289564610563453e-05 |
+| calc_var | 3.3450817364397506e-10 |
+| ecdf | 0.0150273224043715 |
+| ecdf_percentile | 4.262600214133272e-05 |
+| ecdf_percentile_count | 182.5 |
+| ecdf_slope | 16798.33038578079 |
+| entropy | 0.9993583051330968 |
+| hist_mode | 4.060514670527482e-05 |
+| interq_range | 2.93190165393753e-05 |
+| kurtosis | -0.7653806440586406 |
+| mean_abs_deviation | 1.527524349419392e-05 |
+| median_abs_deviation | 1.4418096179724671e-05 |
+| pk_pk_distance | 9.335965751233744e-05 |
+| rms | 4.6765558214510725e-05 |
+| skewness | -0.0484239574991572 |
+
+=== Temporal Domain (21 fitur) ===
+| auc | 0.0157404357614723 |
+| autocorr | 11.0 |
+| calc_centroid | 166.6274749901177 |
+| dfa | 1.0650859251687137 |
+| distance | 365.0000000236696 |
+| higuchi_fractal_dimension | 1.7864516865906903 |
+| hurst_exponent | 0.8803015029826863 |
+| lempel_ziv | 0.1530054644808743 |
+| maximum_fractal_length | -2.488890466514544 |
+| mean_abs_diff | 7.365990754743968e-06 |
+| mean_diff | -2.9038234708722294e-08 |
+| median_abs_diff | 4.423392965691168e-06 |
+| median_diff | 4.016578064433205e-07 |
+| mse | 0.8092219596587233 |
+| negative_turning | 60.0 |
+| neighbourhood_peaks | 18.0 |
+| petrosian_fractal_dimension | 1.021493424787648 |
+| positive_turning | 60.0 |
+| slope | -3.355667328498242e-08 |
+| sum_abs_diff | 0.0026885866254815 |
+| zero_cross | 2.0 |
+
+=== Spectral Domain (26 fitur) ===
+| fundamental_frequency | 0.0027322404371584 |
+| human_range_energy | 0.0 |
+| lpcc | 0.718735662231064 |
+| max_frequency | 0.4207650273224044 |
+| max_power_spectrum | 84.43438787262676 |
+| median_frequency | 0.0491803278688524 |
+| mfcc | 17.634818598055492 |
+| power_bandwidth | 0.2486338797814207 |
+| spectral_centroid | 0.116987781071585 |
+| spectral_decrease | -2.117715250437212 |
+| spectral_distance | -2.776739725085843 |
+| spectral_entropy | 0.6253514711926725 |
+| spectral_kurtosis | 2.953248019217717 |
+| spectral_positive_turning | 57.0 |
+| spectral_roll_off | 0.4207650273224044 |
+| spectral_roll_on | 0.0 |
+| spectral_skewness | 1.0989809936527493 |
+| spectral_slope | -0.0343237171288835 |
+| spectral_spread | 0.1425901303285489 |
+| spectral_variation | 0.2474728843010087 |
+| spectrogram_mean_coeff | 4.3894200449494655e-10 |
+| wavelet_abs_mean | 1.4975436285281366e-06 |
+| wavelet_energy | 2.512626063016688e-05 |
+| wavelet_entropy | 2.1182052206750783 |
+| wavelet_std | 2.507356733958021e-05 |
+| wavelet_var | 6.99915761051232e-10 |
 </pre></div>
 </div>
 </div>

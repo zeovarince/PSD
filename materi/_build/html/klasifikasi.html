@@ -60,6 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'klasifikasi';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Laporan Analisis LULC (Land Use and Land Cover) Jawa Timur" href="laporan_klasifikasi_jatim.html" />
     <link rel="prev" title="Clustering Linear dan Polynomial" href="clusteringlinpoly.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -189,6 +190,7 @@
 <li class="toctree-l1"><a class="reference internal" href="kmean.html">K-Means Clustering Polutan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="clusteringlinpoly.html">Clustering Linear dan Polynomial</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Klasifikasi Lahan Sawah dan Non-Sawah dengan Random Forest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laporan_klasifikasi_jatim.html">Laporan Analisis LULC (Land Use and Land Cover) Jawa Timur</a></li>
 </ul>
 
     </div>
@@ -391,82 +393,58 @@ document.write(`
 <p>Notebook ini menggunakan 10 fitur Sentinel-2A: B2, B3, B4, B8, B11, B12, NDVI, NDWI, MNDWI, dan NDBI. Satu data berarti satu piksel berlabel. GeoJSON berisi 50 petak sawah dan 50 petak non-sawah.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>-q<span class="w"> </span>install<span class="w"> </span>earthengine-api<span class="w"> </span>requests
-<span class="kn">import</span><span class="w"> </span><span class="nn">ee</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rasterio</span>
 
-<span class="c1"># Ganti dengan Google Cloud Project ID yang sudah mengaktifkan Earth Engine.</span>
-<span class="n">PROJECT_GEE</span> <span class="o">=</span> <span class="s1">&#39;ID-PROJECT-GEE&#39;</span>
-<span class="n">START</span><span class="p">,</span> <span class="n">END</span> <span class="o">=</span> <span class="s1">&#39;2024-06-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-09-30&#39;</span>
-<span class="n">MAX_AWAN</span> <span class="o">=</span> <span class="mi">40</span>
-<span class="n">HANYA_S2A</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">OUT_TIF</span> <span class="o">=</span> <span class="s1">&#39;sentinel2A_komposit.tif&#39;</span>
+<span class="c1"># Cari GeoTIFF di folder kerja atau subfolder materi.</span>
+<span class="n">nama_tif</span> <span class="o">=</span> <span class="s1">&#39;sentinel2A_komposit.tif&#39;</span>
+<span class="n">kandidat_tif</span> <span class="o">=</span> <span class="p">[</span><span class="n">Path</span><span class="p">(</span><span class="n">nama_tif</span><span class="p">),</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;materi&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="n">nama_tif</span><span class="p">]</span>
+<span class="n">TIF</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">path</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">kandidat_tif</span> <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">()),</span> <span class="n">kandidat_tif</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
-<span class="c1"># Jalankan autentikasi sekali pada environment yang belum terhubung ke Earth Engine.</span>
-<span class="n">ee</span><span class="o">.</span><span class="n">Authenticate</span><span class="p">()</span>
-<span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">PROJECT_GEE</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">TIF</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GeoTIFF belum ditemukan.&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Lokasi yang diperiksa:&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">kandidat_tif</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  - </span><span class="si">{</span><span class="n">path</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sel selesai tanpa error. Tambahkan file GeoTIFF sebelum menjalankan Random Forest.&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">TIF</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+        <span class="n">jumlah_band</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">count</span>
+        <span class="n">ukuran_citra</span> <span class="o">=</span> <span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">src</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+        <span class="n">crs_citra</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">crs</span>
 
-<span class="n">AOI</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Geometry</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">([</span><span class="mf">112.7060</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.1495</span><span class="p">,</span> <span class="mf">112.7270</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.1325</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;GeoTIFF ditemukan: </span><span class="si">{</span><span class="n">TIF</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Ukuran citra: </span><span class="si">{</span><span class="n">ukuran_citra</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> x </span><span class="si">{</span><span class="n">ukuran_citra</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> piksel&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Jumlah band: </span><span class="si">{</span><span class="n">jumlah_band</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;CRS: </span><span class="si">{</span><span class="n">crs_citra</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-<span class="n">koleksi</span> <span class="o">=</span> <span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s1">&#39;COPERNICUS/S2_SR_HARMONIZED&#39;</span><span class="p">)</span>
-           <span class="o">.</span><span class="n">filterBounds</span><span class="p">(</span><span class="n">AOI</span><span class="p">)</span>
-           <span class="o">.</span><span class="n">filterDate</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="n">END</span><span class="p">)</span>
-           <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Filter</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="s1">&#39;CLOUDY_PIXEL_PERCENTAGE&#39;</span><span class="p">,</span> <span class="n">MAX_AWAN</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Semua Sentinel-2 L2A:&#39;</span><span class="p">,</span> <span class="n">koleksi</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">(),</span> <span class="s1">&#39;citra&#39;</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">HANYA_S2A</span><span class="p">:</span>
-    <span class="n">koleksi</span> <span class="o">=</span> <span class="n">koleksi</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Filter</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="s1">&#39;SPACECRAFT_NAME&#39;</span><span class="p">,</span> <span class="s1">&#39;Sentinel-2A&#39;</span><span class="p">))</span>
-<span class="n">n</span> <span class="o">=</span> <span class="n">koleksi</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dipakai             :&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s1">&#39;citra&#39;</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Tidak ada citra. Ubah periode, MAX_AWAN, atau HANYA_S2A.&#39;</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">mask_awan</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
-    <span class="n">scl</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;SCL&#39;</span><span class="p">)</span>
-    <span class="n">bagus</span> <span class="o">=</span> <span class="p">(</span><span class="n">scl</span><span class="o">.</span><span class="n">neq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">And</span><span class="p">(</span><span class="n">scl</span><span class="o">.</span><span class="n">neq</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">And</span><span class="p">(</span><span class="n">scl</span><span class="o">.</span><span class="n">neq</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">And</span><span class="p">(</span><span class="n">scl</span><span class="o">.</span><span class="n">neq</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
-             <span class="o">.</span><span class="n">And</span><span class="p">(</span><span class="n">scl</span><span class="o">.</span><span class="n">neq</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span><span class="o">.</span><span class="n">And</span><span class="p">(</span><span class="n">scl</span><span class="o">.</span><span class="n">neq</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span><span class="o">.</span><span class="n">And</span><span class="p">(</span><span class="n">scl</span><span class="o">.</span><span class="n">neq</span><span class="p">(</span><span class="mi">11</span><span class="p">)))</span>
-    <span class="k">return</span> <span class="n">img</span><span class="o">.</span><span class="n">updateMask</span><span class="p">(</span><span class="n">bagus</span><span class="p">)</span>
-
-<span class="n">BAND</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;B2&#39;</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="s1">&#39;B4&#39;</span><span class="p">,</span> <span class="s1">&#39;B8&#39;</span><span class="p">,</span> <span class="s1">&#39;B11&#39;</span><span class="p">,</span> <span class="s1">&#39;B12&#39;</span><span class="p">]</span>
-<span class="n">komposit</span> <span class="o">=</span> <span class="n">koleksi</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">mask_awan</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">BAND</span><span class="p">)</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
-<span class="n">ndvi</span> <span class="o">=</span> <span class="n">komposit</span><span class="o">.</span><span class="n">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B8&#39;</span><span class="p">,</span> <span class="s1">&#39;B4&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;NDVI&#39;</span><span class="p">)</span>
-<span class="n">ndwi</span> <span class="o">=</span> <span class="n">komposit</span><span class="o">.</span><span class="n">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="s1">&#39;B8&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;NDWI&#39;</span><span class="p">)</span>
-<span class="n">mndwi</span> <span class="o">=</span> <span class="n">komposit</span><span class="o">.</span><span class="n">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="s1">&#39;B11&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;MNDWI&#39;</span><span class="p">)</span>
-<span class="n">ndbi</span> <span class="o">=</span> <span class="n">komposit</span><span class="o">.</span><span class="n">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B11&#39;</span><span class="p">,</span> <span class="s1">&#39;B8&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;NDBI&#39;</span><span class="p">)</span>
-<span class="n">citra</span> <span class="o">=</span> <span class="n">komposit</span><span class="o">.</span><span class="n">addBands</span><span class="p">([</span><span class="n">ndvi</span><span class="p">,</span> <span class="n">ndwi</span><span class="p">,</span> <span class="n">mndwi</span><span class="p">,</span> <span class="n">ndbi</span><span class="p">])</span><span class="o">.</span><span class="n">toFloat</span><span class="p">()</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">AOI</span><span class="p">)</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="n">citra</span><span class="o">.</span><span class="n">getDownloadURL</span><span class="p">({</span>
-    <span class="s1">&#39;region&#39;</span><span class="p">:</span> <span class="n">AOI</span><span class="p">,</span>
-    <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="s1">&#39;crs&#39;</span><span class="p">:</span> <span class="s1">&#39;EPSG:32749&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;GEO_TIFF&#39;</span><span class="p">,</span>
-<span class="p">})</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">900</span><span class="p">)</span>
-<span class="n">r</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-<span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="sa">b</span><span class="s1">&#39;II&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;MM&#39;</span><span class="p">):</span>
-    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">[:</span><span class="mi">500</span><span class="p">])</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">OUT_TIF</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Tersimpan </span><span class="si">{</span><span class="n">OUT_TIF</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> MB&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Urutan fitur:&#39;</span><span class="p">,</span> <span class="n">BAND</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;NDVI&#39;</span><span class="p">,</span> <span class="s1">&#39;NDWI&#39;</span><span class="p">,</span> <span class="s1">&#39;MNDWI&#39;</span><span class="p">,</span> <span class="s1">&#39;NDBI&#39;</span><span class="p">])</span>
-
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">files</span>
-    <span class="n">files</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">OUT_TIF</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;File tersedia di folder kerja: </span><span class="si">{</span><span class="n">OUT_TIF</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">jumlah_band</span> <span class="o">!=</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;GeoTIFF memiliki </span><span class="si">{</span><span class="n">jumlah_band</span><span class="si">}</span><span class="s1"> band. Model memerlukan 10 band: &#39;</span>
+            <span class="s1">&#39;B2, B3, B4, B8, B11, B12, NDVI, NDWI, MNDWI, NDBI.&#39;</span>
+        <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Fitur: B2, B3, B4, B8, B11, B12, NDVI, NDWI, MNDWI, NDBI&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Lanjutkan ke sel Random Forest.&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>^C
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">rasterio</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Cari GeoTIFF di folder kerja atau subfolder materi.</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">nama_tif</span> <span class="o">=</span> <span class="s1">&#39;sentinel2A_komposit.tif&#39;</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;rasterio&#39;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>-q<span class="w"> </span>install<span class="w"> </span>rasterio<span class="w"> </span>shapely<span class="w"> </span>scikit-learn<span class="w"> </span>matplotlib
-<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -651,6 +629,52 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Petak sawah dari GeoJSON     : 50
+Petak non-sawah dari GeoJSON : 50
+Total petak GeoJSON          : 100
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">CPLE_OpenFailedError</span><span class="g g-Whitespace">                      </span>Traceback (most recent call last)
+<span class="nn">File rasterio\\_base.pyx:310,</span> in <span class="ni">rasterio._base.DatasetBase.__init__</span><span class="nt">()</span>
+
+<span class="nn">File rasterio\\_base.pyx:221,</span> in <span class="ni">rasterio._base.open_dataset</span><span class="nt">()</span>
+
+<span class="nn">File rasterio\\_err.pyx:359,</span> in <span class="ni">rasterio._err.exc_wrap_pointer</span><span class="nt">()</span>
+
+<span class="ne">CPLE_OpenFailedError</span>: sentinel2A_komposit.tif: No such file or directory
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">RasterioIOError</span><span class="g g-Whitespace">                           </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">40</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Petak non-sawah dari GeoJSON : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">TITIK_NON_SAWAH</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">])</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total petak GeoJSON          : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">TITIK_SAWAH</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">])</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">TITIK_NON_SAWAH</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">])</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">40</span> <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">TIF</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span>     <span class="n">arr</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>     <span class="n">profil</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">profile</span>
+
+<span class="nn">File c:\Users\ARIEL\AppData\Local\Programs\Python\Python39\lib\site-packages\rasterio\env.py:463,</span> in <span class="ni">ensure_env_with_credentials.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">460</span>     <span class="n">session</span> <span class="o">=</span> <span class="n">DummySession</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">462</span> <span class="k">with</span> <span class="n">env_ctor</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">463</span>     <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\ARIEL\AppData\Local\Programs\Python\Python39\lib\site-packages\rasterio\__init__.py:387,</span> in <span class="ni">open</span><span class="nt">(fp, mode, driver, width, height, count, crs, transform, dtype, nodata, sharing, opener, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">384</span>     <span class="n">path</span> <span class="o">=</span> <span class="n">_parse_path</span><span class="p">(</span><span class="n">raw_dataset_path</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">386</span> <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;r&quot;</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">387</span>     <span class="n">dataset</span> <span class="o">=</span> <span class="n">DatasetReader</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">,</span> <span class="n">sharing</span><span class="o">=</span><span class="n">sharing</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">388</span> <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;r+&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">389</span>     <span class="n">dataset</span> <span class="o">=</span> <span class="n">get_writer_for_path</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">)(</span>
+<span class="g g-Whitespace">    </span><span class="mi">390</span>         <span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">,</span> <span class="n">sharing</span><span class="o">=</span><span class="n">sharing</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+<span class="g g-Whitespace">    </span><span class="mi">391</span>     <span class="p">)</span>
+
+<span class="nn">File rasterio\\_base.pyx:312,</span> in <span class="ni">rasterio._base.DatasetBase.__init__</span><span class="nt">()</span>
+
+<span class="ne">RasterioIOError</span>: sentinel2A_komposit.tif: No such file or directory
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -785,6 +809,15 @@ document.write(`
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Clustering Linear dan Polynomial</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="laporan_klasifikasi_jatim.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Laporan Analisis LULC (Land Use and Land Cover) Jawa Timur</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

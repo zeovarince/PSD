@@ -190,6 +190,7 @@
 <li class="toctree-l1"><a class="reference internal" href="kmean.html">K-Means Clustering Polutan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="clusteringlinpoly.html">Clustering Linear dan Polynomial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="klasifikasi.html">Klasifikasi Lahan Sawah dan Non-Sawah dengan Random Forest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laporan_klasifikasi_jatim.html">Laporan Analisis LULC (Land Use and Land Cover) Jawa Timur</a></li>
 </ul>
 
     </div>
@@ -441,7 +442,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>^C
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[notice] A new release of pip is available: 26.0.1 -&gt; 26.2.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
 </pre></div>
 </div>
 </div>
@@ -545,6 +547,193 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Centroid Latitude  : -7.165000
+Centroid Longitude : 112.720000
+</pre></div>
+</div>
+<div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
+    
+            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
+            &lt;style&gt;
+                #map_874b99d4a76c40591bc94ece7d960103 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            &lt;/style&gt;
+
+            &lt;style&gt;html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            &lt;/style&gt;
+
+            &lt;style&gt;#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            &lt;/style&gt;
+
+            &lt;script&gt;
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            &lt;/script&gt;
+
+        
+&lt;/head&gt;
+&lt;body&gt;
+    
+    
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_874b99d4a76c40591bc94ece7d960103&quot; &gt;&lt;/div&gt;
+        
+&lt;/body&gt;
+&lt;script&gt;
+    
+    
+            var map_874b99d4a76c40591bc94ece7d960103 = L.map(
+                &quot;map_874b99d4a76c40591bc94ece7d960103&quot;,
+                {
+                    center: [-7.164999999999999, 112.71999999999998],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  &quot;zoom&quot;: 13,
+  &quot;zoomControl&quot;: true,
+  &quot;preferCanvas&quot;: false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_3a90318155ad6f883f39be00c0d90d03 = L.tileLayer(
+                &quot;https://tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
+                {
+  &quot;minZoom&quot;: 0,
+  &quot;maxZoom&quot;: 19,
+  &quot;maxNativeZoom&quot;: 19,
+  &quot;noWrap&quot;: false,
+  &quot;attribution&quot;: &quot;\u0026copy; \u003ca href=\&quot;https://www.openstreetmap.org/copyright\&quot;\u003eOpenStreetMap\u003c/a\u003e contributors&quot;,
+  &quot;subdomains&quot;: &quot;abc&quot;,
+  &quot;detectRetina&quot;: false,
+  &quot;tms&quot;: false,
+  &quot;opacity&quot;: 1,
+}
+
+            );
+        
+    
+            tile_layer_3a90318155ad6f883f39be00c0d90d03.addTo(map_874b99d4a76c40591bc94ece7d960103);
+        
+    
+            var polygon_8973d354dfdbaf97e8dbe50537274718 = L.polygon(
+                [[-7.19, 112.695], [-7.19, 112.745], [-7.14, 112.745], [-7.14, 112.695], [-7.19, 112.695]],
+                {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;#e74c3c&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;#e74c3c&quot;, &quot;fillOpacity&quot;: 0.15, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;noClip&quot;: false, &quot;opacity&quot;: 1.0, &quot;smoothFactor&quot;: 1.0, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
+            ).addTo(map_874b99d4a76c40591bc94ece7d960103);
+        
+    
+        var popup_398f1d26f594b3d518ca5f89bf69fe98 = L.popup({
+  &quot;maxWidth&quot;: 250,
+});
+
+        
+            
+                var html_8ca5afc2c97d45ee720b1aa23c5b9b38 = $(`&lt;div id=&quot;html_8ca5afc2c97d45ee720b1aa23c5b9b38&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;&lt;b&gt;Wilayah Kajian&lt;/b&gt;&lt;br&gt;Kamal - Kampus UTM, Bangkalan&lt;br&gt;Polutan: NO2&lt;br&gt;Periode: Agu 2025 - Agu 2026&lt;/div&gt;`)[0];
+                popup_398f1d26f594b3d518ca5f89bf69fe98.setContent(html_8ca5afc2c97d45ee720b1aa23c5b9b38);
+            
+        
+
+        polygon_8973d354dfdbaf97e8dbe50537274718.bindPopup(popup_398f1d26f594b3d518ca5f89bf69fe98)
+        ;
+
+        
+    
+    
+            polygon_8973d354dfdbaf97e8dbe50537274718.bindTooltip(
+                `&lt;div&gt;
+                     Batas Wilayah Kajian - Kamal UTM
+                 &lt;/div&gt;`,
+                {
+  &quot;sticky&quot;: true,
+}
+            );
+        
+    
+            var marker_62e23df91c84e32b432055c3fdaf7371 = L.marker(
+                [-7.164999999999999, 112.71999999999998],
+                {
+}
+            ).addTo(map_874b99d4a76c40591bc94ece7d960103);
+        
+    
+            var icon_3e510d2d3af1e99320335afdee22d15d = L.AwesomeMarkers.icon(
+                {
+  &quot;markerColor&quot;: &quot;blue&quot;,
+  &quot;iconColor&quot;: &quot;white&quot;,
+  &quot;icon&quot;: &quot;cloud&quot;,
+  &quot;prefix&quot;: &quot;fa&quot;,
+  &quot;extraClasses&quot;: &quot;fa-rotate-0&quot;,
+}
+            );
+        
+    
+        var popup_30c813b2af744a778580fa20312c644d = L.popup({
+  &quot;maxWidth&quot;: 250,
+});
+
+        
+            
+                var html_d5b868a92ba26908f1a154c6f34b8c0c = $(`&lt;div id=&quot;html_d5b868a92ba26908f1a154c6f34b8c0c&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;&lt;b&gt;Titik Pusat Wilayah&lt;/b&gt;&lt;br&gt;Lat: -7.16500&lt;br&gt;Lon: 112.72000&lt;br&gt;Sumber data: Sentinel-5P via OpenEO&lt;/div&gt;`)[0];
+                popup_30c813b2af744a778580fa20312c644d.setContent(html_d5b868a92ba26908f1a154c6f34b8c0c);
+            
+        
+
+        marker_62e23df91c84e32b432055c3fdaf7371.bindPopup(popup_30c813b2af744a778580fa20312c644d)
+        ;
+
+        
+    
+    
+            marker_62e23df91c84e32b432055c3fdaf7371.bindTooltip(
+                `&lt;div&gt;
+                     Titik Pengambilan Data Satelit (OpenEO)
+                 &lt;/div&gt;`,
+                {
+  &quot;sticky&quot;: true,
+}
+            );
+        
+    
+                marker_62e23df91c84e32b432055c3fdaf7371.setIcon(icon_3e510d2d3af1e99320335afdee22d15d);
+            
+&lt;/script&gt;
+&lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
 </div>
 </section>
 <hr class="docutils" />
@@ -559,6 +748,50 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">connection</span> <span class="o">=</span> <span class="n">openeo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;https://openeo.dataspace.copernicus.eu&quot;</span><span class="p">)</span>
 <span class="n">connection</span><span class="o">.</span><span class="n">authenticate_oidc</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">Visit <a href="https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=MILN-YABR" title="Authenticate at https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=MILN-YABR" target="_blank" rel="noopener noreferrer">https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=MILN-YABR</a> <a href="#" onclick="navigator.clipboard.writeText('https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=MILN-YABR');return false;" title="Copy authentication URL to clipboard">&#128203;</a> to authenticate.</div><div class="output text_html"><code>[##################################---]</code> ⌛ Authorization pending</div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">connection</span> <span class="o">=</span> <span class="n">openeo</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;https://openeo.dataspace.copernicus.eu&quot;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">connection</span><span class="o">.</span><span class="n">authenticate_oidc</span><span class="p">()</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\openeo\rest\connection.py:697,</span> in <span class="ni">Connection.authenticate_oidc</span><span class="nt">(self, provider_id, client_id, client_secret, store_refresh_token, use_pkce, display, max_poll_time)</span>
+<span class="g g-Whitespace">    </span><span class="mi">693</span> <span class="n">_log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Trying device code flow.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">694</span> <span class="n">authenticator</span> <span class="o">=</span> <span class="n">OidcDeviceAuthenticator</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">695</span>     <span class="n">client_info</span><span class="o">=</span><span class="n">client_info</span><span class="p">,</span> <span class="n">use_pkce</span><span class="o">=</span><span class="n">use_pkce</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="n">display</span><span class="p">,</span> <span class="n">max_poll_time</span><span class="o">=</span><span class="n">max_poll_time</span>
+<span class="g g-Whitespace">    </span><span class="mi">696</span> <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">697</span> <span class="n">con</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_authenticate_oidc</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">698</span>     <span class="n">authenticator</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">699</span>     <span class="n">provider_id</span><span class="o">=</span><span class="n">provider_id</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">700</span>     <span class="n">store_refresh_token</span><span class="o">=</span><span class="n">store_refresh_token</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">701</span>     <span class="c1"># TODO: expose `auto_renew_from_refresh_token` directly as option instead of reusing `store_refresh_token` arg?</span>
+<span class="g g-Whitespace">    </span><span class="mi">702</span>     <span class="n">auto_renew_from_refresh_token</span><span class="o">=</span><span class="n">store_refresh_token</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">703</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">704</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Authenticated using device code flow.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">705</span> <span class="k">return</span> <span class="n">con</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\openeo\rest\connection.py:413,</span> in <span class="ni">Connection._authenticate_oidc</span><span class="nt">(self, authenticator, provider_id, store_refresh_token, auto_renew_from_refresh_token, fallback_refresh_token, oidc_auth_renewer)</span>
+<span class="g g-Whitespace">    </span><span class="mi">409</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">410</span><span class="sd"> Authenticate through OIDC and set up bearer token (based on OIDC access_token) for further requests.</span>
+<span class="g g-Whitespace">    </span><span class="mi">411</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">412</span> <span class="n">request_refresh_token</span> <span class="o">=</span> <span class="n">store_refresh_token</span> <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">oidc_auth_renewer</span> <span class="ow">and</span> <span class="n">auto_renew_from_refresh_token</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">413</span> <span class="n">tokens</span> <span class="o">=</span> <span class="n">authenticator</span><span class="o">.</span><span class="n">get_tokens</span><span class="p">(</span><span class="n">request_refresh_token</span><span class="o">=</span><span class="n">request_refresh_token</span><span class="p">)</span>
+<span class="nn">    414 _log.info(&quot;Obtained tokens: {t}&quot;.format(t=[k for k, v</span> in <span class="ni">tokens._asdict().items</span><span class="nt">() if v]))</span>
+<span class="g g-Whitespace">    </span><span class="mi">416</span> <span class="n">refresh_token</span> <span class="o">=</span> <span class="n">tokens</span><span class="o">.</span><span class="n">refresh_token</span> <span class="ow">or</span> <span class="n">fallback_refresh_token</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\openeo\rest\auth\oidc.py:928,</span> in <span class="ni">OidcDeviceAuthenticator.get_tokens</span><span class="nt">(self, request_refresh_token)</span>
+<span class="g g-Whitespace">    </span><span class="mi">926</span> <span class="k">while</span> <span class="n">elapsed</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_poll_time</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">927</span>     <span class="n">poll_ui</span><span class="o">.</span><span class="n">show_progress</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">928</span>     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sleep</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">930</span>     <span class="k">if</span> <span class="n">elapsed</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">next_poll</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">931</span>         <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">932</span>             <span class="sa">f</span><span class="s2">&quot;Doing </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">grant_type</span><span class="si">!r}</span><span class="s2"> token request </span><span class="si">{</span><span class="n">token_endpoint</span><span class="si">!r}</span><span class="s2"> with post data fields </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">post_data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">!r}</span><span class="s2"> (client_id </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">client_id</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">933</span>         <span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
