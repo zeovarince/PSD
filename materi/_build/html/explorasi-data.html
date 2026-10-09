@@ -185,8 +185,11 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Eksplorasi Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="timeseriesaiven.html">Analisis Time Series: Migrasi Data &amp; Pengolahan di KNIME</a></li>
 <li class="toctree-l1"><a class="reference internal" href="no2kamal.html">Polutan Kamal (Revisi)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preprocessing_ekstraksi_kamal.html">Preprocessing Sebelum Ekstraksi Fitur</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="tsfel.html">Fitur-Fitur TSFEL pada Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing_ekstraksi_kamal.html">Preprocessing dan Ekstraksi Fitur</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kmean.html">K-Means Clustering Polutan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clusteringlinpoly.html">Clustering Linear dan Polynomial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasifikasi.html">Klasifikasi Lahan Sawah dan Non-Sawah dengan Random Forest</a></li>
 </ul>
 
     </div>
@@ -417,8 +420,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[notice] A new release of pip is available: 26.0.1 -&gt; 26.2.1
-[notice] To update, run: python.exe -m pip install --upgrade pip
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>^C
 </pre></div>
 </div>
 </div>
@@ -434,13 +436,6 @@ document.write(`
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pandas     : </span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;matplotlib : </span><span class="si">{</span><span class="n">plt</span><span class="o">.</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;seaborn    : </span><span class="si">{</span><span class="n">sns</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pandas     : 2.3.3
-matplotlib : 3.10.8
-seaborn    : 0.13.2
 </pre></div>
 </div>
 </div>
@@ -471,12 +466,6 @@ seaborn    : 0.13.2
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total baris : 370
-Periode     : 2025-08-24 s/d 2026-08-28
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <hr class="docutils" />
@@ -494,20 +483,6 @@ Periode     : 2025-08-24 s/d 2026-08-28
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Shape ===
-Baris : 370
-Kolom : 4
-
-=== Kolom &amp; Tipe Data ===
-date    datetime64[ns, UTC]
-NO2                 float64
-CO                  float64
-SO2                 float64
-dtype: object
-</pre></div>
-</div>
-</div>
 </div>
 <p>Dataset memiliki 370 baris dan 4 kolom. Satu baris merepresentasikan satu hari pengamatan. Kolom <code class="docutils literal notranslate"><span class="pre">date</span></code> sudah bertipe <code class="docutils literal notranslate"><span class="pre">datetime64[ns]</span></code> dan ketiga kolom polutan bertipe <code class="docutils literal notranslate"><span class="pre">float64</span></code> — semua sesuai untuk analisis lanjutan.</p>
 <div class="cell docutils container">
@@ -517,108 +492,6 @@ dtype: object
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Preview 10 Baris Pertama ===
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>date</th>
-      <th>NO2</th>
-      <th>CO</th>
-      <th>SO2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2025-08-24 00:00:00+00:00</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2025-08-25 00:00:00+00:00</td>
-      <td>0.000020</td>
-      <td>0.028240</td>
-      <td>0.000272</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2025-08-26 00:00:00+00:00</td>
-      <td>0.000035</td>
-      <td>NaN</td>
-      <td>-0.002125</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2025-08-27 00:00:00+00:00</td>
-      <td>0.000086</td>
-      <td>0.030417</td>
-      <td>0.000169</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2025-08-28 00:00:00+00:00</td>
-      <td>0.000010</td>
-      <td>0.025137</td>
-      <td>0.000109</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>2025-08-29 00:00:00+00:00</td>
-      <td>0.000034</td>
-      <td>0.023990</td>
-      <td>-0.000365</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>2025-08-30 00:00:00+00:00</td>
-      <td>0.000026</td>
-      <td>0.028700</td>
-      <td>0.000124</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>2025-08-31 00:00:00+00:00</td>
-      <td>0.000025</td>
-      <td>0.027550</td>
-      <td>-0.000478</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>2025-09-01 00:00:00+00:00</td>
-      <td>0.000011</td>
-      <td>0.023669</td>
-      <td>0.000298</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>2025-09-02 00:00:00+00:00</td>
-      <td>0.000018</td>
-      <td>0.020387</td>
-      <td>-0.000132</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -627,127 +500,10 @@ dtype: object
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Preview 10 Baris Terakhir ===
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>date</th>
-      <th>NO2</th>
-      <th>CO</th>
-      <th>SO2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>360</th>
-      <td>2026-08-19 00:00:00+00:00</td>
-      <td>1.128241e-05</td>
-      <td>0.024064</td>
-      <td>0.000579</td>
-    </tr>
-    <tr>
-      <th>361</th>
-      <td>2026-08-20 00:00:00+00:00</td>
-      <td>1.734417e-05</td>
-      <td>0.025629</td>
-      <td>0.000164</td>
-    </tr>
-    <tr>
-      <th>362</th>
-      <td>2026-08-21 00:00:00+00:00</td>
-      <td>2.488306e-05</td>
-      <td>0.025582</td>
-      <td>0.000383</td>
-    </tr>
-    <tr>
-      <th>363</th>
-      <td>2026-08-22 00:00:00+00:00</td>
-      <td>-8.041791e-07</td>
-      <td>0.033008</td>
-      <td>-0.000207</td>
-    </tr>
-    <tr>
-      <th>364</th>
-      <td>2026-08-23 00:00:00+00:00</td>
-      <td>1.517305e-05</td>
-      <td>0.035256</td>
-      <td>-0.000467</td>
-    </tr>
-    <tr>
-      <th>365</th>
-      <td>2026-08-24 00:00:00+00:00</td>
-      <td>3.042386e-05</td>
-      <td>0.029695</td>
-      <td>-0.000215</td>
-    </tr>
-    <tr>
-      <th>366</th>
-      <td>2026-08-25 00:00:00+00:00</td>
-      <td>2.706911e-05</td>
-      <td>0.030743</td>
-      <td>0.000132</td>
-    </tr>
-    <tr>
-      <th>367</th>
-      <td>2026-08-26 00:00:00+00:00</td>
-      <td>1.562199e-05</td>
-      <td>0.030572</td>
-      <td>0.000409</td>
-    </tr>
-    <tr>
-      <th>368</th>
-      <td>2026-08-27 00:00:00+00:00</td>
-      <td>4.311178e-05</td>
-      <td>0.034008</td>
-      <td>0.000109</td>
-    </tr>
-    <tr>
-      <th>369</th>
-      <td>2026-08-28 00:00:00+00:00</td>
-      <td>3.527338e-05</td>
-      <td>0.034731</td>
-      <td>-0.000111</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 370 entries, 0 to 369
-Data columns (total 4 columns):
- #   Column  Non-Null Count  Dtype              
----  ------  --------------  -----              
- 0   date    370 non-null    datetime64[ns, UTC]
- 1   NO2     194 non-null    float64            
- 2   CO      202 non-null    float64            
- 3   SO2     234 non-null    float64            
-dtypes: datetime64[ns, UTC](1), float64(3)
-memory usage: 11.7 KB
 </pre></div>
 </div>
 </div>
@@ -764,72 +520,6 @@ memory usage: 11.7 KB
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>NO2</th>
-      <td>194.0</td>
-      <td>0.000035</td>
-      <td>0.000023</td>
-      <td>-0.000011</td>
-      <td>0.000020</td>
-      <td>0.000028</td>
-      <td>0.000043</td>
-      <td>0.000147</td>
-    </tr>
-    <tr>
-      <th>CO</th>
-      <td>202.0</td>
-      <td>0.028868</td>
-      <td>0.003832</td>
-      <td>0.020132</td>
-      <td>0.026199</td>
-      <td>0.029059</td>
-      <td>0.031217</td>
-      <td>0.044651</td>
-    </tr>
-    <tr>
-      <th>SO2</th>
-      <td>234.0</td>
-      <td>0.000064</td>
-      <td>0.000322</td>
-      <td>-0.002125</td>
-      <td>-0.000129</td>
-      <td>0.000064</td>
-      <td>0.000243</td>
-      <td>0.001092</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>Beberapa hal yang langsung terlihat dari tabel ini. CO memiliki nilai rata-rata 0.028868 mol/m², jauh lebih besar secara absolut dibanding NO2 (0.000035) dan SO2 (0.000064). Ini bukan berarti CO lebih berbahaya dalam proporsi yang sama — perbedaan ini mencerminkan perbedaan kelimpahan alami gas-gas ini di troposfer dan sensitivitas instrumen TROPOMI terhadap masing-masing gas. SO2 memiliki nilai minimum negatif (-0.002125), yang secara fisik tidak mungkin dan merupakan noise retrieval algoritma TROPOMI.</p>
 <div class="cell docutils container">
@@ -842,14 +532,6 @@ memory usage: 11.7 KB
     <span class="n">skew</span>    <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">skew</span><span class="p">()</span>
     <span class="n">arah</span>    <span class="o">=</span> <span class="s2">&quot;right-skewed&quot;</span> <span class="k">if</span> <span class="n">mean</span> <span class="o">&gt;</span> <span class="n">median</span> <span class="k">else</span> <span class="s2">&quot;left-skewed&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">:</span><span class="s2">4s</span><span class="si">}</span><span class="s2">  mean: </span><span class="si">{</span><span class="n">mean</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">  median: </span><span class="si">{</span><span class="n">median</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">  selisih: </span><span class="si">{</span><span class="n">selisih</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">  skew: </span><span class="si">{</span><span class="n">skew</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  -&gt; </span><span class="si">{</span><span class="n">arah</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Mean vs Median ===
-NO2   mean: 0.000035  median: 0.000028  selisih: 0.000006  skew: 1.6735  -&gt; right-skewed
-CO    mean: 0.028868  median: 0.029059  selisih: 0.000191  skew: 0.2312  -&gt; left-skewed
-SO2   mean: 0.000064  median: 0.000064  selisih: 0.000000  skew: -1.0465  -&gt; left-skewed
 </pre></div>
 </div>
 </div>
@@ -874,9 +556,6 @@ SO2   mean: 0.000064  median: 0.000064  selisih: 0.000000  skew: -1.0465  -&gt; 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/26e4bb74251e52cd8d15f40476ff9ef021b9ecc8b791635653ed73e99aed00a7.png" src="_images/26e4bb74251e52cd8d15f40476ff9ef021b9ecc8b791635653ed73e99aed00a7.png" />
 </div>
 </div>
 <p>Histogram memperlihatkan karakter distribusi yang berbeda untuk setiap polutan. NO2 menumpuk di nilai rendah (0.00001-0.00004 mol/m²) dengan ekor panjang ke kanan — garis mean (merah putus-putus) berada di kanan median (hitam titik-titik), mengkonfirmasi right-skew. CO membentuk distribusi yang lebih simetris dan lebar, mencerminkan variasi harian yang lebih merata sepanjang tahun. SO2 memiliki distribusi yang menyebar ke kiri hingga masuk wilayah negatif, dengan mean dan median yang hampir berimpit karena nilai positif dan negatif saling menetralkan.</p>
@@ -908,17 +587,6 @@ SO2   mean: 0.000064  median: 0.000064  selisih: 0.000000  skew: -1.0465  -&gt; 
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Jumlah Missing Value ===
-NO2   176 hari missing  (47.6% dari 370 hari)
-CO    168 hari missing  (45.4% dari 370 hari)
-SO2   136 hari missing  (36.8% dari 370 hari)
-
-Hari semua polutan missing sekaligus : 115 hari
-Hari ketiga polutan lengkap          : 158 hari
-</pre></div>
-</div>
-</div>
 </div>
 <p>Dari 370 hari, hanya 158 hari di mana ketiga polutan tersedia lengkap. Sebanyak 115 hari semua polutan missing sekaligus — angka ini konsisten dengan penjelasan cloud cover di atas. Ketika awan menutup wilayah, semua instrumen TROPOMI terdampak bersamaan tanpa memandang jenis gas yang diukur. Streak missing terpanjang yang tercatat adalah 10 hari berturut-turut, kemungkinan besar bertepatan dengan periode hujan berkepanjangan atau La Niña yang memperkuat tutupan awan di Jawa Timur.</p>
 <div class="cell docutils container">
@@ -945,13 +613,6 @@ Hari ketiga polutan lengkap          : 158 hari
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\ARIEL\AppData\Local\Temp\ipykernel_37452\1895569373.py:1: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
-  df[&quot;bulan&quot;] = df[&quot;date&quot;].dt.to_period(&quot;M&quot;)
-</pre></div>
-</div>
-<img alt="_images/696b7a0cfbbfc6110dad1f757034ac5dd1e4b529d6fcaf6acc91659e79dba752.png" src="_images/696b7a0cfbbfc6110dad1f757034ac5dd1e4b529d6fcaf6acc91659e79dba752.png" />
-</div>
 </div>
 <p>Bar chart ini memperlihatkan pola musiman missing value yang jelas. Periode November 2025 hingga Maret 2026 (musim hujan) secara konsisten memiliki missing value tinggi di semua polutan — NO2 mencapai puncak 27 hari missing di Januari 2026, SO2 25 hari di Januari 2026. Sebaliknya, Juni dan Juli 2026 (pertengahan kemarau) hampir bersih dengan hanya 1-4 hari missing per bulan. Pola ini mengkonfirmasi bahwa tutupan awan musim hujan adalah faktor pengendali utama ketersediaan data.</p>
 <div class="cell docutils container">
@@ -972,9 +633,6 @@ Hari ketiga polutan lengkap          : 158 hari
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/4a05c02d2df89121f0acafbde9832a3efa454ab94858247b8fb296b3eccfd9fb.png" src="_images/4a05c02d2df89121f0acafbde9832a3efa454ab94858247b8fb296b3eccfd9fb.png" />
 </div>
 </div>
 <p>Scatter timeline memperlihatkan distribusi spasial missing value sepanjang periode. Perhatikan bahwa titik merah (missing) pada ketiga baris sering muncul di rentang waktu yang sama — ini adalah tanda bahwa awan menutup wilayah dan memengaruhi semua polutan sekaligus. Bagian kiri plot (Agustus-Oktober 2025) dan kanan (Juni-Agustus 2026) terlihat lebih banyak titik berwarna (ada data), sedangkan bagian tengah (November 2025-Maret 2026) didominasi titik merah, sesuai dengan pola musim hujan yang teridentifikasi sebelumnya.</p>
@@ -1013,41 +671,6 @@ Hari ketiga polutan lengkap          : 158 hari
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Deteksi Outlier (Metode IQR) ===
-
---- NO2 ---
-  Q1              : 0.000020
-  Q3              : 0.000043
-  IQR             : 0.000023
-  Batas bawah IQR : -0.000014
-  Batas atas IQR  : 0.000077
-  Outlier bawah   : 0 data
-  Outlier atas    : 11 data
-  Nilai negatif   : 2 data
-
---- CO ---
-  Q1              : 0.026199
-  Q3              : 0.031217
-  IQR             : 0.005018
-  Batas bawah IQR : 0.018673
-  Batas atas IQR  : 0.038743
-  Outlier bawah   : 0 data
-  Outlier atas    : 1 data
-  Nilai negatif   : 0 data
-
---- SO2 ---
-  Q1              : -0.000129
-  Q3              : 0.000243
-  IQR             : 0.000371
-  Batas bawah IQR : -0.000685
-  Batas atas IQR  : 0.000799
-  Outlier bawah   : 2 data
-  Outlier atas    : 4 data
-  Nilai negatif   : 99 data
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1069,9 +692,6 @@ Hari ketiga polutan lengkap          : 158 hari
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/b7481a16cb336cfc86b380d465a8257fc1acbb8a9b9a9ddb8339936f94c2397a.png" src="_images/b7481a16cb336cfc86b380d465a8257fc1acbb8a9b9a9ddb8339936f94c2397a.png" />
-</div>
 </div>
 <p>Tiga karakter berbeda terlihat dari boxplot ini. NO2 memiliki box yang kompak di rentang nilai rendah dengan 11 titik merah di atas whisker atas — outlier ini merepresentasikan hari-hari dengan lonjakan emisi NOx dari kendaraan berat, kapal, atau kondisi angin yang membawa polutan dari Surabaya/Gresik. CO memiliki distribusi paling simetris dengan hanya 1 outlier atas, menunjukkan sumber emisi yang relatif konsisten sepanjang tahun. SO2 menunjukkan pola paling tidak biasa: box-nya melebar ke bawah hingga nilai negatif, dengan titik merah di bawah whisker bawah — ini bukan outlier polusi nyata, melainkan noise retrieval TROPOMI yang konsisten menghasilkan nilai negatif di wilayah dengan konsentrasi SO2 latar belakang yang sangat rendah.</p>
 <div class="cell docutils container">
@@ -1087,120 +707,6 @@ Hari ketiga polutan lengkap          : 158 hari
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Baris dengan Nilai Negatif ===
-
-NO2 (2 baris):
-                     date           NO2
-2026-04-05 00:00:00+00:00 -1.074266e-05
-2026-08-22 00:00:00+00:00 -8.041791e-07
-
-CO: tidak ada nilai negatif
-
-SO2 (99 baris):
-                     date       SO2
-2025-08-26 00:00:00+00:00 -0.002125
-2025-08-29 00:00:00+00:00 -0.000365
-2025-08-31 00:00:00+00:00 -0.000478
-2025-09-02 00:00:00+00:00 -0.000132
-2025-09-04 00:00:00+00:00 -0.000093
-2025-09-06 00:00:00+00:00 -0.000081
-2025-09-09 00:00:00+00:00 -0.000297
-2025-09-10 00:00:00+00:00 -0.000268
-2025-09-13 00:00:00+00:00 -0.000001
-2025-09-16 00:00:00+00:00 -0.000177
-2025-09-19 00:00:00+00:00 -0.000293
-2025-09-21 00:00:00+00:00 -0.000176
-2025-09-24 00:00:00+00:00 -0.000123
-2025-09-26 00:00:00+00:00 -0.000261
-2025-09-27 00:00:00+00:00 -0.000202
-2025-09-28 00:00:00+00:00 -0.000219
-2025-10-02 00:00:00+00:00 -0.000368
-2025-10-05 00:00:00+00:00 -0.000248
-2025-10-06 00:00:00+00:00 -0.000142
-2025-10-09 00:00:00+00:00 -0.000226
-2025-10-11 00:00:00+00:00 -0.000086
-2025-10-14 00:00:00+00:00 -0.000015
-2025-10-17 00:00:00+00:00 -0.000266
-2025-10-19 00:00:00+00:00 -0.000087
-2025-10-28 00:00:00+00:00 -0.000126
-2025-11-07 00:00:00+00:00 -0.000063
-2025-11-21 00:00:00+00:00 -0.000015
-2025-11-26 00:00:00+00:00 -0.000028
-2025-12-03 00:00:00+00:00 -0.000386
-2025-12-05 00:00:00+00:00 -0.000171
-2025-12-06 00:00:00+00:00 -0.000149
-2025-12-10 00:00:00+00:00 -0.000211
-2025-12-12 00:00:00+00:00 -0.000115
-2025-12-21 00:00:00+00:00 -0.000356
-2025-12-22 00:00:00+00:00 -0.000007
-2025-12-24 00:00:00+00:00 -0.000138
-2025-12-25 00:00:00+00:00 -0.000123
-2026-01-19 00:00:00+00:00 -0.000094
-2026-01-29 00:00:00+00:00 -0.000006
-2026-02-03 00:00:00+00:00 -0.000148
-2026-02-17 00:00:00+00:00 -0.000239
-2026-02-27 00:00:00+00:00 -0.000060
-2026-03-03 00:00:00+00:00 -0.000105
-2026-03-04 00:00:00+00:00 -0.000067
-2026-03-05 00:00:00+00:00 -0.000180
-2026-03-08 00:00:00+00:00 -0.000064
-2026-03-12 00:00:00+00:00 -0.000088
-2026-03-16 00:00:00+00:00 -0.000247
-2026-03-24 00:00:00+00:00 -0.000039
-2026-03-27 00:00:00+00:00 -0.000316
-2026-04-01 00:00:00+00:00 -0.000012
-2026-04-03 00:00:00+00:00 -0.000079
-2026-04-05 00:00:00+00:00 -0.000098
-2026-04-20 00:00:00+00:00 -0.000002
-2026-04-23 00:00:00+00:00 -0.000291
-2026-04-26 00:00:00+00:00 -0.000331
-2026-05-04 00:00:00+00:00 -0.000073
-2026-05-07 00:00:00+00:00 -0.000107
-2026-05-10 00:00:00+00:00 -0.000025
-2026-05-11 00:00:00+00:00 -0.000195
-2026-05-12 00:00:00+00:00 -0.000201
-2026-05-22 00:00:00+00:00 -0.000017
-2026-05-23 00:00:00+00:00 -0.000111
-2026-05-28 00:00:00+00:00 -0.000196
-2026-06-02 00:00:00+00:00 -0.000164
-2026-06-05 00:00:00+00:00 -0.000518
-2026-06-07 00:00:00+00:00 -0.000217
-2026-06-09 00:00:00+00:00 -0.000069
-2026-06-13 00:00:00+00:00 -0.000038
-2026-06-17 00:00:00+00:00 -0.000247
-2026-06-18 00:00:00+00:00 -0.000057
-2026-06-20 00:00:00+00:00 -0.000162
-2026-06-24 00:00:00+00:00 -0.000183
-2026-06-25 00:00:00+00:00 -0.000181
-2026-06-29 00:00:00+00:00 -0.000016
-2026-06-30 00:00:00+00:00 -0.000130
-2026-07-03 00:00:00+00:00 -0.000191
-2026-07-04 00:00:00+00:00 -0.000294
-2026-07-05 00:00:00+00:00 -0.000134
-2026-07-07 00:00:00+00:00 -0.000323
-2026-07-09 00:00:00+00:00 -0.000234
-2026-07-10 00:00:00+00:00 -0.000005
-2026-07-14 00:00:00+00:00 -0.000286
-2026-07-16 00:00:00+00:00 -0.000146
-2026-07-20 00:00:00+00:00 -0.000335
-2026-07-21 00:00:00+00:00 -0.000234
-2026-07-23 00:00:00+00:00 -0.000102
-2026-07-28 00:00:00+00:00 -0.000461
-2026-07-30 00:00:00+00:00 -0.000174
-2026-07-31 00:00:00+00:00 -0.000042
-2026-08-03 00:00:00+00:00 -0.000292
-2026-08-10 00:00:00+00:00 -0.000145
-2026-08-11 00:00:00+00:00 -0.000402
-2026-08-12 00:00:00+00:00 -0.000015
-2026-08-13 00:00:00+00:00 -0.001088
-2026-08-22 00:00:00+00:00 -0.000207
-2026-08-23 00:00:00+00:00 -0.000467
-2026-08-24 00:00:00+00:00 -0.000215
-2026-08-28 00:00:00+00:00 -0.000111
-</pre></div>
-</div>
-</div>
 </div>
 <p>SO2 memiliki 99 nilai negatif dengan minimum -0.002125 mol/m², sementara NO2 hanya 2 nilai negatif yang sangat kecil mendekati nol (-0.000011). CO tidak memiliki nilai negatif sama sekali. Nilai negatif SO2 yang banyak dan tersebar sepanjang tahun bukan anomali polusi — ini adalah karakteristik algoritmik. Retrieval SO2 di TROPOMI menggunakan metode diferensial yang bisa menghasilkan nilai negatif di wilayah dengan konsentrasi SO2 sangat rendah, di mana sinyal gas hampir tidak bisa dibedakan dari noise background. Nilai-nilai ini perlu di-clamp ke nol atau dikeluarkan sebelum tahap pemodelan.</p>
 <div class="cell docutils container">
@@ -1209,14 +715,6 @@ SO2 (99 baris):
 <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;NO2&quot;</span><span class="p">,</span> <span class="s2">&quot;CO&quot;</span><span class="p">,</span> <span class="s2">&quot;SO2&quot;</span><span class="p">]:</span>
     <span class="n">idx</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">  max: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="p">]</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">  pada: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Nilai Maksimum (Puncak Polutan) ===
-NO2  max: 0.000147  pada: 2026-05-01
-CO  max: 0.044651  pada: 2025-09-24
-SO2  max: 0.001092  pada: 2026-05-15
 </pre></div>
 </div>
 </div>
@@ -1260,9 +758,6 @@ SO2  max: 0.001092  pada: 2026-05-15
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/0c44fcc68f68758ddbe819c5061dee4f2ca863abb9346c2c38518bd9f0d78ebe.png" src="_images/0c44fcc68f68758ddbe819c5061dee4f2ca863abb9346c2c38518bd9f0d78ebe.png" />
-</div>
 </div>
 <p>Tiga pola berbeda terlihat dari plot ini. NO2 menunjukkan fluktuasi harian yang tajam dengan beberapa lonjakan menonjol, terutama di sekitar Mei 2026 ketika nilainya hampir dua kali lipat rata-rata. Ini mencerminkan emisi yang tidak stabil dari kendaraan dan kapal yang aktivitasnya bervariasi tiap hari. CO bergerak lebih halus dan konsisten di atas garis mean hampir sepanjang periode, dengan satu lonjakan di September 2025 yang bertepatan dengan puncak kemarau. SO2 memperlihatkan titik-titik hitam (nilai negatif) tersebar hampir merata sepanjang tahun di bawah garis nol, memperkuat kesimpulan bahwa nilainya adalah noise sistemik dan bukan kejadian polusi nyata. Garis putus-putus merah (mean) membantu mengidentifikasi hari-hari yang konsentrasinya jauh di atas rata-rata tahunan.</p>
 <div class="cell docutils container">
@@ -1289,13 +784,6 @@ SO2  max: 0.001092  pada: 2026-05-15
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\ARIEL\AppData\Local\Temp\ipykernel_37452\2706875086.py:1: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
-  df[&quot;bulan&quot;] = df[&quot;date&quot;].dt.to_period(&quot;M&quot;)
-</pre></div>
-</div>
-<img alt="_images/c0d5e37aca9963b3fe942fc15ead43c4f16064ce0bad9f19d44298013e304d0f.png" src="_images/c0d5e37aca9963b3fe942fc15ead43c4f16064ce0bad9f19d44298013e304d0f.png" />
-</div>
 </div>
 <p>Rata-rata bulanan memperhalus variasi harian sehingga pola musiman lebih terlihat. NO2 mencapai puncak di Mei 2026 lalu turun di bulan-bulan kemarau penuh (Juni-Agustus). CO relatif konsisten sepanjang tahun di kisaran 0.026-0.033 mol/m², dengan sedikit kenaikan di September-Oktober 2025 yang berkorelasi dengan puncak kemarau dan pembakaran biomassa. SO2 memiliki rata-rata bulanan yang sangat kecil dan beberapa bulan bernilai negatif akibat dominasi noise retrieval, menandakan konsentrasi SO2 nyata di wilayah Kamal memang sangat rendah dan berada di bawah sensitivitas deteksi TROPOMI untuk area sekecil bounding box yang digunakan.</p>
 </section>
@@ -1316,16 +804,6 @@ SO2  max: 0.001092  pada: 2026-05-15
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Nilai korelasi:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">corr</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/a5cdc930529d138d720c62c2a80abd4e209d2c5e31620d09f708b3283ee44f1a.png" src="_images/a5cdc930529d138d720c62c2a80abd4e209d2c5e31620d09f708b3283ee44f1a.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Nilai korelasi:
-          NO2        CO       SO2
-NO2  1.000000  0.192330  0.110931
-CO   0.192330  1.000000  0.010997
-SO2  0.110931  0.010997  1.000000
 </pre></div>
 </div>
 </div>
@@ -1355,9 +833,6 @@ SO2  0.110931  0.010997  1.000000
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/c8ba8b061ecf20e92fd6c9f98ffef7390c2a015b7929dc4e0bcaad8bfb614e76.png" src="_images/c8ba8b061ecf20e92fd6c9f98ffef7390c2a015b7929dc4e0bcaad8bfb614e76.png" />
 </div>
 </div>
 <p>Scatter plot memvisualisasikan hubungan antar polutan secara lebih intuitif dibanding angka korelasi. Pasangan NO2-CO memperlihatkan sebaran titik yang sedikit mengikuti garis regresi dengan lereng positif tipis — ada tendensi hari dengan NO2 tinggi juga memiliki CO sedikit lebih tinggi, tapi polanya sangat bervariasi. Pasangan NO2-SO2 dan CO-SO2 memperlihatkan sebaran yang jauh lebih acak, dengan banyak titik di bawah sumbu Y (nilai SO2 negatif) yang sebetulnya bukan data polutan nyata. Garis regresi pada ketiga scatter plot mendekati horizontal, mengkonfirmasi korelasi yang lemah.~cle</p>

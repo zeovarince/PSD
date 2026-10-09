@@ -30,8 +30,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['!pip install pandas sqlalchemy psycopg2-binary', '', 'import pandas as pd', 'from sqlalchemy import create_engine, text', '']
+['!pip -q install earthengine-api requests', 'import ee', 'import requests', '', '# Ganti dengan Google Cloud Project ID yang sudah mengaktifkan Earth Engine.']
 ...
-["    df_gabung.to_sql(name=table_name, con=engine, if_exists='replace', index=False)", '    print(f"Tabel baru \'{table_name}\' berhasil dibuat dan data telah diunggah!")', '', 'except Exception as e:', '    print(f"Terjadi kesalahan pada database: {e}")']
+['try:', '    from google.colab import files', '    files.download(OUT_TIF)', 'except ImportError:', "    print(f'File tersedia di folder kerja: {OUT_TIF}')"]
 -------------------
 

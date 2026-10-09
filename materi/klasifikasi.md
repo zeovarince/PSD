@@ -48,9 +48,33 @@ $$\text{MNDWI} = \frac{B3 - B11}{B3 + B11} \qquad \text{NDBI} = \frac{B11 - B8}{
 
 NDVI mengukur kerapatan vegetasi, sedangkan NDWI dan MNDWI menandai air, termasuk genangan pada sawah yang baru ditanami. NDBI menandai lahan terbangun.
 
+### Fitur yang digunakan untuk klasifikasi
+
+Random Forest tidak menerima nama kelas atau bentuk petak secara langsung. Model menerima satu baris angka untuk setiap piksel. Satu baris tersebut berisi **10 fitur**, yaitu enam nilai reflektansi dan empat indeks spektral berikut.
+
+| Fitur | Sumber atau rumus | Informasi yang dibawa | Peran dalam membedakan sawah dan non-sawah |
+| :--- | :--- | :--- | :--- |
+| `B2` | Biru, 490 nm | Respons permukaan pada cahaya biru | Membantu membedakan air, tanah, dan permukaan terbangun; juga sensitif terhadap pengaruh atmosfer dan kekeruhan air. |
+| `B3` | Hijau, 560 nm | Pantulan cahaya hijau | Membantu mengenali vegetasi dan air; genangan biasanya memiliki respons berbeda dari vegetasi sawah. |
+| `B4` | Merah, 665 nm | Pantulan cahaya merah | Diserap kuat oleh klorofil. Nilainya bersama `B8` menjadi dasar NDVI. |
+| `B8` | Inframerah dekat/NIR, 842 nm | Pantulan struktur internal daun | Umumnya tinggi pada vegetasi sehat dan menjadi pembeda penting antara vegetasi sawah dengan air atau lahan terbuka. |
+| `B11` | SWIR-1, 1610 nm | Kandungan air dan karakter permukaan | Membantu memisahkan tanah, vegetasi, air, dan area terbangun; digunakan dalam MNDWI dan NDBI. |
+| `B12` | SWIR-2, 2190 nm | Kelembapan dan kondisi material permukaan | Melengkapi informasi `B11` untuk membedakan tanah kering, vegetasi, air, dan material non-vegetasi. |
+| `NDVI` | $(B8-B4)/(B8+B4)$ | Kerapatan dan kehijauan vegetasi | Nilai tinggi umumnya menunjukkan vegetasi aktif, termasuk tanaman padi pada fase vegetatif. |
+| `NDWI` | $(B3-B8)/(B3+B8)$ | Indikasi air atau genangan | Membantu mengenali sawah berair atau baru ditanami, sekaligus memisahkannya dari vegetasi yang memiliki `B8` tinggi. |
+| `MNDWI` | $(B3-B11)/(B3+B11)$ | Air dengan pengurangan pengaruh tanah dan area terbangun | Berguna untuk mendeteksi genangan ketika air bercampur dengan tanah atau berada di sekitar permukaan terbangun. |
+| `NDBI` | $(B11-B8)/(B11+B8)$ | Indikasi permukaan terbangun | Membantu mengurangi kesalahan antara non-sawah terbangun dan sawah, karena area terbangun cenderung memiliki respons SWIR lebih tinggi daripada NIR. |
+
+Semua indeks berada pada rentang teoritis sekitar $-1$ sampai $1$. Nilai aktual dapat dipengaruhi oleh tutupan awan yang tersisa, bayangan, kelembapan tanah, fase pertumbuhan padi, dan pencampuran piksel. Karena itu, satu fitur tidak dipakai sebagai aturan ambang tunggal. Random Forest menggabungkan pola dari semua fitur untuk menentukan kelas setiap piksel.
+
+**Daftar fitur input model:** `B2`, `B3`, `B4`, `B8`, `B11`, `B12`, `NDVI`, `NDWI`, `MNDWI`, dan `NDBI`. Urutan ini harus sama antara urutan band pada GeoTIFF, isi `NAMA_BAND`, dan kolom `X` yang diberikan ke model.
+
 Earth Engine mengekspor sepuluh band pada resolusi 10 m dalam proyeksi UTM zona 49S (EPSG:32749) sebagai GeoTIFF float32, dengan urutan B2, B3, B4, B8, B11, B12, NDVI, NDWI, MNDWI, NDBI. Band B11 dan B12 beresolusi asli 20 m, dan Earth Engine menyamakannya ke 10 m.
 
-```python
+> **Urutan menjalankan sel:** jalankan sel akuisisi ini di Google Colab atau Jupyter Notebook yang dapat membuka proses autentikasi Earth Engine. Setelah autentikasi selesai, pastikan `sentinel2A_komposit.tif` berhasil dibuat dan diunduh. Sel pelatihan berikutnya juga memerlukan `sawah.geojson` dan `nonsawah.geojson` pada folder kerja yang sama. Jika salah satu file atau autentikasi belum tersedia, output Random Forest belum dapat muncul.
+
+```{code-cell} ipython3
+!pip -q install earthengine-api requests
 import ee, requests
 
 ee.Authenticate()
@@ -96,8 +120,11 @@ if r.content[:2] not in (b'II', b'MM'):          # bukan file TIFF = pesan error
 open(OUT_TIF, 'wb').write(r.content)
 print(f'Tersimpan {OUT_TIF}: {len(r.content) / 1e6:.1f} MB | urutan band: B2, B3, B4, B8, B11, B12, NDVI, NDWI, MNDWI, NDBI')
 
-from google.colab import files
-files.download(OUT_TIF)
+try:
+    from google.colab import files
+    files.download(OUT_TIF)
+except ImportError:
+    print(f'File tersedia di folder kerja: {OUT_TIF}')
 ```
 
 **Output:** jumlah citra yang dipakai dan ukuran `sentinel2A_komposit.tif` dicetak
@@ -108,11 +135,26 @@ bergantung pada periode, tutupan awan, dan koleksi yang tersedia saat eksekusi.
 
 Skrip memproyeksikan tiap poligon ke CRS citra dan mengecilkan batasnya 5 m ke dalam, supaya piksel tepi petak yang bercampur dengan penutup lahan lain tidak ikut. Poligon yang kosong setelah pengecilan memakai batas aslinya. Semua piksel yang pusatnya jatuh di dalam poligon menjadi sampel, dan tiap sampel membawa nomor petaknya. Piksel tanpa data tidak masuk.
 
+GeoJSON yang digunakan berisi **100 petak**, terdiri atas **50 petak sawah** pada `sawah.geojson` dan **50 petak non-sawah** pada `nonsawah.geojson`. Dalam klasifikasi ini, **satu data berarti satu piksel berlabel**, bukan satu petak. Karena itu, 100 petak dapat menghasilkan ribuan data piksel, bergantung pada ukuran petak, resolusi 10 m, batas yang diperkecil 5 m, dan piksel yang valid. Setiap data mempunyai **10 fitur**, yaitu `B2`, `B3`, `B4`, `B8`, `B11`, `B12`, `NDVI`, `NDWI`, `MNDWI`, dan `NDBI`. Jadi, bentuk matriks `X` adalah `(jumlah data piksel, 10)`, sedangkan `y` berisi satu label kelas untuk setiap baris `X`.
+
 Pembagian data latih dan uji mengikuti nomor petak: 70% petak melatih model dan 30% petak menguji model. Piksel dari satu petak tidak muncul di kedua sisi, jadi akurasi uji tidak menghitung piksel bertetangga yang nilainya hampir sama sebagai bukti terpisah.
 
-Model Random Forest memakai 300 pohon dan bobot kelas seimbang. Setelah evaluasi, saya melatih ulang model pada semua piksel dan memakainya untuk mengklasifikasi seluruh citra. Skrip menulis hasilnya ke `klasifikasi_sawah.tif`.
+### Model Random Forest
 
-```python
+Random Forest adalah kumpulan banyak pohon keputusan. Setiap pohon belajar dari sampel dan subset fitur yang berbeda, lalu hasil akhirnya ditentukan melalui voting mayoritas. Pendekatan ini sesuai untuk data Sentinel-2A karena hubungan antara reflektansi, indeks vegetasi, genangan, dan kelas lahan tidak harus linear.
+
+Pada penelitian ini digunakan `RandomForestClassifier` dengan pengaturan berikut:
+
+| Parameter | Nilai | Fungsi |
+| :--- | :---: | :--- |
+| `n_estimators` | `300` | Jumlah pohon keputusan. Lebih banyak pohon membuat hasil voting lebih stabil, dengan waktu komputasi yang lebih besar. |
+| `class_weight` | `'balanced'` | Memberi bobot lebih besar pada kelas yang jumlah pikselnya lebih sedikit setelah ekstraksi sampel. |
+| `random_state` | `42` | Membuat pembagian data dan hasil model dapat diulang. |
+| `n_jobs` | `-1` | Menggunakan seluruh inti prosesor yang tersedia. |
+
+Model pertama dilatih hanya pada petak latih, kemudian diuji pada petak yang benar-benar berbeda. Setelah akurasi dan kappa dihitung, model dilatih ulang menggunakan seluruh sampel berlabel. Model akhir inilah yang digunakan untuk memprediksi setiap piksel pada citra dan menghasilkan `klasifikasi_sawah.tif`.
+
+```{code-cell} ipython3
 !pip -q install rasterio
 import json
 from pathlib import Path
@@ -134,11 +176,11 @@ BUFFER_M = 5      # kecilkan tiap petak sekian meter dari tepinya supaya tidak m
 
 # ---------- GeoJSON petak sampel ----------
 # Lampiran poligon sawah disimpan sebagai `sawah.geojson`, sedangkan lampiran
-# persegi P1-P50 disimpan sebagai `non_sawah.geojson` di folder kerja notebook.
+# persegi P1-P50 disimpan sebagai `nonsawah.geojson` di folder kerja notebook.
 # Kedua file harus berupa FeatureCollection dengan geometri LineString tertutup
 # atau Polygon dalam EPSG:4326.
 FILE_SAWAH = Path('sawah.geojson')
-FILE_NON_SAWAH = Path('non_sawah.geojson')
+FILE_NON_SAWAH = Path('nonsawah.geojson')
 
 
 def baca_geojson(path):
@@ -219,8 +261,28 @@ grup = np.concatenate([g1, g0])
 assert len(np.unique(y)) == 2, 'Kedua kelas harus punya petak yang jatuh di dalam citra'
 assert len(np.unique(grup)) >= 4, 'Minimal empat petak harus masuk citra untuk split per petak'
 
+jumlah_fitur = X.shape[1]
+jumlah_data = X.shape[0]
+jumlah_piksel_sawah = int((y == 1).sum())
+jumlah_piksel_non_sawah = int((y == 0).sum())
+jumlah_petak = len(np.unique(grup))
+print('\nRingkasan data berlabel:')
+print(f'  Jumlah data piksel       : {jumlah_data}')
+print(f'  Jumlah fitur per piksel  : {jumlah_fitur}')
+print(f'  Ukuran matriks X         : {X.shape}')
+print(f'  Piksel label sawah (1)   : {jumlah_piksel_sawah}')
+print(f'  Piksel label non-sawah (0): {jumlah_piksel_non_sawah}')
+print(f'  Jumlah petak             : {jumlah_petak}')
+
 # ---------- latih dan uji (data uji = petak yang tidak dipakai melatih) ----------
 tr, te = next(GroupShuffleSplit(n_splits=1, test_size=0.3, random_state=42).split(X, y, grup))
+petak_train = len(np.unique(grup[tr]))
+petak_test = len(np.unique(grup[te]))
+print('\nPembagian data berdasarkan petak:')
+print(f'  Data train               : {len(tr)} piksel ({petak_train} petak)')
+print(f'  Data testing             : {len(te)} piksel ({petak_test} petak)')
+print(f'  Train sawah / non-sawah  : {(y[tr] == 1).sum()} / {(y[tr] == 0).sum()} piksel')
+print(f'  Test sawah / non-sawah   : {(y[te] == 1).sum()} / {(y[te] == 0).sum()} piksel')
 rf = RandomForestClassifier(n_estimators=300, random_state=42, n_jobs=-1, class_weight='balanced')
 rf.fit(X[tr], y[tr])
 pred = rf.predict(X[te])
@@ -232,8 +294,10 @@ print('Kappa    :', round(kappa, 4))
 print('Matriks kebingungan (baris = aktual, kolom = prediksi; urutan: non-sawah, sawah):')
 print(matriks)
 print('\nPentingnya tiap band:')
-for n, v in sorted(zip(NAMA_BAND, rf.feature_importances_), key=lambda t: -t[1]):
-    print(f'  {n:6s} {v:.3f}')
+peringkat_fitur = sorted(zip(NAMA_BAND, rf.feature_importances_), key=lambda t: -t[1])
+print('Fitur       Kepentingan')
+for nama_fitur, nilai in peringkat_fitur:
+    print(f'  {nama_fitur:8s} {nilai:.4f} ({nilai * 100:.2f}%)')
 
 # model akhir dilatih ulang memakai semua piksel
 rf.fit(X, y)
@@ -311,8 +375,14 @@ secara langsung, jadi tidak ada angka dummy yang perlu disalin manual.
 Output numerik berikut dibuat langsung dari hasil klasifikasi, bukan ditulis sebagai
 teks manual. Jalankan sel ini setelah sel pelatihan selesai.
 
-```python
+```{code-cell} ipython3
 hasil_evaluasi = {
+    'Jumlah fitur': f'{jumlah_fitur}',
+    'Jumlah data piksel berlabel': f'{jumlah_data:,}',
+    'Piksel label sawah': f'{jumlah_piksel_sawah:,}',
+    'Piksel label non-sawah': f'{jumlah_piksel_non_sawah:,}',
+    'Data train': f'{len(tr):,} piksel ({petak_train} petak)',
+    'Data testing': f'{len(te):,} piksel ({petak_test} petak)',
     'Akurasi petak uji': f'{akurasi:.4f}',
     'Kappa': f'{kappa:.4f}',
     'Luas sawah hasil klasifikasi (ha)': f'{luas_sawah_ha:.2f}',
@@ -337,13 +407,13 @@ Gambar hasil segmentasi tersimpan sebagai `segmentasi_sawah_non_sawah.png` dan
 menampilkan citra RGB, peta kelas, serta overlay. Warna hijau menunjukkan sawah,
 sedangkan warna oranye menunjukkan non-sawah.
 
-```python
+```{code-cell} ipython3
 from IPython.display import Image, display
 
 display(Image(filename=OUT_GAMBAR))
 ```
 
-```python
+```{code-cell} ipython3
 import matplotlib.pyplot as plt
 from sklearn.metrics import ConfusionMatrixDisplay
 

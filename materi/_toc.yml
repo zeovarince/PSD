@@ -12,5 +12,5 @@ chapters:
 - file: tsfel
 - file: preprocessing_ekstraksi_kamal
 - file: kmean
-- file: clusterlinpoly
+- file: clusteringlinpoly
 - file: klasifikasi

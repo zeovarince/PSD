@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'no2kamal';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Preprocessing Sebelum Ekstraksi Fitur" href="preprocessing_ekstraksi_kamal.html" />
+    <link rel="next" title="Fitur-Fitur TSFEL pada Time Series" href="tsfel.html" />
     <link rel="prev" title="Analisis Time Series: Migrasi Data &amp; Pengolahan di KNIME" href="timeseriesaiven.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -185,8 +185,11 @@
 <li class="toctree-l1"><a class="reference internal" href="explorasi-data.html">Eksplorasi Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="timeseriesaiven.html">Analisis Time Series: Migrasi Data &amp; Pengolahan di KNIME</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Polutan Kamal (Revisi)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preprocessing_ekstraksi_kamal.html">Preprocessing Sebelum Ekstraksi Fitur</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="tsfel.html">Fitur-Fitur TSFEL pada Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing_ekstraksi_kamal.html">Preprocessing dan Ekstraksi Fitur</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kmean.html">K-Means Clustering Polutan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clusteringlinpoly.html">Clustering Linear dan Polynomial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasifikasi.html">Klasifikasi Lahan Sawah dan Non-Sawah dengan Random Forest</a></li>
 </ul>
 
     </div>
@@ -438,8 +441,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[notice] A new release of pip is available: 26.0.1 -&gt; 26.2.1
-[notice] To update, run: python.exe -m pip install --upgrade pip
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>^C
 </pre></div>
 </div>
 </div>
@@ -543,193 +545,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Centroid Latitude  : -7.165000
-Centroid Longitude : 112.720000
-</pre></div>
-</div>
-<div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    
-    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
-    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;https://code.jquery.com/jquery-3.7.1.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
-    
-            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
-                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
-            &lt;style&gt;
-                #map_65f474d939116c69f62017c1dc97343a {
-                    position: relative;
-                    width: 100.0%;
-                    height: 100.0%;
-                    left: 0.0%;
-                    top: 0.0%;
-                }
-                .leaflet-container { font-size: 1rem; }
-            &lt;/style&gt;
-
-            &lt;style&gt;html, body {
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
-            &lt;/style&gt;
-
-            &lt;style&gt;#map {
-                position:absolute;
-                top:0;
-                bottom:0;
-                right:0;
-                left:0;
-                }
-            &lt;/style&gt;
-
-            &lt;script&gt;
-                L_NO_TOUCH = false;
-                L_DISABLE_3D = false;
-            &lt;/script&gt;
-
-        
-&lt;/head&gt;
-&lt;body&gt;
-    
-    
-            &lt;div class=&quot;folium-map&quot; id=&quot;map_65f474d939116c69f62017c1dc97343a&quot; &gt;&lt;/div&gt;
-        
-&lt;/body&gt;
-&lt;script&gt;
-    
-    
-            var map_65f474d939116c69f62017c1dc97343a = L.map(
-                &quot;map_65f474d939116c69f62017c1dc97343a&quot;,
-                {
-                    center: [-7.164999999999999, 112.71999999999998],
-                    crs: L.CRS.EPSG3857,
-                    ...{
-  &quot;zoom&quot;: 13,
-  &quot;zoomControl&quot;: true,
-  &quot;preferCanvas&quot;: false,
-}
-
-                }
-            );
-
-            
-
-        
-    
-            var tile_layer_421365b1af5a858d303d78360feed040 = L.tileLayer(
-                &quot;https://tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
-                {
-  &quot;minZoom&quot;: 0,
-  &quot;maxZoom&quot;: 19,
-  &quot;maxNativeZoom&quot;: 19,
-  &quot;noWrap&quot;: false,
-  &quot;attribution&quot;: &quot;\u0026copy; \u003ca href=\&quot;https://www.openstreetmap.org/copyright\&quot;\u003eOpenStreetMap\u003c/a\u003e contributors&quot;,
-  &quot;subdomains&quot;: &quot;abc&quot;,
-  &quot;detectRetina&quot;: false,
-  &quot;tms&quot;: false,
-  &quot;opacity&quot;: 1,
-}
-
-            );
-        
-    
-            tile_layer_421365b1af5a858d303d78360feed040.addTo(map_65f474d939116c69f62017c1dc97343a);
-        
-    
-            var polygon_4f4a47a25cd00c910b4b77a3dbf01011 = L.polygon(
-                [[-7.19, 112.695], [-7.19, 112.745], [-7.14, 112.745], [-7.14, 112.695], [-7.19, 112.695]],
-                {&quot;bubblingMouseEvents&quot;: true, &quot;color&quot;: &quot;#e74c3c&quot;, &quot;dashArray&quot;: null, &quot;dashOffset&quot;: null, &quot;fill&quot;: true, &quot;fillColor&quot;: &quot;#e74c3c&quot;, &quot;fillOpacity&quot;: 0.15, &quot;fillRule&quot;: &quot;evenodd&quot;, &quot;lineCap&quot;: &quot;round&quot;, &quot;lineJoin&quot;: &quot;round&quot;, &quot;noClip&quot;: false, &quot;opacity&quot;: 1.0, &quot;smoothFactor&quot;: 1.0, &quot;stroke&quot;: true, &quot;weight&quot;: 3}
-            ).addTo(map_65f474d939116c69f62017c1dc97343a);
-        
-    
-        var popup_7718b8aef328d3d0bad6abd80e046e59 = L.popup({
-  &quot;maxWidth&quot;: 250,
-});
-
-        
-            
-                var html_71a5b6e0f504eee7f11a8ca0b194f144 = $(`&lt;div id=&quot;html_71a5b6e0f504eee7f11a8ca0b194f144&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;&lt;b&gt;Wilayah Kajian&lt;/b&gt;&lt;br&gt;Kamal - Kampus UTM, Bangkalan&lt;br&gt;Polutan: NO2&lt;br&gt;Periode: Agu 2025 - Agu 2026&lt;/div&gt;`)[0];
-                popup_7718b8aef328d3d0bad6abd80e046e59.setContent(html_71a5b6e0f504eee7f11a8ca0b194f144);
-            
-        
-
-        polygon_4f4a47a25cd00c910b4b77a3dbf01011.bindPopup(popup_7718b8aef328d3d0bad6abd80e046e59)
-        ;
-
-        
-    
-    
-            polygon_4f4a47a25cd00c910b4b77a3dbf01011.bindTooltip(
-                `&lt;div&gt;
-                     Batas Wilayah Kajian - Kamal UTM
-                 &lt;/div&gt;`,
-                {
-  &quot;sticky&quot;: true,
-}
-            );
-        
-    
-            var marker_38a81339b93bb7e2237c3320dea64156 = L.marker(
-                [-7.164999999999999, 112.71999999999998],
-                {
-}
-            ).addTo(map_65f474d939116c69f62017c1dc97343a);
-        
-    
-            var icon_44c15e74d354780c831efacf32ab410a = L.AwesomeMarkers.icon(
-                {
-  &quot;markerColor&quot;: &quot;blue&quot;,
-  &quot;iconColor&quot;: &quot;white&quot;,
-  &quot;icon&quot;: &quot;cloud&quot;,
-  &quot;prefix&quot;: &quot;fa&quot;,
-  &quot;extraClasses&quot;: &quot;fa-rotate-0&quot;,
-}
-            );
-        
-    
-        var popup_ff599ccaf26e72ee26fb05c702a2cd10 = L.popup({
-  &quot;maxWidth&quot;: 250,
-});
-
-        
-            
-                var html_10d892dff302f495901b1ee0baa679d6 = $(`&lt;div id=&quot;html_10d892dff302f495901b1ee0baa679d6&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;&lt;b&gt;Titik Pusat Wilayah&lt;/b&gt;&lt;br&gt;Lat: -7.16500&lt;br&gt;Lon: 112.72000&lt;br&gt;Sumber data: Sentinel-5P via OpenEO&lt;/div&gt;`)[0];
-                popup_ff599ccaf26e72ee26fb05c702a2cd10.setContent(html_10d892dff302f495901b1ee0baa679d6);
-            
-        
-
-        marker_38a81339b93bb7e2237c3320dea64156.bindPopup(popup_ff599ccaf26e72ee26fb05c702a2cd10)
-        ;
-
-        
-    
-    
-            marker_38a81339b93bb7e2237c3320dea64156.bindTooltip(
-                `&lt;div&gt;
-                     Titik Pengambilan Data Satelit (OpenEO)
-                 &lt;/div&gt;`,
-                {
-  &quot;sticky&quot;: true,
-}
-            );
-        
-    
-                marker_38a81339b93bb7e2237c3320dea64156.setIcon(icon_44c15e74d354780c831efacf32ab410a);
-            
-&lt;/script&gt;
-&lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
 </div>
 </section>
 <hr class="docutils" />
@@ -747,8 +562,6 @@ Centroid Longitude : 112.720000
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html">Visit <a href="https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=YJAO-VGHS" title="Authenticate at https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=YJAO-VGHS" target="_blank" rel="noopener noreferrer">https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=YJAO-VGHS</a> <a href="#" onclick="navigator.clipboard.writeText('https://identity.dataspace.copernicus.eu/auth/realms/CDSE/device?user_code=YJAO-VGHS');return false;" title="Copy authentication URL to clipboard">&#128203;</a> to authenticate.</div><div class="output text_html"><code>[##################################---]</code> ⌛ Authorization pending</div></div>
 </div>
 <section id="crawling-data-no2">
 <h3>Crawling data NO2<a class="headerlink" href="#crawling-data-no2" title="Link to this heading">#</a></h3>
@@ -887,11 +700,11 @@ Centroid Longitude : 112.720000
       </div>
     </a>
     <a class="right-next"
-       href="preprocessing_ekstraksi_kamal.html"
+       href="tsfel.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Preprocessing Sebelum Ekstraksi Fitur</p>
+        <p class="prev-next-title">Fitur-Fitur TSFEL pada Time Series</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
