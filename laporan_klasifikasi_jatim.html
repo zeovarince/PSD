@@ -6,8 +6,9 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Laporan Analisis LULC (Land Use and Land Cover) Jawa Timur &#8212; A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN</title>
   
   
   
@@ -56,9 +57,12 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
-    <link rel="index" title="Index" href="#" />
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'laporan_klasifikasi_jatim';</script>
+    <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Klasifikasi Lahan Sawah dan Non-Sawah dengan Random Forest" href="klasifikasi.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -121,8 +125,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -178,7 +180,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="busines-understanding.html">Business Understanding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data-understanding.html">Data Understanding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="explorasi-data.html">Eksplorasi Data</a></li>
@@ -189,6 +191,7 @@
 <li class="toctree-l1"><a class="reference internal" href="kmean.html">K-Means Clustering Polutan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="clusteringlinpoly.html">Clustering Linear dan Polynomial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="klasifikasi.html">Klasifikasi Lahan Sawah dan Non-Sawah dengan Random Forest</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Laporan Analisis LULC (Land Use and Land Cover) Jawa Timur</a></li>
 </ul>
 
     </div>
@@ -260,7 +263,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fgenindex.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Flaporan_klasifikasi_jatim.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -272,6 +275,54 @@
   </span>
 <span class="btn__text-container">Open issue</span>
 </a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/laporan_klasifikasi_jatim.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
 </li>
       
   </ul>
@@ -313,7 +364,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -324,11 +377,23 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1></h1>
+    <h1>Laporan Analisis LULC (Land Use and Land Cover) Jawa Timur</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding-tujuan-analisis">1. Data Understanding &amp; Tujuan Analisis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collecting-data">2. Collecting Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-band-sentinel-2a">3. Deskripsi Band Sentinel-2A</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-spectral-indices-dan-rumus">4. Ekstraksi Fitur (Spectral Indices) dan Rumus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemodelan-machine-learning">5. Pemodelan Machine Learning</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -338,13 +403,90 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
+  <section class="tex2jax_ignore mathjax_ignore" id="laporan-analisis-lulc-land-use-and-land-cover-jawa-timur">
+<h1>Laporan Analisis LULC (Land Use and Land Cover) Jawa Timur<a class="headerlink" href="#laporan-analisis-lulc-land-use-and-land-cover-jawa-timur" title="Link to this heading">#</a></h1>
+<section id="data-understanding-tujuan-analisis">
+<h2>1. Data Understanding &amp; Tujuan Analisis<a class="headerlink" href="#data-understanding-tujuan-analisis" title="Link to this heading">#</a></h2>
+<p><strong>Tujuan Analisis:</strong>
+Tujuan utama dari analisis Land Use and Land Cover (LULC) ini adalah untuk memetakan dan mengklasifikasikan penutupan dan penggunaan lahan di wilayah Jawa Timur menjadi enam kelas utama berdasarkan citra satelit Sentinel-2A. Pemetaan ini sangat penting untuk perencanaan tata ruang, pemantauan degradasi lingkungan, pengelolaan sumber daya air, serta analisis dampak perubahan iklim dan urbanisasi.</p>
+<p><strong>Referensi Standar di Indonesia:</strong>
+Acuan utama klasifikasi penutup lahan di Indonesia didasarkan pada <strong>SNI 7645-1:2014</strong> (Klasifikasi Penutup Lahan - Bagian 1: Skala 1:1.000.000 hingga 1:250.000) dan <strong>SNI 7645:2010</strong>. SNI ini mendefinisikan kelas-kelas penutup lahan yang dapat disesuaikan dengan skala resolusi satelit yang digunakan. Dalam proyek ini, kita mengambil beberapa kelas penting yang relevan dengan kondisi Jawa Timur:</p>
+<ol class="arabic simple">
+<li><p>Sawah (Pertanian Lahan Basah)</p></li>
+<li><p>Bangunan (Lahan Terbangun / Permukiman)</p></li>
+<li><p>Mangrove (Hutan Bakau)</p></li>
+<li><p>Lahan Hijau (Hutan / Vegetasi Kerapatan Tinggi)</p></li>
+<li><p>Perairan Terbuka (Laut)</p></li>
+<li><p>Danau (Perairan Darat / Ranu)</p></li>
+</ol>
+</section>
+<section id="collecting-data">
+<h2>2. Collecting Data<a class="headerlink" href="#collecting-data" title="Link to this heading">#</a></h2>
+<p>Data dikumpulkan melalui proses digitasi poligon (Region of Interest / ROI) menggunakan perangkat lunak GIS pada wilayah Jawa Timur. Hasil digitasi disimpan dalam format <em>shapefile</em> (<code class="docutils literal notranslate"><span class="pre">.shp</span></code>) yang mencakup 6 folder kelas di atas.
+Untuk mengekstraksi nilai piksel dari poligon-poligon ini, kita menggunakan layanan cloud <strong>Google Earth Engine (GEE)</strong> dengan koleksi citra <code class="docutils literal notranslate"><span class="pre">COPERNICUS/S2_SR_HARMONIZED</span></code> (Sentinel-2A Surface Reflectance) yang memiliki resolusi spasial hingga 10 meter.</p>
+<ul class="simple">
+<li><p><strong>Jumlah Kelas:</strong> 6 Kelas</p></li>
+<li><p><strong>Jumlah Data Training dan Testing:</strong> (Secara dinamis diekstraksi dari piksel poligon, biasanya dibagi dengan rasio 70% Training dan 30% Testing atau 80:20). Jumlah titik piksel bergantung pada luasan hasil digitasi.</p></li>
+</ul>
+</section>
+<section id="deskripsi-band-sentinel-2a">
+<h2>3. Deskripsi Band Sentinel-2A<a class="headerlink" href="#deskripsi-band-sentinel-2a" title="Link to this heading">#</a></h2>
+<p>Citra Sentinel-2A memiliki beberapa saluran (band) yang merespon panjang gelombang tertentu, yang sangat berguna untuk membedakan karakteristik objek di permukaan bumi:</p>
+<ul class="simple">
+<li><p><strong>Band 2 (Blue - 490 nm, 10m):</strong> Sensitif terhadap aerosol atmosfer dan air jernih, berguna untuk pemetaan badan air pesisir (laut).</p></li>
+<li><p><strong>Band 3 (Green - 560 nm, 10m):</strong> Sensitif terhadap puncak reflektansi hijau vegetasi, berguna untuk membedakan jenis vegetasi.</p></li>
+<li><p><strong>Band 4 (Red - 665 nm, 10m):</strong> Menyerap klorofil, sangat penting untuk menghitung indeks vegetasi (NDVI).</p></li>
+<li><p><strong>Band 8 (NIR - 842 nm, 10m):</strong> Memantulkan struktur daun dan biomasa. Membedakan antara vegetasi (reflektansi tinggi) dan air (reflektansi sangat rendah).</p></li>
+<li><p><strong>Band 11 (SWIR 1 - 1610 nm, 20m):</strong> Berguna untuk mengukur kelembaban tanah dan kanopi tanaman, serta menembus asap tipis.</p></li>
+<li><p><strong>Band 12 (SWIR 2 - 2190 nm, 20m):</strong> Sangat sensitif terhadap air dalam tanah dan batuan. Berguna untuk membedakan lahan terbangun, tanah kosong, dan badan air.</p></li>
+</ul>
+</section>
+<section id="ekstraksi-fitur-spectral-indices-dan-rumus">
+<h2>4. Ekstraksi Fitur (Spectral Indices) dan Rumus<a class="headerlink" href="#ekstraksi-fitur-spectral-indices-dan-rumus" title="Link to this heading">#</a></h2>
+<p>Selain nilai pantulan asli (reflectance) dari tiap band, indeks spektral diekstraksi untuk memperjelas batas antar kelas:</p>
+<ol class="arabic simple">
+<li><p><strong>NDVI (Normalized Difference Vegetation Index):</strong>
+Memisahkan lahan bervegetasi dengan tanah/bangunan.
+$<span class="math notranslate nohighlight">\( NDVI = \frac{(B8 - B4)}{(B8 + B4)} \)</span>$</p></li>
+<li><p><strong>NDWI (Normalized Difference Water Index):</strong>
+Mendeteksi badan air dan wilayah tergenang.
+$<span class="math notranslate nohighlight">\( NDWI = \frac{(B3 - B8)}{(B3 + B8)} \)</span>$</p></li>
+<li><p><strong>MNDWI (Modified Normalized Difference Water Index):</strong>
+Modifikasi NDWI menggunakan SWIR untuk lebih baik menekan sinyal dari lahan terbangun saat mendeteksi air.
+$<span class="math notranslate nohighlight">\( MNDWI = \frac{(B3 - B11)}{(B3 + B11)} \)</span>$</p></li>
+<li><p><strong>NDBI (Normalized Difference Built-up Index):</strong>
+Menonjolkan area terbangun / bangunan / permukiman.
+$<span class="math notranslate nohighlight">\( NDBI = \frac{(B11 - B8)}{(B11 + B8)} \)</span>$</p></li>
+<li><p><strong>EVI (Enhanced Vegetation Index):</strong>
+Mendeteksi vegetasi tinggi (seperti hutan/mangrove) dengan mengoreksi pengaruh atmosfer dan background tanah.
+$<span class="math notranslate nohighlight">\( EVI = 2.5 \times \frac{(B8 - B4)}{(B8 + 6 \times B4 - 7.5 \times B2 + 1)} \)</span>$</p></li>
+</ol>
+</section>
+<section id="pemodelan-machine-learning">
+<h2>5. Pemodelan Machine Learning<a class="headerlink" href="#pemodelan-machine-learning" title="Link to this heading">#</a></h2>
+<p>Eksperimen menggunakan <strong>Random Forest</strong> atau <strong>XGBoost Classifier</strong>. XGBoost (Extreme Gradient Boosting) seringkali menghasilkan akurasi klasifikasi tertinggi pada data penginderaan jauh berdimensi tinggi karena mampu menangani multikolinearitas antar band dan interaksi non-linear indeks spektral dengan sangat baik. Penggunaan XGBoost dipadukan dengan teknik validasi silang akan dievaluasi melalui <em>Confusion Matrix</em>, dan akurasi (F1-Score, Overall Accuracy).</p>
+</section>
+</section>
 
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
-</div>
-
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -356,12 +498,40 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="klasifikasi.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Klasifikasi Lahan Sawah dan Non-Sawah dengan Random Forest</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding-tujuan-analisis">1. Data Understanding &amp; Tujuan Analisis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collecting-data">2. Collecting Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-band-sentinel-2a">3. Deskripsi Band Sentinel-2A</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-fitur-spectral-indices-dan-rumus">4. Ekstraksi Fitur (Spectral Indices) dan Rumus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemodelan-machine-learning">5. Pemodelan Machine Learning</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

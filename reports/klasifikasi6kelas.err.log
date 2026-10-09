@@ -17,9 +17,10 @@ nbclient.exceptions.CellExecutionError: An error occurred while executing the fo
 ------------------
 from pathlib import Path
 import rasterio
+import numpy as np
 
 # Cari GeoTIFF di folder kerja atau subfolder materi.
-nama_tif = 'sentinel2A_komposit.tif'
+nama_tif = 'sentinel2A_jatim.tif'
 kandidat_tif = [Path(nama_tif), Path('materi') / nama_tif]
 TIF = next((path for path in kandidat_tif if path.exists()), kandidat_tif[0])
 
@@ -28,7 +29,7 @@ if not TIF.exists():
     print('Lokasi yang diperiksa:')
     for path in kandidat_tif:
         print(f'  - {path.resolve()}')
-    print('Sel selesai tanpa error. Tambahkan file GeoTIFF sebelum menjalankan Random Forest.')
+    print('Sel selesai tanpa error. Tambahkan file GeoTIFF sebelum menjalankan model.')
 else:
     with rasterio.open(TIF) as src:
         jumlah_band = src.count
@@ -40,12 +41,8 @@ else:
     print(f'Jumlah band: {jumlah_band}')
     print(f'CRS: {crs_citra}')
 
-    if jumlah_band != 10:
-        raise ValueError(
-            f'GeoTIFF memiliki {jumlah_band} band. Model memerlukan 10 band: '
-            'B2, B3, B4, B8, B11, B12, NDVI, NDWI, MNDWI, NDBI.'
-        )
-    print('Fitur: B2, B3, B4, B8, B11, B12, NDVI, NDWI, MNDWI, NDBI')
+    # Asumsi 10 band seperti pada klasifikasi.ipynb atau Anda bisa menyesuaikannya nanti
+    print('Fitur yang diharapkan: B2, B3, B4, B8, B11, B12, NDVI, NDWI, MNDWI, NDBI')
     print('Lanjutkan ke sel Random Forest.')
 ------------------
 
@@ -55,8 +52,8 @@ else:
 Cell [1;32mIn[1], line 2[0m
 [0;32m      1[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpathlib[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m Path
 [1;32m----> 2[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mrasterio[39;00m
-[0;32m      4[0m [38;5;66;03m# Cari GeoTIFF di folder kerja atau subfolder materi.[39;00m
-[0;32m      5[0m nama_tif [38;5;241m=[39m [38;5;124m'[39m[38;5;124msentinel2A_komposit.tif[39m[38;5;124m'[39m
+[0;32m      3[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mnp[39;00m
+[0;32m      5[0m [38;5;66;03m# Cari GeoTIFF di folder kerja atau subfolder materi.[39;00m
 
 [1;31mModuleNotFoundError[0m: No module named 'rasterio'
 

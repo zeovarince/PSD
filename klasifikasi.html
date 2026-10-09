@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Klasifikasi Lahan Sawah dan Non-Sawah dari Komposit Sentinel-2A &#8212; A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN</title>
+    <title>Klasifikasi Lahan Sawah dan Non-Sawah dengan Random Forest &#8212; A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN</title>
   
   
   
@@ -57,11 +57,10 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'klasifikasi';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Laporan Analisis LULC (Land Use and Land Cover) Jawa Timur" href="laporan_klasifikasi_jatim.html" />
     <link rel="prev" title="Clustering Linear dan Polynomial" href="clusteringlinpoly.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -190,7 +189,8 @@
 <li class="toctree-l1"><a class="reference internal" href="preprocessing_ekstraksi_kamal.html">Preprocessing dan Ekstraksi Fitur</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kmean.html">K-Means Clustering Polutan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="clusteringlinpoly.html">Clustering Linear dan Polynomial</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Klasifikasi Lahan Sawah dan Non-Sawah dari Komposit Sentinel-2A</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Klasifikasi Lahan Sawah dan Non-Sawah dengan Random Forest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laporan_klasifikasi_jatim.html">Laporan Analisis LULC (Land Use and Land Cover) Jawa Timur</a></li>
 </ul>
 
     </div>
@@ -292,7 +292,7 @@
       
       
       
-      <li><a href="_sources/klasifikasi.md" target="_blank"
+      <li><a href="_sources/klasifikasi.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -302,7 +302,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -363,9 +363,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -376,30 +374,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Klasifikasi Lahan Sawah dan Non-Sawah dari Komposit Sentinel-2A</h1>
+    <h1>Klasifikasi Lahan Sawah dan Non-Sawah dengan Random Forest</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pustaka">Pustaka</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wilayah-studi-dan-sampel">1. Wilayah Studi dan Sampel</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#akuisisi-komposit-sentinel-2a">2. Akuisisi Komposit Sentinel-2A</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitur-yang-digunakan-untuk-klasifikasi">Fitur yang digunakan untuk klasifikasi</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-sampel-dan-pelatihan-model">3. Ekstraksi Sampel dan Pelatihan Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-random-forest">Model Random Forest</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-evaluasi">4. Hasil Evaluasi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keterbatasan">5. Keterbatasan</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -409,247 +388,63 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="klasifikasi-lahan-sawah-dan-non-sawah-dari-komposit-sentinel-2a">
-<h1>Klasifikasi Lahan Sawah dan Non-Sawah dari Komposit Sentinel-2A<a class="headerlink" href="#klasifikasi-lahan-sawah-dan-non-sawah-dari-komposit-sentinel-2a" title="Link to this heading">#</a></h1>
-<p>Klasifikasi ini memisahkan dua kelas, sawah dan non-sawah, pada komposit citra Sentinel-2A Level-2A berformat GeoTIFF. Saya mengunduh komposit untuk wilayah yang mencakup 100 petak sampel, mengambil nilai spektral semua piksel di dalam petak, melatih Random Forest, lalu menguji model pada petak yang tidak ikut pelatihan. Peta hasil berupa GeoTIFF dengan kode 1 untuk sawah, 0 untuk non-sawah, dan 255 untuk piksel tanpa data.</p>
-<section id="pustaka">
-<h2>Pustaka<a class="headerlink" href="#pustaka" title="Link to this heading">#</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>earthengine-api<span class="w"> </span>rasterio<span class="w"> </span>scikit-learn<span class="w"> </span>shapely<span class="w"> </span>matplotlib
-</pre></div>
-</div>
-<p>Earth Engine menyediakan arsip Sentinel-2 dan mengekspor komposit. Rasterio dan Shapely mengolah raster dan poligon, sementara scikit-learn melatih model.</p>
-</section>
-<section id="wilayah-studi-dan-sampel">
-<h2>1. Wilayah Studi dan Sampel<a class="headerlink" href="#wilayah-studi-dan-sampel" title="Link to this heading">#</a></h2>
-<p>Wilayah studi berbentuk persegi panjang dengan batas barat 112.7060, timur 112.7270, selatan -7.1495, dan utara -7.1325 (EPSG:4326). Ukurannya sekitar 2,3 km × 1,9 km, dan semua petak sampel berada di dalamnya.</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head text-left"><p>Kelas</p></th>
-<th class="head text-center"><p>Kode</p></th>
-<th class="head text-center"><p>Jumlah petak</p></th>
-<th class="head text-left"><p>Bentuk sampel</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-left"><p><strong>Sawah</strong></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
-<td class="text-center"><p>50</p></td>
-<td class="text-left"><p>Poligon petak sawah tak beraturan</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><strong>Non-Sawah</strong></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
-<td class="text-center"><p>50</p></td>
-<td class="text-left"><p>Persegi 62 m × 62 m (P1 sampai P50)</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><strong>Total</strong></p></td>
-<td class="text-center"><p>n/a</p></td>
-<td class="text-center"><p><strong>100</strong></p></td>
-<td class="text-left"><p>Seimbang, 50 petak per kelas</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Petak sawah berasal dari digitasi hamparan sawah di atas citra satelit. Saya menggambar sebagian petak langsung, membagi hamparan lain menjadi petak kecil dengan pembagian geometris, dan menyesuaikan bentuk beberapa petak setelahnya. Petak non-sawah berupa 50 persegi berukuran 62 m × 62 m yang tersebar di luar hamparan sawah. Kedua kelas berformat GeoJSON poligon (LineString tertutup) di EPSG:4326.</p>
-</section>
-<section id="akuisisi-komposit-sentinel-2a">
-<h2>2. Akuisisi Komposit Sentinel-2A<a class="headerlink" href="#akuisisi-komposit-sentinel-2a" title="Link to this heading">#</a></h2>
-<p>Earth Engine menyediakan koleksi Sentinel-2 Level-2A (<code class="docutils literal notranslate"><span class="pre">COPERNICUS/S2_SR_HARMONIZED</span></code>) yang berisi reflektansi permukaan. Skrip memilih citra yang menutupi wilayah studi pada periode yang ditetapkan, membuang citra dengan tutupan awan di atas 40%, dan menyaring citra dari satelit Sentinel-2A lewat atribut <code class="docutils literal notranslate"><span class="pre">SPACECRAFT_NAME</span></code>. Pada tiap citra, skrip menutup piksel awan, bayangan awan, cirrus, salju, dan piksel jenuh berdasarkan Scene Classification Layer (SCL). Median dari citra yang lolos menjadi komposit bebas awan.</p>
-<p>Komposit memuat enam band reflektansi: B2 (biru), B3 (hijau), B4 (merah), B8 (inframerah dekat), B11 dan B12 (inframerah gelombang pendek). Skrip menambahkan empat indeks turunan:</p>
-<div class="math notranslate nohighlight">
-\[\text{NDVI} = \frac{B8 - B4}{B8 + B4} \qquad \text{NDWI} = \frac{B3 - B8}{B3 + B8}\]</div>
-<div class="math notranslate nohighlight">
-\[\text{MNDWI} = \frac{B3 - B11}{B3 + B11} \qquad \text{NDBI} = \frac{B11 - B8}{B11 + B8}\]</div>
-<p>NDVI mengukur kerapatan vegetasi, sedangkan NDWI dan MNDWI menandai air, termasuk genangan pada sawah yang baru ditanami. NDBI menandai lahan terbangun.</p>
-<section id="fitur-yang-digunakan-untuk-klasifikasi">
-<h3>Fitur yang digunakan untuk klasifikasi<a class="headerlink" href="#fitur-yang-digunakan-untuk-klasifikasi" title="Link to this heading">#</a></h3>
-<p>Random Forest tidak menerima nama kelas atau bentuk petak secara langsung. Model menerima satu baris angka untuk setiap piksel. Satu baris tersebut berisi <strong>10 fitur</strong>, yaitu enam nilai reflektansi dan empat indeks spektral berikut.</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head text-left"><p>Fitur</p></th>
-<th class="head text-left"><p>Sumber atau rumus</p></th>
-<th class="head text-left"><p>Informasi yang dibawa</p></th>
-<th class="head text-left"><p>Peran dalam membedakan sawah dan non-sawah</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">B2</span></code></p></td>
-<td class="text-left"><p>Biru, 490 nm</p></td>
-<td class="text-left"><p>Respons permukaan pada cahaya biru</p></td>
-<td class="text-left"><p>Membantu membedakan air, tanah, dan permukaan terbangun; juga sensitif terhadap pengaruh atmosfer dan kekeruhan air.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">B3</span></code></p></td>
-<td class="text-left"><p>Hijau, 560 nm</p></td>
-<td class="text-left"><p>Pantulan cahaya hijau</p></td>
-<td class="text-left"><p>Membantu mengenali vegetasi dan air; genangan biasanya memiliki respons berbeda dari vegetasi sawah.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">B4</span></code></p></td>
-<td class="text-left"><p>Merah, 665 nm</p></td>
-<td class="text-left"><p>Pantulan cahaya merah</p></td>
-<td class="text-left"><p>Diserap kuat oleh klorofil. Nilainya bersama <code class="docutils literal notranslate"><span class="pre">B8</span></code> menjadi dasar NDVI.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">B8</span></code></p></td>
-<td class="text-left"><p>Inframerah dekat/NIR, 842 nm</p></td>
-<td class="text-left"><p>Pantulan struktur internal daun</p></td>
-<td class="text-left"><p>Umumnya tinggi pada vegetasi sehat dan menjadi pembeda penting antara vegetasi sawah dengan air atau lahan terbuka.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">B11</span></code></p></td>
-<td class="text-left"><p>SWIR-1, 1610 nm</p></td>
-<td class="text-left"><p>Kandungan air dan karakter permukaan</p></td>
-<td class="text-left"><p>Membantu memisahkan tanah, vegetasi, air, dan area terbangun; digunakan dalam MNDWI dan NDBI.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">B12</span></code></p></td>
-<td class="text-left"><p>SWIR-2, 2190 nm</p></td>
-<td class="text-left"><p>Kelembapan dan kondisi material permukaan</p></td>
-<td class="text-left"><p>Melengkapi informasi <code class="docutils literal notranslate"><span class="pre">B11</span></code> untuk membedakan tanah kering, vegetasi, air, dan material non-vegetasi.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">NDVI</span></code></p></td>
-<td class="text-left"><p><span class="math notranslate nohighlight">\((B8-B4)/(B8+B4)\)</span></p></td>
-<td class="text-left"><p>Kerapatan dan kehijauan vegetasi</p></td>
-<td class="text-left"><p>Nilai tinggi umumnya menunjukkan vegetasi aktif, termasuk tanaman padi pada fase vegetatif.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">NDWI</span></code></p></td>
-<td class="text-left"><p><span class="math notranslate nohighlight">\((B3-B8)/(B3+B8)\)</span></p></td>
-<td class="text-left"><p>Indikasi air atau genangan</p></td>
-<td class="text-left"><p>Membantu mengenali sawah berair atau baru ditanami, sekaligus memisahkannya dari vegetasi yang memiliki <code class="docutils literal notranslate"><span class="pre">B8</span></code> tinggi.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">MNDWI</span></code></p></td>
-<td class="text-left"><p><span class="math notranslate nohighlight">\((B3-B11)/(B3+B11)\)</span></p></td>
-<td class="text-left"><p>Air dengan pengurangan pengaruh tanah dan area terbangun</p></td>
-<td class="text-left"><p>Berguna untuk mendeteksi genangan ketika air bercampur dengan tanah atau berada di sekitar permukaan terbangun.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">NDBI</span></code></p></td>
-<td class="text-left"><p><span class="math notranslate nohighlight">\((B11-B8)/(B11+B8)\)</span></p></td>
-<td class="text-left"><p>Indikasi permukaan terbangun</p></td>
-<td class="text-left"><p>Membantu mengurangi kesalahan antara non-sawah terbangun dan sawah, karena area terbangun cenderung memiliki respons SWIR lebih tinggi daripada NIR.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Semua indeks berada pada rentang teoritis sekitar <span class="math notranslate nohighlight">\(-1\)</span> sampai <span class="math notranslate nohighlight">\(1\)</span>. Nilai aktual dapat dipengaruhi oleh tutupan awan yang tersisa, bayangan, kelembapan tanah, fase pertumbuhan padi, dan pencampuran piksel. Karena itu, satu fitur tidak dipakai sebagai aturan ambang tunggal. Random Forest menggabungkan pola dari semua fitur untuk menentukan kelas setiap piksel.</p>
-<p><strong>Daftar fitur input model:</strong> <code class="docutils literal notranslate"><span class="pre">B2</span></code>, <code class="docutils literal notranslate"><span class="pre">B3</span></code>, <code class="docutils literal notranslate"><span class="pre">B4</span></code>, <code class="docutils literal notranslate"><span class="pre">B8</span></code>, <code class="docutils literal notranslate"><span class="pre">B11</span></code>, <code class="docutils literal notranslate"><span class="pre">B12</span></code>, <code class="docutils literal notranslate"><span class="pre">NDVI</span></code>, <code class="docutils literal notranslate"><span class="pre">NDWI</span></code>, <code class="docutils literal notranslate"><span class="pre">MNDWI</span></code>, dan <code class="docutils literal notranslate"><span class="pre">NDBI</span></code>. Urutan ini harus sama antara urutan band pada GeoTIFF, isi <code class="docutils literal notranslate"><span class="pre">NAMA_BAND</span></code>, dan kolom <code class="docutils literal notranslate"><span class="pre">X</span></code> yang diberikan ke model.</p>
-<p>Earth Engine mengekspor sepuluh band pada resolusi 10 m dalam proyeksi UTM zona 49S (EPSG:32749) sebagai GeoTIFF float32, dengan urutan B2, B3, B4, B8, B11, B12, NDVI, NDWI, MNDWI, NDBI. Band B11 dan B12 beresolusi asli 20 m, dan Earth Engine menyamakannya ke 10 m.</p>
-<blockquote>
-<div><p><strong>Urutan menjalankan sel:</strong> jalankan sel akuisisi ini di Google Colab atau Jupyter Notebook yang dapat membuka proses autentikasi Earth Engine. Setelah autentikasi selesai, pastikan <code class="docutils literal notranslate"><span class="pre">sentinel2A_komposit.tif</span></code> berhasil dibuat dan diunduh. Sel pelatihan berikutnya juga memerlukan <code class="docutils literal notranslate"><span class="pre">sawah.geojson</span></code> dan <code class="docutils literal notranslate"><span class="pre">non_sawah.geojson</span></code> pada folder kerja yang sama. Jika salah satu file atau autentikasi belum tersedia, output Random Forest belum dapat muncul.</p>
-</div></blockquote>
+  <section class="tex2jax_ignore mathjax_ignore" id="klasifikasi-lahan-sawah-dan-non-sawah-dengan-random-forest">
+<h1>Klasifikasi Lahan Sawah dan Non-Sawah dengan Random Forest<a class="headerlink" href="#klasifikasi-lahan-sawah-dan-non-sawah-dengan-random-forest" title="Link to this heading">#</a></h1>
+<p>Notebook ini menggunakan 10 fitur Sentinel-2A: B2, B3, B4, B8, B11, B12, NDVI, NDWI, MNDWI, dan NDBI. Satu data berarti satu piksel berlabel. GeoJSON berisi 50 petak sawah dan 50 petak non-sawah.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>-q<span class="w"> </span>install<span class="w"> </span>earthengine-api<span class="w"> </span>requests
-<span class="kn">import</span><span class="w"> </span><span class="nn">ee</span><span class="o">,</span><span class="w"> </span><span class="nn">requests</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rasterio</span>
 
-<span class="n">ee</span><span class="o">.</span><span class="n">Authenticate</span><span class="p">()</span>
-<span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">&#39;ID-PROJECT-GEE&#39;</span><span class="p">)</span>   <span class="c1"># ganti dengan Project ID Google Cloud</span>
+<span class="c1"># Cari GeoTIFF di folder kerja atau subfolder materi.</span>
+<span class="n">nama_tif</span> <span class="o">=</span> <span class="s1">&#39;sentinel2A_komposit.tif&#39;</span>
+<span class="n">kandidat_tif</span> <span class="o">=</span> <span class="p">[</span><span class="n">Path</span><span class="p">(</span><span class="n">nama_tif</span><span class="p">),</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;materi&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="n">nama_tif</span><span class="p">]</span>
+<span class="n">TIF</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">path</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">kandidat_tif</span> <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">()),</span> <span class="n">kandidat_tif</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
-<span class="c1"># ---------- pengaturan ----------</span>
-<span class="n">START</span><span class="p">,</span> <span class="n">END</span> <span class="o">=</span> <span class="s1">&#39;2024-06-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-09-30&#39;</span>   <span class="c1"># periode citra (musim kemarau, relatif bebas awan)</span>
-<span class="n">MAX_AWAN</span> <span class="o">=</span> <span class="mi">40</span>                             <span class="c1"># persen awan maksimum per citra</span>
-<span class="n">HANYA_S2A</span> <span class="o">=</span> <span class="kc">True</span>                          <span class="c1"># True = hanya satelit Sentinel-2A; False = semua Sentinel-2 L2A</span>
-<span class="n">OUT_TIF</span> <span class="o">=</span> <span class="s1">&#39;sentinel2A_komposit.tif&#39;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">TIF</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GeoTIFF belum ditemukan.&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Lokasi yang diperiksa:&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">kandidat_tif</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  - </span><span class="si">{</span><span class="n">path</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sel selesai tanpa error. Tambahkan file GeoTIFF sebelum menjalankan Random Forest.&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">TIF</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+        <span class="n">jumlah_band</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">count</span>
+        <span class="n">ukuran_citra</span> <span class="o">=</span> <span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">src</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+        <span class="n">crs_citra</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">crs</span>
 
-<span class="n">AOI</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Geometry</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">([</span><span class="mf">112.7060</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.1495</span><span class="p">,</span> <span class="mf">112.7270</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.1325</span><span class="p">])</span>   <span class="c1"># barat, selatan, timur, utara</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;GeoTIFF ditemukan: </span><span class="si">{</span><span class="n">TIF</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Ukuran citra: </span><span class="si">{</span><span class="n">ukuran_citra</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> x </span><span class="si">{</span><span class="n">ukuran_citra</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> piksel&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Jumlah band: </span><span class="si">{</span><span class="n">jumlah_band</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;CRS: </span><span class="si">{</span><span class="n">crs_citra</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-<span class="n">koleksi</span> <span class="o">=</span> <span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s1">&#39;COPERNICUS/S2_SR_HARMONIZED&#39;</span><span class="p">)</span>
-           <span class="o">.</span><span class="n">filterBounds</span><span class="p">(</span><span class="n">AOI</span><span class="p">)</span><span class="o">.</span><span class="n">filterDate</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="n">END</span><span class="p">)</span>
-           <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Filter</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="s1">&#39;CLOUDY_PIXEL_PERCENTAGE&#39;</span><span class="p">,</span> <span class="n">MAX_AWAN</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Semua Sentinel-2 L2A:&#39;</span><span class="p">,</span> <span class="n">koleksi</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">(),</span> <span class="s1">&#39;citra&#39;</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">HANYA_S2A</span><span class="p">:</span>
-    <span class="n">koleksi</span> <span class="o">=</span> <span class="n">koleksi</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Filter</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="s1">&#39;SPACECRAFT_NAME&#39;</span><span class="p">,</span> <span class="s1">&#39;Sentinel-2A&#39;</span><span class="p">))</span>
-<span class="n">n</span> <span class="o">=</span> <span class="n">koleksi</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dipakai             :&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s1">&#39;citra&#39;</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="s1">&#39;Tidak ada citra. Geser START/END, naikkan MAX_AWAN, atau set HANYA_S2A = False.&#39;</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">mask_awan</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
-    <span class="n">scl</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;SCL&#39;</span><span class="p">)</span>   <span class="c1"># buang no-data, jenuh, bayangan awan, awan, cirrus, salju</span>
-    <span class="n">bagus</span> <span class="o">=</span> <span class="p">(</span><span class="n">scl</span><span class="o">.</span><span class="n">neq</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">And</span><span class="p">(</span><span class="n">scl</span><span class="o">.</span><span class="n">neq</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">And</span><span class="p">(</span><span class="n">scl</span><span class="o">.</span><span class="n">neq</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">And</span><span class="p">(</span><span class="n">scl</span><span class="o">.</span><span class="n">neq</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
-             <span class="o">.</span><span class="n">And</span><span class="p">(</span><span class="n">scl</span><span class="o">.</span><span class="n">neq</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span><span class="o">.</span><span class="n">And</span><span class="p">(</span><span class="n">scl</span><span class="o">.</span><span class="n">neq</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span><span class="o">.</span><span class="n">And</span><span class="p">(</span><span class="n">scl</span><span class="o">.</span><span class="n">neq</span><span class="p">(</span><span class="mi">11</span><span class="p">)))</span>
-    <span class="k">return</span> <span class="n">img</span><span class="o">.</span><span class="n">updateMask</span><span class="p">(</span><span class="n">bagus</span><span class="p">)</span>
-
-<span class="n">BAND</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;B2&#39;</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="s1">&#39;B4&#39;</span><span class="p">,</span> <span class="s1">&#39;B8&#39;</span><span class="p">,</span> <span class="s1">&#39;B11&#39;</span><span class="p">,</span> <span class="s1">&#39;B12&#39;</span><span class="p">]</span>
-<span class="n">komposit</span> <span class="o">=</span> <span class="n">koleksi</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">mask_awan</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">BAND</span><span class="p">)</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
-<span class="n">ndvi</span> <span class="o">=</span> <span class="n">komposit</span><span class="o">.</span><span class="n">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B8&#39;</span><span class="p">,</span> <span class="s1">&#39;B4&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;NDVI&#39;</span><span class="p">)</span>
-<span class="n">ndwi</span> <span class="o">=</span> <span class="n">komposit</span><span class="o">.</span><span class="n">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="s1">&#39;B8&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;NDWI&#39;</span><span class="p">)</span>
-<span class="n">mndwi</span> <span class="o">=</span> <span class="n">komposit</span><span class="o">.</span><span class="n">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="s1">&#39;B11&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;MNDWI&#39;</span><span class="p">)</span>
-<span class="n">ndbi</span> <span class="o">=</span> <span class="n">komposit</span><span class="o">.</span><span class="n">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B11&#39;</span><span class="p">,</span> <span class="s1">&#39;B8&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;NDBI&#39;</span><span class="p">)</span>
-<span class="n">citra</span> <span class="o">=</span> <span class="n">komposit</span><span class="o">.</span><span class="n">addBands</span><span class="p">([</span><span class="n">ndvi</span><span class="p">,</span> <span class="n">ndwi</span><span class="p">,</span> <span class="n">mndwi</span><span class="p">,</span> <span class="n">ndbi</span><span class="p">])</span><span class="o">.</span><span class="n">toFloat</span><span class="p">()</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">AOI</span><span class="p">)</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="n">citra</span><span class="o">.</span><span class="n">getDownloadURL</span><span class="p">({</span><span class="s1">&#39;region&#39;</span><span class="p">:</span> <span class="n">AOI</span><span class="p">,</span> <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;crs&#39;</span><span class="p">:</span> <span class="s1">&#39;EPSG:32749&#39;</span><span class="p">,</span> <span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;GEO_TIFF&#39;</span><span class="p">})</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">900</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="sa">b</span><span class="s1">&#39;II&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;MM&#39;</span><span class="p">):</span>          <span class="c1"># bukan file TIFF = pesan error dari GEE</span>
-    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">[:</span><span class="mi">500</span><span class="p">])</span>
-<span class="nb">open</span><span class="p">(</span><span class="n">OUT_TIF</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Tersimpan </span><span class="si">{</span><span class="n">OUT_TIF</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">1e6</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> MB | urutan band: B2, B3, B4, B8, B11, B12, NDVI, NDWI, MNDWI, NDBI&#39;</span><span class="p">)</span>
-
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">files</span>
-    <span class="n">files</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">OUT_TIF</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;File tersedia di folder kerja: </span><span class="si">{</span><span class="n">OUT_TIF</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">jumlah_band</span> <span class="o">!=</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;GeoTIFF memiliki </span><span class="si">{</span><span class="n">jumlah_band</span><span class="si">}</span><span class="s1"> band. Model memerlukan 10 band: &#39;</span>
+            <span class="s1">&#39;B2, B3, B4, B8, B11, B12, NDVI, NDWI, MNDWI, NDBI.&#39;</span>
+        <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Fitur: B2, B3, B4, B8, B11, B12, NDVI, NDWI, MNDWI, NDBI&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Lanjutkan ke sel Random Forest.&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>^C
-</pre></div>
-</div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
 <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;pip -q install earthengine-api requests&#39;</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">ee</span><span class="o">,</span><span class="w"> </span><span class="nn">requests</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">ee</span><span class="o">.</span><span class="n">Authenticate</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">&#39;ID-PROJECT-GEE&#39;</span><span class="p">)</span>   <span class="c1"># ganti dengan Project ID Google Cloud</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">rasterio</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Cari GeoTIFF di folder kerja atau subfolder materi.</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">nama_tif</span> <span class="o">=</span> <span class="s1">&#39;sentinel2A_komposit.tif&#39;</span>
 
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;ee&#39;
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;rasterio&#39;
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong>Output:</strong> jumlah citra yang dipakai dan ukuran <code class="docutils literal notranslate"><span class="pre">sentinel2A_komposit.tif</span></code> dicetak
-otomatis oleh sel di atas setelah Earth Engine berhasil diautentikasi. Nilainya
-bergantung pada periode, tutupan awan, dan koleksi yang tersedia saat eksekusi.</p>
-</section>
-</section>
-<section id="ekstraksi-sampel-dan-pelatihan-model">
-<h2>3. Ekstraksi Sampel dan Pelatihan Model<a class="headerlink" href="#ekstraksi-sampel-dan-pelatihan-model" title="Link to this heading">#</a></h2>
-<p>Skrip memproyeksikan tiap poligon ke CRS citra dan mengecilkan batasnya 5 m ke dalam, supaya piksel tepi petak yang bercampur dengan penutup lahan lain tidak ikut. Poligon yang kosong setelah pengecilan memakai batas aslinya. Semua piksel yang pusatnya jatuh di dalam poligon menjadi sampel, dan tiap sampel membawa nomor petaknya. Piksel tanpa data tidak masuk.</p>
-<p>Dalam klasifikasi ini, <strong>satu data berarti satu piksel berlabel</strong>. Setiap data mempunyai <strong>10 fitur</strong>, yaitu <code class="docutils literal notranslate"><span class="pre">B2</span></code>, <code class="docutils literal notranslate"><span class="pre">B3</span></code>, <code class="docutils literal notranslate"><span class="pre">B4</span></code>, <code class="docutils literal notranslate"><span class="pre">B8</span></code>, <code class="docutils literal notranslate"><span class="pre">B11</span></code>, <code class="docutils literal notranslate"><span class="pre">B12</span></code>, <code class="docutils literal notranslate"><span class="pre">NDVI</span></code>, <code class="docutils literal notranslate"><span class="pre">NDWI</span></code>, <code class="docutils literal notranslate"><span class="pre">MNDWI</span></code>, dan <code class="docutils literal notranslate"><span class="pre">NDBI</span></code>. Jadi, bentuk matriks <code class="docutils literal notranslate"><span class="pre">X</span></code> adalah <code class="docutils literal notranslate"><span class="pre">(jumlah</span> <span class="pre">data</span> <span class="pre">piksel,</span> <span class="pre">10)</span></code>, sedangkan <code class="docutils literal notranslate"><span class="pre">y</span></code> berisi satu label kelas untuk setiap baris <code class="docutils literal notranslate"><span class="pre">X</span></code>. Jumlah data bergantung pada jumlah piksel yang masuk ke dalam petak sampel dan lolos pemeriksaan validitas citra.</p>
-<p>Pembagian data latih dan uji mengikuti nomor petak: 70% petak melatih model dan 30% petak menguji model. Piksel dari satu petak tidak muncul di kedua sisi, jadi akurasi uji tidak menghitung piksel bertetangga yang nilainya hampir sama sebagai bukti terpisah.</p>
-<section id="model-random-forest">
-<h3>Model Random Forest<a class="headerlink" href="#model-random-forest" title="Link to this heading">#</a></h3>
-<p>Random Forest adalah kumpulan banyak pohon keputusan. Setiap pohon belajar dari sampel dan subset fitur yang berbeda, lalu hasil akhirnya ditentukan melalui voting mayoritas. Pendekatan ini sesuai untuk data Sentinel-2A karena hubungan antara reflektansi, indeks vegetasi, genangan, dan kelas lahan tidak harus linear.</p>
-<p>Pada penelitian ini digunakan <code class="docutils literal notranslate"><span class="pre">RandomForestClassifier</span></code> dengan pengaturan berikut:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head text-left"><p>Parameter</p></th>
-<th class="head text-center"><p>Nilai</p></th>
-<th class="head text-left"><p>Fungsi</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">n_estimators</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">300</span></code></p></td>
-<td class="text-left"><p>Jumlah pohon keputusan. Lebih banyak pohon membuat hasil voting lebih stabil, dengan waktu komputasi yang lebih besar.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">class_weight</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">'balanced'</span></code></p></td>
-<td class="text-left"><p>Memberi bobot lebih besar pada kelas yang jumlah pikselnya lebih sedikit setelah ekstraksi sampel.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">random_state</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">42</span></code></p></td>
-<td class="text-left"><p>Membuat pembagian data dan hasil model dapat diulang.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">n_jobs</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">-1</span></code></p></td>
-<td class="text-left"><p>Menggunakan seluruh inti prosesor yang tersedia.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Model pertama dilatih hanya pada petak latih, kemudian diuji pada petak yang benar-benar berbeda. Setelah akurasi dan kappa dihitung, model dilatih ulang menggunakan seluruh sampel berlabel. Model akhir inilah yang digunakan untuk memprediksi setiap piksel pada citra dan menghasilkan <code class="docutils literal notranslate"><span class="pre">klasifikasi_sawah.tif</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>-q<span class="w"> </span>install<span class="w"> </span>rasterio
-<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -661,151 +456,161 @@ bergantung pada periode, tutupan awan, dan koleksi yang tersedia saat eksekusi.<
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">GroupShuffleSplit</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">cohen_kappa_score</span>
 
-<span class="n">TIF</span> <span class="o">=</span> <span class="s1">&#39;sentinel2A_komposit.tif&#39;</span>
-<span class="n">OUT_KLAS</span> <span class="o">=</span> <span class="s1">&#39;klasifikasi_sawah.tif&#39;</span>
+<span class="n">TIF</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;sentinel2A_komposit.tif&#39;</span><span class="p">)</span>
+<span class="n">OUT_KLAS</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;klasifikasi_sawah.tif&#39;</span><span class="p">)</span>
 <span class="n">OUT_GAMBAR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;segmentasi_sawah_non_sawah.png&#39;</span><span class="p">)</span>
-<span class="n">NAMA_BAND</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;B2&#39;</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="s1">&#39;B4&#39;</span><span class="p">,</span> <span class="s1">&#39;B8&#39;</span><span class="p">,</span> <span class="s1">&#39;B11&#39;</span><span class="p">,</span> <span class="s1">&#39;B12&#39;</span><span class="p">,</span> <span class="s1">&#39;NDVI&#39;</span><span class="p">,</span> <span class="s1">&#39;NDWI&#39;</span><span class="p">,</span> <span class="s1">&#39;MNDWI&#39;</span><span class="p">,</span> <span class="s1">&#39;NDBI&#39;</span><span class="p">]</span>
-<span class="n">BUFFER_M</span> <span class="o">=</span> <span class="mi">5</span>      <span class="c1"># kecilkan tiap petak sekian meter dari tepinya supaya tidak mengambil piksel campuran</span>
-
-<span class="c1"># ---------- GeoJSON petak sampel ----------</span>
-<span class="c1"># Lampiran poligon sawah disimpan sebagai `sawah.geojson`, sedangkan lampiran</span>
-<span class="c1"># persegi P1-P50 disimpan sebagai `non_sawah.geojson` di folder kerja notebook.</span>
-<span class="c1"># Kedua file harus berupa FeatureCollection dengan geometri LineString tertutup</span>
-<span class="c1"># atau Polygon dalam EPSG:4326.</span>
 <span class="n">FILE_SAWAH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;sawah.geojson&#39;</span><span class="p">)</span>
-<span class="n">FILE_NON_SAWAH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;non_sawah.geojson&#39;</span><span class="p">)</span>
+<span class="n">FILE_NON_SAWAH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;nonsawah.geojson&#39;</span><span class="p">)</span>
+<span class="n">NAMA_BAND</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;B2&#39;</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="s1">&#39;B4&#39;</span><span class="p">,</span> <span class="s1">&#39;B8&#39;</span><span class="p">,</span> <span class="s1">&#39;B11&#39;</span><span class="p">,</span> <span class="s1">&#39;B12&#39;</span><span class="p">,</span> <span class="s1">&#39;NDVI&#39;</span><span class="p">,</span> <span class="s1">&#39;NDWI&#39;</span><span class="p">,</span> <span class="s1">&#39;MNDWI&#39;</span><span class="p">,</span> <span class="s1">&#39;NDBI&#39;</span><span class="p">]</span>
+<span class="n">BUFFER_M</span> <span class="o">=</span> <span class="mi">5</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">baca_geojson</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s1"> belum ditemukan. Simpan lampiran GeoJSON dengan nama tersebut &#39;</span>
-            <span class="s1">&#39;di folder kerja notebook.&#39;</span>
-        <span class="p">)</span>
-    <span class="k">with</span> <span class="n">path</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;File tidak ditemukan: </span><span class="si">{</span><span class="n">path</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">path</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;FeatureCollection&#39;</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s1"> harus bertipe FeatureCollection&#39;</span><span class="p">)</span>
-    <span class="n">features</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;features&#39;</span><span class="p">,</span> <span class="p">[])</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">features</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;features&#39;</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s1"> tidak berisi feature&#39;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">data</span>
 
 
 <span class="n">TITIK_SAWAH</span> <span class="o">=</span> <span class="n">baca_geojson</span><span class="p">(</span><span class="n">FILE_SAWAH</span><span class="p">)</span>
 <span class="n">TITIK_NON_SAWAH</span> <span class="o">=</span> <span class="n">baca_geojson</span><span class="p">(</span><span class="n">FILE_NON_SAWAH</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Label sawah: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">TITIK_SAWAH</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">])</span><span class="si">}</span><span class="s1"> petak&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Label non-sawah: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">TITIK_NON_SAWAH</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">])</span><span class="si">}</span><span class="s1"> petak&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Petak sawah dari GeoJSON     : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">TITIK_SAWAH</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">])</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Petak non-sawah dari GeoJSON : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">TITIK_NON_SAWAH</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">])</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total petak GeoJSON          : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">TITIK_SAWAH</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">])</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">TITIK_NON_SAWAH</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">])</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-<span class="c1"># ---------- baca citra ----------</span>
 <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">TIF</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
-    <span class="n">arr</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>          <span class="c1"># (band, baris, kolom)</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
     <span class="n">profil</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">profile</span>
     <span class="n">tf</span><span class="p">,</span> <span class="n">crs</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">transform</span><span class="p">,</span> <span class="n">src</span><span class="o">.</span><span class="n">crs</span>
+
 <span class="n">n_band</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span>
-<span class="k">assert</span> <span class="n">n_band</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">NAMA_BAND</span><span class="p">),</span> <span class="sa">f</span><span class="s1">&#39;TIF punya </span><span class="si">{</span><span class="n">n_band</span><span class="si">}</span><span class="s1"> band, NAMA_BAND berisi </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">NAMA_BAND</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="k">if</span> <span class="n">n_band</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">NAMA_BAND</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;TIF memiliki </span><span class="si">{</span><span class="n">n_band</span><span class="si">}</span><span class="s1"> band, tetapi model memerlukan </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">NAMA_BAND</span><span class="p">)</span><span class="si">}</span><span class="s1"> fitur&#39;</span><span class="p">)</span>
 <span class="n">valid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">arr</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Citra: </span><span class="si">{</span><span class="n">W</span><span class="si">}</span><span class="s1"> x </span><span class="si">{</span><span class="n">H</span><span class="si">}</span><span class="s1"> piksel, </span><span class="si">{</span><span class="n">n_band</span><span class="si">}</span><span class="s1"> band, CRS </span><span class="si">{</span><span class="n">crs</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Ukuran citra                : </span><span class="si">{</span><span class="n">W</span><span class="si">}</span><span class="s1"> x </span><span class="si">{</span><span class="n">H</span><span class="si">}</span><span class="s1"> piksel&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Jumlah band/fitur           : </span><span class="si">{</span><span class="n">n_band</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;CRS                         : </span><span class="si">{</span><span class="n">crs</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">petak_ke_polygon</span><span class="p">(</span><span class="n">fc</span><span class="p">):</span>
     <span class="n">hasil</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;features&#39;</span><span class="p">,</span> <span class="p">[]):</span>
-        <span class="n">g</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;geometry&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}</span>
-        <span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;LineString&#39;</span><span class="p">:</span>
-            <span class="n">ring</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="s1">&#39;coordinates&#39;</span><span class="p">]</span>
-        <span class="k">elif</span> <span class="n">g</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Polygon&#39;</span><span class="p">:</span>
-            <span class="n">ring</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="s1">&#39;coordinates&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">fc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;features&#39;</span><span class="p">,</span> <span class="p">[]):</span>
+        <span class="n">geometry</span> <span class="o">=</span> <span class="n">feature</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;geometry&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">geometry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;LineString&#39;</span><span class="p">:</span>
+            <span class="n">ring</span> <span class="o">=</span> <span class="n">geometry</span><span class="p">[</span><span class="s1">&#39;coordinates&#39;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">geometry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Polygon&#39;</span><span class="p">:</span>
+            <span class="n">ring</span> <span class="o">=</span> <span class="n">geometry</span><span class="p">[</span><span class="s1">&#39;coordinates&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">continue</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ring</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
             <span class="k">continue</span>
-        <span class="n">lon</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ring</span><span class="p">]</span>
-        <span class="n">lat</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ring</span><span class="p">]</span>
+        <span class="n">lon</span> <span class="o">=</span> <span class="p">[</span><span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">ring</span><span class="p">]</span>
+        <span class="n">lat</span> <span class="o">=</span> <span class="p">[</span><span class="n">point</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">ring</span><span class="p">]</span>
         <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="s1">&#39;EPSG:4326&#39;</span><span class="p">,</span> <span class="n">crs</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">)</span>
-        <span class="n">poly</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">))</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">poly</span><span class="o">.</span><span class="n">is_valid</span><span class="p">:</span>
-            <span class="n">poly</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">poly</span><span class="o">.</span><span class="n">is_empty</span> <span class="ow">or</span> <span class="n">poly</span><span class="o">.</span><span class="n">area</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">polygon</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">polygon</span><span class="o">.</span><span class="n">is_valid</span><span class="p">:</span>
+            <span class="n">polygon</span> <span class="o">=</span> <span class="n">polygon</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">polygon</span><span class="o">.</span><span class="n">is_empty</span> <span class="ow">or</span> <span class="n">polygon</span><span class="o">.</span><span class="n">area</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">continue</span>
-        <span class="n">kecil</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="o">-</span><span class="n">BUFFER_M</span><span class="p">)</span>
-        <span class="n">hasil</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kecil</span> <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">kecil</span><span class="o">.</span><span class="n">is_empty</span> <span class="ow">and</span> <span class="n">kecil</span><span class="o">.</span><span class="n">area</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">else</span> <span class="n">poly</span><span class="p">)</span>
+        <span class="n">kecil</span> <span class="o">=</span> <span class="n">polygon</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="o">-</span><span class="n">BUFFER_M</span><span class="p">)</span>
+        <span class="n">hasil</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kecil</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">kecil</span><span class="o">.</span><span class="n">is_empty</span> <span class="ow">and</span> <span class="n">kecil</span><span class="o">.</span><span class="n">area</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">polygon</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">hasil</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">ambil</span><span class="p">(</span><span class="n">fc</span><span class="p">,</span> <span class="n">kelas</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
-    <span class="n">polys</span> <span class="o">=</span> <span class="n">petak_ke_polygon</span><span class="p">(</span><span class="n">fc</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">polys</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_band</span><span class="p">),</span> <span class="s1">&#39;float32&#39;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
-    <span class="n">shapes</span> <span class="o">=</span> <span class="p">[(</span><span class="n">mapping</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">polys</span><span class="p">)]</span>
+    <span class="n">polygons</span> <span class="o">=</span> <span class="n">petak_ke_polygon</span><span class="p">(</span><span class="n">fc</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">polygons</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_band</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">shapes</span> <span class="o">=</span> <span class="p">[(</span><span class="n">mapping</span><span class="p">(</span><span class="n">polygon</span><span class="p">),</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">polygon</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">polygons</span><span class="p">)]</span>
     <span class="n">ids</span> <span class="o">=</span> <span class="n">rasterize</span><span class="p">(</span><span class="n">shapes</span><span class="p">,</span> <span class="n">out_shape</span><span class="o">=</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">W</span><span class="p">),</span> <span class="n">transform</span><span class="o">=</span><span class="n">tf</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int32&#39;</span><span class="p">)</span>
-    <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">ids</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">valid</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[:,</span> <span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
-    <span class="n">grup</span> <span class="o">=</span> <span class="n">ids</span><span class="p">[</span><span class="n">m</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Kelas </span><span class="si">{</span><span class="n">kelas</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">polys</span><span class="p">)</span><span class="si">}</span><span class="s1"> petak dibaca, </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">grup</span><span class="p">))</span><span class="si">}</span><span class="s1"> petak punya piksel di dalam citra, </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="si">}</span><span class="s1"> piksel terpakai&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">kelas</span><span class="p">),</span> <span class="n">grup</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">ids</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">valid</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[:,</span> <span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">groups</span> <span class="o">=</span> <span class="n">ids</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Kelas </span><span class="si">{</span><span class="n">kelas</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">polygons</span><span class="p">)</span><span class="si">}</span><span class="s1"> petak, </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">groups</span><span class="p">))</span><span class="si">}</span><span class="s1"> petak masuk, </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">)</span><span class="si">}</span><span class="s1"> piksel&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">features</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="n">kelas</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span> <span class="n">groups</span>
 
 
-<span class="n">X1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">g1</span> <span class="o">=</span> <span class="n">ambil</span><span class="p">(</span><span class="n">TITIK_SAWAH</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">X0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">g0</span> <span class="o">=</span> <span class="n">ambil</span><span class="p">(</span><span class="n">TITIK_NON_SAWAH</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">X1</span><span class="p">,</span> <span class="n">X0</span><span class="p">])</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">y1</span><span class="p">,</span> <span class="n">y0</span><span class="p">])</span>
-<span class="n">grup</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">g1</span><span class="p">,</span> <span class="n">g0</span><span class="p">])</span>
-<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Kedua kelas harus punya petak yang jatuh di dalam citra&#39;</span>
-<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">grup</span><span class="p">))</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;Minimal empat petak harus masuk citra untuk split per petak&#39;</span>
+<span class="n">X_sawah</span><span class="p">,</span> <span class="n">y_sawah</span><span class="p">,</span> <span class="n">g_sawah</span> <span class="o">=</span> <span class="n">ambil</span><span class="p">(</span><span class="n">TITIK_SAWAH</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">X_non_sawah</span><span class="p">,</span> <span class="n">y_non_sawah</span><span class="p">,</span> <span class="n">g_non_sawah</span> <span class="o">=</span> <span class="n">ambil</span><span class="p">(</span><span class="n">TITIK_NON_SAWAH</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">X_sawah</span><span class="p">,</span> <span class="n">X_non_sawah</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">y_sawah</span><span class="p">,</span> <span class="n">y_non_sawah</span><span class="p">])</span>
+<span class="n">grup</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">g_sawah</span><span class="p">,</span> <span class="n">g_non_sawah</span><span class="p">])</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Kedua kelas harus memiliki piksel valid di dalam citra&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">grup</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Minimal empat petak harus tersedia untuk split train/testing&#39;</span><span class="p">)</span>
 
 <span class="n">jumlah_fitur</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">jumlah_data</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">jumlah_piksel_sawah</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 <span class="n">jumlah_piksel_non_sawah</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 <span class="n">jumlah_petak</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">grup</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Ringkasan data berlabel:&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Jumlah data piksel       : </span><span class="si">{</span><span class="n">jumlah_data</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Jumlah fitur per piksel  : </span><span class="si">{</span><span class="n">jumlah_fitur</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Ukuran matriks X         : </span><span class="si">{</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Piksel label sawah (1)   : </span><span class="si">{</span><span class="n">jumlah_piksel_sawah</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Piksel label non-sawah (0): </span><span class="si">{</span><span class="n">jumlah_piksel_non_sawah</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Jumlah petak             : </span><span class="si">{</span><span class="n">jumlah_petak</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">=== RINGKASAN DATA ===&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Jumlah data piksel berlabel  : </span><span class="si">{</span><span class="n">jumlah_data</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Jumlah fitur per piksel      : </span><span class="si">{</span><span class="n">jumlah_fitur</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Ukuran X                    : </span><span class="si">{</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Piksel label sawah (1)       : </span><span class="si">{</span><span class="n">jumlah_piksel_sawah</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Piksel label non-sawah (0)   : </span><span class="si">{</span><span class="n">jumlah_piksel_non_sawah</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Jumlah petak yang terbaca    : </span><span class="si">{</span><span class="n">jumlah_petak</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Nama fitur                   : </span><span class="si">{</span><span class="n">NAMA_BAND</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-<span class="c1"># ---------- latih dan uji (data uji = petak yang tidak dipakai melatih) ----------</span>
-<span class="n">tr</span><span class="p">,</span> <span class="n">te</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">GroupShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">grup</span><span class="p">))</span>
-<span class="n">petak_train</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">grup</span><span class="p">[</span><span class="n">tr</span><span class="p">]))</span>
-<span class="n">petak_test</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">grup</span><span class="p">[</span><span class="n">te</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Pembagian data berdasarkan petak:&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Data train               : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span><span class="si">}</span><span class="s1"> piksel (</span><span class="si">{</span><span class="n">petak_train</span><span class="si">}</span><span class="s1"> petak)&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Data testing             : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">te</span><span class="p">)</span><span class="si">}</span><span class="s1"> piksel (</span><span class="si">{</span><span class="n">petak_test</span><span class="si">}</span><span class="s1"> petak)&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Train sawah / non-sawah  : </span><span class="si">{</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">tr</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1"> / </span><span class="si">{</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">tr</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1"> piksel&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Test sawah / non-sawah   : </span><span class="si">{</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">te</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1"> / </span><span class="si">{</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">te</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1"> piksel&#39;</span><span class="p">)</span>
-<span class="n">rf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">class_weight</span><span class="o">=</span><span class="s1">&#39;balanced&#39;</span><span class="p">)</span>
-<span class="n">rf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">tr</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">tr</span><span class="p">])</span>
-<span class="n">pred</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">te</span><span class="p">])</span>
-<span class="n">akurasi</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">te</span><span class="p">],</span> <span class="n">pred</span><span class="p">)</span>
-<span class="n">kappa</span> <span class="o">=</span> <span class="n">cohen_kappa_score</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">te</span><span class="p">],</span> <span class="n">pred</span><span class="p">)</span>
-<span class="n">matriks</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">te</span><span class="p">],</span> <span class="n">pred</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Akurasi  :&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">akurasi</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Kappa    :&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">kappa</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Matriks kebingungan (baris = aktual, kolom = prediksi; urutan: non-sawah, sawah):&#39;</span><span class="p">)</span>
+<span class="n">splitter</span> <span class="o">=</span> <span class="n">GroupShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">splitter</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">grup</span><span class="p">))</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+<span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+<span class="n">petak_train</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">grup</span><span class="p">[</span><span class="n">train_index</span><span class="p">]))</span>
+<span class="n">petak_test</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">grup</span><span class="p">[</span><span class="n">test_index</span><span class="p">]))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">=== UKURAN TRAINING DAN TESTING ===&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;X_train shape                : </span><span class="si">{</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;X_test shape                 : </span><span class="si">{</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;y_train shape                : </span><span class="si">{</span><span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;y_test shape                 : </span><span class="si">{</span><span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data train                   : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="si">}</span><span class="s1"> piksel dari </span><span class="si">{</span><span class="n">petak_train</span><span class="si">}</span><span class="s1"> petak&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Data testing                 : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span><span class="si">}</span><span class="s1"> piksel dari </span><span class="si">{</span><span class="n">petak_test</span><span class="si">}</span><span class="s1"> petak&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Train sawah/non-sawah        : </span><span class="si">{</span><span class="p">(</span><span class="n">y_train</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1"> / </span><span class="si">{</span><span class="p">(</span><span class="n">y_train</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Test sawah/non-sawah         : </span><span class="si">{</span><span class="p">(</span><span class="n">y_test</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1"> / </span><span class="si">{</span><span class="p">(</span><span class="n">y_test</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">rf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span>
+    <span class="n">n_estimators</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">class_weight</span><span class="o">=</span><span class="s1">&#39;balanced&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">rf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">akurasi</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+<span class="n">kappa</span> <span class="o">=</span> <span class="n">cohen_kappa_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+<span class="n">matriks</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">=== HASIL RANDOM FOREST ===&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Akurasi                     : </span><span class="si">{</span><span class="n">akurasi</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Kappa                       : </span><span class="si">{</span><span class="n">kappa</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Matriks kebingungan (baris aktual, kolom prediksi):&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">matriks</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Pentingnya tiap band:&#39;</span><span class="p">)</span>
-<span class="n">peringkat_fitur</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">NAMA_BAND</span><span class="p">,</span> <span class="n">rf</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Fitur       Kepentingan&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Kepentingan fitur:&#39;</span><span class="p">)</span>
+<span class="n">peringkat_fitur</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">NAMA_BAND</span><span class="p">,</span> <span class="n">rf</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="o">-</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="k">for</span> <span class="n">nama_fitur</span><span class="p">,</span> <span class="n">nilai</span> <span class="ow">in</span> <span class="n">peringkat_fitur</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  </span><span class="si">{</span><span class="n">nama_fitur</span><span class="si">:</span><span class="s1">8s</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">nilai</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">nilai</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%)&#39;</span><span class="p">)</span>
 
-<span class="c1"># model akhir dilatih ulang memakai semua piksel</span>
+<span class="c1"># Latih ulang model menggunakan seluruh data berlabel.</span>
 <span class="n">rf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-
-<span class="c1"># ---------- klasifikasi seluruh citra ----------</span>
 <span class="n">flat</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_band</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">H</span> <span class="o">*</span> <span class="n">W</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
-<span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">valid</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span> <span class="mi">200000</span><span class="p">):</span>
-    <span class="n">j</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">200000</span><span class="p">]</span>
-    <span class="n">h</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">flat</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
-<span class="n">hasil</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+<span class="n">hasil_flat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">H</span> <span class="o">*</span> <span class="n">W</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+<span class="n">valid_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">valid</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">valid_index</span><span class="p">),</span> <span class="mi">200000</span><span class="p">):</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">valid_index</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">start</span> <span class="o">+</span> <span class="mi">200000</span><span class="p">]</span>
+    <span class="n">hasil_flat</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">flat</span><span class="p">[:,</span> <span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+<span class="n">hasil</span> <span class="o">=</span> <span class="n">hasil_flat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;blockxsize&#39;</span><span class="p">,</span> <span class="s1">&#39;blockysize&#39;</span><span class="p">,</span> <span class="s1">&#39;tiled&#39;</span><span class="p">,</span> <span class="s1">&#39;interleave&#39;</span><span class="p">):</span>
-    <span class="n">profil</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;blockxsize&#39;</span><span class="p">,</span> <span class="s1">&#39;blockysize&#39;</span><span class="p">,</span> <span class="s1">&#39;tiled&#39;</span><span class="p">,</span> <span class="s1">&#39;interleave&#39;</span><span class="p">):</span>
+    <span class="n">profil</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="n">profil</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span> <span class="n">nodata</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="s1">&#39;lzw&#39;</span><span class="p">)</span>
 <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">OUT_KLAS</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">profil</span><span class="p">)</span> <span class="k">as</span> <span class="n">dst</span><span class="p">:</span>
     <span class="n">dst</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">hasil</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -815,15 +620,96 @@ bergantung pada periode, tutupan awan, dan koleksi yang tersedia saat eksekusi.<
 <span class="n">n_non</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">hasil</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 <span class="n">luas_sawah_ha</span> <span class="o">=</span> <span class="n">n_sawah</span> <span class="o">*</span> <span class="n">luas_px</span> <span class="o">/</span> <span class="mi">10000</span>
 <span class="n">luas_non_ha</span> <span class="o">=</span> <span class="n">n_non</span> <span class="o">*</span> <span class="n">luas_px</span> <span class="o">/</span> <span class="mi">10000</span>
-<span class="n">luas_valid_ha</span> <span class="o">=</span> <span class="p">(</span><span class="n">n_sawah</span> <span class="o">+</span> <span class="n">n_non</span><span class="p">)</span> <span class="o">*</span> <span class="n">luas_px</span> <span class="o">/</span> <span class="mi">10000</span>
 <span class="n">persen_sawah</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">n_sawah</span> <span class="o">/</span> <span class="p">(</span><span class="n">n_sawah</span> <span class="o">+</span> <span class="n">n_non</span><span class="p">)</span>
 <span class="n">persen_non</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">n_non</span> <span class="o">/</span> <span class="p">(</span><span class="n">n_sawah</span> <span class="o">+</span> <span class="n">n_non</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Sawah: </span><span class="si">{</span><span class="n">n_sawah</span><span class="si">}</span><span class="s1"> piksel (~</span><span class="si">{</span><span class="n">luas_sawah_ha</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> ha) | Non-sawah: </span><span class="si">{</span><span class="n">n_non</span><span class="si">}</span><span class="s1"> piksel (~</span><span class="si">{</span><span class="n">luas_non_ha</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> ha)&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Persentase area valid: sawah </span><span class="si">{</span><span class="n">persen_sawah</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">% | non-sawah </span><span class="si">{</span><span class="n">persen_non</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tersimpan:&#39;</span><span class="p">,</span> <span class="n">OUT_KLAS</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Hasil piksel klasifikasi sawah     : </span><span class="si">{</span><span class="n">n_sawah</span><span class="si">}</span><span class="s1"> (~</span><span class="si">{</span><span class="n">luas_sawah_ha</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> ha)&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Hasil piksel klasifikasi non-sawah : </span><span class="si">{</span><span class="n">n_non</span><span class="si">}</span><span class="s1"> (~</span><span class="si">{</span><span class="n">luas_non_ha</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> ha)&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Persentase sawah/non-sawah         : </span><span class="si">{</span><span class="n">persen_sawah</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">% / </span><span class="si">{</span><span class="n">persen_non</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Tersimpan                        : </span><span class="si">{</span><span class="n">OUT_KLAS</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Petak sawah dari GeoJSON     : 50
+Petak non-sawah dari GeoJSON : 50
+Total petak GeoJSON          : 100
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">CPLE_OpenFailedError</span><span class="g g-Whitespace">                      </span>Traceback (most recent call last)
+<span class="nn">File rasterio\\_base.pyx:310,</span> in <span class="ni">rasterio._base.DatasetBase.__init__</span><span class="nt">()</span>
 
-<span class="c1"># ---------- gambar segmentasi ----------</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="nn">File rasterio\\_base.pyx:221,</span> in <span class="ni">rasterio._base.open_dataset</span><span class="nt">()</span>
+
+<span class="nn">File rasterio\\_err.pyx:359,</span> in <span class="ni">rasterio._err.exc_wrap_pointer</span><span class="nt">()</span>
+
+<span class="ne">CPLE_OpenFailedError</span>: sentinel2A_komposit.tif: No such file or directory
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">RasterioIOError</span><span class="g g-Whitespace">                           </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">40</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Petak non-sawah dari GeoJSON : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">TITIK_NON_SAWAH</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">])</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total petak GeoJSON          : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">TITIK_SAWAH</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">])</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">TITIK_NON_SAWAH</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">])</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">40</span> <span class="k">with</span> <span class="n">rasterio</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">TIF</span><span class="p">)</span> <span class="k">as</span> <span class="n">src</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span>     <span class="n">arr</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>     <span class="n">profil</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">profile</span>
+
+<span class="nn">File c:\Users\ARIEL\AppData\Local\Programs\Python\Python39\lib\site-packages\rasterio\env.py:463,</span> in <span class="ni">ensure_env_with_credentials.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">460</span>     <span class="n">session</span> <span class="o">=</span> <span class="n">DummySession</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">462</span> <span class="k">with</span> <span class="n">env_ctor</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">463</span>     <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\ARIEL\AppData\Local\Programs\Python\Python39\lib\site-packages\rasterio\__init__.py:387,</span> in <span class="ni">open</span><span class="nt">(fp, mode, driver, width, height, count, crs, transform, dtype, nodata, sharing, opener, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">384</span>     <span class="n">path</span> <span class="o">=</span> <span class="n">_parse_path</span><span class="p">(</span><span class="n">raw_dataset_path</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">386</span> <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;r&quot;</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">387</span>     <span class="n">dataset</span> <span class="o">=</span> <span class="n">DatasetReader</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">,</span> <span class="n">sharing</span><span class="o">=</span><span class="n">sharing</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">388</span> <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;r+&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">389</span>     <span class="n">dataset</span> <span class="o">=</span> <span class="n">get_writer_for_path</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">)(</span>
+<span class="g g-Whitespace">    </span><span class="mi">390</span>         <span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">,</span> <span class="n">sharing</span><span class="o">=</span><span class="n">sharing</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+<span class="g g-Whitespace">    </span><span class="mi">391</span>     <span class="p">)</span>
+
+<span class="nn">File rasterio\\_base.pyx:312,</span> in <span class="ni">rasterio._base.DatasetBase.__init__</span><span class="nt">()</span>
+
+<span class="ne">RasterioIOError</span>: sentinel2A_komposit.tif: No such file or directory
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hasil_evaluasi</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Jumlah fitur&#39;</span><span class="p">:</span> <span class="n">jumlah_fitur</span><span class="p">,</span>
+    <span class="s1">&#39;Jumlah data piksel berlabel&#39;</span><span class="p">:</span> <span class="n">jumlah_data</span><span class="p">,</span>
+    <span class="s1">&#39;Piksel label sawah&#39;</span><span class="p">:</span> <span class="n">jumlah_piksel_sawah</span><span class="p">,</span>
+    <span class="s1">&#39;Piksel label non-sawah&#39;</span><span class="p">:</span> <span class="n">jumlah_piksel_non_sawah</span><span class="p">,</span>
+    <span class="s1">&#39;Ukuran X&#39;</span><span class="p">:</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+    <span class="s1">&#39;Ukuran X_train&#39;</span><span class="p">:</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+    <span class="s1">&#39;Ukuran X_test&#39;</span><span class="p">:</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+    <span class="s1">&#39;Data train&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span><span class="si">}</span><span class="s1"> piksel (</span><span class="si">{</span><span class="n">petak_train</span><span class="si">}</span><span class="s1"> petak)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Data testing&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span><span class="si">}</span><span class="s1"> piksel (</span><span class="si">{</span><span class="n">petak_test</span><span class="si">}</span><span class="s1"> petak)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Akurasi petak uji&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">akurasi</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Kappa&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">kappa</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Luas sawah (ha)&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">luas_sawah_ha</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Luas non-sawah (ha)&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">luas_non_ha</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;| Metrik | Nilai |&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;| :--- | ---: |&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">metrik</span><span class="p">,</span> <span class="n">nilai</span> <span class="ow">in</span> <span class="n">hasil_evaluasi</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;| </span><span class="si">{</span><span class="n">metrik</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">nilai</span><span class="si">}</span><span class="s1"> |&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">| Kelas hasil klasifikasi | Piksel | Luas (ha) | Persentase |&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;| :--- | ---: | ---: | ---: |&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;| Sawah | </span><span class="si">{</span><span class="n">n_sawah</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">luas_sawah_ha</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">persen_sawah</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">% |&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;| Non-sawah | </span><span class="si">{</span><span class="n">n_non</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">luas_non_ha</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">persen_non</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">% |&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="kn">import</span> <span class="n">BoundaryNorm</span><span class="p">,</span> <span class="n">ListedColormap</span>
 
 <span class="n">rgb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">arr</span><span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -839,8 +725,8 @@ bergantung pada periode, tutupan awan, dan koleksi yang tersedia saat eksekusi.<
 <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rgb</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">kelas</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">kelas_cmap</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">kelas_norm</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.48</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Overlay Citra dan Hasil Segmentasi&#39;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ax</span><span class="p">:</span>
-    <span class="n">a</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="n">ax</span><span class="p">:</span>
+    <span class="n">axis</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
     <span class="n">handles</span><span class="o">=</span><span class="p">[</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#1b9e77&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sawah&#39;</span><span class="p">),</span>
@@ -849,100 +735,40 @@ bergantung pada periode, tutupan awan, dan koleksi yang tersedia saat eksekusi.<
     <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower center&#39;</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">OUT_GAMBAR</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tersimpan:&#39;</span><span class="p">,</span> <span class="n">OUT_GAMBAR</span><span class="o">.</span><span class="n">resolve</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Gambar tersimpan: </span><span class="si">{</span><span class="n">OUT_GAMBAR</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">files</span>
-    <span class="n">files</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">OUT_KLAS</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-    <span class="k">pass</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">akurasi</span></code>, <code class="docutils literal notranslate"><span class="pre">kappa</span></code>, <code class="docutils literal notranslate"><span class="pre">matriks</span></code>, <code class="docutils literal notranslate"><span class="pre">rf.feature_importances_</span></code>, <code class="docutils literal notranslate"><span class="pre">luas_sawah_ha</span></code>, dan <code class="docutils literal notranslate"><span class="pre">luas_non_ha</span></code>
-adalah output terukur dari sel di atas. Sel evaluasi berikut memakai variabel tersebut
-secara langsung, jadi tidak ada angka dummy yang perlu disalin manual.</p>
-</section>
-</section>
-<section id="hasil-evaluasi">
-<h2>4. Hasil Evaluasi<a class="headerlink" href="#hasil-evaluasi" title="Link to this heading">#</a></h2>
-<p>Output numerik berikut dibuat langsung dari hasil klasifikasi, bukan ditulis sebagai
-teks manual. Jalankan sel ini setelah sel pelatihan selesai.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hasil_evaluasi</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;Jumlah fitur&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">jumlah_fitur</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;Jumlah data piksel berlabel&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">jumlah_data</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;Piksel label sawah&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">jumlah_piksel_sawah</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;Piksel label non-sawah&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">jumlah_piksel_non_sawah</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;Data train&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1"> piksel (</span><span class="si">{</span><span class="n">petak_train</span><span class="si">}</span><span class="s1"> petak)&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;Data testing&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">te</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1"> piksel (</span><span class="si">{</span><span class="n">petak_test</span><span class="si">}</span><span class="s1"> petak)&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;Akurasi petak uji&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">akurasi</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;Kappa&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">kappa</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;Luas sawah hasil klasifikasi (ha)&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">luas_sawah_ha</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;Luas non-sawah hasil klasifikasi (ha)&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">luas_non_ha</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
-<span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;| Metrik | Nilai |&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;| :--- | ---: |&#39;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">metrik</span><span class="p">,</span> <span class="n">nilai</span> <span class="ow">in</span> <span class="n">hasil_evaluasi</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;| </span><span class="si">{</span><span class="n">metrik</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">nilai</span><span class="si">}</span><span class="s1"> |&#39;</span><span class="p">)</span>
-
-<span class="n">segmentasi</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;Sawah&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">n_sawah</span><span class="p">,</span> <span class="n">luas_sawah_ha</span><span class="p">,</span> <span class="n">persen_sawah</span><span class="p">),</span>
-    <span class="s1">&#39;Non-sawah&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">n_non</span><span class="p">,</span> <span class="n">luas_non_ha</span><span class="p">,</span> <span class="n">persen_non</span><span class="p">),</span>
-<span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">| Kelas segmentasi | Piksel | Luas (ha) | Persentase area valid |&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;| :--- | ---: | ---: | ---: |&#39;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">kelas</span><span class="p">,</span> <span class="p">(</span><span class="n">jumlah</span><span class="p">,</span> <span class="n">luas</span><span class="p">,</span> <span class="n">persentase</span><span class="p">)</span> <span class="ow">in</span> <span class="n">segmentasi</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;| </span><span class="si">{</span><span class="n">kelas</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">jumlah</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">luas</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> | </span><span class="si">{</span><span class="n">persentase</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">% |&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Gambar hasil segmentasi tersimpan sebagai <code class="docutils literal notranslate"><span class="pre">segmentasi_sawah_non_sawah.png</span></code> dan
-menampilkan citra RGB, peta kelas, serta overlay. Warna hijau menunjukkan sawah,
-sedangkan warna oranye menunjukkan non-sawah.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
-
-<span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">OUT_GAMBAR</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfusionMatrixDisplay</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfusionMatrixDisplay</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
-<span class="n">ConfusionMatrixDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">te</span><span class="p">],</span> <span class="n">pred</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">display_labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Non-Sawah&#39;</span><span class="p">,</span> <span class="s1">&#39;Sawah&#39;</span><span class="p">],</span>
-                                        <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greens&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ConfusionMatrixDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span>
+    <span class="n">y_test</span><span class="p">,</span>
+    <span class="n">pred</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="n">display_labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Non-Sawah&#39;</span><span class="p">,</span> <span class="s1">&#39;Sawah&#39;</span><span class="p">],</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greens&#39;</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Confusion Matrix (petak uji)&#39;</span><span class="p">)</span>
 
 <span class="n">urut</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">rf</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">urut</span><span class="p">)),</span> <span class="n">rf</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">[</span><span class="n">urut</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#2ecc71&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">urut</span><span class="p">)))</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="n">NAMA_BAND</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">urut</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="n">NAMA_BAND</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">urut</span><span class="p">])</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Nilai kepentingan&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Kontribusi band dan indeks&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Kepentingan band dan indeks&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Interpretasi dibuat dari hasil sel: band/indeks paling berpengaruh adalah fitur dengan
-<code class="docutils literal notranslate"><span class="pre">rf.feature_importances_</span></code> terbesar, sedangkan kelas yang paling sering salah ditentukan
-dari jumlah terbesar pada elemen diagonal luar <code class="docutils literal notranslate"><span class="pre">matriks</span></code> (baris aktual, kolom prediksi).</p>
-</section>
-<section id="keterbatasan">
-<h2>5. Keterbatasan<a class="headerlink" href="#keterbatasan" title="Link to this heading">#</a></h2>
-<p>Pembagian uji per petak mengurangi kebocoran data antara piksel bertetangga, dan sisa kemiripan spektral antarpetak yang berdekatan tetap menaikkan akurasi uji. Sawah berganti fase dari genangan ke vegetatif lalu bera dalam satu musim, dan satu komposit median menangkap kondisi tengah periode itu. Sebagian petak sawah berasal dari pembagian hamparan, jadi batas antarpetak mengikuti hitungan geometri dan tidak selalu berimpit dengan pematang. Petak kecil di bawah 1.000 m² menyumbang kurang dari sepuluh piksel setelah pengecilan batas. Evaluasi memakai satu pembagian acak dari satu wilayah studi, sehingga angka akurasi belum menguji kemampuan model di lokasi lain.</p>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -984,38 +810,21 @@ dari jumlah terbesar pada elemen diagonal luar <code class="docutils literal not
         <p class="prev-next-title">Clustering Linear dan Polynomial</p>
       </div>
     </a>
+    <a class="right-next"
+       href="laporan_klasifikasi_jatim.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Laporan Analisis LULC (Land Use and Land Cover) Jawa Timur</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pustaka">Pustaka</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wilayah-studi-dan-sampel">1. Wilayah Studi dan Sampel</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#akuisisi-komposit-sentinel-2a">2. Akuisisi Komposit Sentinel-2A</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitur-yang-digunakan-untuk-klasifikasi">Fitur yang digunakan untuk klasifikasi</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ekstraksi-sampel-dan-pelatihan-model">3. Ekstraksi Sampel dan Pelatihan Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-random-forest">Model Random Forest</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-evaluasi">4. Hasil Evaluasi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keterbatasan">5. Keterbatasan</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

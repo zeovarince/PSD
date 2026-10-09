@@ -56,10 +56,6 @@ except Exception as e:
     print(f"Terjadi kesalahan pada database: {e}")
 ------------------
 
------ stderr -----
-
-[notice] A new release of pip is available: 26.0.1 -> 26.2.1
-[notice] To update, run: python.exe -m pip install --upgrade pip
 ----- stdout -----
 Requirement already satisfied: pandas in c:\laragon\bin\python\python-3.10\lib\site-packages (2.3.3)
 Requirement already satisfied: sqlalchemy in c:\laragon\bin\python\python-3.10\lib\site-packages (2.0.44)
@@ -69,8 +65,12 @@ Requirement already satisfied: python-dateutil>=2.8.2 in c:\laragon\bin\python\p
 Requirement already satisfied: pytz>=2020.1 in c:\laragon\bin\python\python-3.10\lib\site-packages (from pandas) (2025.2)
 Requirement already satisfied: tzdata>=2022.7 in c:\laragon\bin\python\python-3.10\lib\site-packages (from pandas) (2025.3)
 Requirement already satisfied: greenlet>=1 in c:\laragon\bin\python\python-3.10\lib\site-packages (from sqlalchemy) (3.3.0)
-Requirement already satisfied: typing-extensions>=4.6.0 in c:\laragon\bin\python\python-3.10\lib\site-packages (from sqlalchemy) (4.15.0)
+Requirement already satisfied: typing-extensions>=4.6.0 in c:\laragon\bin\python\python-3.10\lib\site-packages (from sqlalchemy) (4.16.0)
 Requirement already satisfied: six>=1.5 in c:\laragon\bin\python\python-3.10\lib\site-packages (from python-dateutil>=2.8.2->pandas) (1.17.0)
+----- stderr -----
+
+[notice] A new release of pip is available: 26.0.1 -> 26.2.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
 ----- stdout -----
 Data berhasil digabung! Berikut 5 baris pertamanya:
                        date  feature_index       NO2       SO2        CO

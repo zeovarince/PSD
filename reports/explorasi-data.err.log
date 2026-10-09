@@ -30,8 +30,6 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['import pandas as pd', 'import numpy as np', 'import matplotlib.pyplot as plt', 'from sklearn.ensemble import IsolationForest', '']
-...
-['plt.tight_layout()', 'plt.savefig(f"outlier_{pol}_before_after.png", dpi=150)', 'plt.show()', '', 'df_fixed[["date", pol]].to_csv(f"{pol}_Kamal_Timeseries_fixed.csv", index=False)']
+!pip install pandas matplotlib seaborn -q
 -------------------
 
