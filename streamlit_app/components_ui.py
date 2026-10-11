@@ -4,30 +4,41 @@ Mengadopsi Mercury Design System (Dark Onyx, Graphite Cards, Cobalt Accent, Ivor
 dan Plotly untuk visualisasi data interaktif.
 """
 
+from __future__ import annotations
+import os
+from typing import Optional, Dict, List, Any
 import streamlit as st
+import streamlit.components.v1 as components
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 import plotly.express as px
-from content.static_text import WARNA_KELAS
 
-# Theme Tokens for Plotly
-MERCURY_PLOT_LAYOUT = dict(
+from content.static_text import WARNA_KELAS
+from data_loader import load_map_html
+
+# Base Plotly theme layout (HANYA konfigurasi latar belakang dan font canvas global)
+# Menghindari duplikasi kwargs xaxis/yaxis di fig.update_layout()
+MERCURY_BASE_LAYOUT = dict(
     paper_bgcolor="#1e1e2a",
     plot_bgcolor="#1e1e2a",
     font=dict(color="#ededf3", family="Inter, sans-serif", size=12),
-    margin=dict(l=40, r=40, t=50, b=40),
-    xaxis=dict(
-        gridcolor="rgba(226, 227, 237, 0.08)",
-        zerolinecolor="rgba(226, 227, 237, 0.15)",
-        tickfont=dict(color="#c3c3cc")
-    ),
-    yaxis=dict(
+    margin=dict(l=40, r=40, t=50, b=40)
+)
+
+def apply_mercury_axes(fig: go.Figure) -> go.Figure:
+    """Menerapkan styling sumbu standar Mercury tanpa menimpa properti spesifik per plot."""
+    fig.update_xaxes(
         gridcolor="rgba(226, 227, 237, 0.08)",
         zerolinecolor="rgba(226, 227, 237, 0.15)",
         tickfont=dict(color="#c3c3cc")
     )
-)
+    fig.update_yaxes(
+        gridcolor="rgba(226, 227, 237, 0.08)",
+        zerolinecolor="rgba(226, 227, 237, 0.15)",
+        tickfont=dict(color="#c3c3cc")
+    )
+    return fig
 
 def render_metric_card(label: str, value: str, subtext: str = None):
     """Merender satu kartu metrik bergaya Mercury."""
@@ -47,28 +58,28 @@ def render_metric_row(test_metrics: dict, val_metrics: dict = None):
     col1, col2, col3, col4, col5 = st.columns(5)
     
     with col1:
-        acc = test_metrics.get("accuracy", 0.0)
+        acc = test_metrics.get("accuracy", 0.0) if test_metrics else 0.0
         v_acc = val_metrics.get("accuracy", None) if val_metrics else None
         sub = f"Val: {v_acc*100:.1f}%" if v_acc is not None else None
         render_metric_card("Akurasi Test", f"{acc*100:.2f}%", sub)
         
     with col2:
-        f1 = test_metrics.get("f1_weighted", 0.0)
+        f1 = test_metrics.get("f1_weighted", 0.0) if test_metrics else 0.0
         v_f1 = val_metrics.get("f1_weighted", None) if val_metrics else None
         sub = f"Val: {v_f1*100:.1f}%" if v_f1 is not None else None
         render_metric_card("F1-Score (W)", f"{f1*100:.2f}%", sub)
         
     with col3:
-        kappa = test_metrics.get("kappa", 0.0)
+        kappa = test_metrics.get("kappa", 0.0) if test_metrics else 0.0
         k_cat = "Hampir Sempurna" if kappa >= 0.8 else ("Substansial" if kappa >= 0.6 else "Moderat")
         render_metric_card("Cohen's Kappa", f"{kappa:.4f}", k_cat)
         
     with col4:
-        prec = test_metrics.get("precision_weighted", 0.0)
+        prec = test_metrics.get("precision_weighted", 0.0) if test_metrics else 0.0
         render_metric_card("Precision (W)", f"{prec*100:.2f}%", "Rata-rata tertimbang")
         
     with col5:
-        rec = test_metrics.get("recall_weighted", 0.0)
+        rec = test_metrics.get("recall_weighted", 0.0) if test_metrics else 0.0
         render_metric_card("Recall (W)", f"{rec*100:.2f}%", "Sensitivitas model")
 
 def render_tuning_curve(tuning_dict: dict, model_type: str):
@@ -93,13 +104,14 @@ def render_tuning_curve(tuning_dict: dict, model_type: str):
             marker=dict(size=8, color="#ffffff")
         ))
         fig.update_layout(
-            **MERCURY_PLOT_LAYOUT,
+            **MERCURY_BASE_LAYOUT,
             title="Tuning var_smoothing (Gaussian Naive Bayes) pada Validation Set",
             xaxis_title="Parameter var_smoothing (Skala Logaritmik)",
             yaxis_title="Akurasi Validasi (%)",
-            xaxis_type="log",
             height=360
         )
+        apply_mercury_axes(fig)
+        fig.update_xaxes(type="log")
     else:
         # KNN tuning
         y_train = [v * 100 if v <= 1.0 else v for v in tuning_dict.get("train_acc", [])]
@@ -123,13 +135,14 @@ def render_tuning_curve(tuning_dict: dict, model_type: str):
             marker=dict(size=8, color="#ffffff")
         ))
         fig.update_layout(
-            **MERCURY_PLOT_LAYOUT,
+            **MERCURY_BASE_LAYOUT,
             title="Tuning Nilai k (K-Nearest Neighbors) pada Validation Set",
             xaxis_title="Jumlah Tetangga Terdekat (k)",
             yaxis_title="Akurasi (%)",
-            xaxis=dict(tickmode="linear", tick0=1, dtick=2),
             height=360
         )
+        apply_mercury_axes(fig)
+        fig.update_xaxes(tickmode="linear", tick0=1, dtick=2)
         
     st.plotly_chart(fig, use_container_width=True)
 
@@ -150,9 +163,11 @@ def render_confusion_matrix(cm_dict: dict, model_name: str):
         for j, val in enumerate(row):
             is_diag = (i == j)
             font_color = "#ffffff" if is_diag else ("#c3c3cc" if val > 0 else "rgba(195,195,204,0.3)")
+            x_label = labels[j] if j < len(labels) else str(j)
+            y_label = labels[i] if i < len(labels) else str(i)
             annotations.append(dict(
-                x=labels[j],
-                y=labels[i],
+                x=x_label,
+                y=y_label,
                 text=str(val),
                 showarrow=False,
                 font=dict(color=font_color, size=13, family="Inter")
@@ -172,19 +187,22 @@ def render_confusion_matrix(cm_dict: dict, model_name: str):
     ))
     
     fig.update_layout(
-        **MERCURY_PLOT_LAYOUT,
+        **MERCURY_BASE_LAYOUT,
         title=f"Confusion Matrix: {model_name} (Testing Set)",
         xaxis_title="Prediksi Kelas",
         yaxis_title="Kelas Aktual",
         annotations=annotations,
-        height=420,
-        yaxis=dict(autorange="reversed")
+        height=420
     )
+    apply_mercury_axes(fig)
+    fig.update_yaxes(autorange="reversed")
+    
     st.plotly_chart(fig, use_container_width=True)
 
 def render_classification_report_table(report_dict: dict):
     """
     Tabel HTML presisi untuk Classification Report per kelas.
+    Aman dari missing keys, summary rows (accuracy, macro avg), dan tipe non-dict.
     """
     if not report_dict:
         st.info("Laporan klasifikasi per kelas tidak tersedia.")
@@ -192,9 +210,15 @@ def render_classification_report_table(report_dict: dict):
         
     rows_html = ""
     for k, metrics in report_dict.items():
+        if not isinstance(metrics, dict):
+            continue
+        # Lewati baris ringkasan jika ada
+        if str(k).lower() in ["accuracy", "macro avg", "weighted avg"]:
+            continue
+            
         prec = metrics.get("precision", 0.0)
         rec = metrics.get("recall", 0.0)
-        f1 = metrics.get("f1", 0.0)
+        f1 = metrics.get("f1", metrics.get("f1-score", 0.0))
         sup = metrics.get("support", 0)
         badge_color = WARNA_KELAS.get(k, "#8c9bff")
         
@@ -237,8 +261,8 @@ def render_comparison_bar_chart(model_nb: dict, model_knn: dict):
     """
     metrics = ["Akurasi", "F1 (Weighted)", "Kappa (x100)", "Precision", "Recall"]
     
-    t_nb = model_nb.get("test", {})
-    t_knn = model_knn.get("test", {})
+    t_nb = model_nb.get("test", {}) if model_nb else {}
+    t_knn = model_knn.get("test", {}) if model_knn else {}
     
     nb_vals = [
         t_nb.get("accuracy", 0.0) * 100,
@@ -260,7 +284,7 @@ def render_comparison_bar_chart(model_nb: dict, model_knn: dict):
     fig.add_trace(go.Bar(
         x=metrics,
         y=nb_vals,
-        name=model_nb.get("nama", "Gaussian Naive Bayes"),
+        name=model_nb.get("nama", "Gaussian Naive Bayes") if model_nb else "Naive Bayes",
         marker=dict(color="#70707d"),
         text=[f"{v:.1f}%" for v in nb_vals],
         textposition="outside"
@@ -268,20 +292,22 @@ def render_comparison_bar_chart(model_nb: dict, model_knn: dict):
     fig.add_trace(go.Bar(
         x=metrics,
         y=knn_vals,
-        name=model_knn.get("nama", "KNN"),
+        name=model_knn.get("nama", "KNN") if model_knn else "KNN",
         marker=dict(color="#5266eb"),
         text=[f"{v:.1f}%" for v in knn_vals],
         textposition="outside"
     ))
     
     fig.update_layout(
-        **MERCURY_PLOT_LAYOUT,
+        **MERCURY_BASE_LAYOUT,
         barmode="group",
         title="Perbandingan Metrik Evaluasi: Naive Bayes vs KNN (Testing Set)",
-        yaxis=dict(range=[0, 115], title="Persentase (%)"),
         height=380,
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
     )
+    apply_mercury_axes(fig)
+    fig.update_yaxes(range=[0, 115], title_text="Persentase (%)")
+    
     st.plotly_chart(fig, use_container_width=True)
 
 def render_dataset_dist_chart(split_list: list):
@@ -315,13 +341,14 @@ def render_dataset_dist_chart(split_list: list):
     ))
     
     fig.update_layout(
-        **MERCURY_PLOT_LAYOUT,
+        **MERCURY_BASE_LAYOUT,
         barmode="stack",
         title="Distribusi Sampel per Kelas Berdasarkan Split Data",
         yaxis_title="Jumlah Sampel",
         height=360,
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
     )
+    apply_mercury_axes(fig)
     st.plotly_chart(fig, use_container_width=True)
 
 def render_winner_banner(winner_name: str, best_acc: float, best_kappa: float, margin: float, other_name: str, alasan_teks: str):
@@ -362,3 +389,47 @@ def render_winner_banner(winner_name: str, best_acc: float, best_kappa: float, m
         </div>
     </div>
     """, unsafe_allow_html=True)
+
+def render_interactive_map(map_rel_path: str, model_title: str):
+    """
+    Merender peta interaktif Folium HTML dengan toolbar unduh dan status file.
+    Menjamin fallback yang aman dan jelas jika file peta belum tersedia.
+    """
+    map_content = load_map_html(map_rel_path)
+    filename = os.path.basename(map_rel_path)
+    
+    if map_content:
+        size_mb = len(map_content) / (1024 * 1024)
+        c_bar1, c_bar2 = st.columns([3, 1])
+        with c_bar1:
+            st.markdown(f"""
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                <span class="mercury-pill mercury-pill-cobalt">Peta Siap ({size_mb:.1f} MB)</span>
+                <span style="color:#c3c3cc; font-size:0.85rem;">
+                    Gunakan kontrol layer di pojok kanan atas peta untuk switch basemap & batas poligon.
+                </span>
+            </div>
+            """, unsafe_allow_html=True)
+        with c_bar2:
+            st.download_button(
+                label="📥 Unduh HTML",
+                data=map_content,
+                file_name=filename,
+                mime="text/html",
+                key=f"dl_map_{filename}"
+            )
+            
+        components.html(map_content, height=720, scrolling=True)
+    else:
+        st.markdown(f"""
+        <div class="mercury-card" style="border: 1px solid rgba(228, 26, 28, 0.4); padding: 20px;">
+            <div style="color: #ff6b6b; font-weight: 500; font-size: 1.05rem; margin-bottom: 8px;">
+                ⚠️ File Peta Belum Ditemukan: <code>{filename}</code>
+            </div>
+            <p style="color: #c3c3cc; font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                Aplikasi mencari peta di jalur: <code>{map_rel_path}</code>.<br>
+                Pastikan file peta HTML telah di-generate dari notebook atau sudah di-commit ke repositori GitHub 
+                agar Streamlit Cloud dapat memuatnya.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)

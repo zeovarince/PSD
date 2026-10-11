@@ -4,6 +4,7 @@ Menjamin struktur yang identik, modular, dinamis tanpa hardcode,
 dan mengimplementasikan sub-navigasi horizontal non-tabs untuk efisiensi render peta Folium.
 """
 
+from __future__ import annotations
 import streamlit as st
 import streamlit.components.v1 as components
 import pandas as pd
@@ -15,7 +16,8 @@ from data_loader import load_results, load_map_html, list_figures
 from components_ui import (
     render_metric_row, render_tuning_curve, render_confusion_matrix,
     render_classification_report_table, render_comparison_bar_chart,
-    render_dataset_dist_chart, render_winner_banner, render_metric_card
+    render_dataset_dist_chart, render_winner_banner, render_metric_card,
+    render_interactive_map
 )
 from content.static_text import (
     WARNA_KELAS, KETERBATASAN, IMPLIKASI_KEBIJAKAN, PERBEDAAN_BASIS
@@ -66,9 +68,9 @@ def render_basis(basis: str):
     st.markdown("<div style='margin-bottom: 8px; color:#c3c3cc; font-size:0.85rem; font-weight:500;'>ALUR TAHAPAN ANALISIS:</div>", unsafe_allow_html=True)
     try:
         # Streamlit >= 1.36 memiliki st.segmented_control
-        selected_sub = st.segmented_control("", sub_menus, default=sub_menus[0], label_visibility="collapsed")
+        selected_sub = st.segmented_control("Tahapan Analisis", sub_menus, default=sub_menus[0], label_visibility="collapsed")
     except Exception:
-        selected_sub = st.radio("", sub_menus, horizontal=True, label_visibility="collapsed")
+        selected_sub = st.radio("Tahapan Analisis", sub_menus, horizontal=True, label_visibility="collapsed")
         
     st.markdown("<hr style='border:0; border-top:1px solid rgba(226,227,237,0.1); margin:14px 0 24px 0;'>", unsafe_allow_html=True)
     
@@ -283,12 +285,7 @@ def render_basis(basis: str):
         
         map_filename = "peta_gnb.html" if is_poly else "peta_pixel_gnb.html"
         map_rel_path = f"assets/{basis}/{map_filename}"
-        map_content = load_map_html(map_rel_path)
-        
-        if map_content:
-            components.html(map_content, height=720, scrolling=True)
-        else:
-            st.info(f"File peta '{map_rel_path}' tidak ditemukan. Peta akan muncul setelah file HTML diletakkan di assets/{basis}/.")
+        render_interactive_map(map_rel_path, f"Gaussian Naive Bayes ({basis_title})")
             
         # 6. Tabel Luas Kelas & Implikasi Kebijakan
         st.markdown("### Estimasi Luas Tutupan Lahan & Implikasi Kebijakan")
@@ -359,12 +356,7 @@ def render_basis(basis: str):
         
         map_filename = "peta_knn.html" if is_poly else "peta_pixel_knn.html"
         map_rel_path = f"assets/{basis}/{map_filename}"
-        map_content = load_map_html(map_rel_path)
-        
-        if map_content:
-            components.html(map_content, height=720, scrolling=True)
-        else:
-            st.info(f"File peta '{map_rel_path}' tidak ditemukan. Peta akan muncul setelah file HTML diletakkan di assets/{basis}/.")
+        render_interactive_map(map_rel_path, f"K-Nearest Neighbors ({basis_title})")
             
         # 6. Tabel Luas Kelas & Implikasi Kebijakan
         st.markdown("### Estimasi Luas Tutupan Lahan & Implikasi Kebijakan")

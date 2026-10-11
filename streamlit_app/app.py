@@ -1,10 +1,11 @@
-"""
-Sistem Informasi LULC Jawa Timur — Web Streamlit UTS Sistem Informasi Geografis
-Entry point aplikasi dengan navigasi sidebar 3 halaman:
-1. Data Understanding
-2. Basis Polygon
-3. Basis Pixel
-"""
+from __future__ import annotations
+import sys
+import os
+
+# Menjamin direktori streamlit_app selalu terdaftar dalam sys.path
+APP_DIR = os.path.dirname(os.path.abspath(__file__))
+if APP_DIR not in sys.path:
+    sys.path.insert(0, APP_DIR)
 
 import streamlit as st
 from data_loader import load_css
