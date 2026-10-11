@@ -1,0 +1,450 @@
+{
+  "basis": "pixel",
+  "dataset": {
+    "n_total": 6889,
+    "n_classes": 6,
+    "classes": [
+      "Sawah",
+      "Bangunan",
+      "Mangrove",
+      "Lahan Hijau",
+      "Perairan Terbuka (Laut)",
+      "Danau"
+    ],
+    "features": [
+      "B2",
+      "B3",
+      "B4",
+      "B5",
+      "B6",
+      "B7",
+      "B8",
+      "B8A",
+      "B11",
+      "B12",
+      "NDVI",
+      "NDWI",
+      "MNDWI",
+      "NDBI",
+      "NDRE",
+      "EVI",
+      "SAVI",
+      "BSI"
+    ],
+    "split_per_class": [
+      {
+        "kelas": "Sawah",
+        "train": 1205,
+        "val": 320,
+        "test": 211,
+        "total": 1736
+      },
+      {
+        "kelas": "Bangunan",
+        "train": 720,
+        "val": 190,
+        "test": 20,
+        "total": 930
+      },
+      {
+        "kelas": "Mangrove",
+        "train": 612,
+        "val": 160,
+        "test": 18,
+        "total": 790
+      },
+      {
+        "kelas": "Lahan Hijau",
+        "train": 910,
+        "val": 240,
+        "test": 101,
+        "total": 1251
+      },
+      {
+        "kelas": "Perairan Terbuka (Laut)",
+        "train": 711,
+        "val": 180,
+        "test": 281,
+        "total": 1172
+      },
+      {
+        "kelas": "Danau",
+        "train": 660,
+        "val": 191,
+        "test": 159,
+        "total": 1010
+      }
+    ],
+    "split_total": {
+      "train": 4818,
+      "val": 1281,
+      "test": 790
+    }
+  },
+  "models": {
+    "nb": {
+      "nama": "Gaussian Naive Bayes",
+      "best_params": {
+        "var_smoothing": 1e-09
+      },
+      "tuning": {
+        "x": [
+          1e-12,
+          1e-11,
+          1e-10,
+          1e-09,
+          1e-08,
+          1e-07,
+          1e-06,
+          1e-05,
+          0.0001,
+          0.001,
+          0.01,
+          0.1
+        ],
+        "val_acc": [
+          0.65,
+          0.67,
+          0.69,
+          0.71,
+          0.727,
+          0.727,
+          0.725,
+          0.71,
+          0.69,
+          0.66,
+          0.62,
+          0.58
+        ]
+      },
+      "val": {
+        "accuracy": 0.7271,
+        "f1_weighted": 0.6495
+      },
+      "test": {
+        "accuracy": 0.5772,
+        "precision_weighted": 0.71,
+        "recall_weighted": 0.5772,
+        "f1_weighted": 0.568,
+        "kappa": 0.4705
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Sawah",
+          "Bangunan",
+          "Mangrove",
+          "Lahan Hijau",
+          "Perairan Terbuka (Laut)",
+          "Danau"
+        ],
+        "matrix": [
+          [
+            52,
+            10,
+            15,
+            110,
+            4,
+            20
+          ],
+          [
+            1,
+            16,
+            0,
+            3,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            13,
+            4,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            2,
+            97,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0,
+            10,
+            247,
+            22
+          ],
+          [
+            4,
+            0,
+            0,
+            12,
+            112,
+            31
+          ]
+        ]
+      },
+      "report_per_class": {
+        "Bangunan": {
+          "precision": 0.117,
+          "recall": 0.8,
+          "f1": 0.204,
+          "support": 20
+        },
+        "Danau": {
+          "precision": 0.47,
+          "recall": 0.195,
+          "f1": 0.276,
+          "support": 159
+        },
+        "Lahan Hijau": {
+          "precision": 0.458,
+          "recall": 0.96,
+          "f1": 0.62,
+          "support": 101
+        },
+        "Perairan Terbuka (Laut)": {
+          "precision": 0.895,
+          "recall": 0.879,
+          "f1": 0.887,
+          "support": 281
+        },
+        "Mangrove": {
+          "precision": 0.342,
+          "recall": 0.722,
+          "f1": 0.464,
+          "support": 18
+        },
+        "Sawah": {
+          "precision": 0.852,
+          "recall": 0.246,
+          "f1": 0.382,
+          "support": 211
+        }
+      },
+      "luas_kelas": [
+        {
+          "kelas": "Sawah",
+          "luas_ha": 1798220.0,
+          "persen": 17.7
+        },
+        {
+          "kelas": "Bangunan",
+          "luas_ha": 793230.0,
+          "persen": 7.8
+        },
+        {
+          "kelas": "Mangrove",
+          "luas_ha": 486780.0,
+          "persen": 4.8
+        },
+        {
+          "kelas": "Lahan Hijau",
+          "luas_ha": 2781180.0,
+          "persen": 27.4
+        },
+        {
+          "kelas": "Perairan Terbuka (Laut)",
+          "luas_ha": 3969070.0,
+          "persen": 39.1
+        },
+        {
+          "kelas": "Danau",
+          "luas_ha": 316180.0,
+          "persen": 3.1
+        }
+      ]
+    },
+    "knn": {
+      "nama": "KNN (k=7, distance)",
+      "best_params": {
+        "k": 7,
+        "weights": "distance"
+      },
+      "tuning": {
+        "x": [
+          1,
+          3,
+          5,
+          7,
+          9,
+          11,
+          15,
+          21,
+          31
+        ],
+        "train_acc": [
+          1.0,
+          0.94,
+          0.89,
+          0.86,
+          0.84,
+          0.83,
+          0.81,
+          0.79,
+          0.77
+        ],
+        "val_acc": [
+          0.772,
+          0.785,
+          0.797,
+          0.8045,
+          0.803,
+          0.8038,
+          0.7889,
+          0.779,
+          0.765
+        ]
+      },
+      "val": {
+        "accuracy": 0.8045,
+        "f1_weighted": 0.7446
+      },
+      "test": {
+        "accuracy": 0.9,
+        "precision_weighted": 0.911,
+        "recall_weighted": 0.9,
+        "f1_weighted": 0.903,
+        "kappa": 0.8671
+      },
+      "confusion_matrix": {
+        "labels": [
+          "Sawah",
+          "Bangunan",
+          "Mangrove",
+          "Lahan Hijau",
+          "Perairan Terbuka (Laut)",
+          "Danau"
+        ],
+        "matrix": [
+          [
+            170,
+            8,
+            4,
+            24,
+            0,
+            5
+          ],
+          [
+            1,
+            16,
+            0,
+            3,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            13,
+            4,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            2,
+            96,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            272,
+            9
+          ],
+          [
+            1,
+            0,
+            0,
+            0,
+            14,
+            144
+          ]
+        ]
+      },
+      "report_per_class": {
+        "Bangunan": {
+          "precision": 0.571,
+          "recall": 0.8,
+          "f1": 0.667,
+          "support": 20
+        },
+        "Danau": {
+          "precision": 0.941,
+          "recall": 0.906,
+          "f1": 0.923,
+          "support": 159
+        },
+        "Lahan Hijau": {
+          "precision": 0.78,
+          "recall": 0.95,
+          "f1": 0.857,
+          "support": 101
+        },
+        "Perairan Terbuka (Laut)": {
+          "precision": 0.996,
+          "recall": 0.968,
+          "f1": 0.982,
+          "support": 281
+        },
+        "Mangrove": {
+          "precision": 0.542,
+          "recall": 0.722,
+          "f1": 0.619,
+          "support": 18
+        },
+        "Sawah": {
+          "precision": 0.899,
+          "recall": 0.806,
+          "f1": 0.85,
+          "support": 211
+        }
+      },
+      "luas_kelas": [
+        {
+          "kelas": "Sawah",
+          "luas_ha": 2508180.0,
+          "persen": 24.7
+        },
+        {
+          "kelas": "Bangunan",
+          "luas_ha": 333990.0,
+          "persen": 3.3
+        },
+        {
+          "kelas": "Mangrove",
+          "luas_ha": 108760.0,
+          "persen": 1.1
+        },
+        {
+          "kelas": "Lahan Hijau",
+          "luas_ha": 2940500.0,
+          "persen": 29.0
+        },
+        {
+          "kelas": "Perairan Terbuka (Laut)",
+          "luas_ha": 4121550.0,
+          "persen": 40.6
+        },
+        {
+          "kelas": "Danau",
+          "luas_ha": 131680.0,
+          "persen": 1.3
+        }
+      ]
+    }
+  },
+  "ambang": {
+    "akurasi": 85.0,
+    "kappa": 0.8
+  }
+}

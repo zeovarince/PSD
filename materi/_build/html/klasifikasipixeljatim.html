@@ -420,7 +420,12 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#komparasi-model-dan-kesimpulan">14. Komparasi Model dan Kesimpulan</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-komparasi">14.1 Tabel komparasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-komparasi">14.1 Tabel komparasi</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#komparasi-pada-validation-set-1-281-piksel">Komparasi pada Validation Set (1,281 Piksel)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#komparasi-evaluasi-akhir-pada-testing-set-independen-790-piksel-uji">Komparasi Evaluasi Akhir pada Testing Set Independen (790 Piksel Uji)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#komparasi-estimasi-luas-tutupan-lahan-jawa-timur">Komparasi Estimasi Luas Tutupan Lahan Jawa Timur</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">14.2 Kesimpulan</a></li>
 </ul>
 </li>
@@ -1837,6 +1842,80 @@ document.write(`
 </div>
 </div>
 <p><img alt="Confusion matrix Gaussian Naive Bayes" src="pixel_cm_gnb.png" /></p>
+<p><strong>Hasil Evaluasi Akhir Testing Set (790 Piksel Uji Independen):</strong></p>
+<ul class="simple">
+<li><p><strong>Akurasi Test:</strong> <strong>57.72%</strong> (456 dari 790 piksel benar)</p></li>
+<li><p><strong>F1-Score Test (Macro):</strong> <strong>47.21%</strong> | <strong>F1-Score Test (Weighted):</strong> <strong>56.80%</strong></p></li>
+<li><p><strong>Cohen’s Kappa (<span class="math notranslate nohighlight">\(\kappa\)</span>):</strong> <strong>0.4705</strong> (Kategori kesepakatan: Cukup / <em>Moderate Agreement</em>)</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Kelas</p></th>
+<th class="head"><p>Precision</p></th>
+<th class="head"><p>Recall</p></th>
+<th class="head"><p>F1-Score</p></th>
+<th class="head"><p>Support (Piksel)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Bangunan</p></td>
+<td><p>0.117</p></td>
+<td><p>0.800</p></td>
+<td><p>0.204</p></td>
+<td><p>20</p></td>
+</tr>
+<tr class="row-odd"><td><p>Danau</p></td>
+<td><p>0.470</p></td>
+<td><p>0.195</p></td>
+<td><p>0.276</p></td>
+<td><p>159</p></td>
+</tr>
+<tr class="row-even"><td><p>Lahan Hijau</p></td>
+<td><p>0.458</p></td>
+<td><p>0.960</p></td>
+<td><p>0.620</p></td>
+<td><p>101</p></td>
+</tr>
+<tr class="row-odd"><td><p>Laut</p></td>
+<td><p>0.895</p></td>
+<td><p>0.879</p></td>
+<td><p>0.887</p></td>
+<td><p>281</p></td>
+</tr>
+<tr class="row-even"><td><p>Mangrove</p></td>
+<td><p>0.342</p></td>
+<td><p>0.722</p></td>
+<td><p>0.464</p></td>
+<td><p>18</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sawah</p></td>
+<td><p>0.852</p></td>
+<td><p>0.246</p></td>
+<td><p>0.382</p></td>
+<td><p>211</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Akurasi Keseluruhan</strong></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p><strong>0.577 (57.72%)</strong></p></td>
+<td><p><strong>790</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Macro Average</strong></p></td>
+<td><p>0.522</p></td>
+<td><p>0.634</p></td>
+<td><p>0.472</p></td>
+<td><p>790</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Weighted Average</strong></p></td>
+<td><p>0.710</p></td>
+<td><p>0.577</p></td>
+<td><p>0.568</p></td>
+<td><p>790</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>Catatan Evaluasi GNB:</em> Asumsi independensi fitur pada Gaussian Naive Bayes dilanggar secara signifikan pada level piksel karena korelasi kuat antar band spektral Sentinel-2. Akibatnya akurasi hanya mencapai 57.72%: piksel Sawah banyak tertukar menjadi Lahan Hijau (recall Sawah hanya 24.6%), Danau tertukar dengan Laut, dan Bangunan mengalami <em>false positive</em> tinggi (precision hanya 11.7%).</p>
 </section>
 <section id="peta-hasil-klasifikasi-gaussian-naive-bayes">
 <h3>12.3 Peta Hasil Klasifikasi Gaussian Naive Bayes<a class="headerlink" href="#peta-hasil-klasifikasi-gaussian-naive-bayes" title="Link to this heading">#</a></h3>
@@ -1938,6 +2017,13 @@ document.write(`
 </div>
 </div>
 </div>
+<p><strong>Hasil Tuning Validation Set:</strong></p>
+<ul class="simple">
+<li><p>Nilai <span class="math notranslate nohighlight">\(k\)</span> terbaik terpilih: <strong><span class="math notranslate nohighlight">\(k = 7\)</span></strong> dengan pembobotan jarak (<code class="docutils literal notranslate"><span class="pre">weights</span> <span class="pre">=</span> <span class="pre">'distance'</span></code>)</p></li>
+<li><p>Akurasi Validasi: <strong>80.45%</strong></p></li>
+<li><p>F1-Score Validasi (Macro): <strong>74.46%</strong></p></li>
+<li><p>Cohen’s Kappa Validasi: <strong>0.7498</strong></p></li>
+</ul>
 <p><img alt="Kurva tuning k pada KNN" src="pixel_tuning_knn.png" /></p>
 </section>
 <section id="id2">
@@ -1979,6 +2065,80 @@ document.write(`
 </div>
 </div>
 <p><img alt="Confusion matrix KNN" src="pixel_cm_knn.png" /></p>
+<p><strong>Hasil Evaluasi Akhir Testing Set (790 Piksel Uji Independen):</strong></p>
+<ul class="simple">
+<li><p><strong>Akurasi Test:</strong> <strong>90.00%</strong> (711 dari 790 piksel benar)</p></li>
+<li><p><strong>F1-Score Test (Macro):</strong> <strong>81.63%</strong> | <strong>F1-Score Test (Weighted):</strong> <strong>90.30%</strong></p></li>
+<li><p><strong>Cohen’s Kappa (<span class="math notranslate nohighlight">\(\kappa\)</span>):</strong> <strong>0.8671</strong> (Kategori kesepakatan: Hampir Sempurna / <em>Almost Perfect Agreement</em>)</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Kelas</p></th>
+<th class="head"><p>Precision</p></th>
+<th class="head"><p>Recall</p></th>
+<th class="head"><p>F1-Score</p></th>
+<th class="head"><p>Support (Piksel)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Bangunan</p></td>
+<td><p>0.571</p></td>
+<td><p>0.800</p></td>
+<td><p>0.667</p></td>
+<td><p>20</p></td>
+</tr>
+<tr class="row-odd"><td><p>Danau</p></td>
+<td><p>0.941</p></td>
+<td><p>0.906</p></td>
+<td><p>0.923</p></td>
+<td><p>159</p></td>
+</tr>
+<tr class="row-even"><td><p>Lahan Hijau</p></td>
+<td><p>0.780</p></td>
+<td><p>0.950</p></td>
+<td><p>0.857</p></td>
+<td><p>101</p></td>
+</tr>
+<tr class="row-odd"><td><p>Laut</p></td>
+<td><p>0.996</p></td>
+<td><p>0.968</p></td>
+<td><p>0.982</p></td>
+<td><p>281</p></td>
+</tr>
+<tr class="row-even"><td><p>Mangrove</p></td>
+<td><p>0.542</p></td>
+<td><p>0.722</p></td>
+<td><p>0.619</p></td>
+<td><p>18</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sawah</p></td>
+<td><p>0.899</p></td>
+<td><p>0.806</p></td>
+<td><p>0.850</p></td>
+<td><p>211</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Akurasi Keseluruhan</strong></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p><strong>0.900 (90.00%)</strong></p></td>
+<td><p><strong>790</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Macro Average</strong></p></td>
+<td><p>0.788</p></td>
+<td><p>0.859</p></td>
+<td><p>0.816</p></td>
+<td><p>790</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Weighted Average</strong></p></td>
+<td><p>0.911</p></td>
+<td><p>0.900</p></td>
+<td><p>0.903</p></td>
+<td><p>790</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>Catatan Evaluasi KNN:</em> Model non-parametrik KNN (<span class="math notranslate nohighlight">\(k=7\)</span>, distance) bekerja sangat baik pada data spektral piksel karena mampu menangkap batas keputusan non-linear tanpa asumsi independensi fitur. Akurasi pengujian mencapai 90.00% dan Cohen’s Kappa 0.8671, melampaui ambang standar pemetaan tutupan lahan.</p>
 </section>
 <section id="peta-hasil-klasifikasi-knn">
 <h3>13.3 Peta Hasil Klasifikasi KNN<a class="headerlink" href="#peta-hasil-klasifikasi-knn" title="Link to this heading">#</a></h3>
@@ -2082,20 +2242,161 @@ document.write(`
 </div>
 </div>
 </div>
+<section id="komparasi-pada-validation-set-1-281-piksel">
+<h4>Komparasi pada Validation Set (1,281 Piksel)<a class="headerlink" href="#komparasi-pada-validation-set-1-281-piksel" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Model</p></th>
+<th class="head"><p>Kombinasi Fitur</p></th>
+<th class="head"><p>Hyperparameter</p></th>
+<th class="head"><p>Akurasi Validasi (%)</p></th>
+<th class="head"><p>F1-Macro Validasi (%)</p></th>
+<th class="head"><p>Cohen’s Kappa</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>K-Nearest Neighbors</strong></p></td>
+<td><p>Band + Indeks (19 fitur)</p></td>
+<td><p><span class="math notranslate nohighlight">\(k=7\)</span>, weights=distance</p></td>
+<td><p><strong>80.45%</strong></p></td>
+<td><p><strong>74.46%</strong></p></td>
+<td><p><strong>0.7498</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Gaussian Naive Bayes</strong></p></td>
+<td><p>Band + Indeks (19 fitur)</p></td>
+<td><p>Default</p></td>
+<td><p><strong>72.71%</strong></p></td>
+<td><p><strong>64.95%</strong></p></td>
+<td><p><strong>0.6518</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="komparasi-evaluasi-akhir-pada-testing-set-independen-790-piksel-uji">
+<h4>Komparasi Evaluasi Akhir pada Testing Set Independen (790 Piksel Uji)<a class="headerlink" href="#komparasi-evaluasi-akhir-pada-testing-set-independen-790-piksel-uji" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Model</p></th>
+<th class="head"><p>Hyperparameter</p></th>
+<th class="head"><p>Akurasi Test (%)</p></th>
+<th class="head"><p>F1-Macro (%)</p></th>
+<th class="head"><p>F1-Weighted (%)</p></th>
+<th class="head"><p>Cohen’s Kappa (<span class="math notranslate nohighlight">\(\kappa\)</span>)</p></th>
+<th class="head"><p>Status Ambang Akurasi (<span class="math notranslate nohighlight">\(\ge 85\%\)</span>)</p></th>
+<th class="head"><p>Status Ambang Kappa (<span class="math notranslate nohighlight">\(\ge 0.80\)</span>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>KNN (k=7, distance)</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(k=7\)</span>, euclidean distance</p></td>
+<td><p><strong>90.00%</strong></p></td>
+<td><p><strong>81.63%</strong></p></td>
+<td><p><strong>90.30%</strong></p></td>
+<td><p><strong>0.8671</strong></p></td>
+<td><p><strong>Memenuhi</strong></p></td>
+<td><p><strong>Memenuhi (Hampir Sempurna)</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Gaussian Naive Bayes</strong></p></td>
+<td><p>Default</p></td>
+<td><p><strong>57.72%</strong></p></td>
+<td><p><strong>47.21%</strong></p></td>
+<td><p><strong>56.80%</strong></p></td>
+<td><p><strong>0.4705</strong></p></td>
+<td><p>Belum Memenuhi</p></td>
+<td><p>Belum Memenuhi (Cukup)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="komparasi-estimasi-luas-tutupan-lahan-jawa-timur">
+<h4>Komparasi Estimasi Luas Tutupan Lahan Jawa Timur<a class="headerlink" href="#komparasi-estimasi-luas-tutupan-lahan-jawa-timur" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Kelas Tutupan Lahan</p></th>
+<th class="head"><p>Luas Naive Bayes (<span class="math notranslate nohighlight">\(km^2\)</span>)</p></th>
+<th class="head"><p>Luas KNN (<span class="math notranslate nohighlight">\(km^2\)</span>)</p></th>
+<th class="head"><p>Proporsi Naive Bayes (%)</p></th>
+<th class="head"><p>Proporsi KNN (%)</p></th>
+<th class="head"><p>Selisih Luas (<span class="math notranslate nohighlight">\(km^2\)</span>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Sawah</p></td>
+<td><p>17,982.2</p></td>
+<td><p>25,081.8</p></td>
+<td><p>17.7%</p></td>
+<td><p>24.7%</p></td>
+<td><p>+7,099.6</p></td>
+</tr>
+<tr class="row-odd"><td><p>Bangunan</p></td>
+<td><p>7,932.3</p></td>
+<td><p>3,339.9</p></td>
+<td><p>7.8%</p></td>
+<td><p>3.3%</p></td>
+<td><p>-4,592.4</p></td>
+</tr>
+<tr class="row-even"><td><p>Mangrove</p></td>
+<td><p>4,867.8</p></td>
+<td><p>1,087.6</p></td>
+<td><p>4.8%</p></td>
+<td><p>1.1%</p></td>
+<td><p>-3,780.2</p></td>
+</tr>
+<tr class="row-odd"><td><p>Lahan Hijau</p></td>
+<td><p>27,811.8</p></td>
+<td><p>29,405.0</p></td>
+<td><p>27.4%</p></td>
+<td><p>29.0%</p></td>
+<td><p>+1,593.2</p></td>
+</tr>
+<tr class="row-even"><td><p>Perairan Terbuka (Laut)</p></td>
+<td><p>39,690.7</p></td>
+<td><p>41,215.5</p></td>
+<td><p>39.1%</p></td>
+<td><p>40.6%</p></td>
+<td><p>+1,524.8</p></td>
+</tr>
+<tr class="row-odd"><td><p>Danau</p></td>
+<td><p>3,161.8</p></td>
+<td><p>1,316.8</p></td>
+<td><p>3.1%</p></td>
+<td><p>1.3%</p></td>
+<td><p>-1,845.0</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Total Area Studi</strong></p></td>
+<td><p><strong>101,446.6</strong></p></td>
+<td><p><strong>101,446.6</strong></p></td>
+<td><p><strong>100.0%</strong></p></td>
+<td><p><strong>100.0%</strong></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 </section>
 <section id="kesimpulan">
 <h3>14.2 Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h3>
-<p><strong>Model yang lebih baik.</strong> Penentuan model terbaik, selisih akurasi, dan penilaian terhadap ambang ditampilkan langsung oleh keluaran sel komparasi di atas, berdasarkan akurasi pada data uji dengan Kappa sebagai pembeda bila akurasinya sama.</p>
-<p><strong>Berapa akurasi yang dianggap baik.</strong> Dalam pemetaan tutupan lahan, <strong>akurasi keseluruhan sekitar 85% atau lebih</strong> umum dipakai sebagai ambang minimum yang dapat diterima. Untuk Cohen’s Kappa, nilai <strong>0,61 sampai 0,80</strong> dikategorikan <em>substansial</em> dan <strong>0,81 sampai 1,00</strong> dikategorikan <em>hampir sempurna</em>. Akurasi tinggi saja belum cukup: recall tiap kelas juga diperiksa, karena akurasi keseluruhan bisa tetap tinggi walau satu kelas kecil seperti Danau atau Mangrove banyak salah. Akurasi yang mendekati 100% pada data nyata patut dicurigai sebagai tanda kebocoran data atau data yang terlalu mudah, itulah sebabnya pembagian data dilakukan per poligon.</p>
-<p><strong>Keterbatasan.</strong></p>
+<p><strong>Model yang lebih baik:</strong> Berdasarkan pengujian independen pada 790 piksel uji (yang dibagi per poligon untuk menghindari autokorelasi spasial), <strong>K-Nearest Neighbors (KNN)</strong> dengan <span class="math notranslate nohighlight">\(k=7\)</span> dan pembobotan jarak menjadi model terbaik dengan <strong>Akurasi Test 90.00%</strong>, <strong>F1-Weighted 90.30%</strong>, dan <strong>Cohen’s Kappa 0.8671</strong>. KNN unggul mutlak sebesar <strong>32.28 poin persentase</strong> di atas Gaussian Naive Bayes yang hanya meraih akurasi <strong>57.72%</strong> dan Kappa <strong>0.4705</strong>.</p>
+<p><strong>Penilaian terhadap ambang batas:</strong></p>
+<ul class="simple">
+<li><p><strong>KNN</strong> memenuhi ambang batas minimum pemetaan tutupan lahan (ambang akurasi <span class="math notranslate nohighlight">\(\ge 85\%\)</span> tercapai pada 90.00%, dan ambang Kappa <span class="math notranslate nohighlight">\(\ge 0.80\)</span> tercapai pada 0.8671 kategori <em>Almost Perfect Agreement</em>).</p></li>
+<li><p><strong>Gaussian Naive Bayes</strong> belum memenuhi ambang batas yang dapat diterima untuk pemetaan operasional (akurasi 57.72% &lt; 85%, Kappa 0.4705 &lt; 0.80).</p></li>
+</ul>
+<p><strong>Mengapa performa kedua model berbeda drastis pada level piksel:</strong></p>
 <ol class="arabic simple">
-<li><p>Piksel dari poligon yang sama saling berkorelasi, sehingga jumlah sampel yang benar-benar independen jauh lebih sedikit daripada jumlah piksel. Pembagian per poligon mengurangi kebocoran ini, tetapi variasi data uji tetap dibatasi oleh jumlah poligon per kelas, terutama untuk Danau dan Mangrove.</p></li>
-<li><p>Jumlah piksel per kelas dikendalikan oleh <code class="docutils literal notranslate"><span class="pre">N_PER_CLASS</span></code>, dan hasilnya bisa berubah bila nilai itu diganti. Kelas yang poligonnya sedikit atau kecil tidak mencapai target.</p></li>
-<li><p>Periode citra hanya 1 Mei sampai 30 September 2026, sehingga perbedaan musim tanam sawah tidak tertangkap.</p></li>
-<li><p>Resolusi peta (<code class="docutils literal notranslate"><span class="pre">RES_M</span></code>) lebih kasar daripada resolusi data latih 10 m, dan pada ukuran 200 m tiap sel peta hanya memuat nilai satu piksel 10 m. Objek kecil seperti danau (ranu) atau mangrove yang sempit bisa terlewat.</p></li>
-<li><p>Kelas Lahan Hijau menggabungkan hutan, perkebunan, dan semak, sehingga bisa tertukar dengan Sawah dan Mangrove.</p></li>
+<li><p><strong>Kegagalan Gaussian Naive Bayes:</strong> Asumsi independensi fitur (<em>conditional independence</em>) dilanggar parah oleh korelasi multivariat band-band Sentinel-2 (misal B2, B3, B4 yang berkorelasi tinggi satu sama lain). Hal ini menyebabkan Naive Bayes meremehkan ketidakpastian dan mendistorsi batas probabilitas kelas, sehingga banyak piksel sawah tertukar menjadi lahan hijau dan air danau tertukar dengan laut.</p></li>
+<li><p><strong>Keunggulan KNN:</strong> KNN adalah algoritma non-parametrik berbasis kedekatan instans (jarak Euclidean dalam ruang 19 fitur berskala). KNN tidak mengasumsikan distribusi normal atau independensi fitur, sehingga mampu memetakan variasi piksel heterogen di lapangan secara jauh lebih akurat.</p></li>
 </ol>
-<p><strong>Rekomendasi.</strong> Lakukan eksperimen jumlah data dengan mengubah <code class="docutils literal notranslate"><span class="pre">N_PER_CLASS</span></code> (misalnya 500, 1500, dan 3000) lalu bandingkan akurasi testnya. Tambahkan model lain (Random Forest dan Gradient Boosting) dan validasi silang yang membagi per poligon (<em>GroupKFold</em>) untuk membandingkan model yang lebih kuat, lalu perbanyak poligon latih pada kelas yang paling sering tertukar. Hasil laporan ini juga dapat dibandingkan dengan laporan berbasis poligon pada data dan periode citra yang sama.</p>
+<p><strong>Keterbatasan:</strong></p>
+<ol class="arabic simple">
+<li><p>Autokorelasi spasial internal poligon tetap dapat mempengaruhi estimasi variansi, meski pembagian data telah dilakukan per poligon.</p></li>
+<li><p>Target sampel <code class="docutils literal notranslate"><span class="pre">N_PER_CLASS</span></code> membatasi proporsi kelas minoritas seperti Mangrove dan Danau.</p></li>
+<li><p>Resolusi komposit peta (200 m) memuat agregasi piksel campuran (<em>mixed pixel</em>) pada perbatasan badan air darat dan pemukiman padat.</p></li>
+</ol>
+<p><strong>Rekomendasi:</strong> Untuk implementasi produksi skala provinsi, model KNN (<span class="math notranslate nohighlight">\(k=7\)</span>) sangat direkomendasikan dibandingkan Naive Bayes. Pengembangan selanjutnya disarankan menguji Random Forest Classifier dan validasi silang spasial (<em>Spatial Block Cross-Validation</em>).</p>
 </section>
 </section>
 <section id="ringkasan">
@@ -2117,19 +2418,19 @@ document.write(`
 <td><p>18 fitur: 10 band reflektansi (B2, B3, B4, B5, B6, B7, B8, B8A, B11, B12) dan 8 indeks spektral (NDVI, NDWI, MNDWI, NDBI, NDRE, EVI, SAVI, BSI)</p></td>
 </tr>
 <tr class="row-odd"><td><p>Pembagian data</p></td>
-<td><p>70% training, 15% validation, 15% testing, dibagi per poligon di tiap kelas</p></td>
+<td><p>70% training (4,818 piksel), 18.6% validation (1,281 piksel), 11.5% testing (790 piksel), dibagi per poligon</p></td>
 </tr>
 <tr class="row-even"><td><p>Model 1</p></td>
-<td><p>Gaussian Naive Bayes, <code class="docutils literal notranslate"><span class="pre">var_smoothing</span></code> disetel pada validation set</p></td>
+<td><p>Gaussian Naive Bayes, Akurasi Test: <strong>57.72%</strong>, Kappa: <strong>0.4705</strong></p></td>
 </tr>
 <tr class="row-odd"><td><p>Model 2</p></td>
-<td><p>KNN, jarak Euclidean, <span class="math notranslate nohighlight">\(k\)</span> disetel pada validation set</p></td>
+<td><p>KNN (<span class="math notranslate nohighlight">\(k=7\)</span>, distance), Akurasi Test: <strong>90.00%</strong>, Kappa: <strong>0.8671</strong></p></td>
 </tr>
 <tr class="row-even"><td><p>Peta</p></td>
 <td><p>Dua peta Folium terpisah (Naive Bayes dan KNN) dengan batas Provinsi Jawa Timur, disimpan sebagai <code class="docutils literal notranslate"><span class="pre">.html</span></code> mandiri</p></td>
 </tr>
 <tr class="row-odd"><td><p>Model terbaik</p></td>
-<td><p>Ditentukan oleh sel komparasi berdasarkan akurasi test dan Kappa</p></td>
+<td><p><strong>K-Nearest Neighbors (KNN)</strong> (Akurasi Test: 90.00%, Cohen’s Kappa: 0.8671)</p></td>
 </tr>
 </tbody>
 </table>
@@ -2232,7 +2533,12 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#komparasi-model-dan-kesimpulan">14. Komparasi Model dan Kesimpulan</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-komparasi">14.1 Tabel komparasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-komparasi">14.1 Tabel komparasi</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#komparasi-pada-validation-set-1-281-piksel">Komparasi pada Validation Set (1,281 Piksel)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#komparasi-evaluasi-akhir-pada-testing-set-independen-790-piksel-uji">Komparasi Evaluasi Akhir pada Testing Set Independen (790 Piksel Uji)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#komparasi-estimasi-luas-tutupan-lahan-jawa-timur">Komparasi Estimasi Luas Tutupan Lahan Jawa Timur</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">14.2 Kesimpulan</a></li>
 </ul>
 </li>

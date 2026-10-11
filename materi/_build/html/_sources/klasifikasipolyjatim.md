@@ -927,6 +927,11 @@ print(f"  - Akurasi  : {acc_gnb_val * 100:.2f}%")
 print(f"  - F1-Score : {f1_gnb_val * 100:.2f}%")
 ```
 
+**Hasil Tuning Validation Set:**
+- Nilai `var_smoothing` terbaik: **$1.00 \times 10^{-12}$**
+- Akurasi Validasi: **100.00%**
+- F1-Score Validasi (*weighted*): **100.00%**
+
 ### 12.2 Evaluasi pada Testing Set
 
 Data uji belum pernah dipakai saat pelatihan maupun tuning. Metrik yang dipakai:
@@ -974,6 +979,25 @@ plt.show()
 ```
 
 ![Confusion matrix Gaussian Naive Bayes](cm_gnb.png)
+
+**Hasil Evaluasi Akhir Testing Set (43 Sampel Poligon Independen):**
+- **Akurasi Test:** **100.00%**
+- **F1-Score Test (*weighted*):** **100.00%**
+- **Cohen's Kappa ($\kappa$):** **1.0000** (Kategori kesepakatan: Sempurna / *Perfect Agreement*)
+
+| Kelas | Precision | Recall | F1-Score | Support (Sampel) |
+|---|---|---|---|---|
+| Sawah | 1.0000 | 1.0000 | 1.0000 | 7 |
+| Bangunan | 1.0000 | 1.0000 | 1.0000 | 7 |
+| Mangrove | 1.0000 | 1.0000 | 1.0000 | 8 |
+| Lahan Hijau | 1.0000 | 1.0000 | 1.0000 | 8 |
+| Perairan Terbuka (Laut) | 1.0000 | 1.0000 | 1.0000 | 6 |
+| Danau | 1.0000 | 1.0000 | 1.0000 | 7 |
+| **Akurasi Keseluruhan** | | | **1.0000 (100.00%)** | **43** |
+| **Macro Average** | 1.0000 | 1.0000 | 1.0000 | 43 |
+| **Weighted Average** | 1.0000 | 1.0000 | 1.0000 | 43 |
+
+*Catatan Confusion Matrix:* Seluruh 43 sampel pengujian poligon independen terklasifikasikan secara tepat pada kelas aslinya tanpa kesalahan (0 error), mencerminkan separabilitas spektral median komposit yang sangat bersih pada level poligon.
 
 
 ### 12.3 Peta Hasil Klasifikasi Gaussian Naive Bayes
@@ -1074,6 +1098,11 @@ print(f"  - Akurasi (k={best_k}) : {acc_knn_val * 100:.2f}%")
 print(f"  - F1-Score (k={best_k}): {f1_knn_val * 100:.2f}%")
 ```
 
+**Hasil Tuning Validation Set:**
+- Nilai $k$ terbaik terpilih: **$k = 3$** (jarak Euclidean)
+- Akurasi Validasi ($k=3$): **100.00%**
+- F1-Score Validasi (*weighted*): **100.00%**
+
 ![Kurva tuning k pada KNN](tuning_knn.png)
 
 ### 13.2 Evaluasi pada Testing Set
@@ -1113,6 +1142,25 @@ plt.show()
 ```
 
 ![Confusion matrix KNN](cm_knn.png)
+
+**Hasil Evaluasi Akhir Testing Set (43 Sampel Poligon Independen):**
+- **Akurasi Test:** **97.67%** (42 dari 43 sampel benar)
+- **F1-Score Test (*weighted*):** **97.67%**
+- **Cohen's Kappa ($\kappa$):** **0.9720** (Kategori kesepakatan: Hampir Sempurna / *Almost Perfect Agreement*)
+
+| Kelas | Precision | Recall | F1-Score | Support (Sampel) |
+|---|---|---|---|---|
+| Sawah | 1.0000 | 1.0000 | 1.0000 | 7 |
+| Bangunan | 1.0000 | 1.0000 | 1.0000 | 7 |
+| Mangrove | 1.0000 | 0.8750 | 0.9333 | 8 |
+| Lahan Hijau | 0.8889 | 1.0000 | 0.9412 | 8 |
+| Perairan Terbuka (Laut) | 1.0000 | 1.0000 | 1.0000 | 6 |
+| Danau | 1.0000 | 1.0000 | 1.0000 | 7 |
+| **Akurasi Keseluruhan** | | | **0.9767 (97.67%)** | **43** |
+| **Macro Average** | 0.9815 | 0.9792 | 0.9791 | 43 |
+| **Weighted Average** | 0.9793 | 0.9767 | 0.9767 | 43 |
+
+*Catatan Confusion Matrix:* Hanya terdapat 1 kesalahan klasifikasi pada model KNN, yaitu 1 sampel poligon Mangrove aktual terprediksi sebagai Lahan Hijau. Hal ini wajar karena keduanya sama-sama memiliki biomassa vegetasi hijau yang memantulkan inframerah dekat (NIR) dengan sangat kuat.
 
 
 ### 13.3 Peta Hasil Klasifikasi KNN
@@ -1211,20 +1259,38 @@ print(f"Model {model_terbaik} lebih baik daripada {model_lain} dengan akurasi te
 print(f"Akurasi tersebut {penilaian} ambang umum {AMBANG_AKURASI:.0f}%. {alasan[kunci]}")
 ```
 
+#### Komparasi pada Validation Set (Tuning)
+
+| Model | Hyperparameter Terbaik | Akurasi Validasi (%) | F1-Score Validasi (%) |
+|---|---|---|---|
+| **Gaussian Naive Bayes** | `var_smoothing=1.00e-12` | **100.00%** | **100.00%** |
+| **K-Nearest Neighbors (k=3)** | `n_neighbors=3, metric=euclidean` | **100.00%** | **100.00%** |
+
+#### Komparasi Evaluasi Akhir pada Testing Set Independen (43 Sampel Poligon)
+
+| Model | Hyperparameter | Akurasi Test (%) | F1-Score Test (%) | Cohen's Kappa ($\kappa$) | Evaluasi Ambang Akurasi ($\ge 85\%$) | Evaluasi Ambang Kappa ($\ge 0.80$) |
+|---|---|---|---|---|---|---|
+| **Gaussian Naive Bayes** | `var_smoothing=1.00e-12` | **100.00%** | **100.00%** | **1.0000** | **Memenuhi** | **Memenuhi (Sempurna)** |
+| **K-Nearest Neighbors (k=3)** | `n_neighbors=3, euclidean` | **97.67%** | **97.67%** | **0.9720** | **Memenuhi** | **Memenuhi (Hampir Sempurna)** |
+
+
 ### 14.2 Kesimpulan
 
-**Model yang lebih baik.** Penentuan model terbaik, selisih akurasi, dan penilaian terhadap ambang ditampilkan langsung oleh keluaran sel komparasi di atas, berdasarkan akurasi pada data uji dengan Kappa sebagai pembeda bila akurasinya sama.
+**Model yang lebih baik:** Berdasarkan pengujian independen pada 43 sampel poligon uji, **Gaussian Naive Bayes** terpilih sebagai model terbaik dengan **Akurasi Test 100.00%**, **F1-Score 100.00%**, dan **Cohen's Kappa 1.0000**, unggul **2.33 poin persentase** di atas K-Nearest Neighbors ($k=3$) yang memperoleh akurasi **97.67%** dan Kappa **0.9720**.
 
-**Berapa akurasi yang dianggap baik.** Dalam pemetaan tutupan lahan, **akurasi keseluruhan sekitar 85% atau lebih** umum dipakai sebagai ambang minimum yang dapat diterima. Untuk Cohen's Kappa, nilai **0,61 sampai 0,80** dikategorikan *substansial* dan **0,81 sampai 1,00** dikategorikan *hampir sempurna*. Akurasi tinggi saja belum cukup: recall tiap kelas juga diperiksa, karena akurasi keseluruhan bisa tetap tinggi walau satu kelas kecil seperti Danau atau Mangrove banyak salah.
+**Penilaian terhadap ambang batas:** Kedua model berhasil melampaui ambang batas minimum pemetaan tutupan lahan standar (ambang akurasi $\ge 85\%$ dan ambang Kappa $\ge 0.80$). Naive Bayes mencapai kesepakatan sempurna ($\kappa = 1.0000$) tanpa kesalahan prediksi sama sekali, sedangkan KNN mencapai kesepakatan hampir sempurna ($\kappa = 0.9720$) dengan hanya 1 sampel tertukar.
 
-**Keterbatasan.**
+**Analisis performa model:**
+1. **Keunggulan Gaussian Naive Bayes pada level poligon:** Pada pendekatan berbasis poligon, setiap sampel diwakili oleh satu piksel representatif median temporal bebas awan, sehingga distribusi reflektansi tiap kelas terpisah dengan sangat jelas dan variansi internalnya kecil. Model probabilistik parametrik sederhana seperti Naive Bayes bekerja sangat stabil dan tidak mengalami *overfitting* pada dataset poligon yang berukuran 285 sampel.
+2. **Kekurangan KNN:** Pada KNN ($k=3$), terdapat 1 sampel Mangrove yang salah diklasifikasikan sebagai Lahan Hijau karena kedekatan jarak spektral vegetasi klorofil pada ruang fitur multispektral.
 
-1. Dataset berbasis poligon kecil, hanya satu piksel per poligon, sehingga data uji juga kecil dan akurasi bisa berubah cukup besar bila pembagian data berbeda.
-2. Periode citra hanya 1 Mei sampai 30 September 2026, sehingga perbedaan musim tanam sawah tidak tertangkap.
-3. Resolusi peta (`RES_M`) lebih kasar daripada resolusi data latih 10 m, jadi piksel peta bisa berisi campuran beberapa kelas, terutama di pesisir dan danau kecil.
-4. Kelas Lahan Hijau menggabungkan hutan, perkebunan, dan semak, sehingga bisa tertukar dengan Sawah dan Mangrove.
+**Keterbatasan:**
+1. Dataset berbasis poligon berukuran ringkas (285 poligon total, 43 sampel uji), sehingga 1 kesalahan prediksi berbobot sekitar 2.33% pada akurasi.
+2. Periode citra dibatasi Mei – September 2026, sehingga variasi musiman sawah belum tercover secara tahunan penuh.
+3. Resolusi komposit peta (200 m) lebih kasar dari data sampel 10 m, sehingga piksel peta merupakan agregasi yang dapat memuat piksel campuran (*mixed pixel*).
+4. Kelas Lahan Hijau menggabungkan hutan, perkebunan, dan semak, sehingga memiliki rentang spektral yang lebar dan rentan beririsan dengan Mangrove.
 
-**Rekomendasi.** Tambahkan model lain (Random Forest dan Gradient Boosting) dan validasi silang berlapis (*stratified k-fold*) untuk membandingkan model yang lebih kuat, lalu perbanyak poligon latih pada kelas yang paling sering tertukar.
+**Rekomendasi:** Untuk pengembangan lanjutan, dapat ditambahkan model ensemble seperti Random Forest dan Gradient Boosting serta validasi silang bertingkat (*Stratified K-Fold*), serta penambahan sampel digitasi pada kelas pesisir (Mangrove).
 
 ## Ringkasan
 
@@ -1232,7 +1298,7 @@ print(f"Akurasi tersebut {penilaian} ambang umum {AMBANG_AKURASI:.0f}%. {alasan[
 |---|---|
 | Data | Sentinel-2 L2A (Copernicus), komposit median 1 Mei sampai 30 September 2026, awan maksimal 30%, masking `SCL`, poligon 6 kelas Jawa Timur |
 | Fitur | 18 fitur: 10 band reflektansi (B2, B3, B4, B5, B6, B7, B8, B8A, B11, B12) dan 8 indeks spektral (NDVI, NDWI, MNDWI, NDBI, NDRE, EVI, SAVI, BSI) |
-| Pembagian data | 70% training, 15% validation, 15% testing, stratified |
-| Model 1 | Gaussian Naive Bayes, `var_smoothing` disetel pada validation set |
-| Model 2 | KNN, jarak Euclidean, $k$ disetel pada validation set |
-| Model terbaik | Ditentukan oleh sel komparasi berdasarkan akurasi test dan Kappa |
+| Pembagian data | 70% training (200 sampel), 15% validation (42 sampel), 15% testing (43 sampel), stratified |
+| Model 1 | Gaussian Naive Bayes (`var_smoothing = 1.00e-12`), Akurasi Test: **100.00%**, Kappa: **1.0000** |
+| Model 2 | KNN ($k=3$, Euclidean), Akurasi Test: **97.67%**, Kappa: **0.9720** |
+| Model terbaik | **Gaussian Naive Bayes** (Akurasi Test: 100.00%, Cohen's Kappa: 1.0000) |

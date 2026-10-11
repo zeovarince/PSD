@@ -1,0 +1,232 @@
+/* ==========================================================================
+   Mercury Design System Tokens — Streamlit Theme Adaptation
+   Alpine banking at blue hour: dark, monolithic, restrained, premium.
+   ========================================================================== */
+
+:root {
+  --color-onyx-canvas: #171721;
+  --color-graphite-card: #1e1e2a;
+  --color-obsidian-button: #272735;
+  --color-slate-border: #70707d;
+  --color-mist-border: #e2e3ed;
+  --color-ash-text: #c3c3cc;
+  --color-ivory-text: #ededf3;
+  --color-cobalt: #5266eb;
+  --color-pure-white: #ffffff;
+  
+  --radius-card: 12px;
+  --radius-pill: 32px;
+}
+
+/* Base Body Styling */
+.stApp {
+  background-color: var(--color-onyx-canvas);
+  color: var(--color-ivory-text);
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-ivory-text) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.02em !important;
+}
+
+h1 {
+  font-size: 2.2rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+h2 {
+  font-size: 1.6rem !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+h3 {
+  font-size: 1.25rem !important;
+  margin-top: 1.25rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Subtitles / Lead Paragraphs */
+.mercury-lead {
+  color: var(--color-ash-text);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Graphite Content Cards */
+.mercury-card {
+  background-color: var(--color-graphite-card);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(226, 227, 237, 0.06);
+  transition: border-color 0.2s ease;
+}
+
+.mercury-card:hover {
+  border-color: rgba(226, 227, 237, 0.12);
+}
+
+.mercury-card-title {
+  color: var(--color-ivory-text);
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Metric Display Cards */
+.mercury-metric-box {
+  background-color: var(--color-graphite-card);
+  border-radius: var(--radius-card);
+  padding: 18px 20px;
+  text-align: left;
+  border: 1px solid rgba(226, 227, 237, 0.07);
+}
+
+.mercury-metric-label {
+  color: var(--color-ash-text);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.mercury-metric-value {
+  color: var(--color-ivory-text);
+  font-size: 1.75rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.mercury-metric-sub {
+  color: var(--color-ash-text);
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+/* Pill Badges */
+.mercury-pill {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.82rem;
+  font-weight: 480;
+  letter-spacing: 0.02em;
+  background-color: var(--color-obsidian-button);
+  color: var(--color-ivory-text);
+  border: 1px solid rgba(226, 227, 237, 0.1);
+}
+
+.mercury-pill-cobalt {
+  background-color: rgba(82, 102, 235, 0.15);
+  color: #8c9bff;
+  border-color: rgba(82, 102, 235, 0.3);
+}
+
+.mercury-pill-success {
+  background-color: rgba(46, 125, 50, 0.2);
+  color: #81c784;
+  border-color: rgba(46, 125, 50, 0.35);
+}
+
+.mercury-pill-warning {
+  background-color: rgba(255, 217, 47, 0.15);
+  color: #ffe082;
+  border-color: rgba(255, 217, 47, 0.3);
+}
+
+/* Best Model Highlight Container */
+.mercury-winner-banner {
+  background: linear-gradient(135deg, rgba(82, 102, 235, 0.15) 0%, rgba(30, 30, 42, 0.95) 100%);
+  border: 1px solid rgba(82, 102, 235, 0.4);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  margin-top: 20px;
+  margin-bottom: 24px;
+}
+
+/* Styled Table Overrides */
+.mercury-table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius-card);
+  border: 1px solid rgba(226, 227, 237, 0.08);
+  background-color: var(--color-graphite-card);
+  margin: 16px 0;
+}
+
+.mercury-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  color: var(--color-ivory-text);
+}
+
+.mercury-table th {
+  background-color: #242433;
+  color: var(--color-ash-text);
+  font-weight: 500;
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(226, 227, 237, 0.1);
+  letter-spacing: 0.02em;
+}
+
+.mercury-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(226, 227, 237, 0.05);
+}
+
+.mercury-table tr:hover td {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-onyx-canvas);
+}
+::-webkit-scrollbar-thumb {
+  background: #353548;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4a4a63;
+}
+
+/* Streamlit Input / Radio / Segmented Control Styling */
+div[data-testid="stRadio"] > div {
+  gap: 10px;
+}
+
+div[data-testid="stRadio"] label {
+  background-color: var(--color-obsidian-button);
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(226, 227, 237, 0.1);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+div[data-testid="stRadio"] label:hover {
+  border-color: rgba(82, 102, 235, 0.4);
+  background-color: #2f2f42;
+}
+
+div[data-testid="stSegmentedControl"] {
+  background-color: var(--color-graphite-card) !important;
+  border-radius: var(--radius-pill) !important;
+  padding: 4px !important;
+}
