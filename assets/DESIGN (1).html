@@ -1,0 +1,1192 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Mercury — Style Reference &#8212; A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'assets/DESIGN (1)';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/foto.png" class="logo__image only-light" alt="A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN - Home"/>
+    <script>document.write(`<img src="../_static/foto.png" class="logo__image only-dark" alt="A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Proyek Saint Data
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../busines-understanding.html">Business Understanding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data-understanding.html">Data Understanding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../explorasi-data.html">Eksplorasi Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../timeseriesaiven.html">Analisis Time Series: Migrasi Data &amp; Pengolahan di KNIME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../no2kamal.html">Polutan Kamal (Revisi)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tsfel.html">Fitur-Fitur TSFEL pada Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocessing_ekstraksi_kamal.html">Preprocessing dan Ekstraksi Fitur</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kmean.html">K-Means Clustering Polutan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../clusteringlinpoly.html">Clustering Linear dan Polynomial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../klasifikasi.html">Klasifikasi Lahan Sawah dan Non-Sawah dengan Random Forest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../klasifikasipixeljatim.html">Klasifikasi 6 Kelas Jawa Timur Berbasis Piksel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../klasifikasipolyjatim.html">Klasifikasi 6 Kelas Jawa Timur Berbasis Polygon</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fassets/DESIGN (1).html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/assets/DESIGN (1).md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Mercury — Style Reference</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokens-colors">Tokens — Colors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokens-typography">Tokens — Typography</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arcadia-body-and-ui-typeface-handles-navigation-body-copy-buttons-inputs-labels-and-supporting-text-at-weight-400-for-body-and-480-for-emphasis-the-intermediate-weight-scale-360-420-480-instead-of-standard-300-400-600-gives-mercury-s-text-a-distinctly-calibrated-feel-never-bold-never-thin-always-measured-font-arcadia">arcadia — Body and UI typeface — handles navigation, body copy, buttons, inputs, labels, and supporting text at weight 400 for body and 480 for emphasis. The intermediate weight scale (360, 420, 480) instead of standard (300/400/600) gives Mercury’s text a distinctly calibrated feel — never bold, never thin, always measured · <code class="docutils literal notranslate"><span class="pre">--font-arcadia</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arcadiadisplay-headline-and-display-typeface-used-at-weight-480-for-all-heading-sizes-from-28px-through-65px-with-530-reserved-for-the-largest-display-moments-tight-line-heights-1-11-2-and-positive-letter-spacing-0-010-02em-give-display-copy-a-wide-set-architectural-quality-rather-than-compressed-editorial-tightness-font-arcadiadisplay">arcadiaDisplay — Headline and display typeface — used at weight 480 for all heading sizes from 28px through 65px, with 530 reserved for the largest display moments. Tight line-heights (1.1–1.2) and positive letter-spacing (0.01–0.02em) give display copy a wide-set, architectural quality rather than compressed editorial tightness · <code class="docutils literal notranslate"><span class="pre">--font-arcadiadisplay</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#type-scale">Type Scale</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokens-spacing-shapes">Tokens — Spacing &amp; Shapes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spacing-scale">Spacing Scale</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#border-radius">Border Radius</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#layout">Layout</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#components">Components</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#primary-cta-button-cobalt">Primary CTA Button (Cobalt)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ghost-outline-button">Ghost Outline Button</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navigation-pill-link">Navigation Pill Link</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graphite-card">Graphite Card</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#email-capture-input-pill-left-half">Email Capture Input (Pill, Left-Half)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#full-bleed-hero-section">Full-Bleed Hero Section</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transparent-top-navigation-bar">Transparent Top Navigation Bar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#disclaimer-banner">Disclaimer Banner</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#section-container">Section Container</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#do-s-and-don-ts">Do’s and Don’ts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#do">Do</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#don-t">Don’t</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#surfaces">Surfaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#elevation">Elevation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imagery">Imagery</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Layout</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agent-prompt-guide">Agent Prompt Guide</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typography-philosophy">Typography Philosophy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#similar-brands">Similar Brands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#css-custom-properties">CSS Custom Properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tailwind-v4">Tailwind v4</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="mercury-style-reference">
+<h1>Mercury — Style Reference<a class="headerlink" href="#mercury-style-reference" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p>Alpine banking at blue hour</p>
+</div></blockquote>
+<p><strong>Theme:</strong> dark</p>
+<p>Source measurements are normalized; roles and recommendations are interpreted. Font summary lists are independent, not paired by position. HTML examples are reconstructions, not source components.</p>
+<p>Mercury operates in an alpine banking aesthetic: a near-black canvas (#171721) sets a cinematic, observatory-like atmosphere where content surfaces float as subtly lighter graphite cards. The interface is overwhelmingly monochromatic — ivory text on onyx, with a single vivid cobalt (#5266eb) acting as the only chromatic punctuation, reserved exclusively for the primary ‘Open account’ action. Typography carries the weight of expression: a custom display face at intermediate weight 480 (neither bold nor light) paired with a refined body face at weight 400, creating a voice that is confident but never loud. Components are flat and borderless, relying on the 12px-radius graphite card lift and pill-shaped controls to define structure rather than shadows. The full-bleed photographic hero — misty mountains with a solitary desk — establishes aspiration before the product UI takes over, and every subsequent surface maintains that hushed, premium darkness.</p>
+<section id="tokens-colors">
+<h2>Tokens — Colors<a class="headerlink" href="#tokens-colors" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Token</p></th>
+<th class="head"><p>Role</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Onyx Canvas</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#171721</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--color-onyx-canvas</span></code></p></td>
+<td><p>Dominant page background, hero overlay base, footer and section canvases</p></td>
+</tr>
+<tr class="row-odd"><td><p>Graphite Card</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#1e1e2a</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--color-graphite-card</span></code></p></td>
+<td><p>Elevated card and section surfaces — one step lighter than the canvas to create quiet separation</p></td>
+</tr>
+<tr class="row-even"><td><p>Obsidian Button</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#272735</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--color-obsidian-button</span></code></p></td>
+<td><p>Secondary button fills, inline form backgrounds, subtle interactive surfaces</p></td>
+</tr>
+<tr class="row-odd"><td><p>Slate Border</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#70707d</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--color-slate-border</span></code></p></td>
+<td><p>Medium-weight dividers and structural borders between content blocks</p></td>
+</tr>
+<tr class="row-even"><td><p>Mist Border</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#e2e3ed</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--color-mist-border</span></code></p></td>
+<td><p>Light hairline borders, ghost-button outlines, input edges — light-on-dark border</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ash Text</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#c3c3cc</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--color-ash-text</span></code></p></td>
+<td><p>Muted body copy, helper text, secondary labels — reduced hierarchy without losing legibility</p></td>
+</tr>
+<tr class="row-even"><td><p>Ivory Text</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#ededf3</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--color-ivory-text</span></code></p></td>
+<td><p>Primary text, icons, nav items, ghost-button strokes and text — the dominant foreground color across the system</p></td>
+</tr>
+<tr class="row-odd"><td><p>Cobalt</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#5266eb</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--color-cobalt</span></code></p></td>
+<td><p>Violet action color for filled buttons, selected navigation states, and focused conversion moments.</p></td>
+</tr>
+<tr class="row-even"><td><p>Pure White</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#ffffff</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--color-pure-white</span></code></p></td>
+<td><p>Text and icon fills on cobalt primary buttons for maximum contrast</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="tokens-typography">
+<h2>Tokens — Typography<a class="headerlink" href="#tokens-typography" title="Link to this heading">#</a></h2>
+<section id="arcadia-body-and-ui-typeface-handles-navigation-body-copy-buttons-inputs-labels-and-supporting-text-at-weight-400-for-body-and-480-for-emphasis-the-intermediate-weight-scale-360-420-480-instead-of-standard-300-400-600-gives-mercury-s-text-a-distinctly-calibrated-feel-never-bold-never-thin-always-measured-font-arcadia">
+<h3>arcadia — Body and UI typeface — handles navigation, body copy, buttons, inputs, labels, and supporting text at weight 400 for body and 480 for emphasis. The intermediate weight scale (360, 420, 480) instead of standard (300/400/600) gives Mercury’s text a distinctly calibrated feel — never bold, never thin, always measured · <code class="docutils literal notranslate"><span class="pre">--font-arcadia</span></code><a class="headerlink" href="#arcadia-body-and-ui-typeface-handles-navigation-body-copy-buttons-inputs-labels-and-supporting-text-at-weight-400-for-body-and-480-for-emphasis-the-intermediate-weight-scale-360-420-480-instead-of-standard-300-400-600-gives-mercury-s-text-a-distinctly-calibrated-feel-never-bold-never-thin-always-measured-font-arcadia" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Substitute:</strong> Inter</p></li>
+<li><p><strong>Weights:</strong> 360, 400, 420, 480</p></li>
+<li><p><strong>Sizes:</strong> 12px, 14px, 16px, 18px, 21px</p></li>
+<li><p><strong>Line height:</strong> 1.00–1.50</p></li>
+<li><p><strong>Letter spacing:</strong> 0.005em at 14px, 0.01em at 12px</p></li>
+<li><p><strong>Role:</strong> Body and UI typeface — handles navigation, body copy, buttons, inputs, labels, and supporting text at weight 400 for body and 480 for emphasis. The intermediate weight scale (360, 420, 480) instead of standard (300/400/600) gives Mercury’s text a distinctly calibrated feel — never bold, never thin, always measured</p></li>
+</ul>
+</section>
+<section id="arcadiadisplay-headline-and-display-typeface-used-at-weight-480-for-all-heading-sizes-from-28px-through-65px-with-530-reserved-for-the-largest-display-moments-tight-line-heights-1-11-2-and-positive-letter-spacing-0-010-02em-give-display-copy-a-wide-set-architectural-quality-rather-than-compressed-editorial-tightness-font-arcadiadisplay">
+<h3>arcadiaDisplay — Headline and display typeface — used at weight 480 for all heading sizes from 28px through 65px, with 530 reserved for the largest display moments. Tight line-heights (1.1–1.2) and positive letter-spacing (0.01–0.02em) give display copy a wide-set, architectural quality rather than compressed editorial tightness · <code class="docutils literal notranslate"><span class="pre">--font-arcadiadisplay</span></code><a class="headerlink" href="#arcadiadisplay-headline-and-display-typeface-used-at-weight-480-for-all-heading-sizes-from-28px-through-65px-with-530-reserved-for-the-largest-display-moments-tight-line-heights-1-11-2-and-positive-letter-spacing-0-010-02em-give-display-copy-a-wide-set-architectural-quality-rather-than-compressed-editorial-tightness-font-arcadiadisplay" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Substitute:</strong> Söhne Breit</p></li>
+<li><p><strong>Weights:</strong> 360, 480, 530</p></li>
+<li><p><strong>Sizes:</strong> 21px, 24px, 28px, 32px, 42px, 49px, 65px</p></li>
+<li><p><strong>Line height:</strong> 1.10–1.20</p></li>
+<li><p><strong>Letter spacing:</strong> 0.01em at 42px, 0.015em at 32px, 0.02em at 24px</p></li>
+<li><p><strong>Role:</strong> Headline and display typeface — used at weight 480 for all heading sizes from 28px through 65px, with 530 reserved for the largest display moments. Tight line-heights (1.1–1.2) and positive letter-spacing (0.01–0.02em) give display copy a wide-set, architectural quality rather than compressed editorial tightness</p></li>
+</ul>
+</section>
+<section id="type-scale">
+<h3>Type Scale<a class="headerlink" href="#type-scale" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Role</p></th>
+<th class="head"><p>Family</p></th>
+<th class="head"><p>Weight</p></th>
+<th class="head"><p>Size</p></th>
+<th class="head"><p>Line Height</p></th>
+<th class="head"><p>Letter Spacing</p></th>
+<th class="head"><p>Token</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>caption</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>12px</p></td>
+<td><p>1</p></td>
+<td><p>0.12px</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--text-caption</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>body-sm</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>14px</p></td>
+<td><p>1</p></td>
+<td><p>0.07px</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--text-body-sm</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>body</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>16px</p></td>
+<td><p>1.5</p></td>
+<td><p>—</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--text-body</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>body-lg</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>18px</p></td>
+<td><p>1.35</p></td>
+<td><p>—</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--text-body-lg</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>subheading</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>21px</p></td>
+<td><p>1.35</p></td>
+<td><p>—</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--text-subheading</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>heading-sm</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>28px</p></td>
+<td><p>1.2</p></td>
+<td><p>0.42px</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--text-heading-sm</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>heading</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>32px</p></td>
+<td><p>1.15</p></td>
+<td><p>0.48px</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--text-heading</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>heading-lg</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>42px</p></td>
+<td><p>1.15</p></td>
+<td><p>0.42px</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--text-heading-lg</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>display</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>65px</p></td>
+<td><p>1.1</p></td>
+<td><p>—</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--text-display</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="tokens-spacing-shapes">
+<h2>Tokens — Spacing &amp; Shapes<a class="headerlink" href="#tokens-spacing-shapes" title="Link to this heading">#</a></h2>
+<p><strong>Base unit:</strong> 4px</p>
+<p><strong>Density:</strong> spacious</p>
+<section id="spacing-scale">
+<h3>Spacing Scale<a class="headerlink" href="#spacing-scale" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Token</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>4px</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--spacing-4</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>8px</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--spacing-8</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>12px</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--spacing-12</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>16px</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--spacing-16</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>20px</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--spacing-20</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>24px</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--spacing-24</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>32</p></td>
+<td><p>32px</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--spacing-32</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>40</p></td>
+<td><p>40px</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--spacing-40</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>56</p></td>
+<td><p>56px</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--spacing-56</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>72</p></td>
+<td><p>72px</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--spacing-72</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>112</p></td>
+<td><p>112px</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--spacing-112</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>128</p></td>
+<td><p>128px</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--spacing-128</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="border-radius">
+<h3>Border Radius<a class="headerlink" href="#border-radius" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Element</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>nav</p></td>
+<td><p>40px</p></td>
+</tr>
+<tr class="row-odd"><td><p>tags</p></td>
+<td><p>40px</p></td>
+</tr>
+<tr class="row-even"><td><p>cards</p></td>
+<td><p>12px</p></td>
+</tr>
+<tr class="row-odd"><td><p>inputs</p></td>
+<td><p>32px</p></td>
+</tr>
+<tr class="row-even"><td><p>buttons</p></td>
+<td><p>32px</p></td>
+</tr>
+<tr class="row-odd"><td><p>default</p></td>
+<td><p>4px</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="layout">
+<h3>Layout<a class="headerlink" href="#layout" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Page max-width:</strong> 1200px</p></li>
+<li><p><strong>Section gap:</strong> 72px</p></li>
+<li><p><strong>Card padding:</strong> 32px</p></li>
+<li><p><strong>Element gap:</strong> 12px</p></li>
+</ul>
+</section>
+</section>
+<section id="components">
+<h2>Components<a class="headerlink" href="#components" title="Link to this heading">#</a></h2>
+<section id="primary-cta-button-cobalt">
+<h3>Primary CTA Button (Cobalt)<a class="headerlink" href="#primary-cta-button-cobalt" title="Link to this heading">#</a></h3>
+<p><strong>Role:</strong> The sole chromatic action in the system — reserved for the most important conversion</p>
+<p>Filled with #5266eb Cobalt, white text at 16px arcadia weight 400, 32px border-radius (pill), 0px vertical padding with 20px horizontal padding for inline contexts, 40px vertical padding when standalone. No border, no shadow. The vivid blue against the dark canvas makes this button the gravitational center of any page.</p>
+</section>
+<section id="ghost-outline-button">
+<h3>Ghost Outline Button<a class="headerlink" href="#ghost-outline-button" title="Link to this heading">#</a></h3>
+<p><strong>Role:</strong> Secondary or tertiary action on dark backgrounds</p>
+<p>Transparent background, 1px solid #ededf3 Ivory border, Ivory text at 16px arcadia weight 400, 40px border-radius (pill). Zero padding top/bottom with 20px horizontal padding. Used for navigation links and secondary CTAs where a filled button would overpower the layout.</p>
+</section>
+<section id="navigation-pill-link">
+<h3>Navigation Pill Link<a class="headerlink" href="#navigation-pill-link" title="Link to this heading">#</a></h3>
+<p><strong>Role:</strong> Top-bar navigation items with optional dropdown caret</p>
+<p>Transparent background, no border, Ivory text at 16px arcadia weight 400, 40px border-radius, 0px vertical / 20px horizontal padding. Floats over the hero image and transitions to a solid dark fill on scroll via backdrop-blur.</p>
+</section>
+<section id="graphite-card">
+<h3>Graphite Card<a class="headerlink" href="#graphite-card" title="Link to this heading">#</a></h3>
+<p><strong>Role:</strong> Content grouping surface — product features, feature blocks, and section containers</p>
+<p>Background #1e1e2a, 12px border-radius, 32px padding on all sides, no shadow, no border. The one-step lift from the #171721 canvas creates separation through subtle value contrast rather than elevation. Cards sit flat on the dark plane.</p>
+</section>
+<section id="email-capture-input-pill-left-half">
+<h3>Email Capture Input (Pill, Left-Half)<a class="headerlink" href="#email-capture-input-pill-left-half" title="Link to this heading">#</a></h3>
+<p><strong>Role:</strong> Hero email input with attached submit button</p>
+<p>Transparent background, 1px solid #ededf3 Ivory border on left side only, Ivory text at 16px arcadia weight 400, border-radius 32px 0px 0px 32px (left-side pill, flat right edge where it meets the button), 20px left padding. Placeholder text in #c3c3cc Ash.</p>
+</section>
+<section id="full-bleed-hero-section">
+<h3>Full-Bleed Hero Section<a class="headerlink" href="#full-bleed-hero-section" title="Link to this heading">#</a></h3>
+<p><strong>Role:</strong> Above-the-fold brand statement with photographic atmosphere</p>
+<p>100vw × ~100vh, no padding constraints, centered content stack. Headline in arcadiaDisplay at 65px weight 480, subtext in arcadia at 18px weight 480. A full-bleed photographic background (atmospheric landscape) sits behind a subtle dark overlay. Content max-width ~640px centered vertically and horizontally.</p>
+</section>
+<section id="transparent-top-navigation-bar">
+<h3>Transparent Top Navigation Bar<a class="headerlink" href="#transparent-top-navigation-bar" title="Link to this heading">#</a></h3>
+<p><strong>Role:</strong> Primary site navigation overlaid on hero</p>
+<p>Full-width, fixed or sticky, transparent background over the hero image. Brand mark (Mercury logo with concentric-circle icon) on the left, nav links centered (Products, Solutions, Resources, About, Pricing), Log in text link and Cobalt ‘Open account’ pill button on the right. Uses backdrop-blur(8px or 20px) on scroll to create frosted-glass separation.</p>
+</section>
+<section id="disclaimer-banner">
+<h3>Disclaimer Banner<a class="headerlink" href="#disclaimer-banner" title="Link to this heading">#</a></h3>
+<p><strong>Role:</strong> Legal/regulatory footnote strip at page bottom</p>
+<p>Dark background (matches canvas or slightly lighter), small text at 12px arcadia weight 480 with 0.01em letter-spacing, centered or left-aligned, subtle Ivory or Ash text color. Minimal visual weight — present but never distracting.</p>
+</section>
+<section id="section-container">
+<h3>Section Container<a class="headerlink" href="#section-container" title="Link to this heading">#</a></h3>
+<p><strong>Role:</strong> Horizontal content wrapper between hero and footer</p>
+<p>Full-width dark canvas (#171721) with inner content constrained to 1200px max-width, 72px vertical padding. Contains 2- or 3-column grids of Graphite Cards or text+image splits.</p>
+</section>
+</section>
+<section id="do-s-and-don-ts">
+<h2>Do’s and Don’ts<a class="headerlink" href="#do-s-and-don-ts" title="Link to this heading">#</a></h2>
+<section id="do">
+<h3>Do<a class="headerlink" href="#do" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use Cobalt #5266eb exclusively for the single primary action per page — never as a decorative accent, icon fill, or secondary button</p></li>
+<li><p>Set all cards to #1e1e2a with 12px radius and 32px padding — rely on the one-step value lift from the canvas, not shadows, for separation</p></li>
+<li><p>Apply arcadiaDisplay weight 480 (not 600/700) for all headings — the intermediate weight is Mercury’s signature restraint</p></li>
+<li><p>Use 32px or 40px pill radius for all interactive controls (buttons, inputs, nav items) — sharp 4px corners are reserved for structural elements only</p></li>
+<li><p>Set body text at 16px arcadia weight 400 with 1.5 line-height — this is the density baseline for all content</p></li>
+<li><p>Maintain 72px vertical rhythm between major sections — spacious density is part of the premium feel</p></li>
+<li><p>Use ivory #ededf3 on ghost/outline buttons for both border and text — never use a chromatic color for secondary actions</p></li>
+</ul>
+</section>
+<section id="don-t">
+<h3>Don’t<a class="headerlink" href="#don-t" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Do not use multiple bright accent colors — Cobalt is the only chromatic note; introducing greens, reds, or oranges breaks the monochrome discipline</p></li>
+<li><p>Do not add drop shadows to cards or components — separation comes from the graphite-on-onyx value difference alone</p></li>
+<li><p>Do not use bold weights (700+) for headings — arcadiaDisplay at 480 is the ceiling</p></li>
+<li><p>Do not use sharp corners (0–4px) on buttons, inputs, or nav items — the pill shape is non-negotiable</p></li>
+<li><p>Do not use #ffffff for body text — always #ededf3 Ivory; pure white on dark creates harsh, cold contrast</p></li>
+<li><p>Do not place Cobalt-filled elements next to each other without at least 32px gap — the vivid color creates visual competition when clustered</p></li>
+<li><p>Do not use bright or saturated backgrounds for sections — every surface is either #171721 (canvas) or #1e1e2a (card); no mid-gray or colored bands</p></li>
+</ul>
+</section>
+</section>
+<section id="surfaces">
+<h2>Surfaces<a class="headerlink" href="#surfaces" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Level</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Onyx Canvas</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#171721</span></code></p></td>
+<td><p>Base page background — hero overlay, section canvases, footer</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Graphite Card</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#1e1e2a</span></code></p></td>
+<td><p>Elevated content surface — product cards, feature blocks, form containers</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Obsidian Button</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#272735</span></code></p></td>
+<td><p>Interactive surface — secondary button fills, inline form attachments</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="elevation">
+<h2>Elevation<a class="headerlink" href="#elevation" title="Link to this heading">#</a></h2>
+<p>Mercury deliberately avoids shadows. All elevation is communicated through value contrast alone — the graphite card (#1e1e2a) sits one step lighter than the onyx canvas (#171721), creating perceptible separation without any drop shadow. This flat aesthetic keeps the interface feeling modern, digital, and weightless, letting the photographic hero imagery and cobalt accent do the emotional work.</p>
+</section>
+<section id="imagery">
+<h2>Imagery<a class="headerlink" href="#imagery" title="Link to this heading">#</a></h2>
+<p>Cinematic full-bleed photography dominates the hero — atmospheric, aspirational landscapes (misty mountains, isolated desks in nature) that position banking as a contemplative, elevated experience. Photography is high-quality, slightly desaturated with cool tones, and treated with a subtle dark overlay to maintain text legibility. Below the hero, imagery shifts to product UI screenshots and abstract atmospheric backgrounds. No illustrations, no icons-as-art — visuals are photographic or purely functional. Icon style throughout the UI is minimal line/glyph style in Ivory, appearing in nav, buttons, and form elements.</p>
+</section>
+<section id="id1">
+<h2>Layout<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>Full-bleed dark canvas throughout. Hero is 100vw full-bleed photographic with centered headline + subtext + email-capture form stack (max-width ~640px). Below hero, content flows in 1200px max-width sections with 72px vertical padding, alternating between text-left/image-right 2-column splits and 3-column card grids for product features. Navigation is a transparent top bar overlaid on the hero, transitioning to a frosted-glass (backdrop-blur) solid dark fill on scroll. Footer is dark with disclaimer text. Vertical rhythm is generous — spacious density with large breathing room between sections. No sidebar navigation; all navigation lives in the top bar.</p>
+</section>
+<section id="agent-prompt-guide">
+<h2>Agent Prompt Guide<a class="headerlink" href="#agent-prompt-guide" title="Link to this heading">#</a></h2>
+<p><strong>Quick Color Reference</strong></p>
+<ul class="simple">
+<li><p>Background (canvas): #171721 Onyx</p></li>
+<li><p>Card surface: #1e1e2a Graphite</p></li>
+<li><p>Primary text: #ededf3 Ivory</p></li>
+<li><p>Muted text: #c3c3cc Ash</p></li>
+<li><p>Border: #e2e3ed Mist</p></li>
+<li><p>primary action: #5266eb (filled action)</p></li>
+</ul>
+<p><strong>Example Component Prompts</strong></p>
+<ol class="arabic simple">
+<li><p>Create a product feature card: background #1e1e2a Graphite, 12px border-radius, 32px padding all sides, no shadow. Heading at 28px arcadiaDisplay weight 480, letter-spacing 0.015em, color #ededf3 Ivory. Body text at 16px arcadia weight 400, line-height 1.5, color #ededf3 Ivory.</p></li>
+<li><p>Create a primary CTA button: background #5266eb Cobalt, white text at 16px arcadia weight 400, 32px border-radius (pill), no border, no shadow, 12px vertical / 24px horizontal padding. Text is ‘Open account’ or equivalent action label.</p></li>
+<li><p>Create a ghost/outline button: transparent background, 1px solid #ededf3 Ivory border, #ededf3 text at 16px arcadia weight 400, 40px border-radius, 10px vertical / 20px horizontal padding.</p></li>
+<li><p>Create a hero section: full-bleed (100vw), full-viewport height, photographic landscape background with dark overlay. Headline at 65px arcadiaDisplay weight 480, line-height 1.1, color #ffffff, centered. Subtext at 18px arcadia weight 480, color #ededf3 Ivory, centered, max-width 520px.</p></li>
+<li><p>Create an inline email capture form: flex row, no gap. Input — transparent background, 1px solid #ededf3 Ivory border (left + top + bottom only), #ededf3 text at 16px arcadia weight 400, placeholder in #c3c3cc Ash, border-radius 32px 0 0 32px, 14px vertical / 20px horizontal padding. Button — #5266eb Cobalt fill, white text at 16px arcadia weight 400, border-radius 0 32px 32px 0, 14px vertical / 24px horizontal padding, no border.</p></li>
+</ol>
+</section>
+<section id="typography-philosophy">
+<h2>Typography Philosophy<a class="headerlink" href="#typography-philosophy" title="Link to this heading">#</a></h2>
+<p>Mercury’s type system uses two custom faces — arcadia for UI/body and arcadiaDisplay for headlines — both built on an intermediate weight axis (360, 420, 480, 530) that avoids the conventional bold/light binary. Heading weight 480 is the signature: it is heavier than regular but distinctly lighter than semibold, creating a voice that asserts without shouting. Display sizes use tight line-heights (1.1–1.15) with positive letter-spacing (0.01–0.02em), giving large text an architectural, wide-set quality. Body text stays at 16px weight 400 with generous 1.5 line-height. The overall effect is a voice that is measured, premium, and digitally native — never editorial, never corporate.</p>
+</section>
+<section id="similar-brands">
+<h2>Similar Brands<a class="headerlink" href="#similar-brands" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Wise</strong> — Same dark-canvas + single-accent-color approach to fintech, with pill-shaped controls and flat card surfaces</p></li>
+<li><p><strong>Ramp</strong> — Similar graphite-on-dark card system with minimalist borderless components and a restrained primary accent</p></li>
+<li><p><strong>Brex</strong> — Dark-mode fintech aesthetic with comparable flat card elevation and confident intermediate-weight typography</p></li>
+<li><p><strong>Linear</strong> — Same whisper-weight typography philosophy and dark monochrome canvas with a single chromatic action color</p></li>
+<li><p><strong>Stripe</strong> — Shared approach to generous spacing, intermediate-weight display type, and letting one accent color carry the brand</p></li>
+</ul>
+</section>
+<section id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">#</a></h2>
+<section id="css-custom-properties">
+<h3>CSS Custom Properties<a class="headerlink" href="#css-custom-properties" title="Link to this heading">#</a></h3>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c">/* Colors */</span>
+<span class="w">  </span><span class="nv">--color-onyx-canvas</span><span class="p">:</span><span class="w"> </span><span class="mh">#171721</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--color-graphite-card</span><span class="p">:</span><span class="w"> </span><span class="mh">#1e1e2a</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--color-obsidian-button</span><span class="p">:</span><span class="w"> </span><span class="mh">#272735</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--color-slate-border</span><span class="p">:</span><span class="w"> </span><span class="mh">#70707d</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--color-mist-border</span><span class="p">:</span><span class="w"> </span><span class="mh">#e2e3ed</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--color-ash-text</span><span class="p">:</span><span class="w"> </span><span class="mh">#c3c3cc</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--color-ivory-text</span><span class="p">:</span><span class="w"> </span><span class="mh">#ededf3</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--color-cobalt</span><span class="p">:</span><span class="w"> </span><span class="mh">#5266eb</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--color-pure-white</span><span class="p">:</span><span class="w"> </span><span class="mh">#ffffff</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c">/* Typography — Font Families */</span>
+<span class="w">  </span><span class="nv">--font-arcadia</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;arcadia&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ui-sans-serif</span><span class="p">,</span><span class="w"> </span><span class="n">system-ui</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">apple-system</span><span class="p">,</span><span class="w"> </span><span class="n">BlinkMacSystemFont</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Segoe UI&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Roboto</span><span class="p">,</span><span class="w"> </span><span class="kc">sans-serif</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--font-arcadiadisplay</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;arcadiaDisplay&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ui-sans-serif</span><span class="p">,</span><span class="w"> </span><span class="n">system-ui</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">apple-system</span><span class="p">,</span><span class="w"> </span><span class="n">BlinkMacSystemFont</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Segoe UI&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Roboto</span><span class="p">,</span><span class="w"> </span><span class="kc">sans-serif</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c">/* Typography — Scale */</span>
+<span class="w">  </span><span class="nv">--text-caption</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--leading-caption</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--tracking-caption</span><span class="p">:</span><span class="w"> </span><span class="mf">0.12</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--text-body-sm</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--leading-body-sm</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--tracking-body-sm</span><span class="p">:</span><span class="w"> </span><span class="mf">0.07</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--text-body</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--leading-body</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--text-body-lg</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--leading-body-lg</span><span class="p">:</span><span class="w"> </span><span class="mf">1.35</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--text-subheading</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--leading-subheading</span><span class="p">:</span><span class="w"> </span><span class="mf">1.35</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--text-heading-sm</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--leading-heading-sm</span><span class="p">:</span><span class="w"> </span><span class="mf">1.2</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--tracking-heading-sm</span><span class="p">:</span><span class="w"> </span><span class="mf">0.42</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--text-heading</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--leading-heading</span><span class="p">:</span><span class="w"> </span><span class="mf">1.15</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--tracking-heading</span><span class="p">:</span><span class="w"> </span><span class="mf">0.48</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--text-heading-lg</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--leading-heading-lg</span><span class="p">:</span><span class="w"> </span><span class="mf">1.15</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--tracking-heading-lg</span><span class="p">:</span><span class="w"> </span><span class="mf">0.42</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--text-display</span><span class="p">:</span><span class="w"> </span><span class="mi">65</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--leading-display</span><span class="p">:</span><span class="w"> </span><span class="mf">1.1</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c">/* Typography — Weights */</span>
+<span class="w">  </span><span class="nv">--font-weight-w360</span><span class="p">:</span><span class="w"> </span><span class="mi">360</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--font-weight-regular</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--font-weight-w420</span><span class="p">:</span><span class="w"> </span><span class="mi">420</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--font-weight-w480</span><span class="p">:</span><span class="w"> </span><span class="mi">480</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--font-weight-w530</span><span class="p">:</span><span class="w"> </span><span class="mi">530</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c">/* Spacing */</span>
+<span class="w">  </span><span class="nv">--spacing-unit</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--spacing-4</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--spacing-8</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--spacing-12</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--spacing-16</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--spacing-20</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--spacing-24</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--spacing-32</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--spacing-40</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--spacing-56</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--spacing-72</span><span class="p">:</span><span class="w"> </span><span class="mi">72</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--spacing-112</span><span class="p">:</span><span class="w"> </span><span class="mi">112</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--spacing-128</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="kt">px</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c">/* Layout */</span>
+<span class="w">  </span><span class="nv">--page-max-width</span><span class="p">:</span><span class="w"> </span><span class="mi">1200</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--section-gap</span><span class="p">:</span><span class="w"> </span><span class="mi">72</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--card-padding</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--element-gap</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c">/* Border Radius */</span>
+<span class="w">  </span><span class="nv">--radius-md</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--radius-lg</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--radius-xl</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--radius-3xl</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--radius-3xl-2</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="kt">px</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c">/* Named Radii */</span>
+<span class="w">  </span><span class="nv">--radius-nav</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--radius-tags</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--radius-cards</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--radius-inputs</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--radius-buttons</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--radius-default</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c">/* Surfaces */</span>
+<span class="w">  </span><span class="nv">--surface-onyx-canvas</span><span class="p">:</span><span class="w"> </span><span class="mh">#171721</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--surface-graphite-card</span><span class="p">:</span><span class="w"> </span><span class="mh">#1e1e2a</span><span class="p">;</span>
+<span class="w">  </span><span class="nv">--surface-obsidian-button</span><span class="p">:</span><span class="w"> </span><span class="mh">#272735</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="tailwind-v4">
+<h3>Tailwind v4<a class="headerlink" href="#tailwind-v4" title="Link to this heading">#</a></h3>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">@</span><span class="k">theme</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c">/* Colors */</span>
+<span class="w">  </span><span class="nt">--color-onyx-canvas</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">171721</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--color-graphite-card</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">1e1e2a</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--color-obsidian-button</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">272735</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--color-slate-border</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">70707d</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--color-mist-border</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">e2e3ed</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--color-ash-text</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">c3c3cc</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--color-ivory-text</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">ededf3</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--color-cobalt</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">5266eb</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--color-pure-white</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">ffffff</span><span class="o">;</span>
+
+<span class="w">  </span><span class="c">/* Typography */</span>
+<span class="w">  </span><span class="nt">--font-arcadia</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;arcadia&#39;</span><span class="o">,</span><span class="w"> </span><span class="nt">ui-sans-serif</span><span class="o">,</span><span class="w"> </span><span class="nt">system-ui</span><span class="o">,</span><span class="w"> </span><span class="nt">-apple-system</span><span class="o">,</span><span class="w"> </span><span class="nt">BlinkMacSystemFont</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;Segoe UI&quot;</span><span class="o">,</span><span class="w"> </span><span class="nt">Roboto</span><span class="o">,</span><span class="w"> </span><span class="nt">sans-serif</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--font-arcadiadisplay</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;arcadiaDisplay&#39;</span><span class="o">,</span><span class="w"> </span><span class="nt">ui-sans-serif</span><span class="o">,</span><span class="w"> </span><span class="nt">system-ui</span><span class="o">,</span><span class="w"> </span><span class="nt">-apple-system</span><span class="o">,</span><span class="w"> </span><span class="nt">BlinkMacSystemFont</span><span class="o">,</span><span class="w"> </span><span class="s2">&quot;Segoe UI&quot;</span><span class="o">,</span><span class="w"> </span><span class="nt">Roboto</span><span class="o">,</span><span class="w"> </span><span class="nt">sans-serif</span><span class="o">;</span>
+
+<span class="w">  </span><span class="c">/* Typography — Scale */</span>
+<span class="w">  </span><span class="nt">--text-caption</span><span class="o">:</span><span class="w"> </span><span class="nt">12px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--leading-caption</span><span class="o">:</span><span class="w"> </span><span class="nt">1</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--tracking-caption</span><span class="o">:</span><span class="w"> </span><span class="nt">0</span><span class="p">.</span><span class="nc">12px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--text-body-sm</span><span class="o">:</span><span class="w"> </span><span class="nt">14px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--leading-body-sm</span><span class="o">:</span><span class="w"> </span><span class="nt">1</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--tracking-body-sm</span><span class="o">:</span><span class="w"> </span><span class="nt">0</span><span class="p">.</span><span class="nc">07px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--text-body</span><span class="o">:</span><span class="w"> </span><span class="nt">16px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--leading-body</span><span class="o">:</span><span class="w"> </span><span class="nt">1</span><span class="p">.</span><span class="nc">5</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--text-body-lg</span><span class="o">:</span><span class="w"> </span><span class="nt">18px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--leading-body-lg</span><span class="o">:</span><span class="w"> </span><span class="nt">1</span><span class="p">.</span><span class="nc">35</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--text-subheading</span><span class="o">:</span><span class="w"> </span><span class="nt">21px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--leading-subheading</span><span class="o">:</span><span class="w"> </span><span class="nt">1</span><span class="p">.</span><span class="nc">35</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--text-heading-sm</span><span class="o">:</span><span class="w"> </span><span class="nt">28px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--leading-heading-sm</span><span class="o">:</span><span class="w"> </span><span class="nt">1</span><span class="p">.</span><span class="nc">2</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--tracking-heading-sm</span><span class="o">:</span><span class="w"> </span><span class="nt">0</span><span class="p">.</span><span class="nc">42px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--text-heading</span><span class="o">:</span><span class="w"> </span><span class="nt">32px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--leading-heading</span><span class="o">:</span><span class="w"> </span><span class="nt">1</span><span class="p">.</span><span class="nc">15</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--tracking-heading</span><span class="o">:</span><span class="w"> </span><span class="nt">0</span><span class="p">.</span><span class="nc">48px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--text-heading-lg</span><span class="o">:</span><span class="w"> </span><span class="nt">42px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--leading-heading-lg</span><span class="o">:</span><span class="w"> </span><span class="nt">1</span><span class="p">.</span><span class="nc">15</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--tracking-heading-lg</span><span class="o">:</span><span class="w"> </span><span class="nt">0</span><span class="p">.</span><span class="nc">42px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--text-display</span><span class="o">:</span><span class="w"> </span><span class="nt">65px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--leading-display</span><span class="o">:</span><span class="w"> </span><span class="nt">1</span><span class="p">.</span><span class="nc">1</span><span class="o">;</span>
+
+<span class="w">  </span><span class="c">/* Spacing */</span>
+<span class="w">  </span><span class="nt">--spacing-4</span><span class="o">:</span><span class="w"> </span><span class="nt">4px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--spacing-8</span><span class="o">:</span><span class="w"> </span><span class="nt">8px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--spacing-12</span><span class="o">:</span><span class="w"> </span><span class="nt">12px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--spacing-16</span><span class="o">:</span><span class="w"> </span><span class="nt">16px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--spacing-20</span><span class="o">:</span><span class="w"> </span><span class="nt">20px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--spacing-24</span><span class="o">:</span><span class="w"> </span><span class="nt">24px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--spacing-32</span><span class="o">:</span><span class="w"> </span><span class="nt">32px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--spacing-40</span><span class="o">:</span><span class="w"> </span><span class="nt">40px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--spacing-56</span><span class="o">:</span><span class="w"> </span><span class="nt">56px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--spacing-72</span><span class="o">:</span><span class="w"> </span><span class="nt">72px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--spacing-112</span><span class="o">:</span><span class="w"> </span><span class="nt">112px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--spacing-128</span><span class="o">:</span><span class="w"> </span><span class="nt">128px</span><span class="o">;</span>
+
+<span class="w">  </span><span class="c">/* Border Radius */</span>
+<span class="w">  </span><span class="nt">--radius-md</span><span class="o">:</span><span class="w"> </span><span class="nt">4px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--radius-lg</span><span class="o">:</span><span class="w"> </span><span class="nt">8px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--radius-xl</span><span class="o">:</span><span class="w"> </span><span class="nt">12px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--radius-3xl</span><span class="o">:</span><span class="w"> </span><span class="nt">32px</span><span class="o">;</span>
+<span class="w">  </span><span class="nt">--radius-3xl-2</span><span class="o">:</span><span class="w"> </span><span class="nt">40px</span><span class="o">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./assets"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokens-colors">Tokens — Colors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokens-typography">Tokens — Typography</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arcadia-body-and-ui-typeface-handles-navigation-body-copy-buttons-inputs-labels-and-supporting-text-at-weight-400-for-body-and-480-for-emphasis-the-intermediate-weight-scale-360-420-480-instead-of-standard-300-400-600-gives-mercury-s-text-a-distinctly-calibrated-feel-never-bold-never-thin-always-measured-font-arcadia">arcadia — Body and UI typeface — handles navigation, body copy, buttons, inputs, labels, and supporting text at weight 400 for body and 480 for emphasis. The intermediate weight scale (360, 420, 480) instead of standard (300/400/600) gives Mercury’s text a distinctly calibrated feel — never bold, never thin, always measured · <code class="docutils literal notranslate"><span class="pre">--font-arcadia</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arcadiadisplay-headline-and-display-typeface-used-at-weight-480-for-all-heading-sizes-from-28px-through-65px-with-530-reserved-for-the-largest-display-moments-tight-line-heights-1-11-2-and-positive-letter-spacing-0-010-02em-give-display-copy-a-wide-set-architectural-quality-rather-than-compressed-editorial-tightness-font-arcadiadisplay">arcadiaDisplay — Headline and display typeface — used at weight 480 for all heading sizes from 28px through 65px, with 530 reserved for the largest display moments. Tight line-heights (1.1–1.2) and positive letter-spacing (0.01–0.02em) give display copy a wide-set, architectural quality rather than compressed editorial tightness · <code class="docutils literal notranslate"><span class="pre">--font-arcadiadisplay</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#type-scale">Type Scale</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokens-spacing-shapes">Tokens — Spacing &amp; Shapes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spacing-scale">Spacing Scale</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#border-radius">Border Radius</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#layout">Layout</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#components">Components</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#primary-cta-button-cobalt">Primary CTA Button (Cobalt)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ghost-outline-button">Ghost Outline Button</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navigation-pill-link">Navigation Pill Link</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graphite-card">Graphite Card</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#email-capture-input-pill-left-half">Email Capture Input (Pill, Left-Half)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#full-bleed-hero-section">Full-Bleed Hero Section</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transparent-top-navigation-bar">Transparent Top Navigation Bar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#disclaimer-banner">Disclaimer Banner</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#section-container">Section Container</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#do-s-and-don-ts">Do’s and Don’ts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#do">Do</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#don-t">Don’t</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#surfaces">Surfaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#elevation">Elevation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imagery">Imagery</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Layout</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agent-prompt-guide">Agent Prompt Guide</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typography-philosophy">Typography Philosophy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#similar-brands">Similar Brands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#css-custom-properties">CSS Custom Properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tailwind-v4">Tailwind v4</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
