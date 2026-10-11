@@ -91,40 +91,37 @@ def render_data_understanding():
     Enam kelas penelitian merupakan penyederhanaan terukur yang kompatibel dengan resolusi citra satelit Sentinel-2:
     """)
     
-    rows_sni = ""
+    rows_list = []
     for item in TABEL_ACUAN_KLASIFIKASI:
         w = item["warna"]
-        rows_sni += f"""
-        <tr>
-            <td style="text-align:center;">{item['no']}</td>
-            <td>
-                <span style="display:inline-block;width:12px;height:12px;border-radius:50%;background-color:{w};margin-right:8px;"></span>
-                <strong style="color:#ededf3;">{item['kelas']}</strong>
-            </td>
-            <td><code>{w}</code></td>
-            <td style="color:#c3c3cc;">{item['padanan']}</td>
-            <td><span class="mercury-pill">{item['sni']}</span></td>
-        </tr>
-        """
+        rows_list.append(
+            f'<tr>'
+            f'<td style="text-align:center;">{item["no"]}</td>'
+            f'<td><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background-color:{w};margin-right:8px;"></span><strong style="color:#ededf3;">{item["kelas"]}</strong></td>'
+            f'<td><code>{w}</code></td>'
+            f'<td style="color:#c3c3cc;">{item["padanan"]}</td>'
+            f'<td><span class="mercury-pill">{item["sni"]}</span></td>'
+            f'</tr>'
+        )
         
-    st.markdown(f"""
-    <div class="mercury-table-container">
-        <table class="mercury-table">
-            <thead>
-                <tr>
-                    <th style="width:50px;text-align:center;">No</th>
-                    <th>Kelas Penelitian</th>
-                    <th>Kode Warna Peta</th>
-                    <th>Padanan pada Acuan KLHK</th>
-                    <th>Padanan SNI 7645-1:2014</th>
-                </tr>
-            </thead>
-            <tbody>
-                {rows_sni}
-            </tbody>
-        </table>
-    </div>
-    """, unsafe_allow_html=True)
+    rows_sni = "".join(rows_list)
+    html_sni = (
+        '<div class="mercury-table-container">'
+        '<table class="mercury-table">'
+        '<thead>'
+        '<tr>'
+        '<th style="width:50px;text-align:center;">No</th>'
+        '<th>Kelas Penelitian</th>'
+        '<th>Kode Warna Peta</th>'
+        '<th>Padanan pada Acuan KLHK</th>'
+        '<th>Padanan SNI 7645-1:2014</th>'
+        '</tr>'
+        '</thead>'
+        f'<tbody>{rows_sni}</tbody>'
+        '</table>'
+        '</div>'
+    )
+    st.markdown(html_sni, unsafe_allow_html=True)
 
     # ---------------- 4. Kolekting Data Sentinel-2 ----------------
     st.markdown("## 4. Pengumpulan & Pra-pengolahan Data Citra")
