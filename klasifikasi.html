@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'klasifikasi';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Laporan Analisis LULC (Land Use and Land Cover) Jawa Timur" href="laporan_klasifikasi_jatim.html" />
+    <link rel="next" title="Klasifikasi 6 Kelas Jawa Timur Berbasis Piksel" href="klasifikasipixeljatim.html" />
     <link rel="prev" title="Clustering Linear dan Polynomial" href="clusteringlinpoly.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -190,7 +190,8 @@
 <li class="toctree-l1"><a class="reference internal" href="kmean.html">K-Means Clustering Polutan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="clusteringlinpoly.html">Clustering Linear dan Polynomial</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Klasifikasi Lahan Sawah dan Non-Sawah dengan Random Forest</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laporan_klasifikasi_jatim.html">Laporan Analisis LULC (Land Use and Land Cover) Jawa Timur</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasifikasipixeljatim.html">Klasifikasi 6 Kelas Jawa Timur Berbasis Piksel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasifikasipolyjatim.html">Klasifikasi 6 Kelas Jawa Timur Berbasis Polygon</a></li>
 </ul>
 
     </div>
@@ -429,15 +430,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">rasterio</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Cari GeoTIFF di folder kerja atau subfolder materi.</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">nama_tif</span> <span class="o">=</span> <span class="s1">&#39;sentinel2A_komposit.tif&#39;</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;rasterio&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GeoTIFF belum ditemukan.
+Lokasi yang diperiksa:
+  - sentinel2A_komposit.tif
+  - materi\sentinel2A_komposit.tif
+Sel selesai tanpa error. Tambahkan file GeoTIFF sebelum menjalankan Random Forest.
 </pre></div>
 </div>
 </div>
@@ -811,11 +808,11 @@ Total petak GeoJSON          : 100
       </div>
     </a>
     <a class="right-next"
-       href="laporan_klasifikasi_jatim.html"
+       href="klasifikasipixeljatim.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Laporan Analisis LULC (Land Use and Land Cover) Jawa Timur</p>
+        <p class="prev-next-title">Klasifikasi 6 Kelas Jawa Timur Berbasis Piksel</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

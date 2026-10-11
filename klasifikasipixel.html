@@ -190,6 +190,8 @@
 <li class="toctree-l1"><a class="reference internal" href="kmean.html">K-Means Clustering Polutan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="clusteringlinpoly.html">Clustering Linear dan Polynomial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="klasifikasi.html">Klasifikasi Lahan Sawah dan Non-Sawah dengan Random Forest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasifikasipixeljatim.html">Klasifikasi 6 Kelas Jawa Timur Berbasis Piksel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasifikasipolyjatim.html">Klasifikasi 6 Kelas Jawa Timur Berbasis Polygon</a></li>
 </ul>
 
     </div>
@@ -407,10 +409,6 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[notice] A new release of pip is available: 26.0.1 -&gt; 26.2.1
-[notice] To update, run: python.exe -m pip install --upgrade pip
-</pre></div>
-</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -465,7 +463,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Folder kerja: C:\Users\ARIEL\OneDrive\Documents\PSD\materi
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Folder kerja: c:\Users\ARIEL\OneDrive\Documents\PSD\materi
 Kelas terdeteksi:
   1: bangunan
   2: danau
@@ -473,9 +471,8 @@ Kelas terdeteksi:
   4: laut
   5: mangrove
   6: sawah
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total fitur mentah: 285
+
+Total fitur mentah: 285
 class_id  class_name
 1         bangunan      50
 2         danau         50
@@ -1046,9 +1043,7 @@ class_name
 bangunan    6
 laut        1
 dtype: int64
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tersimpan: label_6kelas.geojson &amp; label_6kelas_atribut.csv
+Tersimpan: label_6kelas.geojson &amp; label_6kelas_atribut.csv
 </pre></div>
 </div>
 </div>
@@ -1201,21 +1196,39 @@ sawah        1443       50
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Batch 1/24: 300/300 titik berhasil
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Batch 2/24: 300/300 titik berhasil
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Batch 3/24: 300/300 titik berhasil
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Batch 4/24: 300/300 titik berhasil
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Batch 5/24: 300/300 titik berhasil
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Batch 6/24: 300/300 titik berhasil
+Batch 2/24: 300/300 titik berhasil
+Batch 3/24: 300/300 titik berhasil
+Batch 4/24: 300/300 titik berhasil
+Batch 5/24: 300/300 titik berhasil
+Batch 6/24: 300/300 titik berhasil
+Batch 7/24: 300/300 titik berhasil
+Batch 8/24: 300/300 titik berhasil
+Batch 9/24: 300/300 titik berhasil
+Batch 10/24: 300/300 titik berhasil
+Batch 11/24: 300/300 titik berhasil
+Batch 12/24: 300/300 titik berhasil
+Batch 13/24: 290/300 titik berhasil
+Batch 14/24: 268/300 titik berhasil
+Batch 15/24: 294/300 titik berhasil
+Batch 16/24: 300/300 titik berhasil
+Batch 17/24: 300/300 titik berhasil
+Batch 18/24: 300/300 titik berhasil
+Batch 19/24: 300/300 titik berhasil
+Batch 20/24: 300/300 titik berhasil
+Batch 21/24: 300/300 titik berhasil
+Batch 22/24: 300/300 titik berhasil
+Batch 23/24: 300/300 titik berhasil
+Batch 24/24: 34/34 titik berhasil
+
+Titik dikirim: 6934 | titik dengan nilai valid: 6886
+class_name
+laut          1455
+sawah         1443
+lahanhijau    1330
+danau         1022
+mangrove       989
+bangunan       647
+Name: count, dtype: int64
 </pre></div>
 </div>
 </div>

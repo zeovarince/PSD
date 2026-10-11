@@ -190,7 +190,8 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">K-Means Clustering Polutan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="clusteringlinpoly.html">Clustering Linear dan Polynomial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="klasifikasi.html">Klasifikasi Lahan Sawah dan Non-Sawah dengan Random Forest</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laporan_klasifikasi_jatim.html">Laporan Analisis LULC (Land Use and Land Cover) Jawa Timur</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasifikasipixeljatim.html">Klasifikasi 6 Kelas Jawa Timur Berbasis Piksel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasifikasipolyjatim.html">Klasifikasi 6 Kelas Jawa Timur Berbasis Polygon</a></li>
 </ul>
 
     </div>
@@ -461,7 +462,7 @@ document.write(`
 <p><em>Implementasi Python:</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
@@ -514,24 +515,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inertia: 1001.2819
-
-Jumlah data per cluster:
-cluster_label
-cluster_0    20
-cluster_1     1
-cluster_2    16
-Name: count, dtype: int64
-
-Detail daerah per cluster:
-  cluster_0 (20 daerah): [&#39;Manyar&#39;, &#39;Kedungpring Lamongan&#39;, &#39;Kamal, Bangkalan&#39;, &#39;Kota Sumenep, Sumenep&#39;, &#39;Asemrowo, Surabaya&#39;, &#39;Wonokromo, Surabaya&#39;, &#39;Banyu Ajuh, Perumnas, Kamal&#39;, &#39;Menganti Gresik&#39;, &#39;Labang, Bangkalan&#39;, &#39;Kec. Bangkalan, Kab. Bangkalan&#39;, &#39;Kerek, Tuban&#39;, &#39;Tikala, Manado&#39;, &#39;Socah, Bangkalan&#39;, &#39;Tanah Merah, Bangkalan&#39;, &#39;Dukun, Gresik&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;Baron Nganjuk&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;Warudoyong, Kota Sukabumi&#39;, &#39;Bandung, Jogoroto, Jombang&#39;]
-  cluster_1 (1 daerah): [&#39;Kamal, Banyuajuh&#39;]
-  cluster_2 (16 daerah): [&#39;sambeng lamongan&#39;, &#39;Gresik Kota, Gresik&#39;, &#39;Waru, Pamekasan&#39;, &#39;Bangkalan Kota,Bangkalan&#39;, &#39;Nunukan&#39;, &#39;Kamal, Bangkalan&#39;, &#39;Cerme, Gresik&#39;, &#39;Pilangkenceng, Madiun&#39;, &#39;Sreseh, Sampang&#39;, &#39;Wonoayu&#39;, &#39;Kec. Kalianget, Sumenep&#39;, &#39;Widang, Tuban&#39;, &#39;Paciran, Lamongan&#39;, &#39;Widodaren, Ngawi&#39;, &#39;jabon , Sidoarjo&#39;, &#39;Kertosono, Ngajuk&#39;]
-</pre></div>
-</div>
-<img alt="_images/07c3ccc8dac447099f10997722bb9dbf99971092b49adf7cd7e97438e4160830.png" src="_images/07c3ccc8dac447099f10997722bb9dbf99971092b49adf7cd7e97438e4160830.png" />
-</div>
 </div>
 </section>
 <section id="dengan-pca">
@@ -541,7 +524,7 @@ Detail daerah per cluster:
 <p><em>Implementasi Python:</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
@@ -599,25 +582,6 @@ Detail daerah per cluster:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reduksi dimensi: 68 fitur → 37 komponen PCA
-Inertia: 1001.2819
-
-Jumlah data per cluster:
-cluster_label
-cluster_0    20
-cluster_1     1
-cluster_2    16
-Name: count, dtype: int64
-
-Detail daerah per cluster:
-  cluster_0 (20 daerah): [&#39;Manyar&#39;, &#39;Kedungpring Lamongan&#39;, &#39;Kamal, Bangkalan&#39;, &#39;Kota Sumenep, Sumenep&#39;, &#39;Asemrowo, Surabaya&#39;, &#39;Wonokromo, Surabaya&#39;, &#39;Banyu Ajuh, Perumnas, Kamal&#39;, &#39;Menganti Gresik&#39;, &#39;Labang, Bangkalan&#39;, &#39;Kec. Bangkalan, Kab. Bangkalan&#39;, &#39;Kerek, Tuban&#39;, &#39;Tikala, Manado&#39;, &#39;Socah, Bangkalan&#39;, &#39;Tanah Merah, Bangkalan&#39;, &#39;Dukun, Gresik&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;Baron Nganjuk&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;Warudoyong, Kota Sukabumi&#39;, &#39;Bandung, Jogoroto, Jombang&#39;]
-  cluster_1 (1 daerah): [&#39;Kamal, Banyuajuh&#39;]
-  cluster_2 (16 daerah): [&#39;sambeng lamongan&#39;, &#39;Gresik Kota, Gresik&#39;, &#39;Waru, Pamekasan&#39;, &#39;Bangkalan Kota,Bangkalan&#39;, &#39;Nunukan&#39;, &#39;Kamal, Bangkalan&#39;, &#39;Cerme, Gresik&#39;, &#39;Pilangkenceng, Madiun&#39;, &#39;Sreseh, Sampang&#39;, &#39;Wonoayu&#39;, &#39;Kec. Kalianget, Sumenep&#39;, &#39;Widang, Tuban&#39;, &#39;Paciran, Lamongan&#39;, &#39;Widodaren, Ngawi&#39;, &#39;jabon , Sidoarjo&#39;, &#39;Kertosono, Ngajuk&#39;]
-</pre></div>
-</div>
-<img alt="_images/ab85f39c485e52b0672996f4377d20c00eb29ddb0045f2738b634e0224e8329d.png" src="_images/ab85f39c485e52b0672996f4377d20c00eb29ddb0045f2738b634e0224e8329d.png" />
-</div>
 </div>
 </section>
 <section id="perbandingan-dan-interpretasi-no2">
@@ -641,7 +605,7 @@ Detail daerah per cluster:
 <p><em>Implementasi Python:</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
@@ -694,24 +658,6 @@ Detail daerah per cluster:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inertia: 691.6448
-
-Jumlah data per cluster:
-cluster_label
-cluster_0    35
-cluster_1     1
-cluster_2     1
-Name: count, dtype: int64
-
-Detail daerah per cluster:
-  cluster_0 (35 daerah): [&#39;Kerek, Tuban&#39;, &#39;Menganti Gresik&#39;, &#39;Manyar, Gresik&#39;, &#39;Widang, Tuban&#39;, &#39;Sreseh, Sampang&#39;, &#39;Cerme, Gresik&#39;, &#39;Nunukan&#39;, &#39;Pilangkenceng, Madiun&#39;, &#39;Tikala, Manado&#39;, &#39;Kec. Kalianget, Sumenep&#39;, &#39;Labang, Bangkalan&#39;, &#39;Paciran, Lamongan&#39;, &#39;Waru, Pamekasan&#39;, &#39;Gresik Kota, Gresik&#39;, &#39;sambeng lamongan&#39;, &#39;Widodaren, Ngawi&#39;, &#39;Kertosono, Ngajuk&#39;, &#39;Kedungpring Lamongan&#39;, &#39;Bandung, Jogoroto, Jombang&#39;, &#39;Socah, Bangkalan&#39;, &#39;Tanah Merah, Bangkalan&#39;, &#39;Kamal, Bangkalan&#39;, &#39;Banyu Ajuh, Perumnas, Kamal&#39;, &#39;Wonokromo, Surabaya&#39;, &#39;Dukun, Gresik&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;jabon , Sidoarjo&#39;, &#39;Kota Sumenep, Sumenep&#39;, &#39;Baron Nganjuk&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;Warudoyong, Kota Sukabumi&#39;, &#39;Kec. Bangkalan, Kab. Bangkalan&#39;, &#39;Wonoayu&#39;, &#39;Kecamatan Bangkalan,Bangkalan&#39;, &#39;Asemrowo, Surabaya&#39;]
-  cluster_1 (1 daerah): [&#39;Kamal, Banyuajuh&#39;]
-  cluster_2 (1 daerah): [&#39;Kamal, Bangkalan&#39;]
-</pre></div>
-</div>
-<img alt="_images/9f84093ad82f40dcc420fa2b33cc0dfa6403d16401a1fafcab3c4a6f608d623b.png" src="_images/9f84093ad82f40dcc420fa2b33cc0dfa6403d16401a1fafcab3c4a6f608d623b.png" />
-</div>
 </div>
 </section>
 <section id="id2">
@@ -721,7 +667,7 @@ Detail daerah per cluster:
 <p><em>Implementasi Python:</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
@@ -779,25 +725,6 @@ Detail daerah per cluster:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reduksi dimensi: 68 fitur → 37 komponen PCA
-Inertia: 691.6448
-
-Jumlah data per cluster:
-cluster_label
-cluster_0    35
-cluster_1     1
-cluster_2     1
-Name: count, dtype: int64
-
-Detail daerah per cluster:
-  cluster_0 (35 daerah): [&#39;Kerek, Tuban&#39;, &#39;Menganti Gresik&#39;, &#39;Manyar, Gresik&#39;, &#39;Widang, Tuban&#39;, &#39;Sreseh, Sampang&#39;, &#39;Cerme, Gresik&#39;, &#39;Nunukan&#39;, &#39;Pilangkenceng, Madiun&#39;, &#39;Tikala, Manado&#39;, &#39;Kec. Kalianget, Sumenep&#39;, &#39;Labang, Bangkalan&#39;, &#39;Paciran, Lamongan&#39;, &#39;Waru, Pamekasan&#39;, &#39;Gresik Kota, Gresik&#39;, &#39;sambeng lamongan&#39;, &#39;Widodaren, Ngawi&#39;, &#39;Kertosono, Ngajuk&#39;, &#39;Kedungpring Lamongan&#39;, &#39;Bandung, Jogoroto, Jombang&#39;, &#39;Socah, Bangkalan&#39;, &#39;Tanah Merah, Bangkalan&#39;, &#39;Kamal, Bangkalan&#39;, &#39;Banyu Ajuh, Perumnas, Kamal&#39;, &#39;Wonokromo, Surabaya&#39;, &#39;Dukun, Gresik&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;jabon , Sidoarjo&#39;, &#39;Kota Sumenep, Sumenep&#39;, &#39;Baron Nganjuk&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;Warudoyong, Kota Sukabumi&#39;, &#39;Kec. Bangkalan, Kab. Bangkalan&#39;, &#39;Wonoayu&#39;, &#39;Kecamatan Bangkalan,Bangkalan&#39;, &#39;Asemrowo, Surabaya&#39;]
-  cluster_1 (1 daerah): [&#39;Kamal, Banyuajuh&#39;]
-  cluster_2 (1 daerah): [&#39;Kamal, Bangkalan&#39;]
-</pre></div>
-</div>
-<img alt="_images/b65bd67c33d7ee8ffd266bb7544434443fc3c70caadd30bab55bea28cadd2e4d.png" src="_images/b65bd67c33d7ee8ffd266bb7544434443fc3c70caadd30bab55bea28cadd2e4d.png" />
-</div>
 </div>
 </section>
 <section id="perbandingan-dan-interpretasi-so2">
@@ -820,7 +747,7 @@ Detail daerah per cluster:
 <p><em>Implementasi Python:</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
@@ -873,24 +800,6 @@ Detail daerah per cluster:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inertia: 660.2141
-
-Jumlah data per cluster:
-cluster_label
-cluster_0     1
-cluster_1    35
-cluster_2     1
-Name: count, dtype: int64
-
-Detail daerah per cluster:
-  cluster_0 (1 daerah): [&#39;Kamal, Bangkalan&#39;]
-  cluster_1 (35 daerah): [&#39;Kerek, Tuban&#39;, &#39;Menganti Gresik&#39;, &#39;Manyar, Gresik&#39;, &#39;Widang, Tuban&#39;, &#39;Sreseh, Sampang&#39;, &#39;Cerme, Gresik&#39;, &#39;Nunukan&#39;, &#39;Pilangkenceng, Madiun&#39;, &#39;Tikala, Manado&#39;, &#39;Labang, Bangkalan&#39;, &#39;Kec. Kalianget, Sumenep&#39;, &#39;Paciran, Lamongan&#39;, &#39;Waru, Pamekasan&#39;, &#39;Gresik Kota, Gresik&#39;, &#39;sambeng lamongan&#39;, &#39;Widodaren, Ngawi&#39;, &#39;Kertosono, Ngajuk&#39;, &#39;Kedungpring Lamongan&#39;, &#39;Bandung, Jogoroto, Jombang&#39;, &#39;Socah, Bangkalan&#39;, &#39;Tanah Merah, Bangkalan&#39;, &#39;Kamal, Bangkalan&#39;, &#39;Banyu Ajuh, Perumnas, Kamal&#39;, &#39;Wonokromo, Surabaya&#39;, &#39;Dukun, Gresik&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;jabon , Sidoarjo&#39;, &#39;Kota Sumenep, Sumenep&#39;, &#39;Baron Nganjuk&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;Warudoyong, Kota Sukabumi&#39;, &#39;Kec. Bangkalan, Kab. Bangkalan&#39;, &#39;Wonoayu&#39;, &#39;Kecamatan Bangkalan,Bangkalan&#39;, &#39;Asemrowo, Surabaya&#39;]
-  cluster_2 (1 daerah): [&#39;Kamal, Banyuajuh&#39;]
-</pre></div>
-</div>
-<img alt="_images/bdc271e25218f859c5a1364fcb26db70f5cdfa316d644aa66a37ad9ec3387635.png" src="_images/bdc271e25218f859c5a1364fcb26db70f5cdfa316d644aa66a37ad9ec3387635.png" />
-</div>
 </div>
 </section>
 <section id="id4">
@@ -900,7 +809,7 @@ Detail daerah per cluster:
 <p><em>Implementasi Python:</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
@@ -957,25 +866,6 @@ Detail daerah per cluster:
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reduksi dimensi: 68 fitur → 37 komponen PCA
-Inertia: 660.2141
-
-Jumlah data per cluster:
-cluster_label
-cluster_0     1
-cluster_1    35
-cluster_2     1
-Name: count, dtype: int64
-
-Detail daerah per cluster:
-  cluster_0 (1 daerah): [&#39;Kamal, Bangkalan&#39;]
-  cluster_1 (35 daerah): [&#39;Kerek, Tuban&#39;, &#39;Menganti Gresik&#39;, &#39;Manyar, Gresik&#39;, &#39;Widang, Tuban&#39;, &#39;Sreseh, Sampang&#39;, &#39;Cerme, Gresik&#39;, &#39;Nunukan&#39;, &#39;Pilangkenceng, Madiun&#39;, &#39;Tikala, Manado&#39;, &#39;Labang, Bangkalan&#39;, &#39;Kec. Kalianget, Sumenep&#39;, &#39;Paciran, Lamongan&#39;, &#39;Waru, Pamekasan&#39;, &#39;Gresik Kota, Gresik&#39;, &#39;sambeng lamongan&#39;, &#39;Widodaren, Ngawi&#39;, &#39;Kertosono, Ngajuk&#39;, &#39;Kedungpring Lamongan&#39;, &#39;Bandung, Jogoroto, Jombang&#39;, &#39;Socah, Bangkalan&#39;, &#39;Tanah Merah, Bangkalan&#39;, &#39;Kamal, Bangkalan&#39;, &#39;Banyu Ajuh, Perumnas, Kamal&#39;, &#39;Wonokromo, Surabaya&#39;, &#39;Dukun, Gresik&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;jabon , Sidoarjo&#39;, &#39;Kota Sumenep, Sumenep&#39;, &#39;Baron Nganjuk&#39;, &#39;Kwanyar, Bangkalan&#39;, &#39;Warudoyong, Kota Sukabumi&#39;, &#39;Kec. Bangkalan, Kab. Bangkalan&#39;, &#39;Wonoayu&#39;, &#39;Kecamatan Bangkalan,Bangkalan&#39;, &#39;Asemrowo, Surabaya&#39;]
-  cluster_2 (1 daerah): [&#39;Kamal, Banyuajuh&#39;]
-</pre></div>
-</div>
-<img alt="_images/6647a2d02a15118ddb5f3cd47b2862fdaa95c5a7dfec1726c985d6033bb7c9b9.png" src="_images/6647a2d02a15118ddb5f3cd47b2862fdaa95c5a7dfec1726c985d6033bb7c9b9.png" />
 </div>
 </div>
 </section>
