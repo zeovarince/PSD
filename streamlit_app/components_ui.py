@@ -6,6 +6,7 @@ dan Plotly untuk visualisasi data interaktif.
 
 from __future__ import annotations
 import os
+import textwrap
 from typing import Optional, Dict, List, Any
 import streamlit as st
 import streamlit.components.v1 as components
@@ -43,13 +44,14 @@ def apply_mercury_axes(fig: go.Figure) -> go.Figure:
 def render_metric_card(label: str, value: str, subtext: str = None):
     """Merender satu kartu metrik bergaya Mercury."""
     sub_html = f'<div class="mercury-metric-sub">{subtext}</div>' if subtext else ''
-    st.markdown(f"""
-    <div class="mercury-metric-box">
-        <div class="mercury-metric-label">{label}</div>
-        <div class="mercury-metric-value">{value}</div>
-        {sub_html}
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(
+        f'<div class="mercury-metric-box">'
+        f'<div class="mercury-metric-label">{label}</div>'
+        f'<div class="mercury-metric-value">{value}</div>'
+        f'{sub_html}'
+        f'</div>',
+        unsafe_allow_html=True
+    )
 
 def render_metric_row(test_metrics: dict, val_metrics: dict = None):
     """
@@ -208,7 +210,7 @@ def render_classification_report_table(report_dict: dict):
         st.info("Laporan klasifikasi per kelas tidak tersedia.")
         return
         
-    rows_html = ""
+    rows_list = []
     for k, metrics in report_dict.items():
         if not isinstance(metrics, dict):
             continue
@@ -222,37 +224,36 @@ def render_classification_report_table(report_dict: dict):
         sup = metrics.get("support", 0)
         badge_color = WARNA_KELAS.get(k, "#8c9bff")
         
-        rows_html += f"""
-        <tr>
-            <td style="display:flex;align-items:center;gap:8px;">
-                <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background-color:{badge_color};"></span>
-                <strong>{k}</strong>
-            </td>
-            <td>{prec*100:.2f}%</td>
-            <td>{rec*100:.2f}%</td>
-            <td><strong>{f1*100:.2f}%</strong></td>
-            <td>{sup}</td>
-        </tr>
-        """
+        rows_list.append(
+            f'<tr>'
+            f'<td style="display:flex;align-items:center;gap:8px;">'
+            f'<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background-color:{badge_color};"></span>'
+            f'<strong>{k}</strong>'
+            f'</td>'
+            f'<td>{prec*100:.2f}%</td>'
+            f'<td>{rec*100:.2f}%</td>'
+            f'<td><strong>{f1*100:.2f}%</strong></td>'
+            f'<td>{sup}</td>'
+            f'</tr>'
+        )
         
-    html = f"""
-    <div class="mercury-table-container">
-        <table class="mercury-table">
-            <thead>
-                <tr>
-                    <th>Kelas Tutupan Lahan</th>
-                    <th>Precision</th>
-                    <th>Recall</th>
-                    <th>F1-Score</th>
-                    <th>Support (Sampel Uji)</th>
-                </tr>
-            </thead>
-            <tbody>
-                {rows_html}
-            </tbody>
-        </table>
-    </div>
-    """
+    rows_html = "".join(rows_list)
+    html = (
+        '<div class="mercury-table-container">'
+        '<table class="mercury-table">'
+        '<thead>'
+        '<tr>'
+        '<th>Kelas Tutupan Lahan</th>'
+        '<th>Precision</th>'
+        '<th>Recall</th>'
+        '<th>F1-Score</th>'
+        '<th>Support (Sampel Uji)</th>'
+        '</tr>'
+        '</thead>'
+        f'<tbody>{rows_html}</tbody>'
+        '</table>'
+        '</div>'
+    )
     st.markdown(html, unsafe_allow_html=True)
 
 def render_comparison_bar_chart(model_nb: dict, model_knn: dict):
@@ -358,7 +359,7 @@ def render_winner_banner(winner_name: str, best_acc: float, best_kappa: float, m
     status_acc = "Memenuhi Ambang Batas (≥ 85%)" if best_acc >= 85.0 else "Belum Memenuhi Ambang Batas (85%)"
     status_kappa = "Memenuhi Ambang Kappa (≥ 0.80 - Hampir Sempurna)" if best_kappa >= 0.80 else "Belum Memenuhi Ambang Kappa (0.80)"
     
-    st.markdown(f"""
+    st.markdown(textwrap.dedent(f"""
     <div class="mercury-winner-banner">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
             <div>
@@ -388,7 +389,7 @@ def render_winner_banner(winner_name: str, best_acc: float, best_kappa: float, m
             <span class="mercury-pill mercury-pill-cobalt">{status_kappa}</span>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """), unsafe_allow_html=True)
 
 def render_interactive_map(map_rel_path: str, model_title: str):
     """
@@ -402,14 +403,14 @@ def render_interactive_map(map_rel_path: str, model_title: str):
         size_mb = len(map_content) / (1024 * 1024)
         c_bar1, c_bar2 = st.columns([3, 1])
         with c_bar1:
-            st.markdown(f"""
+            st.markdown(textwrap.dedent(f"""
             <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
                 <span class="mercury-pill mercury-pill-cobalt">Peta Siap ({size_mb:.1f} MB)</span>
                 <span style="color:#c3c3cc; font-size:0.85rem;">
                     Gunakan kontrol layer di pojok kanan atas peta untuk switch basemap & batas poligon.
                 </span>
             </div>
-            """, unsafe_allow_html=True)
+            """), unsafe_allow_html=True)
         with c_bar2:
             st.download_button(
                 label="📥 Unduh HTML",
@@ -421,7 +422,7 @@ def render_interactive_map(map_rel_path: str, model_title: str):
             
         components.html(map_content, height=720, scrolling=True)
     else:
-        st.markdown(f"""
+        st.markdown(textwrap.dedent(f"""
         <div class="mercury-card" style="border: 1px solid rgba(228, 26, 28, 0.4); padding: 20px;">
             <div style="color: #ff6b6b; font-weight: 500; font-size: 1.05rem; margin-bottom: 8px;">
                 ⚠️ File Peta Belum Ditemukan: <code>{filename}</code>
@@ -432,4 +433,4 @@ def render_interactive_map(map_rel_path: str, model_title: str):
                 agar Streamlit Cloud dapat memuatnya.
             </p>
         </div>
-        """, unsafe_allow_html=True)
+        """), unsafe_allow_html=True)

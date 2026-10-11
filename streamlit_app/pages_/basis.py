@@ -297,12 +297,13 @@ def render_basis(basis: str):
         st.markdown("#### Analisis Dampak Kebijakan Lahan:")
         for k_nama, imp in IMPLIKASI_KEBIJAKAN.items():
             w_col = WARNA_KELAS.get(k_nama, "#8c9bff")
-            st.markdown(f"""
-            <div style="margin-bottom:8px; font-size:0.9rem; color:#ededf3;">
-                <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background-color:{w_col};margin-right:6px;"></span>
-                <strong>{k_nama}:</strong> <span style="color:#c3c3cc;">{imp}</span>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown(
+                f'<div style="margin-bottom:8px; font-size:0.9rem; color:#ededf3;">'
+                f'<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background-color:{w_col};margin-right:6px;"></span>'
+                f'<strong>{k_nama}:</strong> <span style="color:#c3c3cc;">{imp}</span>'
+                f'</div>',
+                unsafe_allow_html=True
+            )
 
     # =========================================================================
     # SUB D: MODEL 2 - K-NEAREST NEIGHBORS (KNN)
@@ -368,12 +369,13 @@ def render_basis(basis: str):
         st.markdown("#### Analisis Dampak Kebijakan Lahan:")
         for k_nama, imp in IMPLIKASI_KEBIJAKAN.items():
             w_col = WARNA_KELAS.get(k_nama, "#8c9bff")
-            st.markdown(f"""
-            <div style="margin-bottom:8px; font-size:0.9rem; color:#ededf3;">
-                <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background-color:{w_col};margin-right:6px;"></span>
-                <strong>{k_nama}:</strong> <span style="color:#c3c3cc;">{imp}</span>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown(
+                f'<div style="margin-bottom:8px; font-size:0.9rem; color:#ededf3;">'
+                f'<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background-color:{w_col};margin-right:6px;"></span>'
+                f'<strong>{k_nama}:</strong> <span style="color:#c3c3cc;">{imp}</span>'
+                f'</div>',
+                unsafe_allow_html=True
+            )
 
     # =========================================================================
     # SUB E: PERBANDINGAN & EVALUASI DUA MODEL
