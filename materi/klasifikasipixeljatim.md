@@ -14,6 +14,13 @@ kernelspec:
 
 # Klasifikasi 6 Kelas Jawa Timur Berbasis Piksel
 
+```{important}
+**Aplikasi interaktif sudah di-deploy di Streamlit.** bisa mencobanya langsung di
+👉 [klasifikasi-jawatimur.streamlit.app](https://klasifikasi-jawatimur.streamlit.app/)
+
+Halaman ini adalah laporan lengkap (metode, evaluasi, dan peta) dari aplikasi tersebut.
+```
+
 Laporan ini adalah bagian dari **UTS Sistem Informasi Geografis** dengan basis analisis spasial penggunaan lahan dan kebijakan. Citra yang dipakai adalah **Sentinel-2A Level-2A** dari Copernicus Data Space Ecosystem, dan unit observasinya adalah **piksel**: setiap poligon label dijadikan sumber banyak titik acak, dan satu titik mewakili satu piksel Sentinel-2 berukuran 10 m.
 
 Alur laporan: **Data Understanding → Kolekting Data → Band dan Fitur → Pengambilan Sampel Piksel → Ekstraksi Sentinel-2 → Validasi Data → Pembagian Data per Poligon → Model 1 (Gaussian Naive Bayes, evaluasi, peta, implikasi) → Model 2 (KNN, evaluasi, peta, implikasi) → Kesimpulan Perbandingan.**
@@ -1170,13 +1177,12 @@ print("Selesai - Naive Bayes")
 print(pd.Series(klas_gnb[klas_gnb > 0]).map({k: v["nama"] for k, v in KELAS.items()}).value_counts())
 ```
 
-Peta interaktif dibuat dengan `buat_peta`. Batas Provinsi Jawa Timur ditampilkan sebagai garis putih, dan layer **poligon training** (dapat dinyalakan di kontrol layer) diwarnai menurut kelas aslinya sehingga hasil klasifikasi bisa dibandingkan langsung dengan label di lokasi yang sama.
+Peta interaktif dibuat dengan `buat_peta` dan disimpan sebagai `peta_pixel_gnb.html`. Batas Provinsi Jawa Timur ditampilkan sebagai garis putih, dan layer **poligon training** (dapat dinyalakan di kontrol layer) diwarnai menurut kelas aslinya sehingga hasil klasifikasi bisa dibandingkan langsung dengan label di lokasi yang sama.
 
 ```{code-cell} ipython3
 info_gnb = (f"<b>Model:</b> Gaussian Naive Bayes | <b>Akurasi test:</b> {acc_gnb_test*100:.1f}% | "
             f"<b>F1:</b> {f1_gnb_test*100:.1f}% | <b>Kappa:</b> {kappa_gnb:.3f} | <b>Resolusi:</b> {RES_M} m")
 peta_gnb = buat_peta(klas_gnb, "Gaussian Naive Bayes", "peta_pixel_gnb.html", info_gnb, gdf_poly=gdf)
-peta_gnb
 ```
 
 ```{raw} html
@@ -1255,10 +1261,9 @@ print(f"  - F1-Score (k={best_k}): {f1_knn_val * 100:.2f}%")
 ```
 
 **Hasil Tuning Validation Set:**
-- Nilai $k$ terbaik terpilih: **$k = 7$** dengan pembobotan jarak (`weights = 'distance'`)
+- Nilai $k$ terbaik terpilih: **$k = 7$** (metrik jarak Euclidean pada fitur terskala)
 - Akurasi Validasi: **80.45%**
 - F1-Score Validasi (Macro): **74.46%**
-- Cohen's Kappa Validasi: **0.7498**
 
 ![Kurva tuning k pada KNN](pixel_tuning_knn.png)
 
@@ -1317,7 +1322,7 @@ plt.show()
 | **Macro Average** | 0.788 | 0.859 | 0.816 | 790 |
 | **Weighted Average** | 0.911 | 0.900 | 0.903 | 790 |
 
-*Catatan Evaluasi KNN:* Model non-parametrik KNN ($k=7$, distance) bekerja sangat baik pada data spektral piksel karena mampu menangkap batas keputusan non-linear tanpa asumsi independensi fitur. Akurasi pengujian mencapai 90.00% dan Cohen's Kappa 0.8671, melampaui ambang standar pemetaan tutupan lahan.
+*Catatan Evaluasi KNN:* Model non-parametrik KNN ($k=7$) bekerja sangat baik pada data spektral piksel karena mampu menangkap batas keputusan non-linear tanpa asumsi independensi fitur. Akurasi pengujian mencapai 90.00% dan Cohen's Kappa 0.8671, melampaui ambang standar pemetaan tutupan lahan.
 
 
 ### 13.3 Peta Hasil Klasifikasi KNN
@@ -1334,7 +1339,6 @@ print(pd.Series(klas_knn[klas_knn > 0]).map({k: v["nama"] for k, v in KELAS.item
 info_knn = (f"<b>Model:</b> KNN (k={best_k}) | <b>Akurasi test:</b> {acc_knn_test*100:.1f}% | "
             f"<b>F1:</b> {f1_knn_test*100:.1f}% | <b>Kappa:</b> {kappa_knn:.3f} | <b>Resolusi:</b> {RES_M} m")
 peta_knn = buat_peta(klas_knn, f"KNN (k={best_k})", "peta_pixel_knn.html", info_knn, gdf_poly=gdf)
-peta_knn
 ```
 
 ```{raw} html
@@ -1416,17 +1420,17 @@ print(f"Akurasi tersebut {penilaian} ambang umum {AMBANG_AKURASI:.0f}%. {alasan[
 
 #### Komparasi pada Validation Set (1,281 Piksel)
 
-| Model | Kombinasi Fitur | Hyperparameter | Akurasi Validasi (%) | F1-Macro Validasi (%) | Cohen's Kappa |
-|---|---|---|---|---|---|
-| **K-Nearest Neighbors** | Band + Indeks (19 fitur) | $k=7$, weights=distance | **80.45%** | **74.46%** | **0.7498** |
-| **Gaussian Naive Bayes** | Band + Indeks (19 fitur) | Default | **72.71%** | **64.95%** | **0.6518** |
+| Model | Kombinasi Fitur | Hyperparameter | Akurasi Validasi (%) | F1-Macro Validasi (%) |
+|---|---|---|---|---|
+| **K-Nearest Neighbors** | Band + Indeks (18 fitur) | $k=7$, metric=euclidean | **80.45%** | **74.46%** |
+| **Gaussian Naive Bayes** | Band + Indeks (18 fitur) | `var_smoothing` terbaik dari validation set | **72.71%** | **64.95%** |
 
 #### Komparasi Evaluasi Akhir pada Testing Set Independen (790 Piksel Uji)
 
 | Model | Hyperparameter | Akurasi Test (%) | F1-Macro (%) | F1-Weighted (%) | Cohen's Kappa ($\kappa$) | Status Ambang Akurasi ($\ge 85\%$) | Status Ambang Kappa ($\ge 0.80$) |
 |---|---|---|---|---|---|---|---|
-| **KNN (k=7, distance)** | $k=7$, euclidean distance | **90.00%** | **81.63%** | **90.30%** | **0.8671** | **Memenuhi** | **Memenuhi (Hampir Sempurna)** |
-| **Gaussian Naive Bayes** | Default | **57.72%** | **47.21%** | **56.80%** | **0.4705** | Belum Memenuhi | Belum Memenuhi (Cukup) |
+| **KNN (k=7)** | $k=7$, euclidean | **90.00%** | **81.63%** | **90.30%** | **0.8671** | **Memenuhi** | **Memenuhi (Hampir Sempurna)** |
+| **Gaussian Naive Bayes** | `var_smoothing` terbaik dari validation set | **57.72%** | **47.21%** | **56.80%** | **0.4705** | Belum Memenuhi | Belum Memenuhi (Cukup) |
 
 #### Komparasi Estimasi Luas Tutupan Lahan Jawa Timur
 
@@ -1442,7 +1446,7 @@ print(f"Akurasi tersebut {penilaian} ambang umum {AMBANG_AKURASI:.0f}%. {alasan[
 
 ### 14.2 Kesimpulan
 
-**Model yang lebih baik:** Berdasarkan pengujian independen pada 790 piksel uji (yang dibagi per poligon untuk menghindari autokorelasi spasial), **K-Nearest Neighbors (KNN)** dengan $k=7$ dan pembobotan jarak menjadi model terbaik dengan **Akurasi Test 90.00%**, **F1-Weighted 90.30%**, dan **Cohen's Kappa 0.8671**. KNN unggul mutlak sebesar **32.28 poin persentase** di atas Gaussian Naive Bayes yang hanya meraih akurasi **57.72%** dan Kappa **0.4705**.
+**Model yang lebih baik:** Berdasarkan pengujian independen pada 790 piksel uji (yang dibagi per poligon untuk menghindari autokorelasi spasial), **K-Nearest Neighbors (KNN)** dengan $k=7$ menjadi model terbaik dengan **Akurasi Test 90.00%**, **F1-Weighted 90.30%**, dan **Cohen's Kappa 0.8671**. KNN unggul sebesar **32.28 poin persentase** di atas Gaussian Naive Bayes yang hanya meraih akurasi **57.72%** dan Kappa **0.4705**.
 
 **Penilaian terhadap ambang batas:** 
 - **KNN** memenuhi ambang batas minimum pemetaan tutupan lahan (ambang akurasi $\ge 85\%$ tercapai pada 90.00%, dan ambang Kappa $\ge 0.80$ tercapai pada 0.8671 kategori *Almost Perfect Agreement*).
@@ -1450,7 +1454,7 @@ print(f"Akurasi tersebut {penilaian} ambang umum {AMBANG_AKURASI:.0f}%. {alasan[
 
 **Mengapa performa kedua model berbeda drastis pada level piksel:**
 1. **Kegagalan Gaussian Naive Bayes:** Asumsi independensi fitur (*conditional independence*) dilanggar parah oleh korelasi multivariat band-band Sentinel-2 (misal B2, B3, B4 yang berkorelasi tinggi satu sama lain). Hal ini menyebabkan Naive Bayes meremehkan ketidakpastian dan mendistorsi batas probabilitas kelas, sehingga banyak piksel sawah tertukar menjadi lahan hijau dan air danau tertukar dengan laut.
-2. **Keunggulan KNN:** KNN adalah algoritma non-parametrik berbasis kedekatan instans (jarak Euclidean dalam ruang 19 fitur berskala). KNN tidak mengasumsikan distribusi normal atau independensi fitur, sehingga mampu memetakan variasi piksel heterogen di lapangan secara jauh lebih akurat.
+2. **Keunggulan KNN:** KNN adalah algoritma non-parametrik berbasis kedekatan instans (jarak Euclidean dalam ruang 18 fitur berskala). KNN tidak mengasumsikan distribusi normal atau independensi fitur, sehingga mampu memetakan variasi piksel heterogen di lapangan secara jauh lebih akurat.
 
 **Keterbatasan:**
 1. Autokorelasi spasial internal poligon tetap dapat mempengaruhi estimasi variansi, meski pembagian data telah dilakukan per poligon.
@@ -1463,11 +1467,12 @@ print(f"Akurasi tersebut {penilaian} ambang umum {AMBANG_AKURASI:.0f}%. {alasan[
 
 | Tahap | Keterangan |
 |---|---|
+| Aplikasi | Sudah di-deploy di Streamlit: [klasifikasi-jawatimur.streamlit.app](https://klasifikasi-jawatimur.streamlit.app/) |
 | Data | Sentinel-2 L2A (Copernicus), komposit median 1 Mei sampai 30 September 2026, awan maksimal 30%, masking `SCL`, poligon 6 kelas Jawa Timur |
 | Sampel | Titik acak di dalam poligon, satu titik = satu piksel 10 m, jatah sama rata per poligon, target `N_PER_CLASS` piksel per kelas |
 | Fitur | 18 fitur: 10 band reflektansi (B2, B3, B4, B5, B6, B7, B8, B8A, B11, B12) dan 8 indeks spektral (NDVI, NDWI, MNDWI, NDBI, NDRE, EVI, SAVI, BSI) |
 | Pembagian data | 70% training (4,818 piksel), 18.6% validation (1,281 piksel), 11.5% testing (790 piksel), dibagi per poligon |
 | Model 1 | Gaussian Naive Bayes, Akurasi Test: **57.72%**, Kappa: **0.4705** |
-| Model 2 | KNN ($k=7$, distance), Akurasi Test: **90.00%**, Kappa: **0.8671** |
+| Model 2 | KNN ($k=7$), Akurasi Test: **90.00%**, Kappa: **0.8671** |
 | Peta | Dua peta Folium terpisah (Naive Bayes dan KNN) dengan batas Provinsi Jawa Timur, disimpan sebagai `.html` mandiri |
 | Model terbaik | **K-Nearest Neighbors (KNN)** (Akurasi Test: 90.00%, Cohen's Kappa: 0.8671) |

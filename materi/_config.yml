@@ -9,8 +9,12 @@ logo: foto.png
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  execute_notebooks: Force
+  execute_notebooks: "off"
 
+sphinx:
+  config:
+    html_extra_path: ["peta_pixel_gnb.html", "peta_pixel_knn.html"]
+    
 # Define the name of the latex output file for PDF builds
 latex:
   latex_documents:
