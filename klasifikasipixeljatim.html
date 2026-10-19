@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -62,8 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'klasifikasipixeljatim';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Klasifikasi 6 Kelas Jawa Timur Berbasis Polygon" href="klasifikasipolyjatim.html" />
-    <link rel="prev" title="Klasifikasi Lahan Sawah dan Non-Sawah dengan Random Forest" href="klasifikasi.html" />
+    <link rel="prev" title="Klasifikasi 6 Kelas Jawa Timur Berbasis Polygon" href="klasifikasipolyjatim.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -191,9 +190,9 @@
 <li class="toctree-l1"><a class="reference internal" href="preprocessing_ekstraksi_kamal.html">Preprocessing dan Ekstraksi Fitur</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kmean.html">K-Means Clustering Polutan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="clusteringlinpoly.html">Clustering Linear dan Polynomial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="klasifikasi.html">Klasifikasi Lahan Sawah dan Non-Sawah dengan Random Forest</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Klasifikasi 6 Kelas Jawa Timur Berbasis Piksel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasifikasi.html">Klasifikasi Lahan Sawah dan Non-Sawah dari Komposit Sentinel-2A</a></li>
 <li class="toctree-l1"><a class="reference internal" href="klasifikasipolyjatim.html">Klasifikasi 6 Kelas Jawa Timur Berbasis Polygon</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Klasifikasi 6 Kelas Jawa Timur Berbasis Piksel</a></li>
 </ul>
 
     </div>
@@ -295,7 +294,7 @@
       
       
       
-      <li><a href="_sources/klasifikasipixeljatim.md" target="_blank"
+      <li><a href="_sources/klasifikasipixeljatim.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -305,7 +304,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -443,6 +442,12 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="klasifikasi-6-kelas-jawa-timur-berbasis-piksel">
 <h1>Klasifikasi 6 Kelas Jawa Timur Berbasis Piksel<a class="headerlink" href="#klasifikasi-6-kelas-jawa-timur-berbasis-piksel" title="Link to this heading">#</a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><strong>Aplikasi interaktif sudah di-deploy di Streamlit.</strong> bisa mencobanya langsung di
+👉 <a class="reference external" href="https://klasifikasi-jawatimur.streamlit.app/">klasifikasi-jawatimur.streamlit.app</a></p>
+<p>Halaman ini adalah laporan lengkap (metode, evaluasi, dan peta) dari aplikasi tersebut.</p>
+</div>
 <p>Laporan ini adalah bagian dari <strong>UTS Sistem Informasi Geografis</strong> dengan basis analisis spasial penggunaan lahan dan kebijakan. Citra yang dipakai adalah <strong>Sentinel-2A Level-2A</strong> dari Copernicus Data Space Ecosystem, dan unit observasinya adalah <strong>piksel</strong>: setiap poligon label dijadikan sumber banyak titik acak, dan satu titik mewakili satu piksel Sentinel-2 berukuran 10 m.</p>
 <p>Alur laporan: <strong>Data Understanding → Kolekting Data → Band dan Fitur → Pengambilan Sampel Piksel → Ekstraksi Sentinel-2 → Validasi Data → Pembagian Data per Poligon → Model 1 (Gaussian Naive Bayes, evaluasi, peta, implikasi) → Model 2 (KNN, evaluasi, peta, implikasi) → Kesimpulan Perbandingan.</strong></p>
 <section id="data-understanding">
@@ -1929,13 +1934,12 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Peta interaktif dibuat dengan <code class="docutils literal notranslate"><span class="pre">buat_peta</span></code>. Batas Provinsi Jawa Timur ditampilkan sebagai garis putih, dan layer <strong>poligon training</strong> (dapat dinyalakan di kontrol layer) diwarnai menurut kelas aslinya sehingga hasil klasifikasi bisa dibandingkan langsung dengan label di lokasi yang sama.</p>
+<p>Peta interaktif dibuat dengan <code class="docutils literal notranslate"><span class="pre">buat_peta</span></code> dan disimpan sebagai <code class="docutils literal notranslate"><span class="pre">peta_pixel_gnb.html</span></code>. Batas Provinsi Jawa Timur ditampilkan sebagai garis putih, dan layer <strong>poligon training</strong> (dapat dinyalakan di kontrol layer) diwarnai menurut kelas aslinya sehingga hasil klasifikasi bisa dibandingkan langsung dengan label di lokasi yang sama.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">info_gnb</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Model:&lt;/b&gt; Gaussian Naive Bayes | &lt;b&gt;Akurasi test:&lt;/b&gt; </span><span class="si">{</span><span class="n">acc_gnb_test</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% | &quot;</span>
             <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;F1:&lt;/b&gt; </span><span class="si">{</span><span class="n">f1_gnb_test</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% | &lt;b&gt;Kappa:&lt;/b&gt; </span><span class="si">{</span><span class="n">kappa_gnb</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | &lt;b&gt;Resolusi:&lt;/b&gt; </span><span class="si">{</span><span class="n">RES_M</span><span class="si">}</span><span class="s2"> m&quot;</span><span class="p">)</span>
 <span class="n">peta_gnb</span> <span class="o">=</span> <span class="n">buat_peta</span><span class="p">(</span><span class="n">klas_gnb</span><span class="p">,</span> <span class="s2">&quot;Gaussian Naive Bayes&quot;</span><span class="p">,</span> <span class="s2">&quot;peta_pixel_gnb.html&quot;</span><span class="p">,</span> <span class="n">info_gnb</span><span class="p">,</span> <span class="n">gdf_poly</span><span class="o">=</span><span class="n">gdf</span><span class="p">)</span>
-<span class="n">peta_gnb</span>
 </pre></div>
 </div>
 </div>
@@ -2019,10 +2023,9 @@ document.write(`
 </div>
 <p><strong>Hasil Tuning Validation Set:</strong></p>
 <ul class="simple">
-<li><p>Nilai <span class="math notranslate nohighlight">\(k\)</span> terbaik terpilih: <strong><span class="math notranslate nohighlight">\(k = 7\)</span></strong> dengan pembobotan jarak (<code class="docutils literal notranslate"><span class="pre">weights</span> <span class="pre">=</span> <span class="pre">'distance'</span></code>)</p></li>
+<li><p>Nilai <span class="math notranslate nohighlight">\(k\)</span> terbaik terpilih: <strong><span class="math notranslate nohighlight">\(k = 7\)</span></strong> (metrik jarak Euclidean pada fitur terskala)</p></li>
 <li><p>Akurasi Validasi: <strong>80.45%</strong></p></li>
 <li><p>F1-Score Validasi (Macro): <strong>74.46%</strong></p></li>
-<li><p>Cohen’s Kappa Validasi: <strong>0.7498</strong></p></li>
 </ul>
 <p><img alt="Kurva tuning k pada KNN" src="pixel_tuning_knn.png" /></p>
 </section>
@@ -2138,7 +2141,7 @@ document.write(`
 </tbody>
 </table>
 </div>
-<p><em>Catatan Evaluasi KNN:</em> Model non-parametrik KNN (<span class="math notranslate nohighlight">\(k=7\)</span>, distance) bekerja sangat baik pada data spektral piksel karena mampu menangkap batas keputusan non-linear tanpa asumsi independensi fitur. Akurasi pengujian mencapai 90.00% dan Cohen’s Kappa 0.8671, melampaui ambang standar pemetaan tutupan lahan.</p>
+<p><em>Catatan Evaluasi KNN:</em> Model non-parametrik KNN (<span class="math notranslate nohighlight">\(k=7\)</span>) bekerja sangat baik pada data spektral piksel karena mampu menangkap batas keputusan non-linear tanpa asumsi independensi fitur. Akurasi pengujian mencapai 90.00% dan Cohen’s Kappa 0.8671, melampaui ambang standar pemetaan tutupan lahan.</p>
 </section>
 <section id="peta-hasil-klasifikasi-knn">
 <h3>13.3 Peta Hasil Klasifikasi KNN<a class="headerlink" href="#peta-hasil-klasifikasi-knn" title="Link to this heading">#</a></h3>
@@ -2157,7 +2160,6 @@ document.write(`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">info_knn</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Model:&lt;/b&gt; KNN (k=</span><span class="si">{</span><span class="n">best_k</span><span class="si">}</span><span class="s2">) | &lt;b&gt;Akurasi test:&lt;/b&gt; </span><span class="si">{</span><span class="n">acc_knn_test</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% | &quot;</span>
             <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;F1:&lt;/b&gt; </span><span class="si">{</span><span class="n">f1_knn_test</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% | &lt;b&gt;Kappa:&lt;/b&gt; </span><span class="si">{</span><span class="n">kappa_knn</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | &lt;b&gt;Resolusi:&lt;/b&gt; </span><span class="si">{</span><span class="n">RES_M</span><span class="si">}</span><span class="s2"> m&quot;</span><span class="p">)</span>
 <span class="n">peta_knn</span> <span class="o">=</span> <span class="n">buat_peta</span><span class="p">(</span><span class="n">klas_knn</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;KNN (k=</span><span class="si">{</span><span class="n">best_k</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="s2">&quot;peta_pixel_knn.html&quot;</span><span class="p">,</span> <span class="n">info_knn</span><span class="p">,</span> <span class="n">gdf_poly</span><span class="o">=</span><span class="n">gdf</span><span class="p">)</span>
-<span class="n">peta_knn</span>
 </pre></div>
 </div>
 </div>
@@ -2251,23 +2253,20 @@ document.write(`
 <th class="head"><p>Hyperparameter</p></th>
 <th class="head"><p>Akurasi Validasi (%)</p></th>
 <th class="head"><p>F1-Macro Validasi (%)</p></th>
-<th class="head"><p>Cohen’s Kappa</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>K-Nearest Neighbors</strong></p></td>
-<td><p>Band + Indeks (19 fitur)</p></td>
-<td><p><span class="math notranslate nohighlight">\(k=7\)</span>, weights=distance</p></td>
+<td><p>Band + Indeks (18 fitur)</p></td>
+<td><p><span class="math notranslate nohighlight">\(k=7\)</span>, metric=euclidean</p></td>
 <td><p><strong>80.45%</strong></p></td>
 <td><p><strong>74.46%</strong></p></td>
-<td><p><strong>0.7498</strong></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Gaussian Naive Bayes</strong></p></td>
-<td><p>Band + Indeks (19 fitur)</p></td>
-<td><p>Default</p></td>
+<td><p>Band + Indeks (18 fitur)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">var_smoothing</span></code> terbaik dari validation set</p></td>
 <td><p><strong>72.71%</strong></p></td>
 <td><p><strong>64.95%</strong></p></td>
-<td><p><strong>0.6518</strong></p></td>
 </tr>
 </tbody>
 </table>
@@ -2288,8 +2287,8 @@ document.write(`
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong>KNN (k=7, distance)</strong></p></td>
-<td><p><span class="math notranslate nohighlight">\(k=7\)</span>, euclidean distance</p></td>
+<tr class="row-even"><td><p><strong>KNN (k=7)</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(k=7\)</span>, euclidean</p></td>
 <td><p><strong>90.00%</strong></p></td>
 <td><p><strong>81.63%</strong></p></td>
 <td><p><strong>90.30%</strong></p></td>
@@ -2298,7 +2297,7 @@ document.write(`
 <td><p><strong>Memenuhi (Hampir Sempurna)</strong></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Gaussian Naive Bayes</strong></p></td>
-<td><p>Default</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">var_smoothing</span></code> terbaik dari validation set</p></td>
 <td><p><strong>57.72%</strong></p></td>
 <td><p><strong>47.21%</strong></p></td>
 <td><p><strong>56.80%</strong></p></td>
@@ -2379,7 +2378,7 @@ document.write(`
 </section>
 <section id="kesimpulan">
 <h3>14.2 Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h3>
-<p><strong>Model yang lebih baik:</strong> Berdasarkan pengujian independen pada 790 piksel uji (yang dibagi per poligon untuk menghindari autokorelasi spasial), <strong>K-Nearest Neighbors (KNN)</strong> dengan <span class="math notranslate nohighlight">\(k=7\)</span> dan pembobotan jarak menjadi model terbaik dengan <strong>Akurasi Test 90.00%</strong>, <strong>F1-Weighted 90.30%</strong>, dan <strong>Cohen’s Kappa 0.8671</strong>. KNN unggul mutlak sebesar <strong>32.28 poin persentase</strong> di atas Gaussian Naive Bayes yang hanya meraih akurasi <strong>57.72%</strong> dan Kappa <strong>0.4705</strong>.</p>
+<p><strong>Model yang lebih baik:</strong> Berdasarkan pengujian independen pada 790 piksel uji (yang dibagi per poligon untuk menghindari autokorelasi spasial), <strong>K-Nearest Neighbors (KNN)</strong> dengan <span class="math notranslate nohighlight">\(k=7\)</span> menjadi model terbaik dengan <strong>Akurasi Test 90.00%</strong>, <strong>F1-Weighted 90.30%</strong>, dan <strong>Cohen’s Kappa 0.8671</strong>. KNN unggul sebesar <strong>32.28 poin persentase</strong> di atas Gaussian Naive Bayes yang hanya meraih akurasi <strong>57.72%</strong> dan Kappa <strong>0.4705</strong>.</p>
 <p><strong>Penilaian terhadap ambang batas:</strong></p>
 <ul class="simple">
 <li><p><strong>KNN</strong> memenuhi ambang batas minimum pemetaan tutupan lahan (ambang akurasi <span class="math notranslate nohighlight">\(\ge 85\%\)</span> tercapai pada 90.00%, dan ambang Kappa <span class="math notranslate nohighlight">\(\ge 0.80\)</span> tercapai pada 0.8671 kategori <em>Almost Perfect Agreement</em>).</p></li>
@@ -2388,7 +2387,7 @@ document.write(`
 <p><strong>Mengapa performa kedua model berbeda drastis pada level piksel:</strong></p>
 <ol class="arabic simple">
 <li><p><strong>Kegagalan Gaussian Naive Bayes:</strong> Asumsi independensi fitur (<em>conditional independence</em>) dilanggar parah oleh korelasi multivariat band-band Sentinel-2 (misal B2, B3, B4 yang berkorelasi tinggi satu sama lain). Hal ini menyebabkan Naive Bayes meremehkan ketidakpastian dan mendistorsi batas probabilitas kelas, sehingga banyak piksel sawah tertukar menjadi lahan hijau dan air danau tertukar dengan laut.</p></li>
-<li><p><strong>Keunggulan KNN:</strong> KNN adalah algoritma non-parametrik berbasis kedekatan instans (jarak Euclidean dalam ruang 19 fitur berskala). KNN tidak mengasumsikan distribusi normal atau independensi fitur, sehingga mampu memetakan variasi piksel heterogen di lapangan secara jauh lebih akurat.</p></li>
+<li><p><strong>Keunggulan KNN:</strong> KNN adalah algoritma non-parametrik berbasis kedekatan instans (jarak Euclidean dalam ruang 18 fitur berskala). KNN tidak mengasumsikan distribusi normal atau independensi fitur, sehingga mampu memetakan variasi piksel heterogen di lapangan secara jauh lebih akurat.</p></li>
 </ol>
 <p><strong>Keterbatasan:</strong></p>
 <ol class="arabic simple">
@@ -2408,28 +2407,31 @@ document.write(`
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Data</p></td>
+<tr class="row-even"><td><p>Aplikasi</p></td>
+<td><p>Sudah di-deploy di Streamlit: <a class="reference external" href="https://klasifikasi-jawatimur.streamlit.app/">klasifikasi-jawatimur.streamlit.app</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Data</p></td>
 <td><p>Sentinel-2 L2A (Copernicus), komposit median 1 Mei sampai 30 September 2026, awan maksimal 30%, masking <code class="docutils literal notranslate"><span class="pre">SCL</span></code>, poligon 6 kelas Jawa Timur</p></td>
 </tr>
-<tr class="row-odd"><td><p>Sampel</p></td>
+<tr class="row-even"><td><p>Sampel</p></td>
 <td><p>Titik acak di dalam poligon, satu titik = satu piksel 10 m, jatah sama rata per poligon, target <code class="docutils literal notranslate"><span class="pre">N_PER_CLASS</span></code> piksel per kelas</p></td>
 </tr>
-<tr class="row-even"><td><p>Fitur</p></td>
+<tr class="row-odd"><td><p>Fitur</p></td>
 <td><p>18 fitur: 10 band reflektansi (B2, B3, B4, B5, B6, B7, B8, B8A, B11, B12) dan 8 indeks spektral (NDVI, NDWI, MNDWI, NDBI, NDRE, EVI, SAVI, BSI)</p></td>
 </tr>
-<tr class="row-odd"><td><p>Pembagian data</p></td>
+<tr class="row-even"><td><p>Pembagian data</p></td>
 <td><p>70% training (4,818 piksel), 18.6% validation (1,281 piksel), 11.5% testing (790 piksel), dibagi per poligon</p></td>
 </tr>
-<tr class="row-even"><td><p>Model 1</p></td>
+<tr class="row-odd"><td><p>Model 1</p></td>
 <td><p>Gaussian Naive Bayes, Akurasi Test: <strong>57.72%</strong>, Kappa: <strong>0.4705</strong></p></td>
 </tr>
-<tr class="row-odd"><td><p>Model 2</p></td>
-<td><p>KNN (<span class="math notranslate nohighlight">\(k=7\)</span>, distance), Akurasi Test: <strong>90.00%</strong>, Kappa: <strong>0.8671</strong></p></td>
+<tr class="row-even"><td><p>Model 2</p></td>
+<td><p>KNN (<span class="math notranslate nohighlight">\(k=7\)</span>), Akurasi Test: <strong>90.00%</strong>, Kappa: <strong>0.8671</strong></p></td>
 </tr>
-<tr class="row-even"><td><p>Peta</p></td>
+<tr class="row-odd"><td><p>Peta</p></td>
 <td><p>Dua peta Folium terpisah (Naive Bayes dan KNN) dengan batas Provinsi Jawa Timur, disimpan sebagai <code class="docutils literal notranslate"><span class="pre">.html</span></code> mandiri</p></td>
 </tr>
-<tr class="row-odd"><td><p>Model terbaik</p></td>
+<tr class="row-even"><td><p>Model terbaik</p></td>
 <td><p><strong>K-Nearest Neighbors (KNN)</strong> (Akurasi Test: 90.00%, Cohen’s Kappa: 0.8671)</p></td>
 </tr>
 </tbody>
@@ -2469,22 +2471,13 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="klasifikasi.html"
+       href="klasifikasipolyjatim.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Klasifikasi Lahan Sawah dan Non-Sawah dengan Random Forest</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="klasifikasipolyjatim.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Klasifikasi 6 Kelas Jawa Timur Berbasis Polygon</p>
       </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

@@ -71,7 +71,7 @@ Semua indeks berada pada rentang teoritis sekitar $-1$ sampai $1$. Nilai aktual 
 
 Earth Engine mengekspor sepuluh band pada resolusi 10 m dalam proyeksi UTM zona 49S (EPSG:32749) sebagai GeoTIFF float32, dengan urutan B2, B3, B4, B8, B11, B12, NDVI, NDWI, MNDWI, NDBI. Band B11 dan B12 beresolusi asli 20 m, dan Earth Engine menyamakannya ke 10 m.
 
-> **Urutan menjalankan sel:** jalankan sel akuisisi ini di Google Colab atau Jupyter Notebook yang dapat membuka proses autentikasi Earth Engine. Setelah autentikasi selesai, pastikan `sentinel2A_komposit.tif` berhasil dibuat dan diunduh. Sel pelatihan berikutnya juga memerlukan `sawah.geojson` dan `non_sawah.geojson` pada folder kerja yang sama. Jika salah satu file atau autentikasi belum tersedia, output Random Forest belum dapat muncul.
+> **Urutan menjalankan sel:** jalankan sel akuisisi ini di Google Colab atau Jupyter Notebook yang dapat membuka proses autentikasi Earth Engine. Setelah autentikasi selesai, pastikan `sentinel2A_komposit.tif` berhasil dibuat dan diunduh. Sel pelatihan berikutnya juga memerlukan `sawah.geojson` dan `nonsawah.geojson` pada folder kerja yang sama. Jika salah satu file atau autentikasi belum tersedia, output Random Forest belum dapat muncul.
 
 ```{code-cell} ipython3
 !pip -q install earthengine-api requests
@@ -135,7 +135,7 @@ bergantung pada periode, tutupan awan, dan koleksi yang tersedia saat eksekusi.
 
 Skrip memproyeksikan tiap poligon ke CRS citra dan mengecilkan batasnya 5 m ke dalam, supaya piksel tepi petak yang bercampur dengan penutup lahan lain tidak ikut. Poligon yang kosong setelah pengecilan memakai batas aslinya. Semua piksel yang pusatnya jatuh di dalam poligon menjadi sampel, dan tiap sampel membawa nomor petaknya. Piksel tanpa data tidak masuk.
 
-Dalam klasifikasi ini, **satu data berarti satu piksel berlabel**. Setiap data mempunyai **10 fitur**, yaitu `B2`, `B3`, `B4`, `B8`, `B11`, `B12`, `NDVI`, `NDWI`, `MNDWI`, dan `NDBI`. Jadi, bentuk matriks `X` adalah `(jumlah data piksel, 10)`, sedangkan `y` berisi satu label kelas untuk setiap baris `X`. Jumlah data bergantung pada jumlah piksel yang masuk ke dalam petak sampel dan lolos pemeriksaan validitas citra.
+GeoJSON yang digunakan berisi **100 petak**, terdiri atas **50 petak sawah** pada `sawah.geojson` dan **50 petak non-sawah** pada `nonsawah.geojson`. Dalam klasifikasi ini, **satu data berarti satu piksel berlabel**, bukan satu petak. Karena itu, 100 petak dapat menghasilkan ribuan data piksel, bergantung pada ukuran petak, resolusi 10 m, batas yang diperkecil 5 m, dan piksel yang valid. Setiap data mempunyai **10 fitur**, yaitu `B2`, `B3`, `B4`, `B8`, `B11`, `B12`, `NDVI`, `NDWI`, `MNDWI`, dan `NDBI`. Jadi, bentuk matriks `X` adalah `(jumlah data piksel, 10)`, sedangkan `y` berisi satu label kelas untuk setiap baris `X`.
 
 Pembagian data latih dan uji mengikuti nomor petak: 70% petak melatih model dan 30% petak menguji model. Piksel dari satu petak tidak muncul di kedua sisi, jadi akurasi uji tidak menghitung piksel bertetangga yang nilainya hampir sama sebagai bukti terpisah.
 
@@ -176,11 +176,11 @@ BUFFER_M = 5      # kecilkan tiap petak sekian meter dari tepinya supaya tidak m
 
 # ---------- GeoJSON petak sampel ----------
 # Lampiran poligon sawah disimpan sebagai `sawah.geojson`, sedangkan lampiran
-# persegi P1-P50 disimpan sebagai `non_sawah.geojson` di folder kerja notebook.
+# persegi P1-P50 disimpan sebagai `nonsawah.geojson` di folder kerja notebook.
 # Kedua file harus berupa FeatureCollection dengan geometri LineString tertutup
 # atau Polygon dalam EPSG:4326.
 FILE_SAWAH = Path('sawah.geojson')
-FILE_NON_SAWAH = Path('non_sawah.geojson')
+FILE_NON_SAWAH = Path('nonsawah.geojson')
 
 
 def baca_geojson(path):
