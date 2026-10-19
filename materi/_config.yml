@@ -6,15 +6,28 @@ author: A. CHOIRIL ANWAR EL-ASFIHANI RISYDAN
 copyright: "2026"
 logo: foto.png
 
-# Force re-execution of notebooks on each build.
-# See https://jupyterbook.org/content/execute.html
+# Pakai output yang sudah tersimpan di .ipynb (tidak dieksekusi ulang saat build)
 execute:
   execute_notebooks: "off"
+
+exclude_patterns:
+  - klasifikasipixeljatim.md
+  - klasifikasipixel.ipynb
+  - klasifikasipolygon.ipynb
+  - klasifikasi_pixel_jatim.ipynb
+  - klasifikasi_polygon_jatim.ipynb
+  - posgres.ipynb
+  - procesing.ipynb
+  - "assets/DESIGN (1).md"
+  - _build
+  - Thumbs.db
+  - .DS_Store
+  - "**.ipynb_checkpoints"
 
 sphinx:
   config:
     html_extra_path: ["peta_pixel_gnb.html", "peta_pixel_knn.html"]
-    
+
 # Define the name of the latex output file for PDF builds
 latex:
   latex_documents:
@@ -23,7 +36,7 @@ latex:
 # Add a bibtex file so that we can create citations
 bibtex_bibfiles:
   - references.bib
-
+  
 # Information about where the book exists on the web
 repository:
   url: https://github.com/executablebooks/jupyter-book  # Online location of your book

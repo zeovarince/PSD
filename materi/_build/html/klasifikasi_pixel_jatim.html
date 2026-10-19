@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -191,9 +191,9 @@
 <li class="toctree-l1"><a class="reference internal" href="preprocessing_ekstraksi_kamal.html">Preprocessing dan Ekstraksi Fitur</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kmean.html">K-Means Clustering Polutan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="clusteringlinpoly.html">Clustering Linear dan Polynomial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="klasifikasi.html">Klasifikasi Lahan Sawah dan Non-Sawah dengan Random Forest</a></li>
-<li class="toctree-l1"><a class="reference internal" href="klasifikasipixeljatim.html">Klasifikasi 6 Kelas Jawa Timur Berbasis Piksel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasifikasi.html">Klasifikasi Lahan Sawah dan Non-Sawah dari Komposit Sentinel-2A</a></li>
 <li class="toctree-l1"><a class="reference internal" href="klasifikasipolyjatim.html">Klasifikasi 6 Kelas Jawa Timur Berbasis Polygon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="klasifikasipixeljatim.html">Klasifikasi 6 Kelas Jawa Timur Berbasis Piksel</a></li>
 </ul>
 
     </div>
@@ -648,14 +648,19 @@ document.write(`
 <h2>Import Pustaka, Konfigurasi, dan Fungsi Indeks Spektral<a class="headerlink" href="#import-pustaka-konfigurasi-dan-fungsi-indeks-spektral" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">q</span> <span class="o">-</span><span class="n">U</span> <span class="n">sentinelhub</span> <span class="n">geopandas</span> <span class="n">shapely</span> <span class="n">pyproj</span> <span class="n">rasterio</span> <span class="n">folium</span> <span class="n">scikit</span><span class="o">-</span><span class="n">learn</span> <span class="n">seaborn</span> <span class="n">matplotlib</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pip</span> install -q -U sentinelhub geopandas shapely pyproj rasterio folium scikit-learn seaborn matplotlib
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">io</span><span class="o">,</span><span class="w"> </span><span class="nn">glob</span><span class="o">,</span><span class="w"> </span><span class="nn">time</span><span class="o">,</span><span class="w"> </span><span class="nn">zipfile</span><span class="o">,</span><span class="w"> </span><span class="nn">urllib.request</span><span class="o">,</span><span class="w"> </span><span class="nn">warnings</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">io</span><span class="o">,</span><span class="w"> </span><span class="nn">glob</span><span class="o">,</span><span class="w"> </span><span class="nn">time</span><span class="o">,</span><span class="w"> </span><span class="nn">zipfile</span><span class="o">,</span><span class="w"> </span><span class="nn">urllib.request</span><span class="o">,</span><span class="w"> </span><span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -712,6 +717,12 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total kelas : 6
+Total fitur : 18 (10 band + 8 indeks)
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <hr class="docutils" />
@@ -720,7 +731,7 @@ document.write(`
 <p>Shapefile 6 kelas dibaca, CRS dinormalkan ke EPSG:4326, geometri invalid diperbaiki, lalu <strong>dipotong ke area studi (AOI)</strong>. Poligon yang berada di luar AOI dibuang dan dilaporkan (kemungkinan salah digitasi).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">box</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">box</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">shapely.validation</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_valid</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">cari_shp</span><span class="p">(</span><span class="n">nama</span><span class="p">):</span>
@@ -772,6 +783,88 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Kelas</th>
+      <th>Poligon awal</th>
+      <th>Poligon di dalam AOI</th>
+      <th>Total Luas (Ha)</th>
+    </tr>
+    <tr>
+      <th>ID</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Sawah</td>
+      <td>50</td>
+      <td>50</td>
+      <td>4198.6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Bangunan</td>
+      <td>50</td>
+      <td>50</td>
+      <td>2413.6</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Mangrove</td>
+      <td>50</td>
+      <td>50</td>
+      <td>1207.9</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Lahan Hijau</td>
+      <td>50</td>
+      <td>50</td>
+      <td>18452.9</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Perairan Terbuka (Laut)</td>
+      <td>35</td>
+      <td>17</td>
+      <td>3982331.4</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Danau</td>
+      <td>50</td>
+      <td>49</td>
+      <td>706.3</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total poligon dalam AOI: 266
+[!] 19 poligon berada di luar AOI dan dibuang. Cek apakah itu salah digitasi.
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <hr class="docutils" />
@@ -780,7 +873,7 @@ document.write(`
 <p>Titik acak dibuat di dalam poligon dengan jatah sama rata per poligon, agar poligon besar (misalnya laut) tidak mendominasi. Titik yang jatuh di piksel 10 m yang sama dibuang. <strong>Satu titik = satu piksel Sentinel-2.</strong> <code class="docutils literal notranslate"><span class="pre">N_PER_CLASS</span></code> diubah-ubah untuk eksperimen jumlah data (misalnya 500, 1500, 3000).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Point</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Point</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">shapely.prepared</span><span class="w"> </span><span class="kn">import</span> <span class="n">prep</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyproj</span><span class="w"> </span><span class="kn">import</span> <span class="n">Transformer</span>
 
@@ -825,6 +918,71 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total titik sampel: 7900
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>titik</th>
+      <th>poligon</th>
+    </tr>
+    <tr>
+      <th>kelas</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Sawah</th>
+      <td>1477</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>Bangunan</th>
+      <td>1023</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>Mangrove</th>
+      <td>1282</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>Lahan Hijau</th>
+      <td>1339</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>Perairan Terbuka (Laut)</th>
+      <td>1509</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th>Danau</th>
+      <td>1270</td>
+      <td>49</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 <hr class="docutils" />
@@ -840,7 +998,7 @@ document.write(`
 <p><strong>Biaya:</strong> akun gratis punya kuota bulanan (<em>Processing Units</em> dan jumlah request). Sel estimasi menghitung perkiraan biayanya sebelum data ditarik. Pantau pemakaian aktual di dashboard.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sentinelhub</span><span class="w"> </span><span class="kn">import</span> <span class="n">SHConfig</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sentinelhub</span><span class="w"> </span><span class="kn">import</span> <span class="n">SHConfig</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">getpass</span>
 
 <span class="c1"># Isi sekali saja. Kredensial tersimpan di profil &quot;cdse&quot; pada komputermu (~/.config/sentinelhub/config.toml)</span>
@@ -861,10 +1019,16 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profil &#39;cdse&#39; ditemukan, memakai kredensial tersimpan.
+Base URL: https://sh.dataspace.copernicus.eu
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span><span class="o">,</span><span class="w"> </span><span class="nn">threading</span><span class="o">,</span><span class="w"> </span><span class="nn">time</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span><span class="o">,</span><span class="w"> </span><span class="nn">threading</span><span class="o">,</span><span class="w"> </span><span class="nn">time</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">concurrent.futures</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThreadPoolExecutor</span><span class="p">,</span> <span class="n">as_completed</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sentinelhub</span><span class="w"> </span><span class="kn">import</span> <span class="n">SentinelHubRequest</span><span class="p">,</span> <span class="n">DataCollection</span><span class="p">,</span> <span class="n">MimeType</span><span class="p">,</span> <span class="n">CRS</span><span class="p">,</span> <span class="n">BBox</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyproj</span><span class="w"> </span><span class="kn">import</span> <span class="n">Transformer</span>
@@ -988,7 +1152,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uji koneksi: ambil nilai 1 piksel (sekitar Surabaya). Harus keluar 10 angka reflektansi x 10000.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uji koneksi: ambil nilai 1 piksel (sekitar Surabaya). Harus keluar 10 angka reflektansi x 10000.</span>
 <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">to_utm49</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="mf">112.7508</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.2575</span><span class="p">)</span>
 <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">y</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span>
 <span class="n">uji</span> <span class="o">=</span> <span class="n">ambil_array</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">x0</span> <span class="o">+</span> <span class="mi">10</span><span class="p">,</span> <span class="n">y0</span> <span class="o">+</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">CRS_UTM49S</span><span class="p">)</span>
@@ -998,13 +1162,20 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bentuk array: (1, 1, 10) | dtype: uint16
+{&#39;B2&#39;: 538, &#39;B3&#39;: 611, &#39;B4&#39;: 714, &#39;B5&#39;: 1478, &#39;B6&#39;: 1830, &#39;B7&#39;: 1980, &#39;B8&#39;: 1272, &#39;B8A&#39;: 1959, &#39;B11&#39;: 2294, &#39;B12&#39;: 2025}
+Koneksi ke Copernicus berhasil.
+</pre></div>
+</div>
+</div>
 </div>
 <section id="estimasi-biaya-dan-uji-kecil">
 <h3>Estimasi biaya dan uji kecil<a class="headerlink" href="#estimasi-biaya-dan-uji-kecil" title="Link to this heading">#</a></h3>
 <p>Jalankan estimasi dulu. Lalu uji 20 chip untuk memastikan semuanya benar, dan cek pemakaian PU di dashboard sebelum menarik seluruh data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">chips</span> <span class="o">=</span> <span class="n">buat_chip</span><span class="p">(</span><span class="n">pts</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chips</span> <span class="o">=</span> <span class="n">buat_chip</span><span class="p">(</span><span class="n">pts</span><span class="p">)</span>
 <span class="n">pu</span> <span class="o">=</span> <span class="n">estimasi_pu</span><span class="p">(</span><span class="n">chips</span><span class="p">)</span>
 <span class="n">luas_chip</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">c</span><span class="p">[</span><span class="s2">&quot;w&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;h&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">chips</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Titik: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pts</span><span class="p">)</span><span class="si">}</span><span class="s2"> | request (chip): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">chips</span><span class="p">)</span><span class="si">}</span><span class="s2"> | piksel/chip rata-rata: </span><span class="si">{</span><span class="n">luas_chip</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">, maks: </span><span class="si">{</span><span class="n">luas_chip</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1015,14 +1186,115 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Titik: 7900 | request (chip): 1803 | piksel/chip rata-rata: 881, maks: 19698
+Estimasi biaya: ~491 PU (asumsi 20 scene per piksel; kuota gratis ~10.000 PU/bulan)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uji kecil: 20 chip pertama</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uji kecil: 20 chip pertama</span>
 <span class="n">uji_df</span><span class="p">,</span> <span class="n">uji_gagal</span> <span class="o">=</span> <span class="n">ekstrak_titik</span><span class="p">(</span><span class="n">pts</span><span class="p">,</span> <span class="n">chips</span><span class="p">[:</span><span class="mi">20</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;[uji] &quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Titik terisi:&quot;</span><span class="p">,</span> <span class="n">uji_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;dari&quot;</span><span class="p">,</span> <span class="n">uji_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">display</span><span class="p">(</span><span class="n">uji_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">[[</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;min&quot;</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estimasi 20 chip ini: ~</span><span class="si">{</span><span class="n">estimasi_pu</span><span class="p">(</span><span class="n">chips</span><span class="p">[:</span><span class="mi">20</span><span class="p">])</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> PU -&gt; bandingkan dengan pemakaian di dashboard.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[uji] Chip 20/20 | gagal 0 | 15 dtk
+Titik terisi: 264 dari 264
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>min</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>B2</th>
+      <td>627.0</td>
+      <td>324.0</td>
+      <td>944.0</td>
+    </tr>
+    <tr>
+      <th>B3</th>
+      <td>859.0</td>
+      <td>552.0</td>
+      <td>1198.0</td>
+    </tr>
+    <tr>
+      <th>B4</th>
+      <td>731.0</td>
+      <td>343.0</td>
+      <td>1470.0</td>
+    </tr>
+    <tr>
+      <th>B5</th>
+      <td>1283.0</td>
+      <td>852.0</td>
+      <td>1972.0</td>
+    </tr>
+    <tr>
+      <th>B6</th>
+      <td>2454.0</td>
+      <td>1299.0</td>
+      <td>3974.0</td>
+    </tr>
+    <tr>
+      <th>B7</th>
+      <td>2830.0</td>
+      <td>1365.0</td>
+      <td>4501.0</td>
+    </tr>
+    <tr>
+      <th>B8</th>
+      <td>2808.0</td>
+      <td>1370.0</td>
+      <td>4644.0</td>
+    </tr>
+    <tr>
+      <th>B8A</th>
+      <td>3023.0</td>
+      <td>1445.0</td>
+      <td>4707.0</td>
+    </tr>
+    <tr>
+      <th>B11</th>
+      <td>2141.0</td>
+      <td>1326.0</td>
+      <td>3512.0</td>
+    </tr>
+    <tr>
+      <th>B12</th>
+      <td>1238.0</td>
+      <td>685.0</td>
+      <td>2515.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimasi 20 chip ini: ~22.8 PU -&gt; bandingkan dengan pemakaian di dashboard.
 </pre></div>
 </div>
 </div>
@@ -1032,7 +1304,7 @@ document.write(`
 <h3>Ekstraksi penuh dan pembentukan dataset<a class="headerlink" href="#ekstraksi-penuh-dan-pembentukan-dataset" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df_val</span><span class="p">,</span> <span class="n">gagal</span> <span class="o">=</span> <span class="n">ekstrak_titik</span><span class="p">(</span><span class="n">pts</span><span class="p">,</span> <span class="n">chips</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_val</span><span class="p">,</span> <span class="n">gagal</span> <span class="o">=</span> <span class="n">ekstrak_titik</span><span class="p">(</span><span class="n">pts</span><span class="p">,</span> <span class="n">chips</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">gagal</span><span class="p">:</span>                                           <span class="c1"># ulangi chip yang gagal satu kali</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mengulang chip yang gagal...&quot;</span><span class="p">)</span>
@@ -1053,6 +1325,231 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chip 1803/1803 | gagal 0 | 1083 dtk
+
+Titik dikirim: 7900 | titik valid: 7900
+Tersimpan: dataset_pixel_sentinel2_jatim.csv
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Jumlah piksel valid</th>
+    </tr>
+    <tr>
+      <th>kelas</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Sawah</th>
+      <td>1477</td>
+    </tr>
+    <tr>
+      <th>Bangunan</th>
+      <td>1023</td>
+    </tr>
+    <tr>
+      <th>Mangrove</th>
+      <td>1282</td>
+    </tr>
+    <tr>
+      <th>Lahan Hijau</th>
+      <td>1339</td>
+    </tr>
+    <tr>
+      <th>Perairan Terbuka (Laut)</th>
+      <td>1509</td>
+    </tr>
+    <tr>
+      <th>Danau</th>
+      <td>1270</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>poly_id</th>
+      <th>kelas_id</th>
+      <th>kelas</th>
+      <th>lon</th>
+      <th>lat</th>
+      <th>B2</th>
+      <th>B3</th>
+      <th>B4</th>
+      <th>B5</th>
+      <th>B6</th>
+      <th>...</th>
+      <th>B11</th>
+      <th>B12</th>
+      <th>NDVI</th>
+      <th>NDWI</th>
+      <th>MNDWI</th>
+      <th>NDBI</th>
+      <th>NDRE</th>
+      <th>EVI</th>
+      <th>SAVI</th>
+      <th>BSI</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Sawah</td>
+      <td>112.188737</td>
+      <td>-8.123818</td>
+      <td>0.0461</td>
+      <td>0.0701</td>
+      <td>0.0513</td>
+      <td>0.1064</td>
+      <td>0.2593</td>
+      <td>...</td>
+      <td>0.2077</td>
+      <td>0.1138</td>
+      <td>0.740187</td>
+      <td>-0.661107</td>
+      <td>-0.495320</td>
+      <td>-0.246508</td>
+      <td>0.527111</td>
+      <td>0.559683</td>
+      <td>0.489943</td>
+      <td>-0.201480</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Sawah</td>
+      <td>112.185222</td>
+      <td>-8.127679</td>
+      <td>0.0466</td>
+      <td>0.0704</td>
+      <td>0.0574</td>
+      <td>0.1160</td>
+      <td>0.2446</td>
+      <td>...</td>
+      <td>0.2190</td>
+      <td>0.1275</td>
+      <td>0.671154</td>
+      <td>-0.611157</td>
+      <td>-0.513476</td>
+      <td>-0.142354</td>
+      <td>0.430954</td>
+      <td>0.455270</td>
+      <td>0.413909</td>
+      <td>-0.100700</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Sawah</td>
+      <td>112.188086</td>
+      <td>-8.123396</td>
+      <td>0.0482</td>
+      <td>0.0761</td>
+      <td>0.0544</td>
+      <td>0.1222</td>
+      <td>0.2928</td>
+      <td>...</td>
+      <td>0.2262</td>
+      <td>0.1219</td>
+      <td>0.715332</td>
+      <td>-0.623174</td>
+      <td>-0.496527</td>
+      <td>-0.183394</td>
+      <td>0.456889</td>
+      <td>0.528738</td>
+      <td>0.464861</td>
+      <td>-0.145294</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Sawah</td>
+      <td>112.186973</td>
+      <td>-8.130245</td>
+      <td>0.0582</td>
+      <td>0.0836</td>
+      <td>0.0702</td>
+      <td>0.1350</td>
+      <td>0.3006</td>
+      <td>...</td>
+      <td>0.2384</td>
+      <td>0.1404</td>
+      <td>0.681344</td>
+      <td>-0.631718</td>
+      <td>-0.480745</td>
+      <td>-0.216820</td>
+      <td>0.465770</td>
+      <td>0.553834</td>
+      <td>0.478737</td>
+      <td>-0.162778</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>1</td>
+      <td>Sawah</td>
+      <td>112.188646</td>
+      <td>-8.121732</td>
+      <td>0.0617</td>
+      <td>0.0817</td>
+      <td>0.0555</td>
+      <td>0.1135</td>
+      <td>0.3461</td>
+      <td>...</td>
+      <td>0.2299</td>
+      <td>0.1208</td>
+      <td>0.775167</td>
+      <td>-0.685709</td>
+      <td>-0.475610</td>
+      <td>-0.311780</td>
+      <td>0.588544</td>
+      <td>0.731209</td>
+      <td>0.577689</td>
+      <td>-0.273144</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 23 columns</p>
+</div></div></div>
 </div>
 </section>
 </section>
@@ -1062,7 +1559,7 @@ document.write(`
 <p>Pengecekan NaN/Inf, rekap per kelas, statistik deskriptif, sebaran spasial, tanda tangan spektral (rata-rata nyata dari piksel), dan separabilitas indeks. Tabel rata-rata indeks per kelas harus masuk akal: air punya NDWI/MNDWI tinggi, vegetasi punya NDVI tinggi, bangunan punya NDBI tertinggi.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nan_total</span> <span class="o">=</span> <span class="n">df_dataset</span><span class="p">[</span><span class="n">FITUR_SEMUA</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nan_total</span> <span class="o">=</span> <span class="n">df_dataset</span><span class="p">[</span><span class="n">FITUR_SEMUA</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="n">inf_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">df_dataset</span><span class="p">[</span><span class="n">FITUR_SEMUA</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pengecekan Kualitas Data:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - Nilai Kosong (NaN) : </span><span class="si">{</span><span class="n">nan_total</span><span class="si">}</span><span class="s2"> (Valid: </span><span class="si">{</span><span class="n">nan_total</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
@@ -1078,10 +1575,268 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pengecekan Kualitas Data:
+  - Nilai Kosong (NaN) : 0 (Valid: True)
+  - Nilai Tak Hingga   : 0 (Valid: True)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>Jumlah_Piksel</th>
+      <th>Jumlah_Poligon</th>
+      <th>Persentase (%)</th>
+    </tr>
+    <tr>
+      <th>kelas_id</th>
+      <th>kelas</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <th>Sawah</th>
+      <td>1477</td>
+      <td>50</td>
+      <td>18.70</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <th>Bangunan</th>
+      <td>1023</td>
+      <td>50</td>
+      <td>12.95</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <th>Mangrove</th>
+      <td>1282</td>
+      <td>50</td>
+      <td>16.23</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <th>Lahan Hijau</th>
+      <td>1339</td>
+      <td>50</td>
+      <td>16.95</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <th>Perairan Terbuka (Laut)</th>
+      <td>1509</td>
+      <td>17</td>
+      <td>19.10</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <th>Danau</th>
+      <td>1270</td>
+      <td>49</td>
+      <td>16.08</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Statistik Deskriptif 10 Band dan 8 Indeks Spektral:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>50%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>B2</th>
+      <td>0.0564</td>
+      <td>0.0431</td>
+      <td>0.0104</td>
+      <td>0.0448</td>
+      <td>0.6416</td>
+    </tr>
+    <tr>
+      <th>B3</th>
+      <td>0.0724</td>
+      <td>0.0459</td>
+      <td>0.0083</td>
+      <td>0.0671</td>
+      <td>0.6620</td>
+    </tr>
+    <tr>
+      <th>B4</th>
+      <td>0.0591</td>
+      <td>0.0516</td>
+      <td>0.0070</td>
+      <td>0.0431</td>
+      <td>0.7072</td>
+    </tr>
+    <tr>
+      <th>B5</th>
+      <td>0.0967</td>
+      <td>0.0576</td>
+      <td>0.0026</td>
+      <td>0.1024</td>
+      <td>0.6935</td>
+    </tr>
+    <tr>
+      <th>B6</th>
+      <td>0.1657</td>
+      <td>0.1056</td>
+      <td>0.0000</td>
+      <td>0.1945</td>
+      <td>0.6566</td>
+    </tr>
+    <tr>
+      <th>B7</th>
+      <td>0.1900</td>
+      <td>0.1249</td>
+      <td>0.0000</td>
+      <td>0.2182</td>
+      <td>0.6553</td>
+    </tr>
+    <tr>
+      <th>B8</th>
+      <td>0.1869</td>
+      <td>0.1297</td>
+      <td>0.0000</td>
+      <td>0.2138</td>
+      <td>0.6916</td>
+    </tr>
+    <tr>
+      <th>B8A</th>
+      <td>0.2015</td>
+      <td>0.1364</td>
+      <td>0.0000</td>
+      <td>0.2300</td>
+      <td>0.6545</td>
+    </tr>
+    <tr>
+      <th>B11</th>
+      <td>0.1322</td>
+      <td>0.0953</td>
+      <td>0.0042</td>
+      <td>0.1308</td>
+      <td>0.5772</td>
+    </tr>
+    <tr>
+      <th>B12</th>
+      <td>0.0847</td>
+      <td>0.0769</td>
+      <td>0.0031</td>
+      <td>0.0608</td>
+      <td>0.6479</td>
+    </tr>
+    <tr>
+      <th>NDVI</th>
+      <td>0.3424</td>
+      <td>0.4074</td>
+      <td>-1.0000</td>
+      <td>0.4467</td>
+      <td>0.9157</td>
+    </tr>
+    <tr>
+      <th>NDWI</th>
+      <td>-0.2408</td>
+      <td>0.4363</td>
+      <td>-0.8181</td>
+      <td>-0.4184</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>MNDWI</th>
+      <td>-0.1480</td>
+      <td>0.3697</td>
+      <td>-0.7152</td>
+      <td>-0.2837</td>
+      <td>0.9089</td>
+    </tr>
+    <tr>
+      <th>NDBI</th>
+      <td>-0.1195</td>
+      <td>0.2414</td>
+      <td>-0.7207</td>
+      <td>-0.1081</td>
+      <td>1.0000</td>
+    </tr>
+    <tr>
+      <th>NDRE</th>
+      <td>0.1663</td>
+      <td>0.3162</td>
+      <td>-1.0000</td>
+      <td>0.2424</td>
+      <td>0.7139</td>
+    </tr>
+    <tr>
+      <th>EVI</th>
+      <td>0.2565</td>
+      <td>0.2697</td>
+      <td>-7.6800</td>
+      <td>0.2546</td>
+      <td>2.6336</td>
+    </tr>
+    <tr>
+      <th>SAVI</th>
+      <td>0.2248</td>
+      <td>0.2159</td>
+      <td>-0.3014</td>
+      <td>0.2300</td>
+      <td>0.6912</td>
+    </tr>
+    <tr>
+      <th>BSI</th>
+      <td>-0.1370</td>
+      <td>0.1780</td>
+      <td>-0.6165</td>
+      <td>-0.1388</td>
+      <td>0.4381</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">panjang_gelombang</span> <span class="o">=</span> <span class="p">[</span><span class="mi">492</span><span class="p">,</span> <span class="mi">560</span><span class="p">,</span> <span class="mi">665</span><span class="p">,</span> <span class="mi">704</span><span class="p">,</span> <span class="mi">740</span><span class="p">,</span> <span class="mi">783</span><span class="p">,</span> <span class="mi">833</span><span class="p">,</span> <span class="mi">865</span><span class="p">,</span> <span class="mi">1614</span><span class="p">,</span> <span class="mi">2202</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">panjang_gelombang</span> <span class="o">=</span> <span class="p">[</span><span class="mi">492</span><span class="p">,</span> <span class="mi">560</span><span class="p">,</span> <span class="mi">665</span><span class="p">,</span> <span class="mi">704</span><span class="p">,</span> <span class="mi">740</span><span class="p">,</span> <span class="mi">783</span><span class="p">,</span> <span class="mi">833</span><span class="p">,</span> <span class="mi">865</span><span class="p">,</span> <span class="mi">1614</span><span class="p">,</span> <span class="mi">2202</span><span class="p">]</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
 
@@ -1112,6 +1867,10 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/a916c0f705370f377b7a6705316f074ca7be423ce5fd30efb80c4517f6ef5832.png" src="_images/a916c0f705370f377b7a6705316f074ca7be423ce5fd30efb80c4517f6ef5832.png" />
+<img alt="_images/6d1a44b8198a0e86751912c148debdaecc74e1f017bb041d7fd0dbfcf7082d22.png" src="_images/6d1a44b8198a0e86751912c148debdaecc74e1f017bb041d7fd0dbfcf7082d22.png" />
+</div>
 </div>
 </section>
 <hr class="docutils" />
@@ -1120,7 +1879,7 @@ document.write(`
 <p>Pembagian dilakukan <strong>per poligon</strong> (bukan per piksel) di tiap kelas, agar piksel bertetangga dari satu poligon tidak muncul di training dan test sekaligus (<em>spatial leakage</em>). Proporsi piksel aktual bisa meleset sedikit dari 70/15/15. <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code> hanya di-fit pada data latih dan dipakai untuk KNN.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split 70/15/15 PER POLIGON (bukan per piksel) agar piksel bertetangga tidak bocor antar split</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split 70/15/15 PER POLIGON (bukan per piksel) agar piksel bertetangga tidak bocor antar split</span>
 <span class="n">TRAIN_FRAC</span><span class="p">,</span> <span class="n">VAL_FRAC</span><span class="p">,</span> <span class="n">TEST_FRAC</span> <span class="o">=</span> <span class="mf">0.70</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.15</span>
 <span class="n">rng_split</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
 
@@ -1170,10 +1929,167 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================================================
+HASIL PEMBAGIAN DATA (Total: 7900 piksel dari 266 poligon)
+============================================================
+Training   :   5351 piksel (67.7%) | 182 poligon
+Validation :   1278 piksel (16.2%) | 42 poligon
+Testing    :   1271 piksel (16.1%) | 42 poligon
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Training</th>
+      <th>Validation</th>
+      <th>Testing</th>
+      <th>Total</th>
+    </tr>
+    <tr>
+      <th>kelas</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Sawah</th>
+      <td>1004</td>
+      <td>236</td>
+      <td>237</td>
+      <td>1477</td>
+    </tr>
+    <tr>
+      <th>Bangunan</th>
+      <td>676</td>
+      <td>167</td>
+      <td>180</td>
+      <td>1023</td>
+    </tr>
+    <tr>
+      <th>Mangrove</th>
+      <td>856</td>
+      <td>228</td>
+      <td>198</td>
+      <td>1282</td>
+    </tr>
+    <tr>
+      <th>Lahan Hijau</th>
+      <td>933</td>
+      <td>202</td>
+      <td>204</td>
+      <td>1339</td>
+    </tr>
+    <tr>
+      <th>Perairan Terbuka (Laut)</th>
+      <td>979</td>
+      <td>263</td>
+      <td>267</td>
+      <td>1509</td>
+    </tr>
+    <tr>
+      <th>Danau</th>
+      <td>903</td>
+      <td>182</td>
+      <td>185</td>
+      <td>1270</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Poligon per kelas dan split:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>split</th>
+      <th>train</th>
+      <th>val</th>
+      <th>test</th>
+    </tr>
+    <tr>
+      <th>kelas</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Sawah</th>
+      <td>34</td>
+      <td>8</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>Bangunan</th>
+      <td>34</td>
+      <td>8</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>Mangrove</th>
+      <td>34</td>
+      <td>8</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>Lahan Hijau</th>
+      <td>34</td>
+      <td>8</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>Perairan Terbuka (Laut)</th>
+      <td>11</td>
+      <td>3</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>Danau</th>
+      <td>35</td>
+      <td>7</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianNB</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">accuracy_score</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">,</span>
@@ -1187,6 +2103,11 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Penskalaan selesai. Dimensi X_train_scaled: (5351, 18)
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -1196,7 +2117,7 @@ document.write(`
 <p>Memodelkan distribusi tiap fitur per kelas dengan kurva normal dan asumsi fitur saling bebas. Hyperparameter <code class="docutils literal notranslate"><span class="pre">var_smoothing</span></code> di-tuning pada Validation Set. Tidak memerlukan penskalaan.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ===== MODEL 1: GAUSSIAN NAIVE BAYES =====</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ===== MODEL 1: GAUSSIAN NAIVE BAYES =====</span>
 <span class="n">variasi_smoothing</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">12</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
 <span class="n">skor_nb_val</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">vs</span> <span class="ow">in</span> <span class="n">variasi_smoothing</span><span class="p">:</span>
@@ -1223,6 +2144,18 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>var_smoothing terbaik : 1.00e-12
+F1 validasi tertinggi : 67.53%
+</pre></div>
+</div>
+<img alt="_images/42423f503dfa805d3f3fe69662087be5fea010dca0fa61c8e5b63c3395b5930e.png" src="_images/42423f503dfa805d3f3fe69662087be5fea010dca0fa61c8e5b63c3395b5930e.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Evaluasi Validation Set - Gaussian Naive Bayes]
+  - Akurasi  : 68.94%
+  - F1-Score : 67.53%
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <hr class="docutils" />
@@ -1231,7 +2164,7 @@ document.write(`
 <p>Klasifikasi berdasarkan suara mayoritas k tetangga terdekat (jarak Euclidean) pada fitur yang sudah diskalakan. Nilai k di-tuning pada Validation Set.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ===== MODEL 2: K-NEAREST NEIGHBORS =====</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ===== MODEL 2: K-NEAREST NEIGHBORS =====</span>
 <span class="n">daftar_k</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">31</span><span class="p">]</span>
 <span class="n">skor_tr</span><span class="p">,</span> <span class="n">skor_va</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">daftar_k</span><span class="p">:</span>
@@ -1259,6 +2192,16 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="_images/4f2b149c28da0e09a37d34e29967e01c93d1b101d4a5016377027aa5b4aae354.png" src="_images/4f2b149c28da0e09a37d34e29967e01c93d1b101d4a5016377027aa5b4aae354.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>k terbaik: 31
+
+[Evaluasi Validation Set - KNN (k=31)]
+  - Akurasi  : 77.07%
+  - F1-Score : 77.01%
+</pre></div>
+</div>
+</div>
 </div>
 <hr class="docutils" />
 <section id="komparasi-model-dan-evaluasi-akhir-pada-testing-set">
@@ -1266,7 +2209,7 @@ document.write(`
 <p>Data uji tidak dipakai saat pelatihan maupun tuning. Metrik: akurasi, F1, Cohen’s Kappa, classification report, dan confusion matrix.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- Komparasi di data validasi ---</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- Komparasi di data validasi ---</span>
 <span class="n">display</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
     <span class="s2">&quot;Model&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Gaussian Naive Bayes&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;KNN (k=</span><span class="si">{</span><span class="n">best_k</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">],</span>
     <span class="s2">&quot;Hyperparameter&quot;</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;var_smoothing=</span><span class="si">{</span><span class="n">best_var_smoothing</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;n_neighbors=</span><span class="si">{</span><span class="n">best_k</span><span class="si">}</span><span class="s2">, euclidean&quot;</span><span class="p">],</span>
@@ -1311,6 +2254,184 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Hyperparameter</th>
+      <th>Akurasi Validasi (%)</th>
+      <th>F1 Validasi (%)</th>
+    </tr>
+    <tr>
+      <th>Model</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Gaussian Naive Bayes</th>
+      <td>var_smoothing=1.00e-12</td>
+      <td>68.94</td>
+      <td>67.53</td>
+    </tr>
+    <tr>
+      <th>KNN (k=31)</th>
+      <td>n_neighbors=31, euclidean</td>
+      <td>77.07</td>
+      <td>77.01</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================================================
+EVALUASI AKHIR PADA TESTING SET (1271 piksel, 42 poligon)
+============================================================
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Akurasi Test (%)</th>
+      <th>F1 Test (%)</th>
+      <th>Cohen's Kappa</th>
+    </tr>
+    <tr>
+      <th>Model</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Gaussian Naive Bayes</th>
+      <td>67.11</td>
+      <td>65.16</td>
+      <td>0.6032</td>
+    </tr>
+    <tr>
+      <th>KNN (k=31)</th>
+      <td>81.67</td>
+      <td>81.78</td>
+      <td>0.7788</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- CLASSIFICATION REPORT: GAUSSIAN NAIVE BAYES ---
+                         precision    recall  f1-score   support
+
+                  Sawah     0.5772    0.2996    0.3944       237
+               Bangunan     0.8247    0.7056    0.7605       180
+               Mangrove     0.7247    0.9040    0.8045       198
+            Lahan Hijau     0.4777    0.7353    0.5792       204
+Perairan Terbuka (Laut)     0.7785    0.9476    0.8547       267
+                  Danau     0.6759    0.3946    0.4983       185
+
+               accuracy                         0.6711      1271
+              macro avg     0.6765    0.6644    0.6486      1271
+           weighted avg     0.6759    0.6711    0.6516      1271
+
+--- CLASSIFICATION REPORT: KNN ---
+                         precision    recall  f1-score   support
+
+                  Sawah     0.6850    0.7342    0.7088       237
+               Bangunan     0.9167    0.7333    0.8148       180
+               Mangrove     0.9133    0.9040    0.9086       198
+            Lahan Hijau     0.7017    0.8186    0.7557       204
+Perairan Terbuka (Laut)     0.9296    0.9401    0.9348       267
+                  Danau     0.7988    0.7297    0.7627       185
+
+               accuracy                         0.8167      1271
+              macro avg     0.8242    0.8100    0.8142      1271
+           weighted avg     0.8240    0.8167    0.8178      1271
+</pre></div>
+</div>
+<img alt="_images/8aed00556ae5a4aa364472b0ad23bf593218e37cfa0a158d0e24ce24b30902fa.png" src="_images/8aed00556ae5a4aa364472b0ad23bf593218e37cfa0a158d0e24ce24b30902fa.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">kategori_kappa</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+    <span class="c1"># Skala interpretasi Landis &amp; Koch (1977)</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>     <span class="k">return</span> <span class="s2">&quot;buruk (di bawah acak)&quot;</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="mf">0.20</span><span class="p">:</span> <span class="k">return</span> <span class="s2">&quot;sangat lemah&quot;</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="mf">0.40</span><span class="p">:</span> <span class="k">return</span> <span class="s2">&quot;lemah&quot;</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="mf">0.60</span><span class="p">:</span> <span class="k">return</span> <span class="s2">&quot;sedang&quot;</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="mf">0.80</span><span class="p">:</span> <span class="k">return</span> <span class="s2">&quot;substansial (baik)&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;hampir sempurna&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">interpretasi</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">nama_model</span><span class="p">,</span> <span class="n">ambang_oa</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">ambang_kelas</span><span class="o">=</span><span class="mf">0.70</span><span class="p">):</span>
+    <span class="n">oa</span>    <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">kappa</span> <span class="o">=</span> <span class="n">cohen_kappa_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">lap</span>   <span class="o">=</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">NAMA_KELAS</span><span class="p">,</span> <span class="n">output_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">zero_division</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">per_kelas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s2">&quot;Producer&#39;s acc / Recall (%)&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">lap</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s2">&quot;recall&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">NAMA_KELAS</span><span class="p">],</span>
+        <span class="s2">&quot;User&#39;s acc / Precision (%)&quot;</span><span class="p">:</span>  <span class="p">[</span><span class="n">lap</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s2">&quot;precision&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">NAMA_KELAS</span><span class="p">],</span>
+        <span class="s2">&quot;F1 (%)&quot;</span><span class="p">:</span>                      <span class="p">[</span><span class="n">lap</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s2">&quot;f1-score&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">NAMA_KELAS</span><span class="p">],</span>
+        <span class="s2">&quot;Jumlah data uji&quot;</span><span class="p">:</span>             <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">lap</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="s2">&quot;support&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">NAMA_KELAS</span><span class="p">],</span>
+    <span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">NAMA_KELAS</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">66</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;INTERPRETASI HASIL: </span><span class="si">{</span><span class="n">nama_model</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">66</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Overall accuracy : </span><span class="si">{</span><span class="n">oa</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%  -&gt; </span><span class="si">{</span><span class="s1">&#39;MEMENUHI&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">oa</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">ambang_oa</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;DI BAWAH&#39;</span><span class="si">}</span><span class="s2"> patokan umum </span><span class="si">{</span><span class="n">ambang_oa</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cohen&#39;s Kappa    : </span><span class="si">{</span><span class="n">kappa</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">  -&gt; </span><span class="si">{</span><span class="n">kategori_kappa</span><span class="p">(</span><span class="n">kappa</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">lemah</span> <span class="o">=</span> <span class="n">per_kelas</span><span class="p">[</span><span class="n">per_kelas</span><span class="p">[</span><span class="s2">&quot;F1 (%)&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">ambang_kelas</span> <span class="o">*</span> <span class="mi">100</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kelas dengan F1 di bawah </span><span class="si">%d%%</span><span class="s2"> : </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ambang_kelas</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lemah</span><span class="p">)</span> <span class="k">if</span> <span class="n">lemah</span> <span class="k">else</span> <span class="s2">&quot;tidak ada&quot;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">oa</span> <span class="o">&gt;=</span> <span class="mf">0.98</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[!] Akurasi sangat tinggi (&gt;= 98%). Periksa kebocoran data (split harus per poligon) dan apakah datanya terlalu mudah.&quot;</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">per_kelas</span><span class="p">)</span>
+
+    <span class="n">cm</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">NAMA_KELAS</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">NAMA_KELAS</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">NAMA_KELAS</span><span class="p">)</span>
+    <span class="n">salah</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">cm</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">]))</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">NAMA_KELAS</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">NAMA_KELAS</span> <span class="k">if</span> <span class="n">a</span> <span class="o">!=</span> <span class="n">p</span> <span class="ow">and</span> <span class="n">cm</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">salah</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">salah</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">])[:</span><span class="mi">3</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">salah</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kesalahan paling sering (aktual -&gt; diprediksi):&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">salah</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> data&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">per_kelas</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rep_gnb</span> <span class="o">=</span> <span class="n">interpretasi</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_gnb_test</span><span class="p">,</span> <span class="s2">&quot;Gaussian Naive Bayes&quot;</span><span class="p">)</span>
+<span class="n">rep_knn</span> <span class="o">=</span> <span class="n">interpretasi</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">pred_knn_test</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;KNN (k=</span><span class="si">{</span><span class="n">best_k</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <hr class="docutils" />
@@ -1319,7 +2440,7 @@ document.write(`
 <p>Komposit Sentinel-2 seluruh AOI diminta dari Copernicus per tile langsung ke memori (tanpa menyimpan TIF), pada resolusi <code class="docutils literal notranslate"><span class="pre">RES_M</span></code>. Dipakai bersama oleh kedua model. Sel ini menampilkan estimasi PU lebih dulu dan berhenti bila melebihi <code class="docutils literal notranslate"><span class="pre">PU_BUDGET</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ===== KONFIGURASI PETA =====</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ===== KONFIGURASI PETA =====</span>
 <span class="n">RES_M</span>   <span class="o">=</span> <span class="mi">200</span>      <span class="c1"># meter/piksel peta. 200 = hemat | 100 = lebih detail tetapi ~4x lebih boros PU</span>
 <span class="n">TILE_PX</span> <span class="o">=</span> <span class="mi">700</span>      <span class="c1"># ukuran tile permintaan (piksel); maksimum Sentinel Hub 2500</span>
 <span class="n">PU_BUDGET</span> <span class="o">=</span> <span class="mi">3000</span>   <span class="c1"># batas aman estimasi PU untuk peta (kuota gratis total ~10.000 PU/bulan)</span>
@@ -1371,6 +2492,20 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Grid peta: 2088 x 1237 = 2.58 juta piksel | 6 tile | estimasi ~788 PU (asumsi 20 scene/piksel)
+Tile 1/6 | gagal 0 | 52 dtk
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\ARIEL\AppData\Local\Programs\Python\Python39\lib\site-packages\sentinelhub\download\sentinelhub_client.py:93: SHRateLimitWarning: Download rate limit hit
+  warnings.warn(&quot;Download rate limit hit&quot;, category=SHRateLimitWarning)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tile 6/6 | gagal 0 | 97 dtk
+Tile gagal: 0 | piksel valid: 2,582,414 dari 2,582,856 (100.0%)
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <hr class="docutils" />
@@ -1378,7 +2513,7 @@ document.write(`
 <h2>Fungsi Prediksi Raster dan Pembuat Peta Folium (dipakai kedua model)<a class="headerlink" href="#fungsi-prediksi-raster-dan-pembuat-peta-folium-dipakai-kedua-model" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">folium</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">folium</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">folium.raster_layers</span><span class="w"> </span><span class="kn">import</span> <span class="n">ImageOverlay</span>
 
 <span class="n">CH</span> <span class="o">=</span> <span class="mi">200_000</span>     <span class="c1"># jumlah piksel per potongan prediksi (hemat memori)</span>
@@ -1496,20 +2631,38 @@ document.write(`
 <p>Model Naive Bayes memprediksi seluruh piksel area studi, ditampilkan di atas basemap satelit Esri / Google Hybrid. Layer dapat dinyalakan/dimatikan lewat kontrol di kanan atas (hasil klasifikasi, satelit Sentinel-2 tertanam, poligon training, titik sampel per kelas, batas area studi).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">klas_gnb</span> <span class="o">=</span> <span class="n">prediksi_mosaic</span><span class="p">(</span><span class="k">lambda</span> <span class="n">X</span><span class="p">:</span> <span class="n">model_gnb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">klas_gnb</span> <span class="o">=</span> <span class="n">prediksi_mosaic</span><span class="p">(</span><span class="k">lambda</span> <span class="n">X</span><span class="p">:</span> <span class="n">model_gnb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Selesai - Naive Bayes&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">klas_gnb</span><span class="p">[</span><span class="n">klas_gnb</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;nama&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">KELAS</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prediksi 2,582,414/2,582,414 piksel | 4 dtk
+Selesai - Naive Bayes
+Perairan Terbuka (Laut)    1013443
+Lahan Hijau                 984574
+Sawah                       322127
+Bangunan                    122216
+Danau                        81909
+Mangrove                     58145
+Name: count, dtype: int64
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metrik_gnb</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Akurasi&quot;</span><span class="p">:</span> <span class="n">acc_gnb_test</span><span class="p">,</span> <span class="s2">&quot;F1&quot;</span><span class="p">:</span> <span class="n">f1_gnb_test</span><span class="p">,</span> <span class="s2">&quot;Kappa&quot;</span><span class="p">:</span> <span class="n">kappa_gnb</span><span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metrik_gnb</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Akurasi&quot;</span><span class="p">:</span> <span class="n">acc_gnb_test</span><span class="p">,</span> <span class="s2">&quot;F1&quot;</span><span class="p">:</span> <span class="n">f1_gnb_test</span><span class="p">,</span> <span class="s2">&quot;Kappa&quot;</span><span class="p">:</span> <span class="n">kappa_gnb</span><span class="p">}</span>
 <span class="n">info_gnb</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Model:&lt;/b&gt; Gaussian Naive Bayes | &lt;b&gt;Akurasi test:&lt;/b&gt; </span><span class="si">{</span><span class="n">acc_gnb_test</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% | &quot;</span>
             <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;F1:&lt;/b&gt; </span><span class="si">{</span><span class="n">f1_gnb_test</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | &lt;b&gt;Kappa:&lt;/b&gt; </span><span class="si">{</span><span class="n">kappa_gnb</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | &lt;b&gt;Resolusi:&lt;/b&gt; </span><span class="si">{</span><span class="n">RES_M</span><span class="si">}</span><span class="s2"> m&quot;</span><span class="p">)</span>
 <span class="n">peta_gnb</span> <span class="o">=</span> <span class="n">buat_peta</span><span class="p">(</span><span class="n">klas_gnb</span><span class="p">,</span> <span class="s2">&quot;Gaussian Naive Bayes&quot;</span><span class="p">,</span> <span class="s2">&quot;peta_pixel_gnb.html&quot;</span><span class="p">,</span> <span class="n">info_gnb</span><span class="p">,</span> <span class="n">gdf_poly</span><span class="o">=</span><span class="n">gdf</span><span class="p">)</span>
 <span class="n">peta_gnb</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Peta disimpan: peta_pixel_gnb.html (10.4 MB) - bisa ditanam di web statis lewat &lt;iframe&gt;
 </pre></div>
 </div>
 </div>
@@ -1521,7 +2674,7 @@ document.write(`
 <p>Model KNN (fitur diskalakan dengan <code class="docutils literal notranslate"><span class="pre">scaler</span></code> yang sama dengan saat pelatihan) memprediksi seluruh piksel area studi.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">klas_knn</span> <span class="o">=</span> <span class="n">prediksi_mosaic</span><span class="p">(</span><span class="k">lambda</span> <span class="n">X</span><span class="p">:</span> <span class="n">model_knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">klas_knn</span> <span class="o">=</span> <span class="n">prediksi_mosaic</span><span class="p">(</span><span class="k">lambda</span> <span class="n">X</span><span class="p">:</span> <span class="n">model_knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Selesai - KNN&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">klas_knn</span><span class="p">[</span><span class="n">klas_knn</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;nama&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">KELAS</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
 </pre></div>
@@ -1530,7 +2683,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metrik_knn</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Akurasi&quot;</span><span class="p">:</span> <span class="n">acc_knn_test</span><span class="p">,</span> <span class="s2">&quot;F1&quot;</span><span class="p">:</span> <span class="n">f1_knn_test</span><span class="p">,</span> <span class="s2">&quot;Kappa&quot;</span><span class="p">:</span> <span class="n">kappa_knn</span><span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metrik_knn</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Akurasi&quot;</span><span class="p">:</span> <span class="n">acc_knn_test</span><span class="p">,</span> <span class="s2">&quot;F1&quot;</span><span class="p">:</span> <span class="n">f1_knn_test</span><span class="p">,</span> <span class="s2">&quot;Kappa&quot;</span><span class="p">:</span> <span class="n">kappa_knn</span><span class="p">}</span>
 <span class="n">info_knn</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Model:&lt;/b&gt; KNN (k=</span><span class="si">{</span><span class="n">best_k</span><span class="si">}</span><span class="s2">) | &lt;b&gt;Akurasi test:&lt;/b&gt; </span><span class="si">{</span><span class="n">acc_knn_test</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% | &quot;</span>
             <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;F1:&lt;/b&gt; </span><span class="si">{</span><span class="n">f1_knn_test</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | &lt;b&gt;Kappa:&lt;/b&gt; </span><span class="si">{</span><span class="n">kappa_knn</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | &lt;b&gt;Resolusi:&lt;/b&gt; </span><span class="si">{</span><span class="n">RES_M</span><span class="si">}</span><span class="s2"> m&quot;</span><span class="p">)</span>
 <span class="n">peta_knn</span> <span class="o">=</span> <span class="n">buat_peta</span><span class="p">(</span><span class="n">klas_knn</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;KNN (k=</span><span class="si">{</span><span class="n">best_k</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="s2">&quot;peta_pixel_knn.html&quot;</span><span class="p">,</span> <span class="n">info_knn</span><span class="p">,</span> <span class="n">gdf_poly</span><span class="o">=</span><span class="n">gdf</span><span class="p">)</span>
@@ -1546,7 +2699,7 @@ document.write(`
 <p>Luas dihitung dari jumlah piksel peta dikali luas piksel (dikoreksi lintang). Berguna untuk analisis kebijakan, misalnya luas sawah dan mangrove menurut tiap model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lat_row</span> <span class="o">=</span> <span class="n">t_bw</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">X0</span><span class="p">),</span> <span class="n">Y1</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">H</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="n">RES_M</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lat_row</span> <span class="o">=</span> <span class="n">t_bw</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">X0</span><span class="p">),</span> <span class="n">Y1</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">H</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="n">RES_M</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">km2_px</span>  <span class="o">=</span> <span class="p">(</span><span class="n">RES_M</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">lat_row</span><span class="p">)))</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="mf">1e6</span>        <span class="c1"># luas piksel per baris (km2)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">luas_kelas</span><span class="p">(</span><span class="n">klas</span><span class="p">):</span>
